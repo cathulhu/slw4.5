@@ -15,8 +15,8 @@ public class Fragnent_SimpleMode extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup selectionContainer, Bundle savedInstanceState) {
 
-        View rootLayoutView = inflater.inflate(R.layout.fragment_questions_simple, selectionContainer, false);
+        View rootLayoutView = inflater.inflate(R.layout.questions, selectionContainer, false);
 //            selectionLayout = (RelativeLayout) rootLayoutView.findViewById(R.id.);    //I guess the view is inflated just fine with this.
-        return inflater.inflate(R.layout.fragment_questions_simple, selectionContainer, false);
+        return inflater.inflate(R.layout.questions, selectionContainer, false);
     }
 }

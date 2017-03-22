@@ -8,16 +8,26 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements Fragment_Selection.OnSwitchSelectionListener
+public class MainActivity extends AppCompatActivity implements
+        Fragment_Selection.OnNavigateAwayListener,
+        Fragment_Info.onSaveMoneyNowButton
     {
 
 
-    public void onModeSelection()
+    public void onIncomeFinished()
     {
-        FragmentTransaction modeSelectionTransaction = getSupportFragmentManager().beginTransaction();
-        modeSelectionTransaction.replace(R.id.mainFrameLayout, new Fragnent_SimpleMode());
-        modeSelectionTransaction.addToBackStack(null);
-        modeSelectionTransaction.commit();
+        FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
+        fTransaction.replace(R.id.mainFrameLayout, new Fragment_Advice());
+        fTransaction.addToBackStack(null);
+        fTransaction.commit();
+    }
+
+    public void navigateToChoice()
+    {
+        FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
+        fTransaction.replace(R.id.mainFrameLayout, new Fragment_Info());
+        fTransaction.addToBackStack(null);
+        fTransaction.commit();
     }
 
         FragmentTransaction mainFT = getSupportFragmentManager().beginTransaction();

@@ -26,11 +26,14 @@
             android:text="Advanced" />
     </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/imageView"
+    <TextView
+        android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        app:srcCompat="@android:drawable/btn_dialog" />
+        android:fontFamily="sans-serif"
+        android:text="Debt Defuser"
+        android:textSize="36sp" />
+
 </RelativeLayout>
