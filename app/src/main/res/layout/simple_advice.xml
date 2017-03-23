@@ -3,11 +3,11 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/relativeLayout">
+        android:layout_below="@+id/textView15"
+        android:layout_alignParentStart="true">
 
         <TextView
             android:id="@+id/textView12"
@@ -22,29 +22,30 @@
             android:id="@+id/textView13"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
             android:layout_alignStart="@+id/textView12"
             android:layout_below="@+id/textView12"
+            android:layout_marginBottom="10dp"
             android:text="If you're on the standard repayment plan you'll save about $999 a month by switching to the BLANK repayment plan." />
 
         <TextView
             android:id="@+id/textView14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
             android:layout_alignStart="@+id/textView13"
             android:layout_below="@+id/textView13"
+            android:layout_marginBottom="10dp"
             android:text="With further optimization you could save an additional $99999 over the life of your loan! " />
 
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textView14"
-            android:layout_centerHorizontal="true"
-            android:text="Button" />
-
     </RelativeLayout>
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="59dp"
+        android:text="Go to Action Plan / Summary"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:id="@+id/textView15"
@@ -58,14 +59,14 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/textView15"
+        android:layout_below="@+id/relativeLayout"
         android:layout_centerHorizontal="true"
-        android:layout_above="@+id/relativeLayout">
+        android:layout_above="@+id/button2">
 
-        <lecho.lib.hellocharts.view.BubbleChartView
+        <lecho.lib.hellocharts.view.ColumnChartView
             android:id="@+id/chart"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
     </FrameLayout>
 

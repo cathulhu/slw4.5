@@ -10,7 +10,9 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements
         Fragment_Selection.OnNavigateAwayListener,
-        Fragment_Info.onSaveMoneyNowButton
+        Fragment_Info.onSaveMoneyNowButton,
+        Fragment_Advice.goToSummaryListener,
+        Fragment_Summary.goProButtonListener
     {
 
 
@@ -30,6 +32,20 @@ public class MainActivity extends AppCompatActivity implements
         fTransaction.commit();
     }
 
+    public void navigateToSummary()
+    {
+        FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
+        fTransaction.replace(R.id.mainFrameLayout, new Fragment_Summary());
+        fTransaction.addToBackStack(null);
+        fTransaction.commit();
+    }
+
+    public void goPro()
+    {
+
+    }
+
+
         FragmentTransaction mainFT = getSupportFragmentManager().beginTransaction();
 
     @Override
@@ -43,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements
         adView.loadAd(adRequest);
 
         // Toasts the test ad message on the screen. Remove this after defining your own ad unit ID.
-        Toast.makeText(this, "Test ads are being shown. " + "To show live ads, replace the ad unit ID in res/values/strings.xml with your own ad unit ID.", Toast.LENGTH_LONG).show();
+//        Toast.makeText(this, "Test ads are being shown. " + "To show live ads, replace the ad unit ID in res/values/strings.xml with your own ad unit ID.", Toast.LENGTH_LONG).show();
 
         //populate initial selection fragment into main content layout
         //should later add a check to not re populate if view is changed or something
