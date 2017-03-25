@@ -15,35 +15,41 @@ public class MainActivity extends AppCompatActivity implements
         Fragment_Summary.goProButtonListener
     {
 
+        public Integer simpleIncome = 0;
+        public Integer simpleDebt = 0;
 
-    public void onIncomeFinished()
-    {
-        FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
-        fTransaction.replace(R.id.mainFrameLayout, new Fragment_Advice());
-        fTransaction.addToBackStack(null);
-        fTransaction.commit();
-    }
 
-    public void navigateToChoice()
-    {
-        FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
-        fTransaction.replace(R.id.mainFrameLayout, new Fragment_Info());
-        fTransaction.addToBackStack(null);
-        fTransaction.commit();
-    }
+        public void onIncomeFinished(int income, int debt)
+        {
+            simpleIncome=income*1000;
+            simpleDebt=debt*1000;
 
-    public void navigateToSummary()
-    {
-        FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
-        fTransaction.replace(R.id.mainFrameLayout, new Fragment_Summary());
-        fTransaction.addToBackStack(null);
-        fTransaction.commit();
-    }
+            FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
+            fTransaction.replace(R.id.mainFrameLayout, new Fragment_Advice());
+            fTransaction.addToBackStack(null);
+            fTransaction.commit();
+        }
 
-    public void goPro()
-    {
+        public void navigateToChoice()
+        {
+            FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
+            fTransaction.replace(R.id.mainFrameLayout, new Fragment_Info());
+            fTransaction.addToBackStack(null);
+            fTransaction.commit();
+        }
 
-    }
+        public void navigateToSummary()
+        {
+            FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
+            fTransaction.replace(R.id.mainFrameLayout, new Fragment_Summary());
+            fTransaction.addToBackStack(null);
+            fTransaction.commit();
+        }
+
+        public void goPro()
+        {
+
+        }
 
 
         FragmentTransaction mainFT = getSupportFragmentManager().beginTransaction();

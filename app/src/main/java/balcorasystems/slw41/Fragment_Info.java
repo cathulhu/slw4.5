@@ -15,10 +15,11 @@ public class Fragment_Info extends Fragment
 
     public interface onSaveMoneyNowButton
     {
-        public void onIncomeFinished();
+        public void onIncomeFinished(int income, int debt);
     }
-
     public onSaveMoneyNowButton mListener;
+
+
 
 
     @Override
@@ -27,8 +28,8 @@ public class Fragment_Info extends Fragment
         View rootLayoutView = inflater.inflate(R.layout.simple_getinfo, selectionContainer, false);
         mListener = (onSaveMoneyNowButton) getContext();       //FOR SOME REASON ITS INCREDIBLY IMPORTANT TO SET THIS TO CONTEXT;
 
-        NumberPicker incomePicker;
-        NumberPicker debtPicker;
+        final NumberPicker incomePicker;
+        final NumberPicker debtPicker;
         Button doneButton;
 
         incomePicker = (NumberPicker) rootLayoutView.findViewById(R.id.numberPicker1);
@@ -66,7 +67,7 @@ public class Fragment_Info extends Fragment
             @Override
             public void onClick(View view)
             {
-                mListener.onIncomeFinished();
+                mListener.onIncomeFinished(debtPicker.getValue(), incomePicker.getValue());
             }
         });
 
