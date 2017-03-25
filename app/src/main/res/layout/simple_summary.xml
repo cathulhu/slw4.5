@@ -23,10 +23,9 @@
             android:id="@+id/textView18"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
             android:layout_below="@+id/textView16"
-            android:layout_marginBottom="5dp"
-            android:text="Repayment Plan Reccomendation" />
+            android:layout_centerHorizontal="true"
+            android:text="Repayment Plan Reccomendation:" />
 
         <TextView
             android:id="@+id/textView16"
@@ -75,10 +74,11 @@
             android:id="@+id/textView19"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@+id/textView17"
-            android:layout_marginBottom="5dp"
-            android:text="TextView" />
+            android:layout_below="@+id/textView18"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="5dp"
+            android:text="TextView"
+            android:textStyle="bold|italic" />
 
         <TextView
             android:id="@+id/textView10"
@@ -93,12 +93,12 @@
             android:id="@+id/loanServicersTitleText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textView18"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
             android:text="Tap your loan servicer to call and start saving today!"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_below="@+id/textView19"
+            android:layout_centerHorizontal="true" />
 
         <ListView
             android:id="@+id/servicersListView"

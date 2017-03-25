@@ -15,17 +15,17 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_margin="10dp"
+            android:layout_margin="5dp"
             android:text="If you aren't already on an Income Driven repayment plan you can probably lower your monthly payments to around $999" />
 
         <TextView
             android:id="@+id/textView13"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/textView12"
+            android:text="If you're on the standard repayment plan you'll save about $999 a month by switching to the BLANK repayment plan."
             android:layout_below="@+id/textView12"
-            android:layout_marginBottom="10dp"
-            android:text="If you're on the standard repayment plan you'll save about $999 a month by switching to the BLANK repayment plan." />
+            android:layout_margin="5dp"
+            android:layout_alignParentEnd="true" />
 
         <TextView
             android:id="@+id/textView14"
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/textView13"
             android:layout_below="@+id/textView13"
-            android:layout_marginBottom="10dp"
+            android:layout_margin="5dp"
             android:text="With further optimization you could save an additional $99999 over the life of your loan! " />
 
     </RelativeLayout>

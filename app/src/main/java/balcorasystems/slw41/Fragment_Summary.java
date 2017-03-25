@@ -11,7 +11,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -19,6 +21,11 @@ import java.util.List;
 
 public class Fragment_Summary extends Fragment
 {
+
+    Double currentPayment = MainActivity.currentStdPayment;
+    Double projectedSavings = MainActivity.projectedMonthlySavings;
+    Double newMonthlyPayment = MainActivity.newMonthlyPayment;
+    String reccomendedPlan = MainActivity.planReccomendation;
 
     public interface goProButtonListener
     {
@@ -31,6 +38,23 @@ public class Fragment_Summary extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup selectionContainer, Bundle savedInstanceState) {
         View rootLayoutView = inflater.inflate(R.layout.simple_summary, selectionContainer, false);
         mListener = (goProButtonListener) getContext();       //FOR SOME REASON ITS INCREDIBLY IMPORTANT TO SET THIS TO CONTEXT;
+
+        TextView currentPaymentText = (TextView) rootLayoutView.findViewById(R.id.textView9);
+        TextView savingsText = (TextView) rootLayoutView.findViewById(R.id.textView11);
+        TextView newPaymentText = (TextView) rootLayoutView.findViewById(R.id.textView17);
+        TextView reccomendationText = (TextView) rootLayoutView.findViewById(R.id.textView19);
+
+        NumberFormat nf = NumberFormat.getInstance();
+        nf.setMaximumFractionDigits(2);
+
+        String formattedCurrentPayment = "$" + nf.format(currentPayment);
+        String formattedSavings = "$" + nf.format(projectedSavings);
+        String formattedNewPayment = "$" + nf.format(newMonthlyPayment);
+
+        currentPaymentText.setText(formattedCurrentPayment);
+        savingsText.setText(formattedSavings);
+        newPaymentText.setText(formattedNewPayment);
+        reccomendationText.setText(reccomendedPlan);
 
         List<String> loanServicers = new ArrayList<String>();
         loanServicers.add("Nelnet");

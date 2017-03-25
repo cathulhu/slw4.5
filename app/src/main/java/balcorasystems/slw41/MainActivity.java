@@ -15,9 +15,20 @@ public class MainActivity extends AppCompatActivity implements
         Fragment_Summary.goProButtonListener
     {
 
-        public Integer simpleIncome = 0;
-        public Integer simpleDebt = 0;
+        public static Integer simpleIncome = 0;
+        public static Integer simpleDebt = 0;
+        public static Double currentStdPayment = 0.0;
+        public static Double projectedMonthlySavings = 0.0;
+        public static Double newMonthlyPayment = 0.0;
+        public static String planReccomendation = "";
 
+        public void navigateToChoice()
+        {
+            FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
+            fTransaction.replace(R.id.mainFrameLayout, new Fragment_Info());
+            fTransaction.addToBackStack(null);
+            fTransaction.commit();
+        }
 
         public void onIncomeFinished(int income, int debt)
         {
@@ -30,16 +41,12 @@ public class MainActivity extends AppCompatActivity implements
             fTransaction.commit();
         }
 
-        public void navigateToChoice()
+        public void navigateToSummary(Double stdPayment, Double newPayment, String plan)
         {
-            FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
-            fTransaction.replace(R.id.mainFrameLayout, new Fragment_Info());
-            fTransaction.addToBackStack(null);
-            fTransaction.commit();
-        }
-
-        public void navigateToSummary()
-        {
+            currentStdPayment = stdPayment;
+            newMonthlyPayment = newPayment;
+            planReccomendation = plan;
+            projectedMonthlySavings = stdPayment - newPayment;
             FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
             fTransaction.replace(R.id.mainFrameLayout, new Fragment_Summary());
             fTransaction.addToBackStack(null);
