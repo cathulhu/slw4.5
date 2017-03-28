@@ -32,8 +32,8 @@ public class Fragment_Info extends Fragment
         final NumberPicker debtPicker;
         Button doneButton;
 
-        incomePicker = (NumberPicker) rootLayoutView.findViewById(R.id.numberPicker1);
-        debtPicker = (NumberPicker) rootLayoutView.findViewById(R.id.numberPicker2);
+        incomePicker = (NumberPicker) rootLayoutView.findViewById(R.id.numberPicker2);
+        debtPicker = (NumberPicker) rootLayoutView.findViewById(R.id.numberPicker1);
         doneButton = (Button) rootLayoutView.findViewById(R.id.buttonDone);
 
         String[] incomes = new String[251];
@@ -41,7 +41,7 @@ public class Fragment_Info extends Fragment
 
         for (int i = 0; i < 1001; i++)
         {
-            Integer debtValue = (i*1000);
+            Integer debtValue = ((i+1)*1000);
             debts[i]=debtValue.toString();
         }
 
@@ -51,23 +51,23 @@ public class Fragment_Info extends Fragment
             incomes[i]=incomeValue.toString();
         }
 
-        debtPicker.setMinValue(0);
-        debtPicker.setMaxValue(250);
-        debtPicker.setDisplayedValues(incomes);
-        debtPicker.setValue(25);
+        debtPicker.setMinValue(1);
+        debtPicker.setMaxValue(1000);
+        debtPicker.setDisplayedValues(debts);
+        debtPicker.setValue(32);
         debtPicker.setWrapSelectorWheel(false);
 
         incomePicker.setMinValue(0);
-        incomePicker.setMaxValue(1000);
-        incomePicker.setDisplayedValues(debts);
-        incomePicker.setValue(35);
+        incomePicker.setMaxValue(250);
+        incomePicker.setDisplayedValues(incomes);
+        incomePicker.setValue(28);
         incomePicker.setWrapSelectorWheel(false);
 
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
             {
-                mListener.onIncomeFinished(debtPicker.getValue(), incomePicker.getValue());
+                mListener.onIncomeFinished(incomePicker.getValue(), debtPicker.getValue());
             }
         });
 
