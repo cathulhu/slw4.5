@@ -144,9 +144,9 @@
                 android:id="@+id/imageView93"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:srcCompat="@drawable/moneysmall1"
                 android:layout_alignParentTop="true"
-                android:layout_toStartOf="@+id/imageView94"
-                app:srcCompat="@drawable/moneysmall1" />
+                android:layout_toStartOf="@+id/imageView94" />
 
             <TextView
                 android:id="@+id/textView96"

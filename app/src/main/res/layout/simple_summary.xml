@@ -23,12 +23,13 @@
     <ListView
         android:id="@+id/servicersListView"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="140dp"
         android:layout_below="@+id/loanServicersTitleText"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="5dp"
-        android:fastScrollAlwaysVisible="true"
-        android:layout_marginTop="5dp" />
+        android:layout_marginTop="5dp"
+        android:background="@drawable/rounded_corners_white"
+        android:fastScrollAlwaysVisible="true" />
 
     <RelativeLayout
         android:id="@+id/relativeLayout2"

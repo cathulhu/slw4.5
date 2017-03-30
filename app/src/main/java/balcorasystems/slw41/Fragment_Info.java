@@ -25,7 +25,7 @@ public class Fragment_Info extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup selectionContainer, Bundle savedInstanceState)
     {
-        View rootLayoutView = inflater.inflate(R.layout.simple_getinfo, selectionContainer, false);
+        View rootLayoutView = inflater.inflate(R.layout.simple_info, selectionContainer, false);
         mListener = (onSaveMoneyNowButton) getContext();       //FOR SOME REASON ITS INCREDIBLY IMPORTANT TO SET THIS TO CONTEXT;
 
         final NumberPicker incomePicker;
