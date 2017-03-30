@@ -3,37 +3,83 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Student Loan Wizard"
+        android:textSize="30sp"
+        android:textStyle="bold|italic"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/relativeLayout3"
+        android:layout_below="@+id/textView7"
+        android:text="Student Loan Wizard can help you lower your monthly payments, look for ways you can save money in the long run, and much more."
+        android:textAlignment="textStart" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView6"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="To get started select a mode below:"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:layout_alignStart="@+id/textView6" />
+
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true">
+        android:id="@+id/relativeLayout3"
+        android:layout_below="@+id/textView21"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/advancedButton"
+            android:layout_centerHorizontal="true"
+            android:layout_marginRight="120dp"
+            android:text="An advanced analysis that shows you how to save the most money on your loans over time (not ONLY reduce your monthly payments), computes favorable tax scenarios, screens for debt forgiveness, and save debt in default."
+            android:textAlignment="center" />
 
         <Button
             android:id="@+id/simpleButton"
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:text="Simple Mode" />
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="Ballpark Mode" />
+
+        <TextView
+            android:id="@+id/textView20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/simpleButton"
+            android:layout_centerHorizontal="true"
+            android:layout_marginRight="120dp"
+            android:text="A basic estimate of how much switching to income based repayment can lower your monthly payments for typical borrowers."
+            android:textAlignment="center" />
 
         <Button
             android:id="@+id/advancedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/simpleButton"
+            android:layout_marginTop="30dp"
+            android:layout_below="@+id/textView20"
             android:layout_centerHorizontal="true"
-            android:text="Advanced" />
-    </RelativeLayout>
+            android:elevation="24dp"
+            android:text="Advanced Analysis" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:fontFamily="sans-serif"
-        android:text="Debt Defuser"
-        android:textSize="36sp" />
+    </RelativeLayout>
 
 </RelativeLayout>

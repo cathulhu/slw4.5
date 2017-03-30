@@ -2,40 +2,14 @@ package balcorasystems.slw41;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.Spannable;
-import android.text.SpannableStringBuilder;
 import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBarActivity;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.List;
-
-import lecho.lib.hellocharts.gesture.ZoomType;
-import lecho.lib.hellocharts.listener.ColumnChartOnValueSelectListener;
-import lecho.lib.hellocharts.model.Axis;
-import lecho.lib.hellocharts.model.Column;
-import lecho.lib.hellocharts.model.ColumnChartData;
-import lecho.lib.hellocharts.model.SubcolumnValue;
-import lecho.lib.hellocharts.util.ChartUtils;
-import lecho.lib.hellocharts.view.Chart;
-import lecho.lib.hellocharts.view.ColumnChartView;
-
-import static android.icu.lang.UProperty.INT_START;
 
 
 public class Fragment_Advice extends Fragment
@@ -164,11 +138,16 @@ public class Fragment_Advice extends Fragment
             repaymentYear++;
         }
 
-        while (runningDebt > 0 && (ibrPayment > standardPayment))   //edge case behaviour to finish off repayment over 10 more years
+        if (ibrPayment > standardPayment)
         {
             standardPayment = simpleStandardRepaymentCalc(runningDebt);
-            runningDebt -= standardPayment;
-            totalSpent += standardPayment;
+
+            while (runningDebt > 0)   //edge case behaviour to finish off repayment over 10 more years
+            {
+                runningDebt -= standardPayment;
+                totalSpent += standardPayment;
+                payments.add(standardPayment);
+            }
         }
 
         return payments.get(0);
@@ -178,7 +157,7 @@ public class Fragment_Advice extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup selectionContainer, Bundle savedInstanceState)
     {
-        View rootLayoutView = inflater.inflate(R.layout.simple_advice, selectionContainer, false);
+        View rootLayoutView = inflater.inflate(R.layout.simple_results, selectionContainer, false);
 
         mListener = (goToSummaryListener) getContext();       //FOR SOME REASON ITS INCREDIBLY IMPORTANT TO SET THIS TO CONTEXT;
 

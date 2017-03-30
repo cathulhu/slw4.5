@@ -3,11 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="balcorasystems.slw41.MainActivity">
 
 
 
     <!-- view for AdMob Banner Ad -->
+
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
         android:layout_width="wrap_content"
@@ -21,10 +23,29 @@
         android:id="@+id/mainFrameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="5dp"
-        android:layout_centerHorizontal="true"
-        android:layout_above="@+id/adView">
+        android:layout_margin="10dp"
+        android:layout_below="@+id/state_progress_bar"
+        android:layout_above="@id/adView"
+        android:layout_alignStart="@+id/state_progress_bar">
 
     </FrameLayout>
+
+    <com.kofigyan.stateprogressbar.StateProgressBar
+        android:id="@+id/state_progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        app:spb_currentStateNumber="three"
+        app:spb_maxStateNumber="five"
+        app:spb_stateBackgroundColor="#BDBDBD"
+        app:spb_stateForegroundColor="#009688"
+        app:spb_stateNumberBackgroundColor="#BDBDBD"
+        app:spb_stateNumberForegroundColor="#009688"
+        app:spb_currentStateDescriptionColor="#211f1f"
+        app:spb_stateDescriptionColor="#808080"
+        app:spb_animateToCurrentProgressState="true"
+        app:spb_stateLineThickness="2dp"
+        app:spb_stateSize="10dp"
+        app:spb_checkStateCompleted="true"/>
 
 </RelativeLayout>
