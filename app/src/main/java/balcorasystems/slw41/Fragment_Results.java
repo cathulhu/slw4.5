@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.kofigyan.stateprogressbar.StateProgressBar;
 
+import org.w3c.dom.Text;
+
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
@@ -26,21 +28,6 @@ public class Fragment_Results extends Fragment
     }
 
     public goToSummaryListener mListener;
-
-
-//    private static final int DEFAULT_DATA = 0;
-//    private static final int SUBCOLUMNS_DATA = 1;
-//    private static final int STACKED_DATA = 2;
-//    private static final int NEGATIVE_SUBCOLUMNS_DATA = 3;
-//    private static final int NEGATIVE_STACKED_DATA = 4;
-//
-//    private ColumnChartView chart;
-//    private ColumnChartData data;
-//    private boolean hasAxes = true;
-//    private boolean hasAxesNames = true;
-//    private boolean hasLabels = false;
-//    private boolean hasLabelForSelected = false;
-//    private int dataType = DEFAULT_DATA;
 
     //using simple tight couplings for now, can switch to bundle or data on disk, something more elegant later
     Integer income = MainActivity.simpleIncome;
@@ -83,6 +70,7 @@ public class Fragment_Results extends Fragment
         double runningDebt = debt;
         double runningInterest = 0;
         double totalSpent = 0;
+        double forgiveness = 0;
         double totalUnpaidInterest = 0;
         double totalAccruedInterest=0;
         double financialHardshipLine = povertyLevelsingle48states2017 * 1.5;
@@ -113,10 +101,12 @@ public class Fragment_Results extends Fragment
                 {
                     if (repaymentYear < 3 && (standardPayment > ibrPayment))  //ibr doesn't capitalize interest for first 36 months
                     {
-                        monthlyAccruedInterest=ibrPayment;
+                        monthlyAccruedInterest=0;
                     }
 
                     totalUnpaidInterest += monthlyAccruedInterest - ibrPayment;
+
+                    
                 }
 
                 if (ibrPayment > standardPayment)
@@ -153,6 +143,15 @@ public class Fragment_Results extends Fragment
             }
         }
 
+        for (Double payment: payments)
+        {
+            totalSpent+=payment;
+        }
+
+        forgiveness=runningDebt;
+
+        MainActivity.totalStdSpent=standardPayment*120;
+        MainActivity.totalIdrSpent=totalSpent;
         return payments.get(0);
     }
 
@@ -168,21 +167,28 @@ public class Fragment_Results extends Fragment
         Button goSummaryButton;
         goSummaryButton = (Button) rootLayoutView.findViewById(R.id.button2);
 
-        TextView newPaymentParagraph;
-        TextView savingsParagraph;
+        TextView newPaymentParagraph= (TextView) rootLayoutView.findViewById(R.id.textView12);
+        TextView savingsParagraph= (TextView) rootLayoutView.findViewById(R.id.textView13);
+        TextView topSavingsTitle = (TextView) rootLayoutView.findViewById(R.id.topSavings);
+        TextView oldPaymentGraphLabel = (TextView) rootLayoutView.findViewById(R.id.oldPaymentGraphLabel);
+        TextView newPaymentGraphLabel = (TextView) rootLayoutView.findViewById(R.id.newPaymentGraphLabel);
 
-        newPaymentParagraph = (TextView) rootLayoutView.findViewById(R.id.textView12);
-        savingsParagraph = (TextView) rootLayoutView.findViewById(R.id.textView13);
 
-        Double formattedIBRPayment = simpleIBRRepaymentCalc();
-        Double formattedSavings = simpleStandardRepaymentCalc()-simpleIBRRepaymentCalc();
-        Double formattedStandarPayment = simpleStandardRepaymentCalc();
+
+        Double IBRPayment = simpleIBRRepaymentCalc();
+        Double Savings = simpleStandardRepaymentCalc()-simpleIBRRepaymentCalc();
+        Double StandarPayment = simpleStandardRepaymentCalc();
 
         NumberFormat nf = NumberFormat.getInstance();
-        nf.setMaximumFractionDigits(2);
+        nf.setMaximumFractionDigits(0);
 
-        String paragraph1 = "If you aren't already on an Income Driven repayment plan then you can probably lower your monthly payments to around $" + nf.format(formattedIBRPayment);
-        String paragraph2 = "If you're on the standard repayment plan then you're probably paying around $" + nf.format(formattedStandarPayment) + " a month now. So By switching to the 'Income Based Repayment' plan you'll save about $" + nf.format(formattedSavings) + " a month.";
+        topSavingsTitle.setText("$" + String.valueOf(nf.format(Savings)));
+        String paragraph1 = "If you aren't already on an Income Driven repayment plan then you can probably lower your monthly payments to around $" + nf.format(IBRPayment) + ".";
+        String paragraph2 = "If you're on the standard repayment plan then you're probably paying around $" + nf.format(StandarPayment) + " a month now. So By switching to the 'Income Based Repayment' plan you'll save about $" + nf.format(Savings) + " a month.";
+        oldPaymentGraphLabel.setText("$" + nf.format(StandarPayment));
+        newPaymentGraphLabel.setText("$" + nf.format(IBRPayment));
+
+
 
         newPaymentParagraph.setText(paragraph1);
         savingsParagraph.setText(paragraph2);
