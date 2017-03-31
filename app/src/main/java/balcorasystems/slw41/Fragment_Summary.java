@@ -1,5 +1,6 @@
 package balcorasystems.slw41;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,6 +13,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.kofigyan.stateprogressbar.StateProgressBar;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -97,6 +100,20 @@ public class Fragment_Summary extends Fragment
         loanServicersList.setOnItemClickListener(clickHandler);
 
         return rootLayoutView;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        MainActivity.topProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FOUR);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        MainActivity.topProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FOUR);
     }
 
 }

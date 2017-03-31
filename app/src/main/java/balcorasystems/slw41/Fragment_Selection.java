@@ -1,5 +1,6 @@
 package balcorasystems.slw41;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -7,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.kofigyan.stateprogressbar.StateProgressBar;
 
 
 public class Fragment_Selection extends Fragment
@@ -42,6 +45,23 @@ public class Fragment_Selection extends Fragment
         });
 
         return rootLayoutView;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        MainActivity.topProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.ONE);
+        MainActivity.topProgressBar.setAnimationDuration(9000);
+        MainActivity.topProgressBar.enableAnimationToCurrentState(true);
+        MainActivity.topProgressBar.checkStateCompleted(true);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        MainActivity.topProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.ONE);
     }
 
 }

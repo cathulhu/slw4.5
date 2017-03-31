@@ -1,5 +1,6 @@
 package balcorasystems.slw41;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,11 +9,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.kofigyan.stateprogressbar.StateProgressBar;
+
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
 
-public class Fragment_Advice extends Fragment
+public class Fragment_Results extends Fragment
 {
 
     String reccomendedPlanName = "Income Based Repayment";
@@ -198,6 +201,20 @@ public class Fragment_Advice extends Fragment
 //        generateData();
 
         return rootLayoutView;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        MainActivity.topProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.THREE);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        MainActivity.topProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.THREE);
     }
 
 

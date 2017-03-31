@@ -36,7 +36,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        app:spb_currentStateNumber="three"
         app:spb_maxStateNumber="five"
         app:spb_stateBackgroundColor="#BDBDBD"
         app:spb_stateForegroundColor="#009688"
@@ -45,7 +44,9 @@
         app:spb_currentStateDescriptionColor="#211f1f"
         app:spb_stateDescriptionColor="#808080"
         app:spb_animateToCurrentProgressState="true"
+        ads:spb_animationDuration="5000"
         app:spb_stateLineThickness="2dp"
+        ads:spb_stateDescriptionSize="12dp"
         app:spb_stateSize="10dp"
         app:spb_checkStateCompleted="true"/>
 
