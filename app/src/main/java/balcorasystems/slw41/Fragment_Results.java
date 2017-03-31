@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.kofigyan.stateprogressbar.StateProgressBar;
+import com.startapp.android.publish.adsCommon.StartAppAd;
 
 import org.w3c.dom.Text;
 

@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -18,7 +17,6 @@ import com.kofigyan.stateprogressbar.StateProgressBar;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 
@@ -28,7 +26,9 @@ public class Fragment_Summary extends Fragment
     Double currentPayment = MainActivity.currentStdPayment;
     Double projectedSavings = MainActivity.projectedMonthlySavings;
     Double newMonthlyPayment = MainActivity.newMonthlyPayment;
-    String reccomendedPlan = MainActivity.planReccomendation;
+    String reccomendedPlan = MainActivity.planRecommendation;
+    Double idrTotal = MainActivity.totalIdrSpent;
+    Double stdTotal = MainActivity.totalStdSpent;
 
     public interface goProButtonListener
     {
@@ -47,12 +47,18 @@ public class Fragment_Summary extends Fragment
         TextView newPaymentText = (TextView) rootLayoutView.findViewById(R.id.textView17);
         TextView reccomendationText = (TextView) rootLayoutView.findViewById(R.id.textView19);
 
+        TextView standardSummaryTotal = (TextView) rootLayoutView.findViewById(R.id.standardSummaryTotal);
+        TextView ibrSummaryTotal = (TextView) rootLayoutView.findViewById(R.id.ibrSummaryTotal);
+
         NumberFormat nf = NumberFormat.getInstance();
-        nf.setMaximumFractionDigits(2);
+        nf.setMaximumFractionDigits(0);
 
         String formattedCurrentPayment = "$" + nf.format(currentPayment);
-        String formattedSavings = "$" + nf.format(projectedSavings);
+        String formattedSavings = "-$" + nf.format(projectedSavings);
         String formattedNewPayment = "$" + nf.format(newMonthlyPayment);
+
+        standardSummaryTotal.setText("$" + nf.format(stdTotal));
+        ibrSummaryTotal.setText("$" + nf.format(idrTotal));
 
         currentPaymentText.setText(formattedCurrentPayment);
         savingsText.setText(formattedSavings);

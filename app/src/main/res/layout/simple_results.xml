@@ -15,14 +15,14 @@
             android:id="@+id/textView26"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/textView15"
-            android:layout_alignBottom="@+id/textView15"
-            android:layout_toStartOf="@+id/textView15"
+            android:layout_alignBaseline="@+id/topSavings"
+            android:layout_alignBottom="@+id/topSavings"
+            android:layout_toStartOf="@+id/topSavings"
             android:text="about "
             android:textStyle="italic" />
 
         <TextView
-            android:id="@+id/textView15"
+            android:id="@+id/topSavings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -34,9 +34,9 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/textView15"
-            android:layout_alignBottom="@+id/textView15"
-            android:layout_toEndOf="@+id/textView15"
+            android:layout_alignBaseline="@+id/topSavings"
+            android:layout_alignBottom="@+id/topSavings"
+            android:layout_toEndOf="@+id/topSavings"
             android:text="a month"
             android:textStyle="italic" />
     </RelativeLayout>
@@ -133,7 +133,7 @@
                 app:srcCompat="@drawable/moneysmall1" />
 
             <TextView
-                android:id="@+id/textView30"
+                android:id="@+id/oldPaymentGraphLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -174,7 +174,7 @@
                 app:srcCompat="@drawable/moneysmall1" />
 
             <TextView
-                android:id="@+id/textView29"
+                android:id="@+id/newPaymentGraphLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
