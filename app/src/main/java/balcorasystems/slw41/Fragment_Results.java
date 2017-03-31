@@ -79,9 +79,8 @@ public class Fragment_Results extends Fragment
         double standardPayment = simpleStandardRepaymentCalc(runningDebt);
 
 
-        while (runningDebt > 0 && repaymentYear < 20 &&(ibrPayment < standardPayment) )     //built in edge case detection if IBR gets more expensive than standard
+        while (runningDebt > 0 && repaymentYear < 25)     //built in edge case detection if IBR gets more expensive than standard
         {
-            financialHardshipLine = povertyLevelsingle48states2017 * 1.5;
             discretionaryIncome = runningIncome - financialHardshipLine;
 
             for (int m=0; m < 12; m++)
@@ -94,27 +93,31 @@ public class Fragment_Results extends Fragment
                     ibrPayment = 0;
                 }
 
+
                 double monthlyAccruedInterest = defaultMonthlyInterestRate*runningDebt;
-                standardPayment = simpleStandardRepaymentCalc(runningDebt);
+//                standardPayment = simpleStandardRepaymentCalc(runningDebt);
+                //disabling the standard payment recalc for now since this gives misleading results without differentiating between switch to standard from IBR and total spent doing only standard
 
-                if (monthlyAccruedInterest > ibrPayment)
+                if (repaymentYear < 3 && (standardPayment > ibrPayment))  //ibr doesn't capitalize interest for first 36 months
                 {
-                    if (repaymentYear < 3 && (standardPayment > ibrPayment))  //ibr doesn't capitalize interest for first 36 months
-                    {
-                        monthlyAccruedInterest=0;
-                    }
-
-                    totalUnpaidInterest += monthlyAccruedInterest - ibrPayment;
-
-                    
+                    monthlyAccruedInterest=0;
                 }
+
+                totalUnpaidInterest += monthlyAccruedInterest - ibrPayment;
+
 
                 if (ibrPayment > standardPayment)
                 {
                     ibrPayment=standardPayment;
                 }
 
-                runningDebt += monthlyAccruedInterest;
+                runningDebt += monthlyAccruedInterest - ibrPayment;
+
+                if (totalUnpaidInterest <= 0)
+                {
+                    totalUnpaidInterest=0;
+                }
+
                 totalAccruedInterest += monthlyAccruedInterest - ibrPayment;
 
                 if (totalAccruedInterest < 0)
@@ -131,17 +134,19 @@ public class Fragment_Results extends Fragment
             repaymentYear++;
         }
 
-        if (ibrPayment > standardPayment)
-        {
-            standardPayment = simpleStandardRepaymentCalc(runningDebt);
+        //gonna disable this for now, since this is actually pretty advanced switching to standard vs riding out full IBR conditions.
 
-            while (runningDebt > 0)   //edge case behaviour to finish off repayment over 10 more years
-            {
-                runningDebt -= standardPayment;
-                totalSpent += standardPayment;
-                payments.add(standardPayment);
-            }
-        }
+//        if (ibrPayment > standardPayment)
+//        {
+//            standardPayment = simpleStandardRepaymentCalc(runningDebt);
+//
+//            while (runningDebt > 0)   //edge case behaviour to finish off repayment over 10 more years
+//            {
+//                runningDebt -= standardPayment;
+//                totalSpent += standardPayment;
+//                payments.add(standardPayment);
+//            }
+//        }
 
         for (Double payment: payments)
         {
