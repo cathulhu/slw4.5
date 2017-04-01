@@ -42,7 +42,6 @@ public class MainActivity extends AppCompatActivity implements
     public static Double totalIdrSpent = 0.0;
     public static Double totalStdSpent = 0.0;
     public static String planRecommendation = "";
-    public Integer topState = 1;
     public Integer backCounter =0;
     public Integer launchCount=0;
 
@@ -108,17 +107,18 @@ public class MainActivity extends AppCompatActivity implements
 
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        backCounter++;
-
-        if (backCounter%3==0)
-        {
-            StartAppInterstitialAd.onBackPressed();
-        }
-
-    }
+    //back button ads seem kind of obnoxious, better to just put them when static place when restarting main activity.
+//    @Override
+//    public void onBackPressed() {
+//        super.onBackPressed();
+//        backCounter++;
+//
+//        if (backCounter%3==0)
+//        {
+//            StartAppInterstitialAd.onBackPressed();
+//        }
+//
+//    }
 
     public void showInterstitialAd()
     {
@@ -187,7 +187,7 @@ public class MainActivity extends AppCompatActivity implements
             StartAppInterstitialAd.showSplash(this, passedState, new SplashConfig()
                     .setTheme(SplashConfig.Theme.ASHEN_SKY)
                     .setAppName("Student Loan Wizard")
-                    .setLogo(R.drawable.testanim)
+                    .setLogo(R.drawable.moneysmall1)
                     .setOrientation(SplashConfig.Orientation.PORTRAIT)
             );
         }
@@ -206,6 +206,7 @@ public class MainActivity extends AppCompatActivity implements
             loadLaunchNumberFile();
         } catch (IOException e) {
             e.printStackTrace();
+            createLaunchNumberFile(getApplicationContext());
         }
 
         launchAdCheck(savedInstanceState);
