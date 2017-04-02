@@ -51,17 +51,12 @@ public class Fragment_Selection extends Fragment
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        MainActivity.topProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.ONE);
-        MainActivity.topProgressBar.setAnimationDuration(9000);
-        MainActivity.topProgressBar.enableAnimationToCurrentState(true);
-        MainActivity.topProgressBar.checkStateCompleted(true);
     }
 
     @Override
     public void onResume() {
         super.onResume();
 
-        MainActivity.topProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.ONE);
     }
 
 }

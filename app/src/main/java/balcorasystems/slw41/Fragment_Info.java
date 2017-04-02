@@ -81,50 +81,11 @@ public class Fragment_Info extends Fragment
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        MainActivity.topProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.TWO);
-        MainActivity.topProgressBar.enableAnimationToCurrentState(true);
-        MainActivity.topProgressBar.setAnimationDuration(9000);
-        MainActivity.topProgressBar.checkStateCompleted(true);
     }
 
     @Override
     public void onResume() {
         super.onResume();
 
-        MainActivity.topProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.TWO);
-        MainActivity.topProgressBar.setAnimationDuration(9000);
-        MainActivity.topProgressBar.enableAnimationToCurrentState(true);
-        MainActivity.topProgressBar.checkStateCompleted(true);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-// WHAT THE HELL IS THIS WIZARDRY
-//    @Override
-//    public void onAttach(Context context) {
-//        super.onAttach(context);
-//
-//        if(context instanceof onSaveMoneyNowButton) {
-//            mListener = (onSaveMoneyNowButton) context;
-//        } else {
-//            throw new IllegalArgumentException("Containing activity must implement OnSearchListener interface");
-//        }
-//    }
-//END WIZARDRY (for some reason the interface stuff doesn't work unless I have this
-
-
-
-
-
-

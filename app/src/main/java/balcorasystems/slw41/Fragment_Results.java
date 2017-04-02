@@ -219,14 +219,12 @@ public class Fragment_Results extends Fragment
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        MainActivity.topProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.THREE);
     }
 
     @Override
     public void onResume() {
         super.onResume();
 
-        MainActivity.topProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.THREE);
     }
 
 

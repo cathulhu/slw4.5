@@ -81,7 +81,6 @@ public class MainActivity extends AppCompatActivity implements
 
 
     FragmentTransaction mainFT = getSupportFragmentManager().beginTransaction();
-    public static StateProgressBar topProgressBar;
 
     public StartAppAd StartAppInterstitialAd = new StartAppAd(this);
 
@@ -216,10 +215,6 @@ public class MainActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_main);
 
         String[] topStateDescriptors = {"Welcome", "Info", "Savings", "Summary", "Finish"};
-
-        topProgressBar = (StateProgressBar) findViewById(R.id.state_progress_bar);
-        topProgressBar.enableAnimationToCurrentState(true);
-        topProgressBar.setStateDescriptionData(topStateDescriptors);
 
 //        FrameLayout centralFragmentFrame = (FrameLayout) findViewById(R.id.mainFrameLayout);
 
