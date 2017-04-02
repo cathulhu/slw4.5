@@ -28,11 +28,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Serializable;
 
-public class MainActivity extends AppCompatActivity implements
-        Fragment_Selection.OnNavigateAwayListener,
-        Fragment_Info.onSaveMoneyNowButton,
-        Fragment_Results.goToSummaryListener,
-        Fragment_Summary.goProButtonListener {
+public class MainActivity extends AppCompatActivity
+
+{
 
     public static Integer simpleIncome = 0;
     public static Integer simpleDebt = 0;
@@ -47,33 +45,34 @@ public class MainActivity extends AppCompatActivity implements
 
     public void navigateToChoice()
     {
-        FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
-        fTransaction.replace(R.id.mainFrameLayout, new Fragment_Info());
-        fTransaction.addToBackStack(null);
-        fTransaction.commit();
+
+//        FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
+//        fTransaction.replace(R.id.mainFrameLayout, new Fragment_Info());
+//        fTransaction.addToBackStack(null);
+//        fTransaction.commit();
     }
 
-    public void onIncomeFinished(int income, int debt)
-    {
-        simpleIncome = income * 1000;
-        simpleDebt = debt * 1000;
-        FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
-        fTransaction.replace(R.id.mainFrameLayout, new Fragment_Results());
-        fTransaction.addToBackStack(null);
-        fTransaction.commit();
-    }
-
-    public void navigateToSummary(Double stdPayment, Double newPayment, String plan)
-    {
-        currentStdPayment = stdPayment;
-        newMonthlyPayment = newPayment;
-        planRecommendation = plan;
-        projectedMonthlySavings = stdPayment - newPayment;
-        FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
-        fTransaction.replace(R.id.mainFrameLayout, new Fragment_Summary());
-        fTransaction.addToBackStack(null);
-        fTransaction.commit();
-    }
+//    public void onIncomeFinished(int income, int debt)
+//    {
+//        simpleIncome = income * 1000;
+//        simpleDebt = debt * 1000;
+//        FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
+//        fTransaction.replace(R.id.mainFrameLayout, new Fragment_Results());
+//        fTransaction.addToBackStack(null);
+//        fTransaction.commit();
+//    }
+//
+//    public void navigateToSummary(Double stdPayment, Double newPayment, String plan)
+//    {
+//        currentStdPayment = stdPayment;
+//        newMonthlyPayment = newPayment;
+//        planRecommendation = plan;
+//        projectedMonthlySavings = stdPayment - newPayment;
+//        FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
+//        fTransaction.replace(R.id.mainFrameLayout, new Fragment_Summary());
+//        fTransaction.addToBackStack(null);
+//        fTransaction.commit();
+//    }
 
     public void goPro() {
 
@@ -84,27 +83,27 @@ public class MainActivity extends AppCompatActivity implements
 
     public StartAppAd StartAppInterstitialAd = new StartAppAd(this);
 
-    @Override
-    protected void onResume() {
-        super.onResume();
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//
+//        if (launchCount%3==0)
+//        {
+//            StartAppInterstitialAd.onResume();
+//        }
+//
+//    }
 
-        if (launchCount%3==0)
-        {
-            StartAppInterstitialAd.onResume();
-        }
-
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        if (launchCount%3==0)
-        {
-            StartAppInterstitialAd.onPause();
-        }
-
-    }
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//
+//        if (launchCount%3==0)
+//        {
+//            StartAppInterstitialAd.onPause();
+//        }
+//
+//    }
 
     //back button ads seem kind of obnoxious, better to just put them when static place when restarting main activity.
 //    @Override
@@ -205,9 +204,7 @@ public class MainActivity extends AppCompatActivity implements
 //
 //        launchAdCheck(savedInstanceState);
 
-
         this.supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-
         setContentView(R.layout.activity_main);
 
         //populate initial selection fragment into main content layout
