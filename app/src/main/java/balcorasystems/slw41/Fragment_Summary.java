@@ -23,24 +23,23 @@ import java.util.List;
 public class Fragment_Summary extends Fragment
 {
 
-    Double currentPayment = MainActivity.currentStdPayment;
-    Double projectedSavings = MainActivity.projectedMonthlySavings;
-    Double newMonthlyPayment = MainActivity.newMonthlyPayment;
-    String reccomendedPlan = MainActivity.planRecommendation;
-    Double idrTotal = MainActivity.totalIdrSpent;
-    Double stdTotal = MainActivity.totalStdSpent;
+    Double currentPayment = Main2Activity.currentStdPayment;
+    Double projectedSavings = Main2Activity.projectedMonthlySavings;
+    Double newMonthlyPayment = Main2Activity.newMonthlyPayment;
+    String reccomendedPlan = Main2Activity.planRecommendation;
+    Double idrTotal = Main2Activity.totalIdrSpent;
+    Double stdTotal = Main2Activity.totalStdSpent;
 
     public interface goProButtonListener
     {
         public void goPro();
     }
-
     public goProButtonListener mListener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup selectionContainer, Bundle savedInstanceState) {
         View rootLayoutView = inflater.inflate(R.layout.simple_summary, selectionContainer, false);
-        mListener = (goProButtonListener) getContext();       //FOR SOME REASON ITS INCREDIBLY IMPORTANT TO SET THIS TO CONTEXT;
+//        mListener = (goProButtonListener) getContext();       //FOR SOME REASON ITS INCREDIBLY IMPORTANT TO SET THIS TO CONTEXT;
 
         TextView currentPaymentText = (TextView) rootLayoutView.findViewById(R.id.textView9);
         TextView savingsText = (TextView) rootLayoutView.findViewById(R.id.textView11);

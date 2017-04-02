@@ -33,14 +33,6 @@ public class MainActivity extends AppCompatActivity implements Fragment_Selectio
 
 {
 
-    public static Integer simpleIncome = 0;
-    public static Integer simpleDebt = 0;
-    public static Double currentStdPayment = 0.0;
-    public static Double projectedMonthlySavings = 0.0;
-    public static Double newMonthlyPayment = 0.0;
-    public static Double totalIdrSpent = 0.0;
-    public static Double totalStdSpent = 0.0;
-    public static String planRecommendation = "";
     public Integer backCounter =0;
     public Integer launchCount=0;
 

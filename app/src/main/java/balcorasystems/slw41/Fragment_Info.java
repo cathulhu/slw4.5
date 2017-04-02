@@ -16,11 +16,11 @@ public class Fragment_Info extends Fragment
 
 {
 
-    public interface onSaveMoneyNowButton
-    {
-        public void onIncomeFinished(int income, int debt);
-    }
-    public onSaveMoneyNowButton mListener;
+//    public interface onSaveMoneyNowButton
+//    {
+//        public void onIncomeFinished(int income, int debt);
+//    }
+//    public onSaveMoneyNowButton mListener;
 
 
 
@@ -29,7 +29,8 @@ public class Fragment_Info extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup selectionContainer, Bundle savedInstanceState)
     {
         View rootLayoutView = inflater.inflate(R.layout.simple_info, selectionContainer, false);
-        mListener = (onSaveMoneyNowButton) getContext();       //FOR SOME REASON ITS INCREDIBLY IMPORTANT TO SET THIS TO CONTEXT;
+
+//        mListener = (onSaveMoneyNowButton) getContext();       //FOR SOME REASON ITS INCREDIBLY IMPORTANT TO SET THIS TO CONTEXT;
 
         final NumberPicker incomePicker;
         final NumberPicker debtPicker;
@@ -70,7 +71,7 @@ public class Fragment_Info extends Fragment
             @Override
             public void onClick(View view)
             {
-                mListener.onIncomeFinished(incomePicker.getValue(), debtPicker.getValue());
+//                mListener.onIncomeFinished(incomePicker.getValue(), debtPicker.getValue());
             }
         });
 
