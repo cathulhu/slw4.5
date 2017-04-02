@@ -45,26 +45,26 @@ public class MainActivity extends AppCompatActivity implements
     public Integer backCounter =0;
     public Integer launchCount=0;
 
-    public void navigateToChoice() {
+    public void navigateToChoice()
+    {
         FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
         fTransaction.replace(R.id.mainFrameLayout, new Fragment_Info());
         fTransaction.addToBackStack(null);
         fTransaction.commit();
     }
 
-    public void onIncomeFinished(int income, int debt) {
+    public void onIncomeFinished(int income, int debt)
+    {
         simpleIncome = income * 1000;
         simpleDebt = debt * 1000;
-
         FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
         fTransaction.replace(R.id.mainFrameLayout, new Fragment_Results());
         fTransaction.addToBackStack(null);
         fTransaction.commit();
     }
 
-    public void navigateToSummary(Double stdPayment, Double newPayment, String plan) {
-//        showInterstitialAd();
-
+    public void navigateToSummary(Double stdPayment, Double newPayment, String plan)
+    {
         currentStdPayment = stdPayment;
         newMonthlyPayment = newPayment;
         planRecommendation = plan;
@@ -148,8 +148,8 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
-    public Integer loadLaunchNumberFile() throws IOException {
-
+    public Integer loadLaunchNumberFile() throws IOException
+    {
             FileInputStream fInputStream = this.openFileInput("launchCountFile");
 
             int c;
@@ -172,8 +172,6 @@ public class MainActivity extends AppCompatActivity implements
 
         return  launchValue;
     }
-
-
 
     public void launchAdCheck (Bundle passedState)
     {
@@ -198,8 +196,8 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StartAppSDK.init(this, "000000000", true);
-        //real ad id code 202621518
+//        StartAppSDK.init(this, "000000000", true);
+//        real ad id code 202621518
 
         try {
             loadLaunchNumberFile();
@@ -209,14 +207,9 @@ public class MainActivity extends AppCompatActivity implements
         }
 
         launchAdCheck(savedInstanceState);
-
-
         this.supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
+
         setContentView(R.layout.activity_main);
-
-        String[] topStateDescriptors = {"Welcome", "Info", "Savings", "Summary", "Finish"};
-
-//        FrameLayout centralFragmentFrame = (FrameLayout) findViewById(R.id.mainFrameLayout);
 
         //populate initial selection fragment into main content layout
         mainFT.replace(R.id.mainFrameLayout, new Fragment_Selection());
