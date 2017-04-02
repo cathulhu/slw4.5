@@ -10,6 +10,7 @@ import com.startapp.android.publish.adsCommon.StartAppSDK;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.FragmentTransaction;
@@ -28,7 +29,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Serializable;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends AppCompatActivity implements Fragment_Selection.OnNavigateAwayListener
 
 {
 
@@ -45,6 +46,9 @@ public class MainActivity extends AppCompatActivity
 
     public void navigateToChoice()
     {
+
+        Intent intent = new Intent(getApplicationContext(), Main2Activity.class);
+        startActivity(intent);
 
 //        FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
 //        fTransaction.replace(R.id.mainFrameLayout, new Fragment_Info());
