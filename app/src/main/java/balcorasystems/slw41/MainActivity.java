@@ -131,9 +131,6 @@ public class MainActivity extends AppCompatActivity implements
         String fileName = "launchCountFile";
 
         File launchCount = new File(passedContext.getFilesDir(), fileName);
-
-
-
         FileOutputStream outputStream;
 
         try
@@ -199,14 +196,16 @@ public class MainActivity extends AppCompatActivity implements
 //        StartAppSDK.init(this, "000000000", true);
 //        real ad id code 202621518
 
-        try {
-            loadLaunchNumberFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-            createLaunchNumberFile(getApplicationContext());
-        }
+//        try {
+//            loadLaunchNumberFile();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            createLaunchNumberFile(getApplicationContext());
+//        }
+//
+//        launchAdCheck(savedInstanceState);
 
-        launchAdCheck(savedInstanceState);
+
         this.supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
 
         setContentView(R.layout.activity_main);
