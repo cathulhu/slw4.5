@@ -23,13 +23,6 @@ public class Fragment_Results extends Fragment
 
     String reccomendedPlanName = "Income Based Repayment";
 
-//    public interface goToSummaryListener
-//    {
-//        public void navigateToSummary(Double stdPayment, Double newPayment, String plan);
-//    }
-
-//    public goToSummaryListener mListener;
-
     //using simple tight couplings for now, can switch to bundle or data on disk, something more elegant later
     Integer income = Main2Activity.simpleIncome;
     Integer debt = Main2Activity.simpleDebt;
@@ -170,22 +163,17 @@ public class Fragment_Results extends Fragment
 //        mListener = (goToSummaryListener) getContext();       //FOR SOME REASON ITS INCREDIBLY IMPORTANT TO SET THIS TO CONTEXT;
 
 
-        Button goSummaryButton;
-        goSummaryButton = (Button) rootLayoutView.findViewById(R.id.button2);
-
         TextView newPaymentParagraph= (TextView) rootLayoutView.findViewById(R.id.textView12);
         TextView savingsParagraph= (TextView) rootLayoutView.findViewById(R.id.textView13);
         TextView topSavingsTitle = (TextView) rootLayoutView.findViewById(R.id.topSavings);
-        TextView oldPaymentGraphLabel = (TextView) rootLayoutView.findViewById(R.id.oldPaymentGraphLabel);
-        TextView newPaymentGraphLabel = (TextView) rootLayoutView.findViewById(R.id.newPaymentGraphLabel);
 
-        Double IBRPayment=0.0;
-        Double Savings=0.0;
-        Double StandardPayment=0.0;
+//        Double IBRPayment=0.0;
+//        Double Savings=0.0;
+//        Double StandardPayment=0.0;
 
-//        Double IBRPayment = simpleIBRRepaymentCalc();
-//        Double Savings = simpleStandardRepaymentCalc()-simpleIBRRepaymentCalc();
-//        Double StandardPayment = simpleStandardRepaymentCalc();
+        Double IBRPayment = simpleIBRRepaymentCalc();
+        Double Savings = simpleStandardRepaymentCalc()-simpleIBRRepaymentCalc();
+        Double StandardPayment = simpleStandardRepaymentCalc();
 
         NumberFormat nf = NumberFormat.getInstance();
         nf.setMaximumFractionDigits(0);
@@ -193,21 +181,11 @@ public class Fragment_Results extends Fragment
         topSavingsTitle.setText("$" + String.valueOf(nf.format(Savings)));
         String paragraph1 = "If you aren't already on an Income Driven repayment plan then you can probably lower your monthly payments to around $" + nf.format(IBRPayment) + ".";
         String paragraph2 = "If you're on the standard repayment plan then you're probably paying around $" + nf.format(StandardPayment) + " a month now. So By switching to the 'Income Based Repayment' plan you'll save about $" + nf.format(Savings) + " a month.";
-        oldPaymentGraphLabel.setText("$" + nf.format(StandardPayment));
-        newPaymentGraphLabel.setText("$" + nf.format(IBRPayment));
-
-
 
         newPaymentParagraph.setText(paragraph1);
         savingsParagraph.setText(paragraph2);
 
-        goSummaryButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-//                mListener.navigateToSummary(simpleStandardRepaymentCalc(), simpleIBRRepaymentCalc(), reccomendedPlanName);
-            }
-        });
 
 
 //        chart = (ColumnChartView) rootLayoutView.findViewById(R.id.chart);

@@ -21,10 +21,11 @@ import android.widget.TextView;
 
 import static android.R.attr.fragment;
 
-public class Main2Activity extends AppCompatActivity {
+public class Main2Activity extends AppCompatActivity implements Fragment_Info.sendDebtToMain, Fragment_Info.sendIncomeToMain
+{
 
-    public static Integer simpleIncome = 0;
-    public static Integer simpleDebt = 0;
+    public static Integer simpleIncome = 27000;
+    public static Integer simpleDebt = 35000;
     public static Double currentStdPayment = 0.0;
     public static Double projectedMonthlySavings = 0.0;
     public static Double newMonthlyPayment = 0.0;
@@ -32,20 +33,20 @@ public class Main2Activity extends AppCompatActivity {
     public static Double totalStdSpent = 0.0;
     public static String planRecommendation = "";
 
-    /**
-     * The {@link android.support.v4.view.PagerAdapter} that will provide
-     * fragments for each of the sections. We use a
-     * {@link FragmentPagerAdapter} derivative, which will keep every
-     * loaded fragment in memory. If this becomes too memory intensive, it
-     * may be best to switch to a
-     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
-     */
     private SectionsPagerAdapter mSectionsPagerAdapter;
-
-    /**
-     * The {@link ViewPager} that will host the section contents.
-     */
     private ViewPager mViewPager;
+
+    @Override
+    public void onRecieveDebtData(int debt)
+    {
+        simpleDebt = debt;
+    }
+
+    @Override
+    public void onRecieveIncomeData(int income)
+    {
+        simpleIncome = income;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +63,7 @@ public class Main2Activity extends AppCompatActivity {
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+//        mViewPager.setOffscreenPageLimit(0);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
@@ -95,37 +97,7 @@ public class Main2Activity extends AppCompatActivity {
 
 
 
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
 
-        public PlaceholderFragment() {
-        }
-
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main2, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
-            return rootView;
-        }
-    }
 
 
 
@@ -158,13 +130,15 @@ public class Main2Activity extends AppCompatActivity {
         }
 
         @Override
-        public Fragment getItem(int position)
+        public int getItemPosition(Object object)
         {
 
+            return super.getItemPosition(object);
+        }
 
-//            return newInfoInstance();
-//            return newResultsInstance();
-
+        @Override
+        public Fragment getItem(int position)
+        {
             switch (position)
             {
                 case 0:
