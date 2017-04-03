@@ -26,21 +26,26 @@ public class Main2Activity extends AppCompatActivity implements Fragment_Info.se
 
     public static Integer simpleIncome = 27000;
     public static Integer simpleDebt = 35000;
-    public static Double currentStdPayment = 0.0;
-    public static Double projectedMonthlySavings = 0.0;
-    public static Double newMonthlyPayment = 0.0;
-    public static Double totalIdrSpent = 0.0;
-    public static Double totalStdSpent = 0.0;
-    public static String planRecommendation = "";
+    public static Double currentStdPayment = 0.7;
+    public static Double projectedMonthlySavings = 0.7;
+    public static Double newMonthlyPayment = 0.7;
+    public static Double totalIdrSpent = 0.7;
+    public static Double totalStdSpent = 0.7;
+    public static String planRecommendation = "IBRRR";
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
+
+    int flag1 = 0;
+    int flag2 = 0;
 
     @Override
     public void onRecieveDebtData(int debt)
     {
         simpleDebt = debt;
         Fragment_Results.debt=debt;
+        updateSummary();
+
     }
 
     @Override
@@ -48,6 +53,26 @@ public class Main2Activity extends AppCompatActivity implements Fragment_Info.se
     {
         simpleIncome = income;
         Fragment_Results.income=income;
+
+        updateSummary();
+
+//        flag2=1;
+//        if (flag1==1 && flag2 ==1)
+//        {
+//            flag1=0;
+//            flag2=0;
+//            updateSummary();
+//        }
+    }
+
+    public void updateSummary()
+    {
+        Fragment_Summary.currentPayment=currentStdPayment;
+        Fragment_Summary.projectedSavings=projectedMonthlySavings;
+        Fragment_Summary.newMonthlyPayment=newMonthlyPayment;
+        Fragment_Summary.reccomendedPlan=planRecommendation;
+        Fragment_Summary.idrTotal=totalIdrSpent;
+        Fragment_Summary.stdTotal=totalStdSpent;
     }
 
 
@@ -67,7 +92,7 @@ public class Main2Activity extends AppCompatActivity implements Fragment_Info.se
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-//        mViewPager.setOffscreenPageLimit(0);
+        mViewPager.setOffscreenPageLimit(3);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);

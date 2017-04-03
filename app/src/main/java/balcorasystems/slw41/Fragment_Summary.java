@@ -23,12 +23,12 @@ import java.util.List;
 public class Fragment_Summary extends Fragment
 {
 
-    Double currentPayment = Main2Activity.currentStdPayment;
-    Double projectedSavings = Main2Activity.projectedMonthlySavings;
-    Double newMonthlyPayment = Main2Activity.newMonthlyPayment;
-    String reccomendedPlan = Main2Activity.planRecommendation;
-    Double idrTotal = Main2Activity.totalIdrSpent;
-    Double stdTotal = Main2Activity.totalStdSpent;
+    public static Double currentPayment = Main2Activity.currentStdPayment;
+    public static Double projectedSavings = Main2Activity.projectedMonthlySavings;
+    public static Double newMonthlyPayment = Main2Activity.newMonthlyPayment;
+    public static String reccomendedPlan = Main2Activity.planRecommendation;
+    public static Double idrTotal = Main2Activity.totalIdrSpent;
+    public static Double stdTotal = Main2Activity.totalStdSpent;
 
     public interface goProButtonListener
     {
@@ -105,6 +105,40 @@ public class Fragment_Summary extends Fragment
         loanServicersList.setOnItemClickListener(clickHandler);
 
         return rootLayoutView;
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser)
+    {
+        super.setUserVisibleHint(isVisibleToUser);
+
+        if (isVisibleToUser)
+        {
+            TextView currentPaymentText = (TextView) getView().findViewById(R.id.textView9);
+            TextView savingsText = (TextView) getView().findViewById(R.id.textView11);
+            TextView newPaymentText = (TextView) getView().findViewById(R.id.textView17);
+            TextView reccomendationText = (TextView) getView().findViewById(R.id.textView19);
+            TextView standardSummaryTotal = (TextView) getView().findViewById(R.id.standardSummaryTotal);
+            TextView ibrSummaryTotal = (TextView) getView().findViewById(R.id.ibrSummaryTotal);
+
+            NumberFormat nf = NumberFormat.getInstance();
+            nf.setMaximumFractionDigits(0);
+
+
+
+            String formattedCurrentPayment = "$" + nf.format(currentPayment);
+            String formattedSavings = "-$" + nf.format(projectedSavings);
+            String formattedNewPayment = "$" + nf.format(newMonthlyPayment);
+
+            standardSummaryTotal.setText("$" + nf.format(stdTotal));
+            ibrSummaryTotal.setText("$" + nf.format(idrTotal));
+
+            currentPaymentText.setText(formattedCurrentPayment);
+            savingsText.setText(formattedSavings);
+            newPaymentText.setText(formattedNewPayment);
+            reccomendationText.setText(reccomendedPlan);
+        }
+
     }
 
     @Override
