@@ -40,13 +40,17 @@ public class Main2Activity extends AppCompatActivity implements Fragment_Info.se
     public void onRecieveDebtData(int debt)
     {
         simpleDebt = debt;
+        Fragment_Results.debt=debt;
     }
 
     @Override
     public void onRecieveIncomeData(int income)
     {
         simpleIncome = income;
+        Fragment_Results.income=income;
     }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

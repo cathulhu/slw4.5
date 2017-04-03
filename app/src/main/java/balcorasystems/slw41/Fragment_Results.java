@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kofigyan.stateprogressbar.StateProgressBar;
 import com.startapp.android.publish.adsCommon.StartAppAd;
@@ -24,8 +25,8 @@ public class Fragment_Results extends Fragment
     String reccomendedPlanName = "Income Based Repayment";
 
     //using simple tight couplings for now, can switch to bundle or data on disk, something more elegant later
-    Integer income = Main2Activity.simpleIncome;
-    Integer debt = Main2Activity.simpleDebt;
+    public static Integer income = Main2Activity.simpleIncome;
+    public static Integer debt = Main2Activity.simpleDebt;
     double defaultMonthlyInterestRate = (0.0466 / 12);
 
     public Double simpleStandardRepaymentCalc()
@@ -196,21 +197,55 @@ public class Fragment_Results extends Fragment
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void setUserVisibleHint(boolean isVisibleToUser)
+    {
+        super.setUserVisibleHint(isVisibleToUser);
+
+        if (isVisibleToUser)
+        {
+
+            Double IBRPayment = simpleIBRRepaymentCalc();
+            Double Savings = simpleStandardRepaymentCalc()-simpleIBRRepaymentCalc();
+            Double StandardPayment = simpleStandardRepaymentCalc();
+
+            TextView newPaymentParagraph= (TextView) getView().findViewById(R.id.textView12);
+            TextView savingsParagraph= (TextView) getView().findViewById(R.id.textView13);
+            TextView topSavingsTitle = (TextView) getView().findViewById(R.id.topSavings);
+
+            NumberFormat nf = NumberFormat.getInstance();
+            nf.setMaximumFractionDigits(0);
+
+            topSavingsTitle.setText("$" + String.valueOf(nf.format(Savings)));
+            String paragraph1 = "If you aren't already on an Income Driven repayment plan then you can probably lower your monthly payments to around $" + nf.format(IBRPayment) + ".";
+            String paragraph2 = "If you're on the standard repayment plan then you're probably paying around $" + nf.format(StandardPayment) + " a month now. So By switching to the 'Income Based Repayment' plan you'll save about $" + nf.format(Savings) + " a month.";
+
+            newPaymentParagraph.setText(paragraph1);
+            savingsParagraph.setText(paragraph2);
+
+        }
+        else
+        {
+
+        }
+
+    }
+
+    @Override
+    public void onAttach(Context context)
+    {
         super.onAttach(context);
 
     }
 
     @Override
-    public void onResume() {
+    public void onResume()
+    {
+
         super.onResume();
 
     }
 
-
-
-
-//    private void reset() {
+    //    private void reset() {
 //        hasAxes = true;
 //        hasAxesNames = true;
 //        hasLabels = false;
