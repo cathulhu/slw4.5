@@ -11,7 +11,7 @@ import android.widget.NumberPicker;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.kofigyan.stateprogressbar.StateProgressBar;
+
 
 
 public class Fragment_Info extends Fragment

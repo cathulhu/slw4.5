@@ -3,97 +3,144 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Student Loan Wizard"
-        android:textSize="30sp"
-        android:textStyle="bold|italic"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/relativeLayout3"
-        android:layout_below="@+id/textView7"
-        android:text="Student Loan Wizard can help you lower your monthly payments, look for ways you can save money in the long run, and much more."
-        android:textAlignment="textStart" />
-
-    <TextView
-        android:id="@+id/textView21"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView6"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:text="To get started select a mode below:"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        android:layout_alignStart="@+id/textView6" />
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/relativeLayout3"
-        android:layout_below="@+id/textView21"
+        android:layout_weight="0.8"
+        app:cardBackgroundColor="#E0E0E0"
+        app:contentPaddingLeft="8dp"
+        app:contentPaddingRight="8dp"
+        app:contentPaddingTop="8dp"
         android:layout_alignParentStart="true">
 
-        <TextView
-            android:id="@+id/textView22"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/advancedButton"
-            android:layout_centerHorizontal="true"
-            android:layout_marginRight="120dp"
-            android:text="An advanced analysis that shows you how to save the most money on your loans over time (not ONLY reduce your monthly payments), computes favorable tax scenarios, screens for debt forgiveness, and save debt in default."
-            android:textAlignment="center" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/simpleButton"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:text="Ballpark Mode" />
+            <ImageView
+                android:id="@+id/thumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/moneysmall1" />
 
-        <TextView
-            android:id="@+id/textView20"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/simpleButton"
-            android:layout_centerHorizontal="true"
-            android:layout_marginRight="120dp"
-            android:text="A basic estimate of how much switching to income based repayment can lower your monthly payments for typical borrowers."
-            android:textAlignment="center" />
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/thumbnail"
+                android:maxLines="3"
+                android:padding="8dp"
+                android:text="Quick Estimate"
+                android:textColor="#222"
+                android:textSize="22dp"
+                android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/advancedButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_below="@+id/textView20"
-            android:layout_centerHorizontal="true"
-            android:clickable="false"
-            android:alpha="0.5"
-            android:elevation="24dp"
-            android:text="Advanced Analysis" />
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/title"
+                android:maxLines="3"
+                android:padding="8dp"
+                android:text="A basic estimate of how much switching to income based repayment can lower your monthly payments for typical borrowers."
+                android:textColor="#666"
+                android:textSize="14dp" />
 
-    </RelativeLayout>
+            <Button
+                android:id="@+id/simpleButton"
+                style="@android:style/Widget.DeviceDefault.Button.Borderless"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textView2"
+                android:text="Get Started" />
 
-    <TextView
-        android:id="@+id/textView15"
-        android:layout_width="wrap_content"
+            <View
+                android:id="@+id/separator"
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:layout_below="@+id/title"
+                android:background="#FF180F"
+                android:visibility="invisible" />
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView android:id="@+id/card_view2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/relativeLayout3"
-        android:layout_alignEnd="@+id/textView7"
-        android:layout_marginBottom="131dp"
-        android:text="Advanced mode coming soon!"
-        android:textColor="@android:color/holo_red_dark"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:layout_weight="0.8"
+        app:cardBackgroundColor="#E0E0E0"
+        app:contentPaddingLeft="8dp"
+        app:contentPaddingRight="8dp"
+        app:contentPaddingTop="8dp"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/thumbnail1"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/moneysmall1" />
+
+            <TextView
+                android:id="@+id/title1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/thumbnail1"
+                android:maxLines="3"
+                android:padding="8dp"
+                android:text="Pro Analysis"
+                android:textColor="#222"
+                android:textSize="22dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/title1"
+                android:maxLines="3"
+                android:padding="8dp"
+                android:text="An advanced analysis that shows you how to save the most money on your loans over time (not ONLY reduce your monthly payments), computes favorable tax scenarios, screens for debt forgiveness, and save debt in default."
+                android:textColor="#666"
+                android:textSize="14dp" />
+
+            <Button
+                android:id="@+id/advancedButton"
+                style="@android:style/Widget.DeviceDefault.Button.Borderless"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textView3"
+                android:text="Get full version" />
+
+            <View
+                android:id="@+id/separator1"
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:layout_below="@+id/title1"
+                android:background="#FF180F"
+                android:visibility="invisible" />
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
 
 </RelativeLayout>

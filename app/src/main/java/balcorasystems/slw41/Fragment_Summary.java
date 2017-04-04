@@ -13,8 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.kofigyan.stateprogressbar.StateProgressBar;
-
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;

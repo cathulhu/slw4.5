@@ -2,7 +2,6 @@ package balcorasystems.slw41;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.kofigyan.stateprogressbar.StateProgressBar;
 import com.startapp.android.publish.ads.splash.SplashConfig;
 import com.startapp.android.publish.adsCommon.StartAppAd;
 import com.startapp.android.publish.adsCommon.StartAppSDK;
