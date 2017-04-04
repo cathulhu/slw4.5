@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="New Monthly Payment:"
+            android:textAlignment="viewStart"
+            android:textSize="24sp"
+            android:textStyle="italic" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView15"
+            android:layout_centerHorizontal="true"
+            android:text="$230"
+            android:textSize="36sp"
+            android:textStyle="bold|italic" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Scroll or tap and enter values below:"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@+id/textView3"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Here you'll enter an estimat of your approximat debt and income values when you start repayment." />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentStart="true">
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true">
+
+
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/textView14"
+                android:layout_alignStart="@+id/textView14"
+                android:layout_below="@+id/textView14"
+                android:ems="10"
+                android:hint="$230"
+                android:inputType="number"
+                android:textAlignment="center"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/seekBar3"
+                android:layout_centerHorizontal="true"
+                android:text="Current Payment (Optional)"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Debt"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/textView29"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView24"
+                android:layout_centerHorizontal="true"
+                android:text="$36,500"
+                android:textSize="30sp" />
+
+            <SeekBar
+                android:id="@+id/seekBar2"
+                style="@android:style/Widget.DeviceDefault.Light.SeekBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="100"
+                android:progress="30"
+                android:scrollbarThumbVertical="@drawable/common_google_signin_btn_icon_disabled"
+                android:layout_below="@+id/textView29"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:id="@+id/textView23"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/seekBar2"
+                android:layout_centerHorizontal="true"
+                android:text="Income"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView37"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/textView29"
+                android:layout_below="@+id/textView23"
+                android:text="$54,200"
+                android:textSize="30sp" />
+
+            <SeekBar
+                android:id="@+id/seekBar3"
+                style="@android:style/Widget.DeviceDefault.Light.SeekBar"
+                android:layout_width="151dp"
+                android:layout_height="wrap_content"
+                android:max="100"
+                android:progress="25"
+                android:scrollbarThumbVertical="@drawable/common_google_signin_btn_icon_disabled"
+                android:layout_below="@+id/textView37"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true" />
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

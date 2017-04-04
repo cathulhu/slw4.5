@@ -21,7 +21,7 @@ import android.widget.TextView;
 
 import static android.R.attr.fragment;
 
-public class Main2Activity extends AppCompatActivity implements Fragment_Info.sendDebtToMain, Fragment_Info.sendIncomeToMain
+public class Main2Activity extends AppCompatActivity
 {
 
     public static Integer simpleIncome = 27000;
@@ -36,41 +36,34 @@ public class Main2Activity extends AppCompatActivity implements Fragment_Info.se
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
 
-    @Override
-    public void onRecieveDebtData(int debt)
-    {
-        simpleDebt = debt;
-        Fragment_Results.debt=debt;
-        updateSummary();
+//    @Override
+//    public void onRecieveDebtData(int debt)
+//    {
+//        simpleDebt = debt;
+//        Fragment_Results.debt=debt;
+//        updateSummary();
+//
+//    }
+//
+//    @Override
+//    public void onRecieveIncomeData(int income)
+//    {
+//        simpleIncome = income;
+//        Fragment_Results.income=income;
+//
+//        updateSummary();
+//
+//    }
 
-    }
-
-    @Override
-    public void onRecieveIncomeData(int income)
-    {
-        simpleIncome = income;
-        Fragment_Results.income=income;
-
-        updateSummary();
-
-//        flag2=1;
-//        if (flag1==1 && flag2 ==1)
-//        {
-//            flag1=0;
-//            flag2=0;
-//            updateSummary();
-//        }
-    }
-
-    public static void updateSummary()
-    {
-        Fragment_Summary.currentPayment=currentStdPayment;
-        Fragment_Summary.projectedSavings=projectedMonthlySavings;
-        Fragment_Summary.newMonthlyPayment=newMonthlyPayment;
-        Fragment_Summary.reccomendedPlan=planRecommendation;
-        Fragment_Summary.idrTotal=totalIdrSpent;
-        Fragment_Summary.stdTotal=totalStdSpent;
-    }
+//    public static void updateSummary()
+//    {
+//        Fragment_Summary.currentPayment=currentStdPayment;
+//        Fragment_Summary.projectedSavings=projectedMonthlySavings;
+//        Fragment_Summary.newMonthlyPayment=newMonthlyPayment;
+//        Fragment_Summary.reccomendedPlan=planRecommendation;
+//        Fragment_Summary.idrTotal=totalIdrSpent;
+//        Fragment_Summary.stdTotal=totalStdSpent;
+//    }
 
 
 
@@ -93,6 +86,7 @@ public class Main2Activity extends AppCompatActivity implements Fragment_Info.se
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
+
 
     }
 
@@ -142,11 +136,11 @@ public class Main2Activity extends AppCompatActivity implements Fragment_Info.se
         return resultsFragment;
     }
 
-    public static Fragment_Summary newSummaryInstance()
-    {
-        Fragment_Summary summaryFragment = new Fragment_Summary();
-        return summaryFragment;
-    }
+//    public static Fragment_Summary newSummaryInstance()
+//    {
+//        Fragment_Summary summaryFragment = new Fragment_Summary();
+//        return summaryFragment;
+//    }
 
 
 
@@ -174,8 +168,6 @@ public class Main2Activity extends AppCompatActivity implements Fragment_Info.se
                     return newInfoInstance();
                 case 1:
                     return newResultsInstance();
-                case 2:
-                    return newSummaryInstance();
                 default:
                     return null;
             }
@@ -184,7 +176,7 @@ public class Main2Activity extends AppCompatActivity implements Fragment_Info.se
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 2;
         }
 
         @Override
@@ -195,8 +187,6 @@ public class Main2Activity extends AppCompatActivity implements Fragment_Info.se
                     return "SECTION 1";
                 case 1:
                     return "SECTION 2";
-                case 2:
-                    return "SECTION 3";
             }
             return null;
         }

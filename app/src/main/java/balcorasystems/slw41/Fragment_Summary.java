@@ -39,7 +39,7 @@ public class Fragment_Summary extends Fragment
         View rootLayoutView = inflater.inflate(R.layout.simple_summary, selectionContainer, false);
 //        mListener = (goProButtonListener) getContext();       //FOR SOME REASON ITS INCREDIBLY IMPORTANT TO SET THIS TO CONTEXT;
 
-        Main2Activity.updateSummary();
+//        Main2Activity.updateSummary();
 
         TextView currentPaymentText = (TextView) rootLayoutView.findViewById(R.id.textView9);
         TextView savingsText = (TextView) rootLayoutView.findViewById(R.id.textView11);
@@ -114,7 +114,7 @@ public class Fragment_Summary extends Fragment
 
         if (isVisibleToUser)
         {
-            Main2Activity.updateSummary();
+//            Main2Activity.updateSummary();
 
             TextView currentPaymentText = (TextView) getView().findViewById(R.id.textView9);
             TextView savingsText = (TextView) getView().findViewById(R.id.textView11);
