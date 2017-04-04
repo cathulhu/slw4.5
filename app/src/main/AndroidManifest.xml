@@ -21,6 +21,7 @@
         <activity
             android:name="com.startapp.android.publish.ads.list3d.List3DActivity"
             android:theme="@android:style/Theme" />
+
         <activity
             android:name="com.startapp.android.publish.adsCommon.activities.OverlayActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"

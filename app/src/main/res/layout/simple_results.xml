@@ -85,4 +85,13 @@
         android:layout_centerHorizontal="true"
         android:text="A basic IBR plan could lower your payments by..." />
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/placeholder"
+        android:layout_below="@+id/relativeLayoutGraph" />
+
 </RelativeLayout>

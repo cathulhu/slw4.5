@@ -22,28 +22,18 @@
 
     <RelativeLayout
         android:id="@+id/relativeLayout5"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView2"
-        android:layout_centerHorizontal="true">
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView2">
 
         <RelativeLayout
             android:id="@+id/relativeLayout4"
             android:layout_width="200dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true">
 
-            <SeekBar
-                android:id="@+id/seekBar2"
-                style="@android:style/Widget.DeviceDefault.Light.SeekBar"
-                android:layout_width="wrap_content"
-                android:layout_height="500dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentStart="true"
-                android:max="10"
-                android:progress="3"
-                android:rotation="270" />
 
             <TextView
                 android:id="@+id/textView24"
@@ -54,22 +44,40 @@
                 android:text="Debt"
                 android:textStyle="bold" />
 
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="300dp"
+                android:id="@+id/verticalFrame1"
+                android:layout_below="@+id/textView29"
+                android:layout_centerHorizontal="true">
+
+                <balcorasystems.slw41.VerticalSeekBar
+                    android:id="@+id/seekBar2"
+                    style="@android:style/Widget.DeviceDefault.Light.SeekBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="300dp"
+                    android:max="100"
+                    android:progress="30"
+                    android:scrollbarThumbVertical="@drawable/common_google_signin_btn_icon_disabled" />
+
+            </FrameLayout>
+
+
             <NumberPicker
                 android:id="@+id/numberPicker1"
                 android:layout_width="wrap_content"
                 android:layout_height="100dp"
-                android:layout_below="@+id/textView24"
+                android:layout_below="@id/verticalFrame1"
                 android:layout_centerHorizontal="true" />
 
             <TextView
                 android:id="@+id/textView29"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="$36,500"
-                android:textSize="36sp"
-                android:layout_alignParentBottom="true"
+                android:layout_below="@+id/textView24"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="92dp" />
+                android:text="$36,500"
+                android:textSize="36sp" />
 
 
         </RelativeLayout>
@@ -77,7 +85,7 @@
         <RelativeLayout
             android:id="@+id/relativeLayout11"
             android:layout_width="200dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@+id/relativeLayout4">
 
@@ -87,20 +95,26 @@
                 android:layout_height="wrap_content"
                 android:text="$54,200"
                 android:textSize="36sp"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="91dp" />
+                android:layout_below="@+id/textView23"
+                android:layout_centerHorizontal="true" />
 
-            <SeekBar
-                android:id="@+id/seekBar3"
-                style="@android:style/Widget.DeviceDefault.Light.SeekBar"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:max="10"
-                android:progress="3"
-                android:rotation="270" />
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="300dp"
+                android:id="@+id/verticalFrame2"
+                android:layout_below="@+id/textView37"
+                android:layout_centerHorizontal="true">
+
+                <balcorasystems.slw41.VerticalSeekBar
+                    android:id="@+id/seekBar3"
+                    style="@android:style/Widget.DeviceDefault.Light.SeekBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="300dp"
+                    android:max="100"
+                    android:progress="25"
+                    android:scrollbarThumbVertical="@drawable/common_google_signin_btn_icon_disabled" />
+
+            </FrameLayout>
 
             <TextView
                 android:id="@+id/textView23"
@@ -114,9 +128,9 @@
             <NumberPicker
                 android:id="@+id/numberPicker2"
                 android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:layout_below="@+id/textView23"
-                android:layout_centerHorizontal="true" />
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/verticalFrame2"
+                android:layout_height="100dp" />
 
         </RelativeLayout>
 
