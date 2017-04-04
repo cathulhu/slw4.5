@@ -29,22 +29,21 @@
 
         <RelativeLayout
             android:id="@+id/relativeLayout4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true">
 
             <SeekBar
                 android:id="@+id/seekBar2"
-                style="@style/Widget.AppCompat.SeekBar.Discrete"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@android:style/Widget.DeviceDefault.Light.SeekBar"
+                android:layout_width="wrap_content"
+                android:layout_height="500dp"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:layout_toStartOf="@+id/numberPicker1"
                 android:max="10"
-                android:progress="3" />
+                android:progress="3"
+                android:rotation="270" />
 
             <TextView
                 android:id="@+id/textView24"
@@ -59,67 +58,65 @@
                 android:id="@+id/numberPicker1"
                 android:layout_width="wrap_content"
                 android:layout_height="100dp"
-                android:layout_alignParentEnd="true"
                 android:layout_below="@+id/textView24"
-                android:layout_centerVertical="true" />
+                android:layout_centerHorizontal="true" />
 
             <TextView
                 android:id="@+id/textView29"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="64dp"
                 android:text="$36,500"
-                android:textSize="36sp" />
+                android:textSize="36sp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="92dp" />
 
 
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/relativeLayout11"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="10dp"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/relativeLayout4">
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/relativeLayout4">
 
             <TextView
                 android:id="@+id/textView37"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:text="$54,200"
                 android:textSize="36sp"
-                android:layout_marginTop="64dp"
-                android:layout_below="@+id/seekBar3" />
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="91dp" />
 
             <SeekBar
                 android:id="@+id/seekBar3"
-                style="@style/Widget.AppCompat.SeekBar.Discrete"
+                style="@android:style/Widget.DeviceDefault.Light.SeekBar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
                 android:max="10"
                 android:progress="3"
-                android:layout_alignParentStart="true"
-                android:layout_toStartOf="@+id/numberPicker2" />
+                android:rotation="270" />
 
             <TextView
                 android:id="@+id/textView23"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:text="Income"
-                android:textStyle="bold"
-                android:layout_alignParentTop="true" />
+                android:textStyle="bold" />
 
             <NumberPicker
                 android:id="@+id/numberPicker2"
                 android:layout_width="wrap_content"
                 android:layout_height="100dp"
-                android:layout_alignParentEnd="true"
-                android:layout_below="@+id/textView23" />
+                android:layout_below="@+id/textView23"
+                android:layout_centerHorizontal="true" />
 
         </RelativeLayout>
 
