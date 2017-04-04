@@ -36,6 +36,8 @@ public class Fragment_Results extends Fragment
         double paymentCalcDenominator = 1 - Math.pow(1 + defaultMonthlyInterestRate, -repaymentTermMonhts);
         double fixedPayment = paymentCalcNumerator / paymentCalcDenominator;
 
+        Main2Activity.currentStdPayment=fixedPayment;
+
         return fixedPayment;
     }
 
@@ -46,6 +48,8 @@ public class Fragment_Results extends Fragment
         double paymentCalcNumerator = defaultMonthlyInterestRate * passedDebt;
         double paymentCalcDenominator = 1 - Math.pow(1 + defaultMonthlyInterestRate, -repaymentTermMonhts);
         double fixedPayment = paymentCalcNumerator / paymentCalcDenominator;
+
+        Main2Activity.currentStdPayment=fixedPayment;
 
         return fixedPayment;
     }
@@ -151,6 +155,8 @@ public class Fragment_Results extends Fragment
 
         Main2Activity.totalStdSpent=standardPayment*120;
         Main2Activity.totalIdrSpent=totalSpent;
+        Main2Activity.newMonthlyPayment=payments.get(0);
+
         return payments.get(0);
     }
 

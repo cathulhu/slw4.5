@@ -36,9 +36,6 @@ public class Main2Activity extends AppCompatActivity implements Fragment_Info.se
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
 
-    int flag1 = 0;
-    int flag2 = 0;
-
     @Override
     public void onRecieveDebtData(int debt)
     {
@@ -65,7 +62,7 @@ public class Main2Activity extends AppCompatActivity implements Fragment_Info.se
 //        }
     }
 
-    public void updateSummary()
+    public static void updateSummary()
     {
         Fragment_Summary.currentPayment=currentStdPayment;
         Fragment_Summary.projectedSavings=projectedMonthlySavings;
@@ -98,6 +95,9 @@ public class Main2Activity extends AppCompatActivity implements Fragment_Info.se
         tabLayout.setupWithViewPager(mViewPager);
 
     }
+
+
+
 
 
 //    @Override

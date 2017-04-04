@@ -21,12 +21,12 @@ import java.util.List;
 public class Fragment_Summary extends Fragment
 {
 
-    public static Double currentPayment = Main2Activity.currentStdPayment;
-    public static Double projectedSavings = Main2Activity.projectedMonthlySavings;
-    public static Double newMonthlyPayment = Main2Activity.newMonthlyPayment;
-    public static String reccomendedPlan = Main2Activity.planRecommendation;
-    public static Double idrTotal = Main2Activity.totalIdrSpent;
-    public static Double stdTotal = Main2Activity.totalStdSpent;
+    public static Double currentPayment = 6.66;
+    public static Double projectedSavings = 6.66;
+    public static Double newMonthlyPayment = 6.66;
+    public static String reccomendedPlan = "cats";
+    public static Double idrTotal = 6.66;
+    public static Double stdTotal = 6.66;
 
     public interface goProButtonListener
     {
@@ -38,6 +38,8 @@ public class Fragment_Summary extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup selectionContainer, Bundle savedInstanceState) {
         View rootLayoutView = inflater.inflate(R.layout.simple_summary, selectionContainer, false);
 //        mListener = (goProButtonListener) getContext();       //FOR SOME REASON ITS INCREDIBLY IMPORTANT TO SET THIS TO CONTEXT;
+
+        Main2Activity.updateSummary();
 
         TextView currentPaymentText = (TextView) rootLayoutView.findViewById(R.id.textView9);
         TextView savingsText = (TextView) rootLayoutView.findViewById(R.id.textView11);
@@ -112,6 +114,8 @@ public class Fragment_Summary extends Fragment
 
         if (isVisibleToUser)
         {
+            Main2Activity.updateSummary();
+
             TextView currentPaymentText = (TextView) getView().findViewById(R.id.textView9);
             TextView savingsText = (TextView) getView().findViewById(R.id.textView11);
             TextView newPaymentText = (TextView) getView().findViewById(R.id.textView17);
