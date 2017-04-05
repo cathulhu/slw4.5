@@ -38,11 +38,30 @@ public class Fragment_Info extends Fragment {
 //    }
 //    public sendIncomeToMain sendIncomeListener;
 
+    public String savingsDescription() {
+        String savingsExclamation = "";
+
+        if (StandardPayment / IBRPayment > 2) {
+            savingsExclamation = "IBR will reduce your payments a lot!";
+        } else if (StandardPayment / IBRPayment > 1.33 && StandardPayment / IBRPayment <= 2) {
+            savingsExclamation = "IBR will reduce your payments.";
+        } else if (StandardPayment / IBRPayment > 1.15 && StandardPayment / IBRPayment <= 1.33) {
+            savingsExclamation = "IBR will reduce your payments a little.";
+        } else if (StandardPayment / IBRPayment <= 1.15) {
+            savingsExclamation = "IBR won't reduce your payments much";
+        }
+
+        if (IBRPayment < 0.1) {
+            savingsExclamation = "IBR will reduce your payment to zero!";
+        }
+
+        return savingsExclamation;
+    }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup selectionContainer, Bundle savedInstanceState) {
-        View rootLayoutView = inflater.inflate(R.layout.simple_infohoriz, selectionContainer, false);
+        View rootLayoutView = inflater.inflate(R.layout.simple_info, selectionContainer, false);
 
 //        sendDebtListener = (sendDebtToMain) getContext();        //FOR SOME REASON ITS INCREDIBLY IMPORTANT TO SET THIS TO CONTEXT;
 //        sendIncomeListener = (sendIncomeToMain) getContext();    //FOR SOME REASON ITS INCREDIBLY IMPORTANT TO SET THIS TO CONTEXT;
@@ -52,6 +71,12 @@ public class Fragment_Info extends Fragment {
         final TextView savings = (TextView) rootLayoutView.findViewById(R.id.textView6);
         final TextView debtText = (TextView) rootLayoutView.findViewById(R.id.textView29);
         final TextView incomeText = (TextView) rootLayoutView.findViewById(R.id.textView37);
+        final TextView youCanSave = (TextView) rootLayoutView.findViewById(R.id.textView20);
+        final TextView bestPaymentTitle = (TextView) rootLayoutView.findViewById(R.id.textView15);
+
+        savings.setVisibility(View.INVISIBLE);
+        youCanSave.setVisibility(View.INVISIBLE);
+        bestPaymentTitle.setVisibility(View.INVISIBLE);
 
 //        final String[] incomes = new String[251];
 //        final String[] debts = new String[1001];
@@ -75,6 +100,8 @@ public class Fragment_Info extends Fragment {
                 debtText.setText("$" + String.valueOf(i * 1000));
                 StandardPayment=simpleStandardRepaymentCalc();
                 IBRPayment=simpleIBRRepaymentCalc();       //im pretty sure IBR wont change based on debt but ill leave this here for the moment.
+
+                youCanSave.setText(savingsDescription());
                 savings.setText("$" + IBRPayment);
 
             }
@@ -100,8 +127,13 @@ public class Fragment_Info extends Fragment {
                 IBRPayment=simpleIBRRepaymentCalc();
 
                 StandardPayment=simpleStandardRepaymentCalc();
+                youCanSave.setText(savingsDescription());
 
                 savings.setText("$" + IBRPayment);
+
+                savings.setVisibility(View.VISIBLE);
+                youCanSave.setVisibility(View.VISIBLE);
+                bestPaymentTitle.setVisibility(View.VISIBLE);
             }
 
             @Override
@@ -259,6 +291,9 @@ public class Fragment_Info extends Fragment {
                 totalSpent += ibrPayment;
                 totalSpent += ibrPayment;
                 payments.add(ibrPayment);
+
+
+
             }
 
             repaymentYear++;

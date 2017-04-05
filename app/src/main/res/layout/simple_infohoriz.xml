@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:text="New Monthly Payment:"
+            android:text="Best Monthly Payment:"
             android:textAlignment="viewStart"
             android:textSize="24sp"
             android:textStyle="italic" />
