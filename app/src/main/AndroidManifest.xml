@@ -60,7 +60,7 @@
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:theme="@android:style/Theme.Translucent" />
         <activity
-            android:name=".Main2Activity"
+            android:name=".ViewpagerActivityDEFUNCT"
             android:label="@string/title_activity_main2"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">

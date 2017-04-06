@@ -6,14 +6,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.NumberPicker;
+import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import java.text.NumberFormat;
 import java.util.ArrayList;
 
 
@@ -42,17 +38,17 @@ public class Fragment_Info extends Fragment {
         String savingsExclamation = "";
 
         if (StandardPayment / IBRPayment > 2) {
-            savingsExclamation = "IBR will reduce your payments a lot!";
+            savingsExclamation = "Your payments would be reduced a lot!";
         } else if (StandardPayment / IBRPayment > 1.33 && StandardPayment / IBRPayment <= 2) {
-            savingsExclamation = "IBR will reduce your payments.";
+            savingsExclamation = "Your payments would be reduced significantly.";
         } else if (StandardPayment / IBRPayment > 1.15 && StandardPayment / IBRPayment <= 1.33) {
-            savingsExclamation = "IBR will reduce your payments a little.";
+            savingsExclamation = "Your payments would be reduced a little.";
         } else if (StandardPayment / IBRPayment <= 1.15) {
-            savingsExclamation = "IBR won't reduce your payments much";
+            savingsExclamation = "See advanced mode for better savings.";
         }
 
         if (IBRPayment < 0.1) {
-            savingsExclamation = "IBR will reduce your payment to zero!";
+            savingsExclamation = "Your payments would be reduced to zero!";
         }
 
         return savingsExclamation;
@@ -61,7 +57,7 @@ public class Fragment_Info extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup selectionContainer, Bundle savedInstanceState) {
-        View rootLayoutView = inflater.inflate(R.layout.simple_info, selectionContainer, false);
+        View rootLayoutView = inflater.inflate(R.layout.simple_infohoriz, selectionContainer, false);
 
 //        sendDebtListener = (sendDebtToMain) getContext();        //FOR SOME REASON ITS INCREDIBLY IMPORTANT TO SET THIS TO CONTEXT;
 //        sendIncomeListener = (sendIncomeToMain) getContext();    //FOR SOME REASON ITS INCREDIBLY IMPORTANT TO SET THIS TO CONTEXT;
@@ -73,6 +69,8 @@ public class Fragment_Info extends Fragment {
         final TextView incomeText = (TextView) rootLayoutView.findViewById(R.id.textView37);
         final TextView youCanSave = (TextView) rootLayoutView.findViewById(R.id.textView20);
         final TextView bestPaymentTitle = (TextView) rootLayoutView.findViewById(R.id.textView15);
+        final EditText currentPaymentBox = (EditText) rootLayoutView.findViewById(R.id.editTextPayment1);
+//        final GifTextView piggyBank = (GifTextView) rootLayoutView.findViewById(R.id.imageView4);
 
         savings.setVisibility(View.INVISIBLE);
         youCanSave.setVisibility(View.INVISIBLE);
@@ -102,7 +100,8 @@ public class Fragment_Info extends Fragment {
                 IBRPayment=simpleIBRRepaymentCalc();       //im pretty sure IBR wont change based on debt but ill leave this here for the moment.
 
                 youCanSave.setText(savingsDescription());
-                savings.setText("$" + IBRPayment);
+                savings.setText("$" + simpleIBRRepaymentCalc());
+                currentPaymentBox.setHint("Estimated $" + String.valueOf(simpleStandardRepaymentCalc()));
 
             }
 
@@ -129,7 +128,7 @@ public class Fragment_Info extends Fragment {
                 StandardPayment=simpleStandardRepaymentCalc();
                 youCanSave.setText(savingsDescription());
 
-                savings.setText("$" + IBRPayment);
+                savings.setText("$" + simpleIBRRepaymentCalc());
 
                 savings.setVisibility(View.VISIBLE);
                 youCanSave.setVisibility(View.VISIBLE);
@@ -200,27 +199,28 @@ public class Fragment_Info extends Fragment {
 
 
 
-    public Double simpleStandardRepaymentCalc() {
+    public Long simpleStandardRepaymentCalc() {
         double repaymentTermMonhts = 120;
 
         double paymentCalcNumerator = defaultMonthlyInterestRate * debt;
         double paymentCalcDenominator = 1 - Math.pow(1 + defaultMonthlyInterestRate, -repaymentTermMonhts);
         double fixedPayment = paymentCalcNumerator / paymentCalcDenominator;
-        Main2Activity.currentStdPayment = fixedPayment;
 
-        return fixedPayment;
+        MainActivity.currentStdPayment = fixedPayment;
+
+        return Math.round(fixedPayment);
     }
 
-    public Double simpleStandardRepaymentCalc(double passedDebt) {
+    public Long simpleStandardRepaymentCalc(double passedDebt) {
         double repaymentTermMonhts = 120;
 
         double paymentCalcNumerator = defaultMonthlyInterestRate * passedDebt;
         double paymentCalcDenominator = 1 - Math.pow(1 + defaultMonthlyInterestRate, -repaymentTermMonhts);
         double fixedPayment = paymentCalcNumerator / paymentCalcDenominator;
 
-        Main2Activity.currentStdPayment = fixedPayment;
+        MainActivity.currentStdPayment = fixedPayment;
 
-        return fixedPayment;
+        return Math.round(fixedPayment);
     }
 
     public Long simpleIBRRepaymentCalc() {
@@ -306,10 +306,9 @@ public class Fragment_Info extends Fragment {
 
         forgiveness = runningDebt;
 
-        Main2Activity.totalStdSpent = standardPayment * 120;
-        Main2Activity.totalIdrSpent = totalSpent;
-        Main2Activity.newMonthlyPayment = payments.get(0);
-
+        MainActivity.totalStdSpent = standardPayment * 120;
+        MainActivity.totalIdrSpent = totalSpent;
+        MainActivity.newMonthlyPayment = payments.get(0);
 
         return Math.round(payments.get(0));
 

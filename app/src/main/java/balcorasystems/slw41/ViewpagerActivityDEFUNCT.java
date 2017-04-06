@@ -21,17 +21,17 @@ import android.widget.TextView;
 
 import static android.R.attr.fragment;
 
-public class Main2Activity extends AppCompatActivity
+public class ViewpagerActivityDEFUNCT extends AppCompatActivity
 {
 
-    public static Integer simpleIncome = 27000;
-    public static Integer simpleDebt = 35000;
-    public static Double currentStdPayment = 0.7;
-    public static Double projectedMonthlySavings = 0.7;
-    public static Double newMonthlyPayment = 0.7;
-    public static Double totalIdrSpent = 0.7;
-    public static Double totalStdSpent = 0.7;
-    public static String planRecommendation = "IBRRR";
+//    public static Integer simpleIncome = 27000;
+//    public static Integer simpleDebt = 35000;
+//    public static Double currentStdPayment = 0.7;
+//    public static Double projectedMonthlySavings = 0.7;
+//    public static Double newMonthlyPayment = 0.7;
+//    public static Double totalIdrSpent = 0.7;
+//    public static Double totalStdSpent = 0.7;
+//    public static String planRecommendation = "IBRRR";
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;

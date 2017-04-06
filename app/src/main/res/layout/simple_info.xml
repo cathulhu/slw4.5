@@ -17,7 +17,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:alpha="0.30"
-            android:layout_below="@+id/relativeLayout3"
             android:layout_centerHorizontal="true"
             android:background="@drawable/redpiganim"
             android:src="@drawable/redpiganim" />

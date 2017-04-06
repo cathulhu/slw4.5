@@ -24,8 +24,8 @@ public class Fragment_Results extends Fragment
     String reccomendedPlanName = "Income Based Repayment";
 
     //using simple tight couplings for now, can switch to bundle or data on disk, something more elegant later
-//    public static Integer income = Main2Activity.simpleIncome;
-//    public static Integer debt = Main2Activity.simpleDebt;
+//    public static Integer income = ViewpagerActivityDEFUNCT.simpleIncome;
+//    public static Integer debt = ViewpagerActivityDEFUNCT.simpleDebt;
 //    double defaultMonthlyInterestRate = (0.0466 / 12);
 
 //    public Double simpleStandardRepaymentCalc()
@@ -36,7 +36,7 @@ public class Fragment_Results extends Fragment
 //        double paymentCalcDenominator = 1 - Math.pow(1 + defaultMonthlyInterestRate, -repaymentTermMonhts);
 //        double fixedPayment = paymentCalcNumerator / paymentCalcDenominator;
 //
-//        Main2Activity.currentStdPayment=fixedPayment;
+//        ViewpagerActivityDEFUNCT.currentStdPayment=fixedPayment;
 //
 //        return fixedPayment;
 //    }
@@ -49,7 +49,7 @@ public class Fragment_Results extends Fragment
 //        double paymentCalcDenominator = 1 - Math.pow(1 + defaultMonthlyInterestRate, -repaymentTermMonhts);
 //        double fixedPayment = paymentCalcNumerator / paymentCalcDenominator;
 //
-//        Main2Activity.currentStdPayment=fixedPayment;
+//        ViewpagerActivityDEFUNCT.currentStdPayment=fixedPayment;
 //
 //        return fixedPayment;
 //    }
@@ -153,9 +153,9 @@ public class Fragment_Results extends Fragment
 //
 //        forgiveness=runningDebt;
 //
-//        Main2Activity.totalStdSpent=standardPayment*120;
-//        Main2Activity.totalIdrSpent=totalSpent;
-//        Main2Activity.newMonthlyPayment=payments.get(0);
+//        ViewpagerActivityDEFUNCT.totalStdSpent=standardPayment*120;
+//        ViewpagerActivityDEFUNCT.totalIdrSpent=totalSpent;
+//        ViewpagerActivityDEFUNCT.newMonthlyPayment=payments.get(0);
 //
 //        return payments.get(0);
 //    }
@@ -210,11 +210,11 @@ public class Fragment_Results extends Fragment
         {
 
 //            Double IBRPayment = simpleIBRRepaymentCalc();
-//            Main2Activity.newMonthlyPayment=IBRPayment;
+//            ViewpagerActivityDEFUNCT.newMonthlyPayment=IBRPayment;
 //            Double Savings = simpleStandardRepaymentCalc()-simpleIBRRepaymentCalc();
-//            Main2Activity.projectedMonthlySavings=Savings;
+//            ViewpagerActivityDEFUNCT.projectedMonthlySavings=Savings;
 //            Double StandardPayment = simpleStandardRepaymentCalc();
-//            Main2Activity.currentStdPayment=StandardPayment;
+//            ViewpagerActivityDEFUNCT.currentStdPayment=StandardPayment;
 //
 //            TextView newPaymentParagraph= (TextView) getView().findViewById(R.id.textView12);
 //            TextView savingsParagraph= (TextView) getView().findViewById(R.id.textView13);
