@@ -61,33 +61,3 @@ public class Fragment_Selection extends Fragment
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-// WHAT THE HELL IS THIS WIZARDRY
-//    @Override
-//    public void onAttach(Context context) {
-//        super.onAttach(context);
-//
-//        if(context instanceof onSaveMoneyNowButton) {
-//            mListener = (onSaveMoneyNowButton) context;
-//        } else {
-//            throw new IllegalArgumentException("Containing activity must implement OnSearchListener interface");
-//        }
-//    }
-//END WIZARDRY (for some reason the interface stuff doesn't work unless I have this
-
-
-
-
-
-

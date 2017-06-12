@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -14,6 +15,16 @@ import java.util.ArrayList;
 
 
 public class Fragment_Info extends Fragment {
+
+
+    public interface testListener
+    {
+        public void finishedQuestions();
+    }
+
+    public testListener mListener;
+
+
 
     public static Integer income =6;
     public static Integer debt =6;
@@ -70,11 +81,20 @@ public class Fragment_Info extends Fragment {
         final TextView youCanSave = (TextView) rootLayoutView.findViewById(R.id.textView20);
         final TextView bestPaymentTitle = (TextView) rootLayoutView.findViewById(R.id.textView15);
         final EditText currentPaymentBox = (EditText) rootLayoutView.findViewById(R.id.editTextPayment1);
+
+        Button continueButton = (Button) rootLayoutView.findViewById(R.id.continueButton);
+        continueButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
 //        final GifTextView piggyBank = (GifTextView) rootLayoutView.findViewById(R.id.imageView4);
 
         savings.setVisibility(View.INVISIBLE);
         youCanSave.setVisibility(View.INVISIBLE);
-        bestPaymentTitle.setVisibility(View.INVISIBLE);
+//        bestPaymentTitle.setVisibility(View.INVISIBLE);
 
 //        final String[] incomes = new String[251];
 //        final String[] debts = new String[1001];
@@ -132,7 +152,8 @@ public class Fragment_Info extends Fragment {
 
                 savings.setVisibility(View.VISIBLE);
                 youCanSave.setVisibility(View.VISIBLE);
-                bestPaymentTitle.setVisibility(View.VISIBLE);
+//                bestPaymentTitle.setVisibility(View.VISIBLE);
+                bestPaymentTitle.setText("New Monthly Payment:");
             }
 
             @Override

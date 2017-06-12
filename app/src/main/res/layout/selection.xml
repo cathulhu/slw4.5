@@ -12,29 +12,20 @@
         app:contentPaddingLeft="8dp"
         app:contentPaddingRight="8dp"
         app:contentPaddingTop="8dp"
+        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:id="@+id/thumbnail"
-                android:layout_width="match_parent"
-                android:layout_height="75dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:scaleType="centerCrop"
-                android:src="@drawable/moneysmall1" />
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/thumbnail"
                 android:maxLines="3"
                 android:padding="8dp"
-                android:text="Quick Estimate"
+                android:text="New Estimate"
                 android:textColor="#222"
                 android:textSize="22dp"
                 android:textStyle="bold" />
@@ -43,10 +34,11 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/title"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/separator"
                 android:maxLines="3"
                 android:padding="8dp"
-                android:text="A basic estimate of how much switching to income based repayment can lower your monthly payments for typical borrowers."
+                android:text="A simplified estimate of what repayment strategies can help typical borrowers lower their monthly payments, get loan forgiveness, rescue defaulting debt and more."
                 android:textColor="#666"
                 android:textSize="14dp" />
 
@@ -55,7 +47,6 @@
                 style="@android:style/Widget.DeviceDefault.Button.Borderless"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/textView2"
                 android:text="Get Started" />
@@ -90,15 +81,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/thumbnail1"
-                android:layout_width="match_parent"
-                android:layout_height="75dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:scaleType="centerCrop"
-                android:src="@drawable/moneysmall1" />
-
             <TextView
                 android:id="@+id/title1"
                 android:layout_width="wrap_content"
@@ -106,7 +88,7 @@
                 android:layout_below="@+id/thumbnail1"
                 android:maxLines="3"
                 android:padding="8dp"
-                android:text="Pro Analysis"
+                android:text="Review Last Estimate"
                 android:textColor="#222"
                 android:textSize="22dp"
                 android:textStyle="bold" />
@@ -118,7 +100,7 @@
                 android:layout_below="@+id/title1"
                 android:maxLines="3"
                 android:padding="8dp"
-                android:text="An advanced analysis that shows you how to save the most money on your loans over time (not ONLY reduce your monthly payments), computes favorable tax scenarios, screens for debt forgiveness, and save debt in default."
+                android:text="go to last plan "
                 android:textColor="#666"
                 android:textSize="14dp" />
 
@@ -130,7 +112,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/textView3"
-                android:text="Get full version" />
+                android:text="go " />
 
             <View
                 android:id="@+id/separator1"
