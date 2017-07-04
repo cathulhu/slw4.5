@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +37,8 @@ public class Fragment_Questions extends Fragment
     Integer counter = 0;
 
 
+    private ListView mainListView ;
+    private ArrayAdapter<String> listAdapter ;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup selectionContainer, Bundle savedInstanceState) {
         View rootLayoutView = inflater.inflate(R.layout.questions, selectionContainer, false);
@@ -59,6 +63,7 @@ public class Fragment_Questions extends Fragment
 //        firstQuestions.add("At the time of repayment what will your tax filing status be?");
         firstQuestions.add("Select the industry and position you work in.");
         firstQuestions.add("Select one of the following ranges for the date you received your first student loan.");
+        firstQuestions.add("Select your income and debt at the time of repayment or current values if you are already in repayment. Optionally you can enter your current or expected monthly Repayment otherwise it will be automatically calculated.");
 
 //        final List<String> taxOptions = new ArrayList<>();
 //        taxOptions.add("Single filing");
@@ -79,15 +84,42 @@ public class Fragment_Questions extends Fragment
         employmentOptions.add("Private for profit company");
 
         final List<String> dateQuestionOptions = new ArrayList<String>();
-        dateQuestionOptions.add("My first student loans were issued prior to October 1st, 1998");
-        dateQuestionOptions.add("My first student loans were issued between October 1st, 1998 and October 1st, 2007");
-        dateQuestionOptions.add("My first student loans were issued between October 1st, 2007 and October 1st, 2011");
-        dateQuestionOptions.add("My first student loans were issued between October 1st, 2011 and October 1st, 2014");
-        dateQuestionOptions.add("My first student loans were issued after October 1st, 2014");
+        dateQuestionOptions.add("Prior to October 1st, 1998");
+        dateQuestionOptions.add("Between October 1st, 1998 and October 1st, 2007");
+        dateQuestionOptions.add("Between October 1st, 2007 and October 1st, 2011");
+        dateQuestionOptions.add("Between October 1st, 2011 and October 1st, 2014");
+        dateQuestionOptions.add("After October 1st, 2014");
+
+        final List<String> yesNoOptions = new ArrayList<>();
+        yesNoOptions.add("Yes");
+        yesNoOptions.add("No");
+
+        final List<String> summaryTitles = new ArrayList<>();
+        summaryTitles.add("Loan Default");
+        summaryTitles.add("Loan Delinquency");
+        summaryTitles.add("Deceased Borrower");
+        summaryTitles.add("Consolidated Loans");
+        summaryTitles.add("Loan Rehabilitation");
+        summaryTitles.add("Parent PLUS Loans");
+        summaryTitles.add("FFEL Loans");
+        summaryTitles.add("Perkins Loans");
+        summaryTitles.add("Direct Loans");
+        summaryTitles.add("Employment");
+        summaryTitles.add("First Loan Date");
+        summaryTitles.add("Debt, Income, and Payment");
+
+
+        mainListView = (ListView) rootLayoutView.findViewById(R.id.questionsList);
+        listAdapter = new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, yesNoOptions);
+        mainListView.setAdapter( listAdapter );
+
+        final RelativeLayout layoutForFragment = (RelativeLayout) rootLayoutView.findViewById(R.id.relativeLayout3);
+        layoutForFragment.setVisibility(View.GONE);
 
 
 
 
+        final TextView questionTitle = (TextView) rootLayoutView.findViewById(R.id.questionsTitle);
         final TextView currentQuestion = (TextView) rootLayoutView.findViewById(R.id.questionsHere);
 
         final Button nextButton = (Button) rootLayoutView.findViewById(R.id.nextButton);
@@ -95,216 +127,104 @@ public class Fragment_Questions extends Fragment
 
         currentQuestion.setText(firstQuestions.get(counter));
 
-        final RadioGroup detailRadioGroup = (RadioGroup) rootLayoutView.findViewById(R.id.detailRadioGroup);
-
-        final RadioButton yesButton = (RadioButton) rootLayoutView.findViewById(R.id.YesButton);
-        final RadioButton noButton = (RadioButton) rootLayoutView.findViewById(R.id.noButton);
-        final RadioButton skipButton = (RadioButton) rootLayoutView.findViewById(R.id.skipButton);
-
-        final RadioButton det1 = (RadioButton) rootLayoutView.findViewById(R.id.detailQbutton1);
-        final RadioButton det2 = (RadioButton) rootLayoutView.findViewById(R.id.detailQbutton2);
-        final RadioButton det3 = (RadioButton) rootLayoutView.findViewById(R.id.detailQbutton3);
-        final RadioButton det4 = (RadioButton) rootLayoutView.findViewById(R.id.detailQbutton4);
-        final RadioButton det5 = (RadioButton) rootLayoutView.findViewById(R.id.detailQbutton5);
-        final RadioButton det6 = (RadioButton) rootLayoutView.findViewById(R.id.detailQbutton6);
-        final RadioButton det7 = (RadioButton) rootLayoutView.findViewById(R.id.detailQbutton7);
-        final RadioButton det8 = (RadioButton) rootLayoutView.findViewById(R.id.detailQbutton8);
-        final RadioButton det9 = (RadioButton) rootLayoutView.findViewById(R.id.detailQbutton9);
-        final RadioButton det10 = (RadioButton) rootLayoutView.findViewById(R.id.detailQbutton10);
-        final RadioButton det11 = (RadioButton) rootLayoutView.findViewById(R.id.detailQbutton11);
-
-
-        det1.setVisibility(View.INVISIBLE);
-        det2.setVisibility(View.INVISIBLE);
-        det3.setVisibility(View.INVISIBLE);
-        det4.setVisibility(View.INVISIBLE);
-        det5.setVisibility(View.INVISIBLE);
-        det6.setVisibility(View.INVISIBLE);
-        det7.setVisibility(View.INVISIBLE);
-        det8.setVisibility(View.INVISIBLE);
-        det9.setVisibility(View.INVISIBLE);
-        det10.setVisibility(View.INVISIBLE);
-        det11.setVisibility(View.INVISIBLE);
-
-
-        nextButton.setOnClickListener(new View.OnClickListener() {
+        nextButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view)
-            {
-                if (counter <= 10 )
-                {
+            public void onClick(View view) {
+                if (counter <= summaryTitles.size()) {
                     counter++;
 
-                    if (counter < 11)
-                    {
+                    mainListView.setVisibility(View.VISIBLE);
+                    layoutForFragment.setVisibility(View.GONE);
+
+                    if (counter < 12) {
                         currentQuestion.setText(firstQuestions.get(counter));
+                        questionTitle.setText(summaryTitles.get(counter));
                     }
                     else
                     {
                         mListener.finishedQuestions();
                     }
 
+                    if (counter==9)
+                    {
+                        listAdapter = new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, employmentOptions);
+                        mainListView.setAdapter( listAdapter );
+                    }
+                    else if (counter==10)
+                    {
+                        listAdapter = new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, dateQuestionOptions);
+                        mainListView.setAdapter( listAdapter );
+                    }
+                    else if (counter==11)
+                    {
+                        mainListView.setVisibility(View.GONE);
+                        layoutForFragment.setVisibility(View.VISIBLE);
+
+                        //this is for the income debt and payment fragment text
+                        FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
+                        fTransaction.replace(R.id.relativeLayout3, new Fragment_Info(), "questions");
+                        fTransaction.addToBackStack(null);
+                        fTransaction.commit();
+
+                    }
+                    else
+                    {
+                        listAdapter = new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, yesNoOptions);
+                        mainListView.setAdapter( listAdapter );
+                    }
+
 
                 }
-
-
-                if (counter >= 9)
-                {
-                    yesButton.setVisibility(View.INVISIBLE);
-                    noButton.setVisibility(View.INVISIBLE);
-                    skipButton.setVisibility(View.INVISIBLE);
-
-                    detailRadioGroup.setVisibility(View.VISIBLE);
-                }
-                else
-                {
-                    yesButton.setVisibility(View.VISIBLE);
-                    noButton.setVisibility(View.VISIBLE);
-                    skipButton.setVisibility(View.VISIBLE);
-
-                    detailRadioGroup.setVisibility(View.INVISIBLE);
-                }
-
-
-
-
-                if (counter==9)
-                {
-                    det1.setText(employmentOptions.get(0));
-                    det2.setText(employmentOptions.get(1));
-                    det3.setText(employmentOptions.get(2));
-                    det4.setText(employmentOptions.get(3));
-                    det5.setText(employmentOptions.get(4));
-                    det6.setText(employmentOptions.get(5));
-                    det7.setText(employmentOptions.get(6));
-                    det8.setText(employmentOptions.get(7));
-                    det9.setText(employmentOptions.get(8));
-                    det10.setText(employmentOptions.get(9));
-                    det11.setText(employmentOptions.get(10));
-
-                    det1.setVisibility(View.VISIBLE);
-                    det2.setVisibility(View.VISIBLE);
-                    det3.setVisibility(View.VISIBLE);
-                    det4.setVisibility(View.VISIBLE);
-                    det5.setVisibility(View.VISIBLE);
-                    det6.setVisibility(View.VISIBLE);
-                    det7.setVisibility(View.VISIBLE);
-                    det8.setVisibility(View.VISIBLE);
-                    det9.setVisibility(View.VISIBLE);
-                    det10.setVisibility(View.VISIBLE);
-                    det11.setVisibility(View.VISIBLE);
-
-                }
-                else if (counter==10)
-                {
-                    det1.setText(dateQuestionOptions.get(0));
-                    det2.setText(dateQuestionOptions.get(1));
-                    det3.setText(dateQuestionOptions.get(2));
-                    det4.setText(dateQuestionOptions.get(3));
-                    det5.setText(dateQuestionOptions.get(4));
-
-                    det1.setVisibility(View.VISIBLE);
-                    det2.setVisibility(View.VISIBLE);
-                    det3.setVisibility(View.VISIBLE);
-                    det4.setVisibility(View.VISIBLE);
-                    det5.setVisibility(View.VISIBLE);
-
-                    det6.setVisibility(View.INVISIBLE);
-                    det7.setVisibility(View.INVISIBLE);
-                    det8.setVisibility(View.INVISIBLE);
-                    det9.setVisibility(View.INVISIBLE);
-                    det10.setVisibility(View.INVISIBLE);
-                    det11.setVisibility(View.INVISIBLE);
-
-                    nextButton.setText("Go To Next Section");
-                }
-
             }
+
         });
+
 
         previousButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
             {
-                if (counter > 0)
-                {
+                if (counter > 0) {
                     counter--;
                     currentQuestion.setText(firstQuestions.get(counter));
-                }
+                    questionTitle.setText(summaryTitles.get(counter));
 
-                if (counter == 10 || counter == 9)
-                {
-                    yesButton.setVisibility(View.INVISIBLE);
-                    noButton.setVisibility(View.INVISIBLE);
-                    skipButton.setVisibility(View.INVISIBLE);
-
-                    detailRadioGroup.setVisibility(View.VISIBLE);
-                }
-                else
-                {
-                    yesButton.setVisibility(View.VISIBLE);
-                    noButton.setVisibility(View.VISIBLE);
-                    skipButton.setVisibility(View.VISIBLE);
-
-                    detailRadioGroup.setVisibility(View.INVISIBLE);
+                    mainListView.setVisibility(View.VISIBLE);
+                    layoutForFragment.setVisibility(View.GONE);
                 }
 
                 if (counter==9)
                 {
-                    detailRadioGroup.setVisibility(View.VISIBLE);
-                    det1.setText(employmentOptions.get(0));
-                    det2.setText(employmentOptions.get(1));
-                    det3.setText(employmentOptions.get(2));
-                    det4.setText(employmentOptions.get(3));
-                    det5.setText(employmentOptions.get(4));
-                    det6.setText(employmentOptions.get(5));
-                    det7.setText(employmentOptions.get(6));
-                    det8.setText(employmentOptions.get(7));
-                    det9.setText(employmentOptions.get(8));
-                    det10.setText(employmentOptions.get(9));
-                    det11.setText(employmentOptions.get(10));
-
-                    det1.setVisibility(View.VISIBLE);
-                    det2.setVisibility(View.VISIBLE);
-                    det3.setVisibility(View.VISIBLE);
-                    det4.setVisibility(View.VISIBLE);
-                    det5.setVisibility(View.VISIBLE);
-                    det6.setVisibility(View.VISIBLE);
-                    det7.setVisibility(View.VISIBLE);
-                    det8.setVisibility(View.VISIBLE);
-                    det9.setVisibility(View.VISIBLE);
-                    det10.setVisibility(View.VISIBLE);
-                    det11.setVisibility(View.VISIBLE);
-
+                    listAdapter = new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, employmentOptions);
+                    mainListView.setAdapter( listAdapter );
                 }
                 else if (counter==10)
                 {
-                    detailRadioGroup.setVisibility(View.VISIBLE);
-                    det1.setText(dateQuestionOptions.get(0));
-                    det2.setText(dateQuestionOptions.get(1));
-                    det3.setText(dateQuestionOptions.get(2));
-                    det4.setText(dateQuestionOptions.get(3));
-                    det5.setText(dateQuestionOptions.get(4));
+                    listAdapter = new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, dateQuestionOptions);
+                    mainListView.setAdapter( listAdapter );
+                }
+                else if (counter==11)
+                {
+                    mainListView.setVisibility(View.GONE);
+                    layoutForFragment.setVisibility(View.VISIBLE);
 
-                    det1.setVisibility(View.VISIBLE);
-                    det2.setVisibility(View.VISIBLE);
-                    det3.setVisibility(View.VISIBLE);
-                    det4.setVisibility(View.VISIBLE);
-                    det5.setVisibility(View.VISIBLE);
+                    //this is for the income debt and payment fragment text
+                    FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
+                    fTransaction.replace(R.id.relativeLayout3, new Fragment_Info(), "questions");
+                    fTransaction.addToBackStack(null);
+                    fTransaction.commit();
 
-                    det6.setVisibility(View.INVISIBLE);
-                    det7.setVisibility(View.INVISIBLE);
-                    det8.setVisibility(View.INVISIBLE);
-                    det9.setVisibility(View.INVISIBLE);
-                    det10.setVisibility(View.INVISIBLE);
-                    det11.setVisibility(View.INVISIBLE);
+                }
+                else
+                {
+                    listAdapter = new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, yesNoOptions);
+                    mainListView.setAdapter( listAdapter );
                 }
 
-
-
             }
+//
         });
-
 
 
 

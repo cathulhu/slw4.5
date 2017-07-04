@@ -78,22 +78,22 @@ public class Fragment_Info extends Fragment {
         final TextView savings = (TextView) rootLayoutView.findViewById(R.id.textView6);
         final TextView debtText = (TextView) rootLayoutView.findViewById(R.id.textView29);
         final TextView incomeText = (TextView) rootLayoutView.findViewById(R.id.textView37);
-        final TextView youCanSave = (TextView) rootLayoutView.findViewById(R.id.textView20);
-        final TextView bestPaymentTitle = (TextView) rootLayoutView.findViewById(R.id.textView15);
+//        final TextView youCanSave = (TextView) rootLayoutView.findViewById(R.id.textView20);
+//        final TextView bestPaymentTitle = (TextView) rootLayoutView.findViewById(R.id.textView15);
         final EditText currentPaymentBox = (EditText) rootLayoutView.findViewById(R.id.editTextPayment1);
 
-        Button continueButton = (Button) rootLayoutView.findViewById(R.id.continueButton);
-        continueButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
+//        Button continueButton = (Button) rootLayoutView.findViewById(R.id.continueButton);
+//        continueButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//            }
+//        });
 
 //        final GifTextView piggyBank = (GifTextView) rootLayoutView.findViewById(R.id.imageView4);
 
-        savings.setVisibility(View.INVISIBLE);
-        youCanSave.setVisibility(View.INVISIBLE);
+//        savings.setVisibility(View.INVISIBLE);
+//        youCanSave.setVisibility(View.INVISIBLE);
 //        bestPaymentTitle.setVisibility(View.INVISIBLE);
 
 //        final String[] incomes = new String[251];
@@ -119,7 +119,7 @@ public class Fragment_Info extends Fragment {
                 StandardPayment=simpleStandardRepaymentCalc();
                 IBRPayment=simpleIBRRepaymentCalc();       //im pretty sure IBR wont change based on debt but ill leave this here for the moment.
 
-                youCanSave.setText(savingsDescription());
+//                youCanSave.setText(savingsDescription());
                 savings.setText("$" + simpleIBRRepaymentCalc());
                 currentPaymentBox.setHint("Estimated $" + String.valueOf(simpleStandardRepaymentCalc()));
 
@@ -146,14 +146,14 @@ public class Fragment_Info extends Fragment {
                 IBRPayment=simpleIBRRepaymentCalc();
 
                 StandardPayment=simpleStandardRepaymentCalc();
-                youCanSave.setText(savingsDescription());
+//                youCanSave.setText(savingsDescription());
 
                 savings.setText("$" + simpleIBRRepaymentCalc());
 
-                savings.setVisibility(View.VISIBLE);
-                youCanSave.setVisibility(View.VISIBLE);
+//                savings.setVisibility(View.VISIBLE);
+//                youCanSave.setVisibility(View.VISIBLE);
 //                bestPaymentTitle.setVisibility(View.VISIBLE);
-                bestPaymentTitle.setText("New Monthly Payment:");
+//                bestPaymentTitle.setText("New Monthly Payment:");
             }
 
             @Override

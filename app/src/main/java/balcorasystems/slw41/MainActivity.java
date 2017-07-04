@@ -42,10 +42,12 @@ public class MainActivity extends AppCompatActivity implements Fragment_Selectio
 
     public void finishedQuestions()
     {
-        FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
-        fTransaction.replace(R.id.mainFrameLayout, new Fragment_Info(), "info");
-        fTransaction.addToBackStack(null);
-        fTransaction.commit();
+        //need to change what this does since the income stuff has been integrated into the questions wizard, this should now go to a summary.
+
+//        FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
+//        fTransaction.replace(R.id.mainFrameLayout, new Fragment_Info(), "info");
+//        fTransaction.addToBackStack(null);
+//        fTransaction.commit();
     }
 
     public void onIncomeFinished(int income, int debt)
@@ -64,10 +66,10 @@ public class MainActivity extends AppCompatActivity implements Fragment_Selectio
 //        newMonthlyPayment = newPayment;
 //        planRecommendation = plan;
 //        projectedMonthlySavings = stdPayment - newPayment;
-        FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
-        fTransaction.replace(R.id.mainFrameLayout, new Fragment_Summary());
-        fTransaction.addToBackStack(null);
-        fTransaction.commit();
+//        FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
+//        fTransaction.replace(R.id.mainFrameLayout, new Fragment_Summary());
+//        fTransaction.addToBackStack(null);
+//        fTransaction.commit();
     }
 
 
