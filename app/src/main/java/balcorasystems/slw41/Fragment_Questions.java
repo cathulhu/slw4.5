@@ -49,26 +49,31 @@ public class Fragment_Questions extends Fragment
         //!!!!
         //!!!!
 
-        final List<String> firstQuestions = new ArrayList<String>();
-        firstQuestions.add("Are any of your student loans in a state of default? Typically loans go into default after a period of non payment (delinquency) of about 9 months, or 270 days.");
-        firstQuestions.add("Are any of your student loans in a state of delinquency? Delinquency is defined as having missed a payment due date and still having an outstanding owed balance on the missed payment.");
-        firstQuestions.add("Are you a parent borrower, next of kin, or other entity who thinks they may be financially responsible for the student loans of an individual who has died?");
-        firstQuestions.add("Have you consolidated your loans into a Direct Consolidation loan?");
-        firstQuestions.add("Have you undergone loan rehabilitation on these student loans for a past default?");
-        firstQuestions.add("Are you a parent borrower with a Parent PLUS Loan?");
-        firstQuestions.add("Does your student debt include Federal Family Education Loans (FFEL)? ");
-        firstQuestions.add("Does your student debt include Perkins Loans? ");
-        firstQuestions.add("Does your student debt include Federal Direct Loans? ");
+        final List<String> mainQuestions = new ArrayList<String>();
+        mainQuestions.add("Are any of your student loans in a state of default? Typically loans go into default after a period of non payment (delinquency) of about 9 months, or 270 days.");
+        mainQuestions.add("Are any of your student loans in a state of delinquency? Delinquency is defined as having missed a payment due date and still having an outstanding owed balance on the missed payment.");
+        mainQuestions.add("Are you a parent borrower, next of kin, or other entity who thinks they may be financially responsible for the student loans of an individual who has died?");
+        mainQuestions.add("Have you consolidated your loans into a Direct Consolidation loan?");
+        mainQuestions.add("Have you undergone loan rehabilitation on these student loans for a past default?");
+        mainQuestions.add("Are you a parent borrower with a Parent PLUS Loan?");
+        mainQuestions.add("Does your student debt include Federal Family Education Loans (FFEL)? ");
+        mainQuestions.add("Does your student debt include Perkins Loans? ");
+        mainQuestions.add("Does your student debt include Federal Direct Loans? ");
+        mainQuestions.add("Select the industry and position you work in.");
+        mainQuestions.add("Select one of the following ranges for the date you received your first student loan.");
+        mainQuestions.add("Select your income and debt at the time of repayment or current values if you are already in repayment. Optionally you can enter your current or expected monthly Repayment otherwise it will be automatically calculated.");
+        mainQuestions.add("At the time of repayment what will your tax filing status be?");
+        mainQuestions.add("At the time of repayment how many dependencies will you be claiming on your tax filing?");
+        mainQuestions.add("Optional: Of your total debt ($99999) about how much of that is composed of Parent PLUS Loans?");
+        mainQuestions.add("Optional: Of your total debt ($99999) about how much of that is composed of FFEL Loans?");
+        mainQuestions.add("Optional: Of your total debt ($99999) about how much of that is composed of Perkins Loans?");
+        mainQuestions.add("Optional: Of your total debt ($99999) about how much of that is composed of Direct Loans?");
+        mainQuestions.add("Review your answers to the questionnaire below, click on any item to go back and change your answer. When you're ready to proceed tap Analyze Loans.");
 
-//        firstQuestions.add("At the time of repayment what will your tax filing status be?");
-        firstQuestions.add("Select the industry and position you work in.");
-        firstQuestions.add("Select one of the following ranges for the date you received your first student loan.");
-        firstQuestions.add("Select your income and debt at the time of repayment or current values if you are already in repayment. Optionally you can enter your current or expected monthly Repayment otherwise it will be automatically calculated.");
-
-//        final List<String> taxOptions = new ArrayList<>();
-//        taxOptions.add("Single filing");
-//        taxOptions.add("Joint filing");
-//        taxOptions.add("Married but filing separately");
+        final List<String> taxOptions = new ArrayList<>();
+        taxOptions.add("Single filing");
+        taxOptions.add("Joint filing");
+        taxOptions.add("Married but filing separately");
 
         final List<String> employmentOptions = new ArrayList<>();
         employmentOptions.add("Independent contractor/Self Employed");
@@ -107,6 +112,13 @@ public class Fragment_Questions extends Fragment
         summaryTitles.add("Employment");
         summaryTitles.add("First Loan Date");
         summaryTitles.add("Debt, Income, and Payment");
+        summaryTitles.add("Tax Status");
+        summaryTitles.add("Tax Dependants");
+        summaryTitles.add("Parent PLUS Loan Details");
+        summaryTitles.add("FFEL Loan Details");
+        summaryTitles.add("Perkins Loan Details");
+        summaryTitles.add("Direct Loan Details");
+        summaryTitles.add("Review");
 
 
         mainListView = (ListView) rootLayoutView.findViewById(R.id.questionsList);
@@ -123,28 +135,29 @@ public class Fragment_Questions extends Fragment
         final TextView currentQuestion = (TextView) rootLayoutView.findViewById(R.id.questionsHere);
 
         final Button nextButton = (Button) rootLayoutView.findViewById(R.id.nextButton);
-        Button previousButton = (Button) rootLayoutView.findViewById(R.id.prevButton);
+        final Button previousButton = (Button) rootLayoutView.findViewById(R.id.prevButton);
 
-        currentQuestion.setText(firstQuestions.get(counter));
+        currentQuestion.setText(mainQuestions.get(counter));
 
         nextButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
-            public void onClick(View view) {
-                if (counter <= summaryTitles.size()) {
+            public void onClick(View view)
+            {
+                if (counter < mainQuestions.size()-1)
+                {
                     counter++;
 
                     mainListView.setVisibility(View.VISIBLE);
                     layoutForFragment.setVisibility(View.GONE);
 
-                    if (counter < 12) {
-                        currentQuestion.setText(firstQuestions.get(counter));
-                        questionTitle.setText(summaryTitles.get(counter));
-                    }
-                    else
-                    {
-                        mListener.finishedQuestions();
-                    }
+                    listAdapter = new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, yesNoOptions);
+                    mainListView.setAdapter(listAdapter);
+
+                    currentQuestion.setText(mainQuestions.get(counter));
+                    questionTitle.setText(summaryTitles.get(counter));
+                    nextButton.setText("Next");
+
 
                     if (counter==9)
                     {
@@ -168,6 +181,36 @@ public class Fragment_Questions extends Fragment
                         fTransaction.commit();
 
                     }
+                    else if (counter==12)
+                    {
+                        listAdapter = new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, taxOptions);
+                        mainListView.setAdapter(listAdapter);
+                    }
+                    else if (counter==13)
+                    {
+                        //load the number picker here
+                        mainListView.setVisibility(View.GONE);
+                    }
+                    else if (counter==13)
+                    {
+                        //load the number picker and text field for tax dependants
+                        mainListView.setVisibility(View.GONE);
+                    }
+                    else if (counter==17|| counter==16 || counter==15 || counter==14)
+                    {
+                        //load the interface for specifying loan fractions, pie chart or something
+                        mainListView.setVisibility(View.GONE);
+                    }
+                    else if (counter==18)
+                    {
+                        nextButton.setText("Analyze Loans");
+                        //load the review list here with actual values
+                        List<String> reviewTitles = new ArrayList<String>(summaryTitles);
+                        reviewTitles.remove(reviewTitles.size()-1);
+
+                        listAdapter = new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, reviewTitles);
+                        mainListView.setAdapter( listAdapter );
+                    }
                     else
                     {
                         listAdapter = new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, yesNoOptions);
@@ -175,6 +218,12 @@ public class Fragment_Questions extends Fragment
                     }
 
 
+
+
+                }
+                else
+                {
+//                    mListener.finishedQuestions();
                 }
             }
 
@@ -185,42 +234,72 @@ public class Fragment_Questions extends Fragment
             @Override
             public void onClick(View view)
             {
-                if (counter > 0) {
+                if (counter > 0)
+                {
                     counter--;
-                    currentQuestion.setText(firstQuestions.get(counter));
-                    questionTitle.setText(summaryTitles.get(counter));
 
                     mainListView.setVisibility(View.VISIBLE);
                     layoutForFragment.setVisibility(View.GONE);
-                }
 
-                if (counter==9)
-                {
-                    listAdapter = new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, employmentOptions);
-                    mainListView.setAdapter( listAdapter );
-                }
-                else if (counter==10)
-                {
-                    listAdapter = new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, dateQuestionOptions);
-                    mainListView.setAdapter( listAdapter );
-                }
-                else if (counter==11)
-                {
-                    mainListView.setVisibility(View.GONE);
-                    layoutForFragment.setVisibility(View.VISIBLE);
-
-                    //this is for the income debt and payment fragment text
-                    FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
-                    fTransaction.replace(R.id.relativeLayout3, new Fragment_Info(), "questions");
-                    fTransaction.addToBackStack(null);
-                    fTransaction.commit();
-
-                }
-                else
-                {
                     listAdapter = new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, yesNoOptions);
-                    mainListView.setAdapter( listAdapter );
+                    mainListView.setAdapter(listAdapter);
+
+                    currentQuestion.setText(mainQuestions.get(counter));
+                    questionTitle.setText(summaryTitles.get(counter));
+                    nextButton.setText("Next");
+
+                    if (counter==9)
+                    {
+                        listAdapter = new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, employmentOptions);
+                        mainListView.setAdapter( listAdapter );
+                    }
+                    else if (counter==10)
+                    {
+                        listAdapter = new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, dateQuestionOptions);
+                        mainListView.setAdapter( listAdapter );
+                    }
+                    else if (counter==11)
+                    {
+                        mainListView.setVisibility(View.GONE);
+                        layoutForFragment.setVisibility(View.VISIBLE);
+
+                        //this is for the income debt and payment fragment text
+                        FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
+                        fTransaction.replace(R.id.relativeLayout3, new Fragment_Info(), "questions");
+                        fTransaction.addToBackStack(null);
+                        fTransaction.commit();
+
+                    }
+                    else if (counter==12)
+                    {
+                        listAdapter = new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, taxOptions);
+                        mainListView.setAdapter(listAdapter);
+                    }
+                    else if (counter==13)
+                    {
+                        //load the number picker here
+                        mainListView.setVisibility(View.GONE);
+                    }
+                    else if (counter==13)
+                    {
+                        //load the number picker and text field for tax dependants
+                        mainListView.setVisibility(View.GONE);
+                    }
+                    else if (counter==17|| counter==16 || counter==15 || counter==14)
+                    {
+                        //load the interface for specifying loan fractions, pie chart or something
+                        mainListView.setVisibility(View.GONE);
+                    }
+                    else
+                    {
+                        listAdapter = new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, yesNoOptions);
+                        mainListView.setAdapter( listAdapter );
+                    }
+
+
                 }
+
+
 
             }
 //
