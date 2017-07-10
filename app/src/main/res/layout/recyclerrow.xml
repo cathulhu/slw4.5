@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/previewChart"
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:layout_alignBottom="@+id/textView9"
+            android:layout_alignParentEnd="true"
+            android:layout_alignStart="@+id/rowItem"
+            android:layout_below="@+id/textView8"
+            android:layout_toEndOf="@+id/rowItem"
+            card_view:srcCompat="@drawable/area_graph" />
+
+        <TextView
+            android:id="@+id/rowItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/rowItem"
+            android:text="Describing Title"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@+id/previewChart"
+            android:text="Lots of text describing this loan thing Lots of text describing this loan thing Lots of text describing this loan thing "
+            android:layout_below="@+id/textView8" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/previewChart"
+            android:layout_centerHorizontal="true"
+            android:text="Features"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView10"
+            android:layout_centerHorizontal="true">
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="8dp"
+                android:layout_toEndOf="@+id/textView15"
+                android:text="Zero Payment"
+                android:textStyle="bold|italic" />
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:text="Loan Forgiveness"
+                android:textStyle="bold|italic" />
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="8dp"
+                android:layout_toEndOf="@+id/textView16"
+                android:text="Debt Rescue"
+                android:textStyle="bold|italic" />
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/textView17" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

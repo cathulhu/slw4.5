@@ -1,20 +1,9 @@
 package balcorasystems.slw41;
 
-import com.startapp.android.publish.ads.splash.SplashConfig;
-import com.startapp.android.publish.adsCommon.StartAppAd;
-
-import android.app.Fragment;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity implements Fragment_Selection.OnNavigateAwayListener, Fragment_Questions.OnGoToMoneyStuff, Fragment_Info.testListener
 
@@ -36,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements Fragment_Selectio
     {
         FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
         fTransaction.replace(R.id.mainFrameLayout, new Fragment_Questions(), "questions");
+//        fTransaction.replace(R.id.mainFrameLayout, new Plans_RecyclerFragment(), "info");
         fTransaction.addToBackStack(null);
         fTransaction.commit();
     }
@@ -44,10 +34,10 @@ public class MainActivity extends AppCompatActivity implements Fragment_Selectio
     {
         //need to change what this does since the income stuff has been integrated into the questions wizard, this should now go to a summary.
 
-//        FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
-//        fTransaction.replace(R.id.mainFrameLayout, new Fragment_Info(), "info");
-//        fTransaction.addToBackStack(null);
-//        fTransaction.commit();
+        FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
+        fTransaction.replace(R.id.mainFrameLayout, new Plans_RecyclerFragment(), "info");
+        fTransaction.addToBackStack(null);
+        fTransaction.commit();
     }
 
     public void onIncomeFinished(int income, int debt)
