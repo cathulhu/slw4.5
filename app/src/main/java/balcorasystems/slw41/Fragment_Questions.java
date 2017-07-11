@@ -6,9 +6,11 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.NumberPicker;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -120,10 +122,23 @@ public class Fragment_Questions extends Fragment
         final RelativeLayout layoutForFragment = (RelativeLayout) rootLayoutView.findViewById(R.id.relativeLayout3);
         layoutForFragment.setVisibility(View.GONE);
 
+        mainListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
+            {
+
+            }
+        });
 
 
 
-        final TextView questionTitle = (TextView) rootLayoutView.findViewById(R.id.plansTitle);
+        final NumberPicker taxDependants = (NumberPicker) rootLayoutView.findViewById(R.id.taxNumberPicker);
+        taxDependants.setMaxValue(99);
+        taxDependants.setMinValue(0);
+        taxDependants.setValue(1);
+        taxDependants.setVisibility(View.GONE);
+
+        final TextView questionTitle = (TextView) rootLayoutView.findViewById(R.id.loanRatioTitle);
         final TextView currentQuestion = (TextView) rootLayoutView.findViewById(R.id.questionsHere);
 
         final Button nextButton = (Button) rootLayoutView.findViewById(R.id.nextButton);
@@ -142,6 +157,7 @@ public class Fragment_Questions extends Fragment
 
                     mainListView.setVisibility(View.VISIBLE);
                     layoutForFragment.setVisibility(View.GONE);
+                    taxDependants.setVisibility(View.GONE);
 
                     listAdapter = new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, yesNoOptions);
                     mainListView.setAdapter(listAdapter);
@@ -177,11 +193,13 @@ public class Fragment_Questions extends Fragment
                     {
                         listAdapter = new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, taxOptions);
                         mainListView.setAdapter(listAdapter);
+
                     }
                     else if (counter==13)
                     {
                         //load the number picker here
                         mainListView.setVisibility(View.GONE);
+                        taxDependants.setVisibility(View.VISIBLE);
                     }
                     else if (counter==13)
                     {
@@ -192,6 +210,12 @@ public class Fragment_Questions extends Fragment
                     {
                         //load the interface for specifying loan fractions, pie chart or something
                         mainListView.setVisibility(View.GONE);
+                        layoutForFragment.setVisibility(View.VISIBLE);
+
+                        FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
+                        fTransaction.replace(R.id.relativeLayout3, new Fragment_DebtRatio(), "questions");
+                        fTransaction.addToBackStack(null);
+                        fTransaction.commit();
                     }
                     else if (counter==18)
                     {
@@ -235,6 +259,7 @@ public class Fragment_Questions extends Fragment
 
                     listAdapter = new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, yesNoOptions);
                     mainListView.setAdapter(listAdapter);
+                    taxDependants.setVisibility(View.GONE);
 
                     currentQuestion.setText(mainQuestions.get(counter));
                     questionTitle.setText(summaryTitles.get(counter));
@@ -266,11 +291,13 @@ public class Fragment_Questions extends Fragment
                     {
                         listAdapter = new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, taxOptions);
                         mainListView.setAdapter(listAdapter);
+
                     }
                     else if (counter==13)
                     {
                         //load the number picker here
                         mainListView.setVisibility(View.GONE);
+                        taxDependants.setVisibility(View.VISIBLE);
                     }
                     else if (counter==13)
                     {

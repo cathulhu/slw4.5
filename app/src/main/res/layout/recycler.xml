@@ -5,11 +5,13 @@
     <RelativeLayout
         android:id="@+id/firstQuestionsArea"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+
         android:layout_centerHorizontal="true">
 
         <TextView
-            android:id="@+id/plansTitle"
+            android:id="@+id/loanRatioTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -22,8 +24,8 @@
             android:id="@+id/planInstructions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/plansTitle"
             android:layout_marginLeft="16dp"
+            android:layout_below="@+id/loanRatioTitle"
             android:text="Listed below are the best repayment strategies PROGRAMNAME could calculate. Tap to select one and view it in greater detail."
             android:textSize="16sp" />
 
@@ -34,7 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
+        android:layout_marginLeft="16dp"
         android:layout_below="@+id/firstQuestionsArea" />
 
 </RelativeLayout>
