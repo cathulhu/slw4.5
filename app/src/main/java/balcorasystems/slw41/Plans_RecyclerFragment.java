@@ -8,20 +8,22 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 
-public class Plans_RecyclerFragment extends Fragment {
+public class Plans_RecyclerFragment extends Fragment{
 
     ArrayList plans;
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup selectionContainer, Bundle savedInstanceState) {
-        View rootLayoutView = inflater.inflate(R.layout.recycler, selectionContainer, false);
+        final View rootLayoutView = inflater.inflate(R.layout.recycler, selectionContainer, false);
 
 
-        RecyclerView recyclerView = (RecyclerView) rootLayoutView.findViewById(R.id.recyclerList);
+        final RecyclerView recyclerView = (RecyclerView) rootLayoutView.findViewById(R.id.recyclerList);
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
@@ -41,5 +43,9 @@ public class Plans_RecyclerFragment extends Fragment {
         return rootLayoutView;
 
     }
+
+
+
+
 
 }

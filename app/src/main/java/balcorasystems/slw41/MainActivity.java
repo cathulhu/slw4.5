@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 
-public class MainActivity extends AppCompatActivity implements Fragment_Selection.OnNavigateAwayListener, Fragment_Questions.OnGoToMoneyStuff, Fragment_Info.testListener
+public class MainActivity extends AppCompatActivity implements Fragment_Selection.OnNavigateAwayListener, Fragment_Questions.OnGoToMoneyStuff, Fragment_Info.testListener, Plans_Adapter.OnNavigateToDetail
 
 {
 
@@ -21,11 +21,18 @@ public class MainActivity extends AppCompatActivity implements Fragment_Selectio
     public Integer backCounter =0;
     public Integer launchCount=0;
 
+    public void recyclerToDetail()
+    {
+        FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
+        fTransaction.replace(R.id.mainFrameLayout, new Fragment_PlanDetail(), "details=");
+        fTransaction.addToBackStack(null);
+        fTransaction.commit();
+    }
+
     public void navigateToChoice()
     {
         FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
         fTransaction.replace(R.id.mainFrameLayout, new Fragment_Questions(), "questions");
-//        fTransaction.replace(R.id.mainFrameLayout, new Plans_RecyclerFragment(), "info");
         fTransaction.addToBackStack(null);
         fTransaction.commit();
     }
