@@ -1,127 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/topLevelLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <RelativeLayout
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/chart1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/relativeLayout5"
-        android:layout_alignParentStart="true">
-
-        <com.github.mikephil.charting.charts.PieChart
-            android:id="@+id/chart1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/seekBar1" />
-
-        <SeekBar
-            android:id="@+id/seekBar2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_toLeftOf="@+id/tvYMax"
-            android:layout_marginRight="8dp"
-            android:max="200"
-            android:paddingBottom="12dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginBottom="8dp" />
-
-        <SeekBar
-            android:id="@+id/seekBar1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/seekBar2"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_toLeftOf="@+id/tvXMax"
-            android:max="25"
-            android:paddingBottom="12dp"
-            android:visibility="gone" />
-
-        <TextView
-            android:id="@+id/tvXMax"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/seekBar1"
-            android:layout_alignParentRight="true"
-            android:layout_marginBottom="15dp"
-            android:layout_marginRight="10dp"
-            android:gravity="right"
-            android:text="500"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:visibility="gone" />
-
-        <TextView
-            android:id="@+id/tvYMax"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/seekBar2"
-            android:layout_alignParentRight="true"
-            android:text="500"
-            android:layout_marginBottom="15dp"
-            android:layout_marginRight="10dp"
-            android:gravity="right"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    </RelativeLayout>
+        android:layout_height="match_parent" />
 
     <RelativeLayout
         android:id="@+id/relativeLayout5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/firstQuestionsArea"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:visibility="gone">
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/textView61"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/firstQuestionsArea"
-            android:text="TextView" />
-
-        <SeekBar
-            android:id="@+id/seekBar4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@+id/firstQuestionsArea"
-            android:layout_toEndOf="@+id/textView5" />
+            android:layout_below="@+id/textView60"
+            android:text="TextView"
+            android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/textView11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/textView5"
-            android:layout_below="@+id/textView5"
-            android:text="TextView" />
-
-        <SeekBar
-            android:id="@+id/seekBar5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@+id/seekBar4"
-            android:layout_toEndOf="@+id/textView11" />
-
-        <TextView
-            android:id="@+id/textView14"
+            android:id="@+id/textView60"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView11"
-            android:text="TextView" />
+            android:layout_below="@+id/textView58"
+            android:text="TextView"
+            android:textSize="18sp" />
 
-        <SeekBar
-            android:id="@+id/seekBar6"
+        <TextView
+            android:id="@+id/textView59"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@+id/seekBar5"
-            android:layout_toEndOf="@+id/textView14" />
+            android:text="TextView"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textView58"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textView59"
+            android:text="TextView"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/editText10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textView61"
+            android:layout_below="@+id/editText9"
+            android:layout_toEndOf="@+id/textView61"
+            android:ems="10"
+            android:inputType="number"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/editText8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textView58"
+            android:layout_below="@+id/textView59"
+            android:layout_toEndOf="@+id/textView59"
+            android:ems="10"
+            android:inputType="number"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/editText7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/textView58"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/textView59"
+            android:ems="10"
+            android:inputType="number"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/editText9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/textView61"
+            android:layout_below="@+id/textView58"
+            android:layout_toEndOf="@+id/textView61"
+            android:ems="10"
+            android:inputType="number"
+            android:textSize="14sp" />
+
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/scalertext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relativeLayout5"
+        android:layout_centerHorizontal="true"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/datatext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/scalertext"
+        android:layout_below="@+id/scalertext"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/selectedtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/datatext"
+        android:layout_below="@+id/datatext"
+        android:text="TextView" />
 
 </RelativeLayout>

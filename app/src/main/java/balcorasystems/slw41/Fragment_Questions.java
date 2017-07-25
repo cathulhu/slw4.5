@@ -58,11 +58,11 @@ public class Fragment_Questions extends Fragment
         mainQuestions.add("Select your income and debt at the time of repayment or current values if you are already in repayment. Optionally you can enter your current or expected monthly Repayment otherwise it will be automatically calculated.");
         mainQuestions.add("At the time of repayment what will your tax filing status be?");
         mainQuestions.add("At the time of repayment how many dependencies will you be claiming on your tax filing?");
-        mainQuestions.add("Optional: Of your total debt ($99999) about how much of that is composed of Parent PLUS Loans?");
-        mainQuestions.add("Optional: Of your total debt ($99999) about how much of that is composed of FFEL Loans?");
-        mainQuestions.add("Optional: Of your total debt ($99999) about how much of that is composed of Perkins Loans?");
-        mainQuestions.add("Optional: Of your total debt ($99999) about how much of that is composed of Direct Loans?");
+        mainQuestions.add("How much of the total debt is comprised of each different loan type? Tap on s slice of the pie chart and use the slider to adjust the fraction that fraction.");
+        mainQuestions.add("Select your debt servicer from the list below.");
         mainQuestions.add("Review your answers to the questionnaire below, click on any item to go back and change your answer. When you're ready to proceed tap Analyze Loans.");
+
+
 
         final List<String> taxOptions = new ArrayList<>();
         taxOptions.add("Single filing");
@@ -108,11 +108,21 @@ public class Fragment_Questions extends Fragment
         summaryTitles.add("Debt, Income, and Payment");
         summaryTitles.add("Tax Status");
         summaryTitles.add("Tax Dependants");
-        summaryTitles.add("Parent PLUS Loan Details");
-        summaryTitles.add("FFEL Loan Details");
-        summaryTitles.add("Perkins Loan Details");
-        summaryTitles.add("Direct Loan Details");
+        summaryTitles.add("Debt Types");
+        summaryTitles.add("Debt Servicer");
         summaryTitles.add("Review");
+
+        final List<String> servicerTitles = new ArrayList<>();
+        servicerTitles.add("Nelnet");
+        servicerTitles.add("Great Lakes Educational Loan Services, Inc.");
+        servicerTitles.add("Navient");
+        servicerTitles.add("FedLoan Servicing (PHEAA)");
+        servicerTitles.add("MOHELA");
+        servicerTitles.add("HESC/EdFinancial");
+        servicerTitles.add("CornerStone");
+        servicerTitles.add("Granite State - GSMR");
+        servicerTitles.add("OSLA Servicing");
+        servicerTitles.add("Debt Management and Collections System");
 
 
         mainListView = (ListView) rootLayoutView.findViewById(R.id.questionsList);
@@ -201,12 +211,7 @@ public class Fragment_Questions extends Fragment
                         mainListView.setVisibility(View.GONE);
                         taxDependants.setVisibility(View.VISIBLE);
                     }
-                    else if (counter==13)
-                    {
-                        //load the number picker and text field for tax dependants
-                        mainListView.setVisibility(View.GONE);
-                    }
-                    else if (counter==17|| counter==16 || counter==15 || counter==14)
+                    else if (counter==14)
                     {
                         //load the interface for specifying loan fractions, pie chart or something
                         mainListView.setVisibility(View.GONE);
@@ -217,7 +222,12 @@ public class Fragment_Questions extends Fragment
                         fTransaction.addToBackStack(null);
                         fTransaction.commit();
                     }
-                    else if (counter==18)
+                    else if (counter==15)
+                    {
+                        listAdapter = new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, servicerTitles);
+                        mainListView.setAdapter( listAdapter );
+                    }
+                    else if (counter==16)
                     {
                         nextButton.setText("Analyze Loans");
                         //load the review list here with actual values
@@ -265,6 +275,7 @@ public class Fragment_Questions extends Fragment
                     questionTitle.setText(summaryTitles.get(counter));
                     nextButton.setText("Next");
 
+
                     if (counter==9)
                     {
                         listAdapter = new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, employmentOptions);
@@ -299,21 +310,38 @@ public class Fragment_Questions extends Fragment
                         mainListView.setVisibility(View.GONE);
                         taxDependants.setVisibility(View.VISIBLE);
                     }
-                    else if (counter==13)
-                    {
-                        //load the number picker and text field for tax dependants
-                        mainListView.setVisibility(View.GONE);
-                    }
-                    else if (counter==17|| counter==16 || counter==15 || counter==14)
+                    else if (counter==14)
                     {
                         //load the interface for specifying loan fractions, pie chart or something
                         mainListView.setVisibility(View.GONE);
+                        layoutForFragment.setVisibility(View.VISIBLE);
+
+                        FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
+                        fTransaction.replace(R.id.relativeLayout3, new Fragment_DebtRatio(), "questions");
+                        fTransaction.addToBackStack(null);
+                        fTransaction.commit();
+                    }
+                    else if (counter==15)
+                    {
+                        listAdapter = new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, servicerTitles);
+                        mainListView.setAdapter( listAdapter );
+                    }
+                    else if (counter==16)
+                    {
+                        nextButton.setText("Analyze Loans");
+                        //load the review list here with actual values
+                        List<String> reviewTitles = new ArrayList<String>(summaryTitles);
+                        reviewTitles.remove(reviewTitles.size()-1);
+
+                        listAdapter = new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, reviewTitles);
+                        mainListView.setAdapter( listAdapter );
                     }
                     else
                     {
                         listAdapter = new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, yesNoOptions);
                         mainListView.setAdapter( listAdapter );
                     }
+
 
 
                 }

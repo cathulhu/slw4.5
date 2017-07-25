@@ -7,7 +7,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+
 import java.util.ArrayList;
+
+import static android.R.attr.entries;
 
 public class Plans_Adapter extends RecyclerView.Adapter<Plans_Adapter.ViewHolder>
 {
@@ -31,6 +38,22 @@ public class Plans_Adapter extends RecyclerView.Adapter<Plans_Adapter.ViewHolder
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recyclerrow, viewGroup, false);
         final ViewHolder genericViewholder = new ViewHolder(view);
         mListener = (OnNavigateToDetail) view.getContext();       //FOR SOME REASON ITS INCREDIBLY IMPORTANT TO SET THIS TO CONTEXT;
+
+
+
+
+        LineChart lineChart = (LineChart) view.findViewById(R.id.previewChart);
+                // creating list of entry<br />
+                ArrayList<Entry> entries = new ArrayList();
+                entries.add(new Entry(1, 6));
+
+        LineDataSet dataset = new LineDataSet(entries, "Moneyz");
+        dataset.setDrawFilled(true);
+        LineData data = new LineData(dataset);
+        lineChart.setData(data);
+
+
+
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
