@@ -8,11 +8,23 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/rowItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:padding="4dp"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/previewChart">
 
@@ -25,22 +37,11 @@
                 android:text="38458" />
 
             <TextView
-                android:id="@+id/rowItem"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <TextView
                 android:id="@+id/textView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/rowItem"
                 android:text="Describing Title"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -74,10 +75,10 @@
                 android:id="@+id/textView28"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/textView20"
                 android:layout_marginLeft="8dp"
                 android:layout_toEndOf="@+id/textView19"
-                android:text="15 Years"
-                android:layout_below="@+id/textView20" />
+                android:text="15 Years" />
 
             <TextView
                 android:id="@+id/textView27"
@@ -93,20 +94,21 @@
                 android:id="@+id/textView9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingBottom="4dp"
                 android:text="Lots of text describing this loan thing Lots of text describing this loan thing Lots of text describing this loan thing "
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_below="@+id/rowItem"
-                android:layout_centerHorizontal="true" />
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true" />
 
         </RelativeLayout>
 
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/previewChart"
             android:layout_width="match_parent"
+            android:padding="4dp"
             android:layout_height="150dp"
+            android:layout_alignParentEnd="true"
 
-            android:layout_alignParentEnd="true" />
+            android:layout_below="@id/rowItem" />
 
     </RelativeLayout>
 

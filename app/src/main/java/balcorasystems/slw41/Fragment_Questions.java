@@ -3,6 +3,7 @@ package balcorasystems.slw41;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.util.TimeUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,11 +29,12 @@ public class Fragment_Questions extends Fragment
 
     public OnGoToMoneyStuff mListener;
 
-    Integer counter = 0;
+    Integer counter;
 
 
     private ListView mainListView ;
     private ArrayAdapter<String> listAdapter ;
+    public Object_Loan loan = new Object_Loan();
 
     public View onCreateView(LayoutInflater inflater, ViewGroup selectionContainer, Bundle savedInstanceState) {
         View rootLayoutView = inflater.inflate(R.layout.questions, selectionContainer, false);
@@ -129,19 +131,6 @@ public class Fragment_Questions extends Fragment
         listAdapter = new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, yesNoOptions);
         mainListView.setAdapter( listAdapter );
 
-        final RelativeLayout layoutForFragment = (RelativeLayout) rootLayoutView.findViewById(R.id.relativeLayout3);
-        layoutForFragment.setVisibility(View.GONE);
-
-        mainListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
-            {
-
-            }
-        });
-
-
-
         final NumberPicker taxDependants = (NumberPicker) rootLayoutView.findViewById(R.id.taxNumberPicker);
         taxDependants.setMaxValue(99);
         taxDependants.setMinValue(0);
@@ -154,6 +143,171 @@ public class Fragment_Questions extends Fragment
         final Button nextButton = (Button) rootLayoutView.findViewById(R.id.nextButton);
         final Button previousButton = (Button) rootLayoutView.findViewById(R.id.prevButton);
 
+        final RelativeLayout layoutForFragment = (RelativeLayout) rootLayoutView.findViewById(R.id.relativeLayout3);
+        layoutForFragment.setVisibility(View.GONE);
+
+        nextButton.setEnabled(false);
+        taxDependants.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker numberPicker, int i, int i1)
+            {
+                loan.dependants=taxDependants.getValue();
+                nextButton.setEnabled(true);
+            }
+        });
+
+        mainListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
+            {
+                if (counter==mainQuestions.size()-1)
+                {
+                    //review section code
+
+                    counter=i+1;
+                    previousButton.performClick();
+                }
+                else if (counter==0)
+                {
+
+                    if (adapterView.getItemAtPosition(i)=="Yes")
+                    {
+                        loan.inDefault=true;
+                    }
+                    nextButton.setEnabled(true);
+
+                }
+                else if (counter==1)
+                {
+
+                    if (adapterView.getItemAtPosition(i)=="Yes")
+                    {
+                        loan.inDelinquincy=true;
+                    }
+                    nextButton.setEnabled(true);
+
+                }
+                else if (counter==2)
+                {
+
+                    if (adapterView.getItemAtPosition(i)=="Yes")
+                    {
+                        loan.deceased=true;
+                    }
+                    nextButton.setEnabled(true);
+
+                }
+                else if (counter==3)
+                {
+
+                    if (adapterView.getItemAtPosition(i)=="Yes")
+                    {
+                        loan.hasConsolidated=true;
+                    }
+                    nextButton.setEnabled(true);
+
+                }
+                else if (counter==4)
+                {
+
+                    if (adapterView.getItemAtPosition(i)=="Yes")
+                    {
+                        loan.loanRehab=true;
+                    }
+                    nextButton.setEnabled(true);
+
+                }
+                else if (counter==5)
+                {
+
+                    if (adapterView.getItemAtPosition(i)=="Yes")
+                    {
+                        loan.parentLoans=true;
+                    }
+                    nextButton.setEnabled(true);
+
+                }
+                else if (counter==6)
+                {
+
+                    if (adapterView.getItemAtPosition(i)=="Yes")
+                    {
+                        loan.ffelLoans=true;
+                    }
+                    nextButton.setEnabled(true);
+
+                }
+                else if (counter==7)
+                {
+
+                    if (adapterView.getItemAtPosition(i)=="Yes")
+                    {
+                        loan.perkinsLoans=true;
+                    }
+                    nextButton.setEnabled(true);
+
+                }
+                else if (counter==8)
+                {
+
+                    if (adapterView.getItemAtPosition(i)=="Yes")
+                    {
+                        loan.directLoans=true;
+                    }
+                    nextButton.setEnabled(true);
+
+                }
+                else if (counter==9)
+                {
+                    loan.employmentNumber=i;
+                    nextButton.setEnabled(true);
+                }
+                else if (counter==10)
+                {
+                    loan.employmentNumber=i;
+                    nextButton.setEnabled(true);
+                }
+                else if (counter==11)
+                {
+                    loan.loanDateString=adapterView.getItemAtPosition(i).toString();
+                    nextButton.setEnabled(true);
+                }
+                else if (counter==12)
+                {
+
+                    nextButton.setEnabled(true);
+                }
+                else if (counter==13)
+                {
+
+                }
+                else if (counter==14)
+                {
+
+                    nextButton.setEnabled(true);
+                }
+                else if (counter==15)
+                {
+                    loan.servicer=adapterView.getItemAtPosition(i).toString();
+                    nextButton.setEnabled(true);
+                }
+
+
+
+
+
+
+
+
+            }
+        });
+
+
+
+
+
+
+
         currentQuestion.setText(mainQuestions.get(counter));
 
         nextButton.setOnClickListener(new View.OnClickListener()
@@ -164,6 +318,8 @@ public class Fragment_Questions extends Fragment
                 if (counter < mainQuestions.size()-1)
                 {
                     counter++;
+
+                    nextButton.setEnabled(false);
 
                     mainListView.setVisibility(View.VISIBLE);
                     layoutForFragment.setVisibility(View.GONE);
@@ -198,11 +354,15 @@ public class Fragment_Questions extends Fragment
                         fTransaction.addToBackStack(null);
                         fTransaction.commit();
 
+                        nextButton.setEnabled(true);
+
                     }
                     else if (counter==12)
                     {
                         listAdapter = new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, taxOptions);
                         mainListView.setAdapter(listAdapter);
+
+
 
                     }
                     else if (counter==13)
@@ -210,6 +370,10 @@ public class Fragment_Questions extends Fragment
                         //load the number picker here
                         mainListView.setVisibility(View.GONE);
                         taxDependants.setVisibility(View.VISIBLE);
+                        loan.dependants=1;
+                        nextButton.setEnabled(true);
+
+
                     }
                     else if (counter==14)
                     {
@@ -221,14 +385,22 @@ public class Fragment_Questions extends Fragment
                         fTransaction.replace(R.id.relativeLayout3, new Fragment_DebtRatio(), "questions");
                         fTransaction.addToBackStack(null);
                         fTransaction.commit();
+
+                        nextButton.setEnabled(true);
                     }
                     else if (counter==15)
                     {
+                        //saving data from debt ratio first
+
+
+
                         listAdapter = new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, servicerTitles);
                         mainListView.setAdapter( listAdapter );
                     }
                     else if (counter==16)
                     {
+
+
                         nextButton.setText("Analyze Loans");
                         //load the review list here with actual values
                         List<String> reviewTitles = new ArrayList<String>(summaryTitles);
@@ -236,6 +408,8 @@ public class Fragment_Questions extends Fragment
 
                         listAdapter = new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, reviewTitles);
                         mainListView.setAdapter( listAdapter );
+
+                        nextButton.setEnabled(true);
                     }
                     else
                     {
@@ -351,9 +525,6 @@ public class Fragment_Questions extends Fragment
             }
 //
         });
-
-
-
 
         return rootLayoutView;
     }

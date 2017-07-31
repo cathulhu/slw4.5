@@ -72,37 +72,6 @@ public class Fragment_DebtRatio extends Fragment implements SeekBar.OnSeekBarCha
         final TextView selecttext = (TextView) rootLayoutView.findViewById(R.id.selectedtext);
 
 
-//        rawEntriesData.add(data1);
-//        rawEntriesData.add(data2);
-//        rawEntriesData.add(data3);
-//
-//        entries.
-//
-//        final ScaleGestureDetector pinchGestureDetector = new ScaleGestureDetector(getContext(), new PiePinchListener(getContext()));
-//        mChart.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent)
-//            {
-//                pinchGestureDetector.onTouchEvent(motionEvent);
-//                Toast.makeText(getContext(), String.valueOf(motionEvent.getX() + motionEvent.getY()) , Toast.LENGTH_SHORT).show();
-//                return true;
-//            }
-//        });
-
-
-
-//        PieChart debtRatioChart = (PieChart) rootLayoutView.findViewById(R.id.PieDebtChart);
-//        PieData data = new PieData()
-
-//        tvX = (TextView) rootLayoutView.findViewById(R.id.tvXMax);
-//        tvY = (TextView) rootLayoutView.findViewById(R.id.tvYMax);
-
-//        mSeekBarX = (SeekBar) rootLayoutView.findViewById(R.id.seekBar1);
-//        mSeekBarY = (SeekBar) rootLayoutView.findViewById(R.id.seekBar2);
-//        mSeekBarX.setProgress(4);
-//        mSeekBarY.setProgress(10);
-
-
         mChart.setLongClickable(true);
         mChart.setHapticFeedbackEnabled(true);
         mChart.setTouchEnabled(true);
@@ -190,7 +159,7 @@ public class Fragment_DebtRatio extends Fragment implements SeekBar.OnSeekBarCha
                     float scaler = linearDistance/250;
                     PieEntry oldEntry = entries.get(dataCoord);
                     float oldData = oldEntry.getValue();
-                    Integer changedData = Integer.valueOf((int) (oldData*scaler));
+                    Integer changedData = Integer.valueOf((int) (oldData+scaler));
 
                     if (changedData > 10000)
                     {
