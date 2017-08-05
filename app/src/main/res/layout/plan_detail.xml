@@ -5,7 +5,9 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -16,39 +18,42 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
+                android:layout_marginTop="8dp"
                 android:layout_below="@+id/relativeLayout9">
 
                 <TextView
-                    android:id="@+id/textView48"
+                    android:id="@+id/autogen3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:layout_below="@+id/textView45"
-                    android:text="TextView" />
+                    android:layout_below="@+id/autogen2"
+                    android:text="Autogen3" />
 
                 <TextView
                     android:id="@+id/textView47"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
-                    android:text="TextView" />
+                    android:text="Variable Income 22 Year Repayment Plan"
+                    android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/textView46"
+                    android:id="@+id/autogen1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
+                    android:layout_marginTop="16dp"
                     android:layout_below="@+id/textView47"
-                    android:text="TextView" />
+                    android:text="Autogendesc1" />
 
                 <TextView
-                    android:id="@+id/textView45"
+                    android:id="@+id/autogen2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:layout_below="@+id/textView46"
-                    android:text="TextView" />
+                    android:layout_below="@+id/autogen1"
+                    android:text="Autogen2" />
             </RelativeLayout>
 
             <TextView
@@ -65,32 +70,25 @@
                 android:id="@+id/relativeLayout6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/button2">
+                android:layout_below="@+id/button2"
+                android:layout_alignParentStart="true">
 
                 <ImageView
                     android:id="@+id/imageView17"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/imageView16"
-                    android:layout_toStartOf="@+id/textView51"
-                    app:srcCompat="@android:drawable/presence_online" />
+                    app:srcCompat="@drawable/greenup"
+                    android:layout_alignBottom="@+id/textView39"
+                    android:layout_alignStart="@+id/imageView16" />
 
                 <ImageView
                     android:id="@+id/imageView16"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/reddown"
                     android:layout_alignParentTop="true"
-                    android:layout_toStartOf="@+id/textView51"
-                    app:srcCompat="@android:drawable/presence_online" />
-
-                <ImageView
-                    android:id="@+id/imageView18"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/textView39"
-                    android:layout_toStartOf="@+id/textView39"
-                    app:srcCompat="@android:drawable/presence_online" />
+                    android:layout_toStartOf="@+id/textView39" />
 
                 <TextView
                     android:id="@+id/textView51"
@@ -98,7 +96,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentTop="true"
-                    android:text="TextView" />
+                    android:layout_marginLeft="4dp"
+                    android:text="-16% vs Standard" />
 
                 <TextView
                     android:id="@+id/textView39"
@@ -106,23 +105,22 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_below="@+id/textView51"
-                    android:text="TextView" />
+                    android:layout_marginLeft="4dp"
+                    android:text="+11% vs Standard" />
 
                 <TextView
                     android:id="@+id/textView35"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignStart="@+id/textView34"
-                    android:layout_below="@+id/textView34"
-                    android:text="TextView" />
+                    android:layout_alignStart="@+id/textview34"
+                    android:layout_below="@+id/textview34"
+                    android:text="Loan Liftime Total" />
 
                 <TextView
-                    android:id="@+id/textView34"
+                    android:id="@+id/textview34"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/relativeLayout6"
-                    android:layout_toEndOf="@+id/textView22"
-                    android:text="TextView" />
+                    android:text="Monthly Payment" />
 
                 <TextView
                     android:id="@+id/textView36"
@@ -130,41 +128,38 @@
                     android:layout_height="wrap_content"
                     android:layout_alignStart="@+id/textView35"
                     android:layout_below="@+id/textView35"
-                    android:text="TextView" />
+                    android:text="Loan Forgiveness" />
 
                 <TextView
-                    android:id="@+id/textView52"
+                    android:id="@+id/monthlyPayment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/imageView18"
-                    android:layout_alignParentEnd="true"
-                    android:text="TextView" />
-
-                <TextView
-                    android:id="@+id/textView33"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_toEndOf="@+id/textView35"
-                    android:text="TextView" />
+                    android:layout_marginRight="8dp"
+                    android:text="$116"
+                    android:textStyle="bold"
+                    android:layout_alignStart="@+id/totalRepayment"
+                    android:layout_alignParentTop="true" />
 
                 <TextView
                     android:id="@+id/textView32"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/textView36"
-                    android:layout_alignBottom="@+id/textView36"
-                    android:layout_toEndOf="@+id/textView36"
-                    android:text="TextView" />
+                    android:text="$11420"
+                    android:textStyle="bold"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginRight="8dp"
+                    android:layout_alignStart="@+id/totalRepayment" />
 
                 <TextView
-                    android:id="@+id/textView31"
+                    android:id="@+id/totalRepayment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/textView35"
-                    android:layout_alignBottom="@+id/textView35"
-                    android:layout_toEndOf="@+id/textView35"
-                    android:text="TextView" />
+                    android:layout_marginRight="8dp"
+                    android:text="$44250"
+                    android:textStyle="bold"
+                    android:layout_below="@+id/monthlyPayment"
+                    android:layout_toStartOf="@+id/imageView17"
+                    android:layout_marginEnd="23dp" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -172,11 +167,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:layout_alignParentStart="true"
+                android:layout_margin="4dp"
                 android:layout_below="@+id/relativeLayout6">
 
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/detailChart"
                     android:layout_width="match_parent"
+                    android:padding="4dp"
                     android:layout_height="match_parent" />
             </RelativeLayout>
 
@@ -200,66 +197,93 @@
 
             <RelativeLayout
                 android:id="@+id/relativeLayout9"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/relativeLayout8">
 
-                <TextView
-                    android:id="@+id/textView42"
+                <RelativeLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/imageView11"
-                    android:layout_toEndOf="@+id/imageView11"
-                    android:text="TextView" />
+                    android:layout_height="match_parent"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_below="@+id/textView40">
 
-                <TextView
-                    android:id="@+id/textView44"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/imageView9"
-                    android:layout_toEndOf="@+id/imageView9"
-                    android:text="TextView" />
+                    <ImageView
+                        android:id="@+id/imageView5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        app:srcCompat="@drawable/aa" />
 
-                <TextView
-                    android:id="@+id/textView43"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_above="@+id/textView42"
-                    android:layout_toEndOf="@+id/imageView10"
-                    android:text="TextView" />
+                    <TextView
+                        android:id="@+id/textView15"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/imageView5"
+                        android:layout_centerHorizontal="true"
+                        android:text="Loan Forgiveness" />
+                </RelativeLayout>
 
-                <ImageView
-                    android:id="@+id/imageView11"
+                <RelativeLayout
+                    android:id="@+id/relativeLayout12"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/imageView10"
-                    app:srcCompat="@android:drawable/presence_online" />
+                    android:layout_height="match_parent"
+                    android:layout_alignTop="@+id/relativeLayout13"
+                    android:layout_alignParentStart="true">
 
-                <ImageView
-                    android:id="@+id/imageView10"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/textView44"
-                    app:srcCompat="@android:drawable/presence_online" />
+                    <ImageView
+                        android:id="@+id/imageView4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        app:srcCompat="@drawable/a12" />
 
-                <ImageView
-                    android:id="@+id/imageView9"
+                    <TextView
+                        android:id="@+id/textView10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@+id/imageView4"
+                        android:text="Default Rescue!" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout13"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
+                    android:layout_height="match_parent"
                     android:layout_below="@+id/textView40"
-                    app:srcCompat="@android:drawable/presence_online" />
+                    android:layout_centerHorizontal="true">
+
+                    <TextView
+                        android:id="@+id/textView14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/imageView3"
+                        android:layout_centerHorizontal="true"
+                        android:text="Variable Repayment" />
+
+                    <ImageView
+                        android:id="@+id/imageView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        app:srcCompat="@drawable/a20" />
+                </RelativeLayout>
 
                 <TextView
                     android:id="@+id/textView40"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:text="TextView" />
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="4dp"
+                    android:text="Features"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
             </RelativeLayout>
         </RelativeLayout>
     </ScrollView>

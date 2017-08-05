@@ -42,7 +42,9 @@ import com.github.mikephil.charting.utils.MPPointF;
 
 import java.util.ArrayList;
 
-public class Fragment_DebtRatio extends Fragment implements SeekBar.OnSeekBarChangeListener, OnChartValueSelectedListener {
+public class Fragment_DebtRatio extends Fragment implements SeekBar.OnSeekBarChangeListener, OnChartValueSelectedListener
+{
+
 
     private PieChart mChart;
 //    private SeekBar mSeekBarX, mSeekBarY;
@@ -50,9 +52,9 @@ public class Fragment_DebtRatio extends Fragment implements SeekBar.OnSeekBarCha
     ArrayList<PieEntry> entries = new ArrayList<PieEntry>();
     ArrayList<Double> rawEntriesData = new ArrayList<>();
 
-    Integer data1 = 5;
-    Integer data2 = 11;
-    Integer data3 = 29;
+    Float data1 = Float.valueOf((float) (MainActivity.simpleDebt/3));
+    Float data2 = Float.valueOf((float) (MainActivity.simpleDebt/3));
+    Float data3 = Float.valueOf((float) (MainActivity.simpleDebt/3));
 
     Integer FirstTouch =0;
 
@@ -161,9 +163,9 @@ public class Fragment_DebtRatio extends Fragment implements SeekBar.OnSeekBarCha
                     float oldData = oldEntry.getValue();
                     Integer changedData = Integer.valueOf((int) (oldData+scaler));
 
-                    if (changedData > 10000)
+                    if (changedData > 1000000)
                     {
-                        changedData=10000;
+                        changedData=1000000;
                     }
                     else if (changedData <2)
                     {

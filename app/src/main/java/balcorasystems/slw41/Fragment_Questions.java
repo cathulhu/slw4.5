@@ -29,7 +29,14 @@ public class Fragment_Questions extends Fragment
 
     public OnGoToMoneyStuff mListener;
 
-    Integer counter;
+    public interface updateMainLoan
+    {
+        void updateLoan();
+    }
+
+    public updateMainLoan loanListener;
+
+    Integer counter=0;
 
 
     private ListView mainListView ;
@@ -42,6 +49,7 @@ public class Fragment_Questions extends Fragment
         //!!!!
         //MUST HAVE THIS FOR LISTENER TO WORK!!!!
         mListener = (OnGoToMoneyStuff) getContext();       //FOR SOME REASON ITS INCREDIBLY IMPORTANT TO SET THIS TO CONTEXT;
+        loanListener = (updateMainLoan) getContext();
         //!!!!
         //!!!!
 
@@ -359,6 +367,9 @@ public class Fragment_Questions extends Fragment
                     }
                     else if (counter==12)
                     {
+                        //processing changes from last section, updating master loan debt income, etc.
+                        loanListener.updateLoan();
+
                         listAdapter = new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, taxOptions);
                         mainListView.setAdapter(listAdapter);
 
@@ -410,6 +421,10 @@ public class Fragment_Questions extends Fragment
                         mainListView.setAdapter( listAdapter );
 
                         nextButton.setEnabled(true);
+
+                        //sync the main loan with all the gathered data
+                        MainActivity.masterLoan=loan;
+                        loanListener.updateLoan();
                     }
                     else
                     {

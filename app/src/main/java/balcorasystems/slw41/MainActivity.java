@@ -5,21 +5,28 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 
-public class MainActivity extends AppCompatActivity implements Fragment_Selection.OnNavigateAwayListener, Fragment_Questions.OnGoToMoneyStuff, Fragment_Info.testListener, Plans_Adapter.OnNavigateToDetail
+import java.util.ArrayList;
+
+public class MainActivity extends AppCompatActivity implements Fragment_Selection.OnNavigateAwayListener, Fragment_Questions.OnGoToMoneyStuff, Fragment_Info.testListener, Plans_Adapter.OnNavigateToDetail, Fragment_Questions.updateMainLoan
 
 {
+    public static Object_Loan masterLoan = new Object_Loan();
 
-    public static Integer simpleIncome = 27000;
-    public static Integer simpleDebt = 35000;
+    public static Double simpleIncome = 27000.0;
+    public static Double simpleDebt = 35000.0;
     public static Double currentStdPayment = 0.7;
-    public static Double projectedMonthlySavings = 0.7;
-    public static Double newMonthlyPayment = 0.7;
-    public static Double totalIdrSpent = 0.7;
-    public static Double totalStdSpent = 0.7;
-    public static String planRecommendation = "IBRRR";
+    public static ArrayList<Double> payments = new ArrayList<>();
 
     public Integer backCounter =0;
     public Integer launchCount=0;
+
+    public void updateLoan()
+    {
+        masterLoan.debt=simpleDebt;
+        masterLoan.income=simpleIncome;
+        masterLoan.currentPayment=currentStdPayment;
+        masterLoan.payments=payments;
+    }
 
     public void recyclerToDetail()
     {

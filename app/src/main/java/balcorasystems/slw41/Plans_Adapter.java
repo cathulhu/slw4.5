@@ -14,9 +14,6 @@ import com.github.mikephil.charting.data.LineDataSet;
 
 import java.util.ArrayList;
 
-import static android.R.attr.data;
-import static android.R.attr.entries;
-
 public class Plans_Adapter extends RecyclerView.Adapter<Plans_Adapter.ViewHolder>
 {
 
@@ -36,7 +33,7 @@ public class Plans_Adapter extends RecyclerView.Adapter<Plans_Adapter.ViewHolder
 
     @Override
     public Plans_Adapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recyclerrow, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recycler_plans_row, viewGroup, false);
         final ViewHolder genericViewholder = new ViewHolder(view);
         mListener = (OnNavigateToDetail) view.getContext();       //FOR SOME REASON ITS INCREDIBLY IMPORTANT TO SET THIS TO CONTEXT;
 
@@ -47,18 +44,27 @@ public class Plans_Adapter extends RecyclerView.Adapter<Plans_Adapter.ViewHolder
         // creating list of entry<br />
         ArrayList<Entry> entries = new ArrayList();
 
-        //populate charts with random example data
-        for (int j = 0; j <240 ; j++)
+        Integer index=0;
+        for (double x: MainActivity.masterLoan.payments)
         {
-            Float random = (float) Math.random()*200;
-
-            while (random > 200)
-            {
-                random = (float) Math.random()*200;
-            }
-
-            entries.add(new Entry(j, random));
+            entries.add(new Entry(index, (float) x));
+            index++;
         }
+
+
+
+//        //populate charts with random example data
+//        for (int j = 0; j <240 ; j++)
+//        {
+//            Float random = (float) Math.random()*200;
+//
+//            while (random > 200)
+//            {
+//                random = (float) Math.random()*200;
+//            }
+//
+//            entries.add(new Entry(j, random));
+//        }
 
         LineDataSet dataset = new LineDataSet(entries, "Moneyz");
         dataset.setDrawCircleHole(false);
@@ -73,10 +79,13 @@ public class Plans_Adapter extends RecyclerView.Adapter<Plans_Adapter.ViewHolder
         lineChart.setDrawGridBackground(false);
         lineChart.setDrawBorders(false);
         lineChart.setData(data);
-        lineChart.animateX(50);
+        lineChart.animateX(100);
         lineChart.setDrawGridBackground(false);
-
-
+        lineChart.setGridBackgroundColor(0);
+        lineChart.getAxisLeft().setDrawGridLines(false);
+        lineChart.getXAxis().setDrawGridLines(false);
+        lineChart.getAxisRight().setDrawGridLines(false);
+        lineChart.setScaleXEnabled(false);
 
 
         view.setOnClickListener(new View.OnClickListener() {
@@ -93,7 +102,7 @@ public class Plans_Adapter extends RecyclerView.Adapter<Plans_Adapter.ViewHolder
     @Override
     public void onBindViewHolder(Plans_Adapter.ViewHolder viewHolder, int i) {
 
-        //this is behaviour that happens every time an element is added to the recycler view I think
+        //this is behaviour that happens every time an element is added to the recycler_plans view I think
         viewHolder.rowItem.setText(adapterPlans.get(i));
 
     }

@@ -22,6 +22,9 @@ public class Fragment_Info extends Fragment {
         public void finishedQuestions();
     }
 
+
+
+
     public testListener mListener;
 
 
@@ -73,6 +76,8 @@ public class Fragment_Info extends Fragment {
 //        sendDebtListener = (sendDebtToMain) getContext();        //FOR SOME REASON ITS INCREDIBLY IMPORTANT TO SET THIS TO CONTEXT;
 //        sendIncomeListener = (sendIncomeToMain) getContext();    //FOR SOME REASON ITS INCREDIBLY IMPORTANT TO SET THIS TO CONTEXT;
 
+
+
         SeekBar debtSeeker = (SeekBar) rootLayoutView.findViewById(R.id.seekBar2);
         SeekBar incomeSeeker = (SeekBar) rootLayoutView.findViewById(R.id.seekBar3);
         final TextView savings = (TextView) rootLayoutView.findViewById(R.id.textView6);
@@ -109,6 +114,25 @@ public class Fragment_Info extends Fragment {
 //            incomes[i] = incomeValue.toString();
 //        }
 
+        incomeSeeker.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+
+                MainActivity.simpleIncome=(double) i*1000;
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
         debtSeeker.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
@@ -121,7 +145,11 @@ public class Fragment_Info extends Fragment {
 
 //                youCanSave.setText(savingsDescription());
                 savings.setText("$" + simpleIBRRepaymentCalc());
+
                 currentPaymentBox.setHint("Estimated $" + String.valueOf(simpleStandardRepaymentCalc()));
+
+                MainActivity.simpleDebt= (double) debt;
+                MainActivity.currentStdPayment=StandardPayment;
 
             }
 
@@ -154,6 +182,8 @@ public class Fragment_Info extends Fragment {
 //                youCanSave.setVisibility(View.VISIBLE);
 //                bestPaymentTitle.setVisibility(View.VISIBLE);
 //                bestPaymentTitle.setText("New Monthly Payment:");
+
+
             }
 
             @Override
@@ -212,10 +242,6 @@ public class Fragment_Info extends Fragment {
     public void onResume() {
         super.onResume();
     }
-
-
-
-
 
 
 
@@ -327,12 +353,16 @@ public class Fragment_Info extends Fragment {
 
         forgiveness = runningDebt;
 
-        MainActivity.totalStdSpent = standardPayment * 120;
-        MainActivity.totalIdrSpent = totalSpent;
-        MainActivity.newMonthlyPayment = payments.get(0);
+//        MainActivity.totalStdSpent = standardPayment * 120;
+//        MainActivity.totalIdrSpent = totalSpent;
+//        MainActivity.newMonthlyPayment = payments.get(0);
+
+        MainActivity.payments=payments;
 
         return Math.round(payments.get(0));
 
     }
+
+
 
 }

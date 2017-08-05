@@ -26,6 +26,7 @@ public class Object_Loan
     public Double currentPayment;
     public Integer dependants;
     public ArrayList<Double> loanBalances;
+    public ArrayList<Double> payments;
     public String servicer;
 
 }
