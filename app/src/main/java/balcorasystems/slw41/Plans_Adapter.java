@@ -53,19 +53,6 @@ public class Plans_Adapter extends RecyclerView.Adapter<Plans_Adapter.ViewHolder
 
 
 
-//        //populate charts with random example data
-//        for (int j = 0; j <240 ; j++)
-//        {
-//            Float random = (float) Math.random()*200;
-//
-//            while (random > 200)
-//            {
-//                random = (float) Math.random()*200;
-//            }
-//
-//            entries.add(new Entry(j, random));
-//        }
-
         LineDataSet dataset = new LineDataSet(entries, "Moneyz");
         dataset.setDrawCircleHole(false);
         dataset.setDrawValues(false);

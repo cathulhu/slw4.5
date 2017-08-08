@@ -3,7 +3,6 @@ package balcorasystems.slw41;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.util.TimeUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -145,7 +144,7 @@ public class Fragment_Questions extends Fragment
         taxDependants.setValue(1);
         taxDependants.setVisibility(View.GONE);
 
-        final TextView questionTitle = (TextView) rootLayoutView.findViewById(R.id.loanRatioTitle);
+        final TextView questionTitle = (TextView) rootLayoutView.findViewById(R.id.planTimelineTItle);
         final TextView currentQuestion = (TextView) rootLayoutView.findViewById(R.id.questionsHere);
 
         final Button nextButton = (Button) rootLayoutView.findViewById(R.id.nextButton);
@@ -161,6 +160,9 @@ public class Fragment_Questions extends Fragment
             {
                 loan.dependants=taxDependants.getValue();
                 nextButton.setEnabled(true);
+
+
+
             }
         });
 
@@ -303,7 +305,97 @@ public class Fragment_Questions extends Fragment
 
 
 
+                if (counter < mainQuestions.size()-1)
+                {
+                    counter++;
 
+                    nextButton.setEnabled(false);
+
+                    mainListView.setVisibility(View.VISIBLE);
+                    layoutForFragment.setVisibility(View.GONE);
+                    taxDependants.setVisibility(View.GONE);
+
+                    listAdapter = new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, yesNoOptions);
+                    mainListView.setAdapter(listAdapter);
+
+                    currentQuestion.setText(mainQuestions.get(counter));
+                    questionTitle.setText(summaryTitles.get(counter));
+                    nextButton.setText("Next");
+
+                    if (counter == 9) {
+                        listAdapter = new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, employmentOptions);
+                        mainListView.setAdapter(listAdapter);
+
+                    } else if (counter == 10) {
+                        listAdapter = new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, dateQuestionOptions);
+                        mainListView.setAdapter(listAdapter);
+                    } else if (counter == 11) {
+                        mainListView.setVisibility(View.GONE);
+                        layoutForFragment.setVisibility(View.VISIBLE);
+
+                        //this is for the income debt and payment fragment text
+                        FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
+                        fTransaction.replace(R.id.relativeLayout3, new Fragment_Info(), "questions");
+
+                        fTransaction.addToBackStack(null);
+                        fTransaction.commit();
+
+                        nextButton.setEnabled(true);
+
+                    } else if (counter == 12) {
+                        //processing changes from last section, updating master loan debt income, etc.
+                        loanListener.updateLoan();
+
+                        listAdapter = new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, taxOptions);
+                        mainListView.setAdapter(listAdapter);
+
+
+                    } else if (counter == 13) {
+                        //load the number picker here
+                        mainListView.setVisibility(View.GONE);
+                        taxDependants.setVisibility(View.VISIBLE);
+                        loan.dependants = 1;
+                        nextButton.setEnabled(true);
+
+
+                    } else if (counter == 14) {
+                        //load the interface for specifying loan fractions, pie chart or something
+                        mainListView.setVisibility(View.GONE);
+                        layoutForFragment.setVisibility(View.VISIBLE);
+
+                        FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
+                        fTransaction.replace(R.id.relativeLayout3, new Fragment_DebtRatio(), "questions");
+                        fTransaction.addToBackStack(null);
+                        fTransaction.commit();
+
+                        nextButton.setEnabled(true);
+                    } else if (counter == 15) {
+                        //saving data from debt ratio first
+
+
+                        listAdapter = new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, servicerTitles);
+                        mainListView.setAdapter(listAdapter);
+                    } else if (counter == 16) {
+
+
+                        nextButton.setText("Analyze Loans");
+                        //load the review list here with actual values
+                        List<String> reviewTitles = new ArrayList<String>(summaryTitles);
+                        reviewTitles.remove(reviewTitles.size() - 1);
+
+                        listAdapter = new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, reviewTitles);
+                        mainListView.setAdapter(listAdapter);
+
+                        nextButton.setEnabled(true);
+
+                        //sync the main loan with all the gathered data
+                        MainActivity.masterLoan = loan;
+                        loanListener.updateLoan();
+                    } else {
+                        listAdapter = new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, yesNoOptions);
+                        mainListView.setAdapter(listAdapter);
+                    }
+                }
 
 
 
@@ -340,11 +432,11 @@ public class Fragment_Questions extends Fragment
                     questionTitle.setText(summaryTitles.get(counter));
                     nextButton.setText("Next");
 
-
                     if (counter==9)
                     {
                         listAdapter = new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, employmentOptions);
                         mainListView.setAdapter( listAdapter );
+
                     }
                     else if (counter==10)
                     {
@@ -359,6 +451,7 @@ public class Fragment_Questions extends Fragment
                         //this is for the income debt and payment fragment text
                         FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
                         fTransaction.replace(R.id.relativeLayout3, new Fragment_Info(), "questions");
+
                         fTransaction.addToBackStack(null);
                         fTransaction.commit();
 

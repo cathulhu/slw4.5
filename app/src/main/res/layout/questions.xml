@@ -30,7 +30,7 @@
         android:layout_centerHorizontal="true">
 
         <TextView
-            android:id="@+id/loanRatioTitle"
+            android:id="@+id/planTimelineTItle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -43,7 +43,7 @@
             android:id="@+id/questionsHere"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/loanRatioTitle"
+            android:layout_below="@+id/planTimelineTItle"
             android:layout_marginLeft="16dp"
             android:text="Answer these questions"
             android:textSize="16sp" />

@@ -7,7 +7,7 @@ import android.view.Window;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements Fragment_Selection.OnNavigateAwayListener, Fragment_Questions.OnGoToMoneyStuff, Fragment_Info.testListener, Plans_Adapter.OnNavigateToDetail, Fragment_Questions.updateMainLoan
+public class MainActivity extends AppCompatActivity implements Fragment_Selection.OnNavigateAwayListener, Fragment_Questions.OnGoToMoneyStuff, Fragment_Info.testListener, Plans_Adapter.OnNavigateToDetail, Fragment_Questions.updateMainLoan, Fragment_PlanDetail.OnGoToDetailPlan
 
 {
     public static Object_Loan masterLoan = new Object_Loan();
@@ -28,6 +28,14 @@ public class MainActivity extends AppCompatActivity implements Fragment_Selectio
         masterLoan.payments=payments;
     }
 
+    public void toDetailPlan()
+    {
+        FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
+        fTransaction.replace(R.id.mainFrameLayout, new Fragment_Summary(), "summary");
+        fTransaction.addToBackStack(null);
+        fTransaction.commit();
+    }
+
     public void recyclerToDetail()
     {
         FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
@@ -46,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements Fragment_Selectio
 
     public void finishedQuestions()
     {
-        //need to change what this does since the income stuff has been integrated into the questions wizard, this should now go to a summary.
+        //need to change what this does since the income stuff has been integrated into the questions wizard, this should now go to a recycler_summary.
 
         FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
         fTransaction.replace(R.id.mainFrameLayout, new Plans_RecyclerFragment(), "info");

@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -21,13 +22,27 @@ import java.util.ArrayList;
 
 public class Fragment_PlanDetail extends Fragment
 {
+    public interface OnGoToDetailPlan
+    {
+        void toDetailPlan();
+    }
+
+    public OnGoToDetailPlan mListener;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup selectionContainer, Bundle savedInstanceState)
     {
         View rootLayoutView = inflater.inflate(R.layout.plan_detail, selectionContainer, false);
+        mListener = (OnGoToDetailPlan) getContext();
 
 
-
+        Button seePlanButton = (Button) rootLayoutView.findViewById(R.id.getButton);
+        seePlanButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.toDetailPlan();
+            }
+        });
 
 
         LineChart lineChart = (LineChart) rootLayoutView.findViewById(R.id.detailChart);
