@@ -19,9 +19,11 @@ public class Object_Loan
     public boolean directLoans;
     public Integer employmentNumber;
     public String employmentType;
+    public String taxStatus;
     public Integer loanDate;
     public String loanDateString;
     public Double debt;
+    public Integer taxSize;
     public Double income;
     public Double currentPayment;
     public Integer dependants;

@@ -10,17 +10,36 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_margin="16dp"
-        android:text="Repayment Strategy Timeline"
+        android:text="Repayment Timeline"
         android:textColor="@color/step_pager_selected_tab_color"
         android:textSize="18sp" />
 
     <ListView
         android:id="@+id/timeline_listView"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/planTimelineTItle"
         android:divider="@null"
         android:dividerHeight="0dp"
-        android:layout_below="@+id/planTimelineTItle"
-        android:layout_alignParentStart="true" />
+        android:layout_above="@+id/relativeLayout7" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout7"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
+
+        <Button
+            android:id="@+id/button3"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="Select this Repayment Strategy" />
+
+    </RelativeLayout>
 
 </RelativeLayout>

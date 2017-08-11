@@ -269,7 +269,7 @@ public class Fragment_Questions extends Fragment
                 }
                 else if (counter==9)
                 {
-                    loan.employmentNumber=i;
+                    loan.employmentType=employmentOptions.get(i);
                     nextButton.setEnabled(true);
                 }
                 else if (counter==10)
@@ -380,17 +380,28 @@ public class Fragment_Questions extends Fragment
 
                         nextButton.setText("Analyze Loans");
                         //load the review list here with actual values
-                        List<String> reviewTitles = new ArrayList<String>(summaryTitles);
-                        reviewTitles.remove(reviewTitles.size() - 1);
+//                        List<String> reviewTitles = new ArrayList<String>(summaryTitles);
+//                        reviewTitles.remove(reviewTitles.size() - 1);
+//
+//                        listAdapter = new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, reviewTitles);
+//                        mainListView.setAdapter(listAdapter);
 
-                        listAdapter = new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, reviewTitles);
-                        mainListView.setAdapter(listAdapter);
-
-                        nextButton.setEnabled(true);
+                        mainListView.setVisibility(View.GONE);
+                        layoutForFragment.setVisibility(View.VISIBLE);
 
                         //sync the main loan with all the gathered data
                         MainActivity.masterLoan = loan;
                         loanListener.updateLoan();
+
+                        FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
+                        fTransaction.replace(R.id.relativeLayout3, new Review_Fragment(), "questions");
+                        fTransaction.addToBackStack(null);
+                        fTransaction.commit();
+
+                        nextButton.setEnabled(true);
+
+
+
                     } else {
                         listAdapter = new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, yesNoOptions);
                         mainListView.setAdapter(listAdapter);

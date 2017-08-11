@@ -47,10 +47,9 @@ public class Fragment_Summary extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup selectionContainer, Bundle savedInstanceState) {
         View rootLayoutView = inflater.inflate(R.layout.summary_timeline, selectionContainer, false);
 
-// Create Timeline rows List
+
         ArrayList<TimelineRow> timelineRowsList = new ArrayList<>();
 
-// Create new timeline row (Row Id)
         TimelineRow myRow = new TimelineRow(0);
         TimelineRow myRow1 = new TimelineRow(1);
         TimelineRow myRow2 = new TimelineRow(2);
