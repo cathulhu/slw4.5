@@ -17,23 +17,24 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
+            android:text="Title rowItem"
             android:textSize="18sp"
             android:textStyle="bold" />
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:padding="4dp"
+            android:layout_height="200dp"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/previewChart">
+            android:layout_below="@+id/previewChart"
+            android:layout_marginTop="4dp"
+            android:padding="4dp">
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/totalView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_above="@+id/textView28"
-                android:layout_alignStart="@+id/textView28"
+                android:layout_above="@+id/timeView"
+                android:layout_alignStart="@+id/timeView"
                 android:text="$38458" />
 
             <TextView
@@ -51,17 +52,17 @@
                 android:id="@+id/textView20"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Total Repayment"
+                android:layout_alignParentStart="true"
                 android:layout_below="@+id/textView19"
-                android:layout_toStartOf="@+id/textView28" />
+                android:text="Total Repayment" />
 
             <TextView
                 android:id="@+id/textView21"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Total Repayment"
+                android:layout_alignParentStart="true"
                 android:layout_below="@+id/textView20"
-                android:layout_toStartOf="@+id/textView28" />
+                android:text="Repayment Time" />
 
             <TextView
                 android:id="@+id/textView19"
@@ -72,32 +73,46 @@
                 android:text="Monthly Payment" />
 
             <TextView
-                android:id="@+id/textView28"
+                android:id="@+id/timeView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textView20"
                 android:layout_marginLeft="8dp"
                 android:layout_toEndOf="@+id/textView19"
-                android:text="15 Years" />
-
-            <TextView
-                android:id="@+id/textView27"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/textView19"
-                android:layout_alignBottom="@+id/textView19"
-                android:layout_alignEnd="@+id/textView28"
-                android:layout_alignStart="@+id/textView5"
-                android:text="$140" />
+                android:text="0" />
 
             <TextView
                 android:id="@+id/textView9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingBottom="4dp"
-                android:text="Lots of text describing this loan thing Lots of text describing this loan thing Lots of text describing this loan thing "
+                android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true" />
+                android:paddingBottom="4dp"
+                android:text="Lots of text describing this loan thing Lots of text describing this loan thing Lots of text describing this loan thing " />
+
+            <TextView
+                android:id="@+id/monthlyValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/totalView"
+                android:layout_below="@+id/textView9"
+                android:text="66" />
+
+            <TextView
+                android:id="@+id/forgivnessValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/timeView"
+                android:layout_below="@+id/timeView"
+                android:text="0" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textView21"
+                android:text="Loan Forgiveness" />
 
         </RelativeLayout>
 

@@ -7,13 +7,14 @@ import android.view.Window;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements Fragment_Selection.OnNavigateAwayListener, Fragment_Questions.OnGoToMoneyStuff, Fragment_Info.testListener, Plans_Adapter.OnNavigateToDetail, Fragment_Questions.updateMainLoan, Fragment_PlanDetail.OnGoToDetailPlan
+public class MainActivity extends AppCompatActivity implements Fragment_Selection.OnNavigateAwayListener, Fragment_Questions.OnGoToMoneyStuff, Plans_Adapter.OnNavigateToDetail, Fragment_Questions.updateMainLoan, Fragment_PlanDetail.OnGoToDetailPlan
 
 {
     public static Object_Loan masterLoan = new Object_Loan();
 
     public static Double simpleIncome = 27000.0;
     public static Double simpleDebt = 35000.0;
+    public static Double simpleForgiveness = 0.0;
     public static Double currentStdPayment = 0.7;
     public static ArrayList<Double> payments = new ArrayList<>();
 
@@ -61,29 +62,6 @@ public class MainActivity extends AppCompatActivity implements Fragment_Selectio
         fTransaction.addToBackStack(null);
         fTransaction.commit();
     }
-
-    public void onIncomeFinished(int income, int debt)
-    {
-//        simpleIncome = income * 1000;
-//        simpleDebt = debt * 1000;
-        FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
-//        fTransaction.replace(R.id.mainFrameLayout, new Fragment_Results());
-        fTransaction.addToBackStack(null);
-        fTransaction.commit();
-    }
-
-    public void navigateToSummary(Double stdPayment, Double newPayment, String plan)
-    {
-//        currentStdPayment = stdPayment;
-//        newMonthlyPayment = newPayment;
-//        planRecommendation = plan;
-//        projectedMonthlySavings = stdPayment - newPayment;
-//        FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
-//        fTransaction.replace(R.id.mainFrameLayout, new Fragment_Summary());
-//        fTransaction.addToBackStack(null);
-//        fTransaction.commit();
-    }
-
 
     FragmentTransaction mainFT = getSupportFragmentManager().beginTransaction();
 

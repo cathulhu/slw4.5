@@ -27,10 +27,9 @@ public class Plans_RecyclerFragment extends Fragment{
         recyclerView.setLayoutManager(layoutManager);
 
         plans = new ArrayList<>();
-        plans.add("Option 1");
-        plans.add("Option 2");
-        plans.add("Option 3");
-        plans.add("Option 4");
+        plans.add("Standard Repayment");
+        plans.add("Simple IBR");
+        plans.add("Opportunistic IBR");
 
         RecyclerView.Adapter adapter = new Plans_Adapter(plans);
         recyclerView.setAdapter(adapter);
