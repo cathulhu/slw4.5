@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements Fragment_Selection.OnNavigateAwayListener, Fragment_Questions.OnGoToMoneyStuff, Plans_Adapter.OnNavigateToDetail, Fragment_Questions.updateMainLoan, Fragment_PlanDetail.OnGoToDetailPlan
@@ -17,6 +18,8 @@ public class MainActivity extends AppCompatActivity implements Fragment_Selectio
     public static Double simpleForgiveness = 0.0;
     public static Double currentStdPayment = 0.7;
     public static ArrayList<Double> payments = new ArrayList<>();
+    public static ArrayList<ArrayList> masterUberPayments;
+    public static Integer detailID=0;
 
     public Integer backCounter =0;
     public Integer launchCount=0;

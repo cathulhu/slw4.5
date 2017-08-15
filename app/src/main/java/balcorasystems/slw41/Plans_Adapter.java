@@ -84,7 +84,7 @@ public class Plans_Adapter extends RecyclerView.Adapter<Plans_Adapter.ViewHolder
 
 
     @Override
-    public Plans_Adapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i)
+    public Plans_Adapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, final int i)
     {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recycler_plans_row, viewGroup, false);
         final ViewHolder genericViewholder = new ViewHolder(view);
@@ -98,6 +98,10 @@ public class Plans_Adapter extends RecyclerView.Adapter<Plans_Adapter.ViewHolder
             @Override
             public void onClick(View view) {
                 Toast.makeText(view.getContext(), "Number  " + genericViewholder.getAdapterPosition(), Toast.LENGTH_SHORT).show();
+
+                //will add something more elegant later
+                MainActivity.masterUberPayments=uberPayments;
+                MainActivity.detailID=genericViewholder.getAdapterPosition();
                 mListener.recyclerToDetail();
             }
         });
@@ -184,9 +188,7 @@ public class Plans_Adapter extends RecyclerView.Adapter<Plans_Adapter.ViewHolder
             totalRepayment = (TextView) view.findViewById(R.id.totalView);
             totalTime = (TextView) view.findViewById(R.id.timeView);
             rowItem = (TextView) view.findViewById(R.id.rowItem);
-
             lineChart = (LineChart) view.findViewById(R.id.previewChart);
-
             forgiveness = (TextView) view.findViewById(R.id.forgivnessValue);
         }
     }

@@ -22,12 +22,15 @@ import java.util.ArrayList;
 
 public class Fragment_PlanDetail extends Fragment
 {
+
+
     public interface OnGoToDetailPlan
     {
         void toDetailPlan();
     }
 
     public OnGoToDetailPlan mListener;
+    ArrayList<ArrayList> uberPayments = MainActivity.masterUberPayments;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup selectionContainer, Bundle savedInstanceState)
@@ -49,18 +52,32 @@ public class Fragment_PlanDetail extends Fragment
         // creating list of entry<br />
         ArrayList<Entry> entries = new ArrayList();
 
-        //populate charts with random example data
-        for (int j = 0; j <240 ; j++)
+
+//        //populate charts with random example data
+//        for (int j = 0; j <240 ; j++)
+//        {
+//            Float random = (float) Math.random()*200;
+//
+//            while (random > 200)
+//            {
+//                random = (float) Math.random()*200;
+//            }
+//
+//            entries.add(new Entry(j, random));
+//        }
+
+        Integer index=0;
+
+        ArrayList<Double> individualContents = new ArrayList<>();
+        individualContents = uberPayments.get(MainActivity.detailID);
+
+        for (Double y: individualContents)
         {
-            Float random = (float) Math.random()*200;
-
-            while (random > 200)
-            {
-                random = (float) Math.random()*200;
-            }
-
-            entries.add(new Entry(j, random));
+            entries.add(new Entry(index, y.floatValue()));
+            index++;
         }
+
+
 
         LineDataSet dataset = new LineDataSet(entries, "Moneyz");
         dataset.setDrawCircleHole(false);
