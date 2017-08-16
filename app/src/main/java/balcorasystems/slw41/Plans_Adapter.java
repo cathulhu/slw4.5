@@ -28,11 +28,15 @@ public class Plans_Adapter extends RecyclerView.Adapter<Plans_Adapter.ViewHolder
     public static ArrayList<String> monthlyPayments;
     public static ArrayList<String> timeLength;
     public static ArrayList<ArrayList> uberPayments;
+    public static ArrayList<Double> forgivnessValues;
     public ArrayList<Double> totals;
 
     public Plans_Adapter(ArrayList<String> passedPlans)
     {
         this.adapterPlans = passedPlans;
+
+        this.forgivnessValues=MainActivity.simpleForgiveness;
+
 
         Calculations Calculator = new Calculations(MainActivity.masterLoan);
 
@@ -162,7 +166,10 @@ public class Plans_Adapter extends RecyclerView.Adapter<Plans_Adapter.ViewHolder
         viewHolder.monthlyPayment.setText(String.valueOf(uberPayments.get(i).get(0)));
         viewHolder.totalTime.setText(String.valueOf(uberPayments.get(i).size()));
         viewHolder.totalRepayment.setText(String.valueOf(totals.get(i)));
-//        viewHolder.forgiveness.setText();
+        viewHolder.forgiveness.setText(String.valueOf(forgivnessValues.get(i)));
+
+
+
 
     }
 

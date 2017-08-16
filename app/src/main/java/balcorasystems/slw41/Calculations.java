@@ -28,7 +28,6 @@ public class Calculations
         double paymentCalcNumerator = defaultMonthlyInterestRate * passedDebt;
         double paymentCalcDenominator = 1 - Math.pow(1 + defaultMonthlyInterestRate, -repaymentTermMonhts);
         double fixedPayment = paymentCalcNumerator / paymentCalcDenominator;
-
         MainActivity.currentStdPayment = fixedPayment;
 
         return fixedPayment;
@@ -57,6 +56,7 @@ public class Calculations
         boolean financialHardship= true;
         double standardPayment = simpleStandardRepaymentCalc(runningDebt);
         double monthlyAccruedInterest;
+        double forgivenessTaxDue;
 
 
         while (runningDebt > 0 && repaymentYear < repaymentYearLimit)     //built in edge case detection if IBR gets more expensive than standard
@@ -72,8 +72,7 @@ public class Calculations
                 {
                     ibrPayment=standardPayment;
                     financialHardship=true;
-                    //not sure if losing PFH actually puts you back on standard (thus adding 10 years or just caps IBR at standard level)
-                    repaymentYearLimit += 10;
+                    //not sure if losing PFH just puts you at the standard repayment level, so doesn't increase the time you're repaying.
 
                 }
 
@@ -135,7 +134,11 @@ public class Calculations
         }
 
         forgiveness = runningDebt;
-        MainActivity.simpleForgiveness=forgiveness;
+        MainActivity.simpleForgiveness.add(forgiveness);
+
+        //adding extra blank value as hacky way to avoid crashing on the other plans that don't have forgiveness for now
+//        forgivenessTaxDue=taxCalc(runningIncome, forgiveness)
+
 
         MainActivity.payments = payments;
         return payments;
@@ -191,8 +194,8 @@ public class Calculations
                 {
                     ibrPayment=originalStandardPayment;
                     financialHardship=false;
-                    //not sure if losing PFH actually puts you back on standard (thus adding 10 years or just caps IBR at standard level)
-                    repaymentYearLimit += 10;
+                    //the opportunistic switch means repayment isn't really limited, its just 120 more payments to whenever it was triggered
+                    repaymentYearLimit =9999;
                 }
 
 
@@ -267,8 +270,16 @@ public class Calculations
             repaymentYear++;
         }
 
-        forgiveness = runningDebt;
-        MainActivity.simpleForgiveness=forgiveness;
+        forgiveness=runningDebt;
+
+        if (oportunisticSwitch==true)
+        {
+            MainActivity.simpleForgiveness.add(0.0);
+        }
+        else
+        {
+            MainActivity.simpleForgiveness.add(forgiveness);
+        }
 
         MainActivity.payments = payments;
         return payments;

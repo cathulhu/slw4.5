@@ -15,10 +15,11 @@ public class MainActivity extends AppCompatActivity implements Fragment_Selectio
 
     public static Double simpleIncome = 27000.0;
     public static Double simpleDebt = 35000.0;
-    public static Double simpleForgiveness = 0.0;
     public static Double currentStdPayment = 0.7;
     public static ArrayList<Double> payments = new ArrayList<>();
     public static ArrayList<ArrayList> masterUberPayments;
+    public static ArrayList<Double> simpleForgiveness = new ArrayList<>();
+
     public static Integer detailID=0;
 
     public Integer backCounter =0;
@@ -219,9 +220,21 @@ public class MainActivity extends AppCompatActivity implements Fragment_Selectio
         this.supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
 
+        //forgiveness hack for now
+        simpleForgiveness.add(0.0);
+
         //populate initial selection fragment into main content layout
         mainFT.replace(R.id.mainFrameLayout, new Fragment_Selection());
         mainFT.commit();
     }
 
+    @Override
+    public void onBackPressed()
+    {
+        //hack so forgiveness can be used more then once without having to restart app
+        simpleForgiveness.clear();
+        //need to add in another 0 here so array is right size, man this is a lot of dirty hacks to get this feature working crudely...
+        simpleForgiveness.add(0.0);
+        super.onBackPressed();
+    }
 }
