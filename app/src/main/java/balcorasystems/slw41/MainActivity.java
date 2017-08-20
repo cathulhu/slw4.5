@@ -49,12 +49,23 @@ public class MainActivity extends AppCompatActivity implements Fragment_Selectio
         fTransaction.commit();
     }
 
-    public void navigateToChoice()
+    public void navigateToChoice(Integer selection)
     {
-        FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
-        fTransaction.replace(R.id.mainFrameLayout, new Fragment_Questions(), "questions");
-        fTransaction.addToBackStack(null);
-        fTransaction.commit();
+        if (selection==0)
+        {
+            FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
+            fTransaction.replace(R.id.mainFrameLayout, new Fragment_Questions(), "questions");
+            fTransaction.addToBackStack(null);
+            fTransaction.commit();
+        }
+        else if (selection==1)
+        {
+            FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
+            fTransaction.replace(R.id.mainFrameLayout, new Fragment_Tracking(), "questions");
+            fTransaction.addToBackStack(null);
+            fTransaction.commit();
+        }
+
     }
 
     public void finishedQuestions()

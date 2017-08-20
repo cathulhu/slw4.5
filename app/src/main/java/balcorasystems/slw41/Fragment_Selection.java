@@ -18,7 +18,7 @@ public class Fragment_Selection extends Fragment
 
     public interface OnNavigateAwayListener
     {
-        public void navigateToChoice();
+        public void navigateToChoice(Integer choice);
     }
 
     public OnNavigateAwayListener mListener;
@@ -40,7 +40,15 @@ public class Fragment_Selection extends Fragment
             @Override
             public void onClick(View view)
             {
-                mListener.navigateToChoice();
+                mListener.navigateToChoice(0);
+            }
+        });
+
+        advancedLaunchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                mListener.navigateToChoice(1);
             }
         });
 
