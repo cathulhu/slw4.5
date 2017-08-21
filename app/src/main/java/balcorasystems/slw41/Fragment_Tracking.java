@@ -17,6 +17,7 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.h6ah4i.android.widget.advrecyclerview.swipeable.RecyclerViewSwipeManager;
 
 import java.util.ArrayList;
 
@@ -30,6 +31,9 @@ public class Fragment_Tracking extends Fragment
     Integer chartSelection=0;
     ArrayList<Entry> entries = new ArrayList();
     boolean datapopulated =false;
+    ArrayList<ArrayList> uberPayments = MainActivity.masterUberPayments;
+    ArrayList<Double> individualContents = new ArrayList<>();
+    boolean chartMovement=false;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup selectionContainer, Bundle savedInstanceState) {
         final View rootLayoutView = inflater.inflate(R.layout.tracking, selectionContainer, false);
@@ -52,46 +56,98 @@ public class Fragment_Tracking extends Fragment
 //            }
 //        });
 
-
-
-
-
-        //chart population, very crude example
-
         Integer index=0;
-        ArrayList<ArrayList> uberPayments = MainActivity.masterUberPayments;
-        ArrayList<Double> individualContents = new ArrayList<>();
-        individualContents = uberPayments.get(0);
 
-        for (Double y: individualContents)
+        //dummy data
+        if (MainActivity.noPaymentDateYet==true)
         {
-            entries.add(new Entry(index, y.floatValue()));
-            index++;
+            for (int i = 0; i < 8; i++)
+            {
+                individualContents.add((double) i);
+            }
+
+            for (Double y: individualContents)
+            {
+                entries.add(new Entry(index, y.floatValue()));
+                index++;
+            }
+            datapopulated=true;
+            mPagerAdapter.notifyDataSetChanged();
+
+            LineDataSet dataset = new LineDataSet(entries, "Moneyz");
+            dataset.setDrawCircleHole(false);
+            dataset.setDrawValues(false);
+            dataset.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+            dataset.setCircleColor(0);
+            dataset.setDrawFilled(true);
+
+            LineData data = new LineData(dataset);
+            data.setDrawValues(false);
+
+            trackingChart.setDrawGridBackground(false);
+            trackingChart.setDrawBorders(false);
+            trackingChart.setData(data);
+            trackingChart.animateX(50);
+            trackingChart.setDrawGridBackground(false);
+
+            index=0;
         }
-        datapopulated=true;
+        else
+        {
+            //chart population, very crude example
 
-        LineDataSet dataset = new LineDataSet(entries, "Moneyz");
-        dataset.setDrawCircleHole(false);
-        dataset.setDrawValues(false);
-        dataset.setMode(LineDataSet.Mode.CUBIC_BEZIER);
-        dataset.setCircleColor(0);
-        dataset.setDrawFilled(true);
 
-        LineData data = new LineData(dataset);
-        data.setDrawValues(false);
 
-        trackingChart.setDrawGridBackground(false);
-        trackingChart.setDrawBorders(false);
-        trackingChart.setData(data);
-        trackingChart.animateX(50);
-        trackingChart.setDrawGridBackground(false);
+            individualContents = uberPayments.get(MainActivity.detailID);
 
-        //end chart population
+            for (Double y: individualContents)
+            {
+                entries.add(new Entry(index, y.floatValue()));
+                index++;
+            }
+            datapopulated=true;
+            mPagerAdapter.notifyDataSetChanged();
+
+            LineDataSet dataset = new LineDataSet(entries, "Moneyz");
+            dataset.setDrawCircleHole(false);
+            dataset.setDrawValues(false);
+            dataset.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+            dataset.setCircleColor(0);
+            dataset.setDrawFilled(true);
+
+            LineData data = new LineData(dataset);
+            data.setDrawValues(false);
+
+            trackingChart.setDrawGridBackground(false);
+            trackingChart.setDrawBorders(false);
+            trackingChart.setData(data);
+            trackingChart.animateX(50);
+            trackingChart.setDrawGridBackground(false);
+
+            index=0;
+
+            //end chart population
+
+        }
+
+        trackingChart.highlightValue(0, 0);
+
+
+
+
+
+
 
         trackingChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
-            public void onValueSelected(Entry e, Highlight h) {
-                trackingPager.setCurrentItem(Math.round(e.getX()), true);
+            public void onValueSelected(Entry e, Highlight h)
+            {
+                //check to make sure chart doesn't get stuck in infinite loop moving the chart and then moving the viewpager, which then moves the chart, which then moves the viewpager...
+                if (chartMovement==false)
+                {
+                    trackingPager.setCurrentItem(Math.round(e.getX()), true);
+                }
+
             }
 
             @Override
@@ -101,6 +157,29 @@ public class Fragment_Tracking extends Fragment
         });
 
 
+
+        trackingPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
+            {
+
+                //check to make sure chart doesn't get stuck in infinite loop moving the chart and then moving the viewpager, which then moves the chart, which then moves the viewpager...
+                chartMovement=true;
+                trackingChart.highlightValue( (float) position, 0);
+                chartMovement=false;
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
 
 
@@ -124,9 +203,9 @@ public class Fragment_Tracking extends Fragment
 
         @Override
         public int getCount() {
-
-
-            return 120;
+//            mPagerAdapter.notifyDataSetChanged();
+            //need to figure out the issue with  pageradapter getting notified of change in size
+            return entries.size();
         }
     }
 }

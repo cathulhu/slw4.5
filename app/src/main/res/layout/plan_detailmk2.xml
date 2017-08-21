@@ -20,7 +20,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
-                android:text="Purchase/Free" />
+                android:text="Select this Plan" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -30,7 +30,7 @@
                 android:id="@+id/relativeLayout11">
 
                 <TextView
-                    android:id="@+id/textView11"
+                    android:id="@+id/newPaymentTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -148,7 +148,7 @@
                     android:id="@+id/textview34"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Monthly Payment" />
+                    android:text="Average Monthly Payment" />
 
                 <TextView
                     android:id="@+id/textView36"
@@ -159,7 +159,7 @@
                     android:text="Loan Forgiveness" />
 
                 <TextView
-                    android:id="@+id/monthlyPayment"
+                    android:id="@+id/averagePayment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="8dp"
@@ -172,22 +172,22 @@
                     android:id="@+id/textView32"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="$11420"
-                    android:textStyle="bold"
                     android:layout_alignParentBottom="true"
+                    android:layout_alignStart="@+id/totalRepayment"
                     android:layout_marginRight="8dp"
-                    android:layout_alignStart="@+id/totalRepayment" />
+                    android:text="$66"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/totalRepayment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/averagePayment"
+                    android:layout_marginEnd="23dp"
                     android:layout_marginRight="8dp"
-                    android:text="$44250"
-                    android:textStyle="bold"
-                    android:layout_below="@+id/monthlyPayment"
                     android:layout_toStartOf="@+id/imageView17"
-                    android:layout_marginEnd="23dp" />
+                    android:text="$66"
+                    android:textStyle="bold" />
 
             </RelativeLayout>
 

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
@@ -15,6 +16,7 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 /**
  * Created by L on 7/12/2017.
@@ -35,7 +37,7 @@ public class Fragment_PlanDetail extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup selectionContainer, Bundle savedInstanceState)
     {
-        View rootLayoutView = inflater.inflate(R.layout.plan_detail, selectionContainer, false);
+        View rootLayoutView = inflater.inflate(R.layout.plan_detailmk2, selectionContainer, false);
         mListener = (OnGoToDetailPlan) getContext();
 
 
@@ -44,8 +46,10 @@ public class Fragment_PlanDetail extends Fragment
             @Override
             public void onClick(View view) {
                 mListener.toDetailPlan();
+                MainActivity.simpleRepaymentSelection=MainActivity.detailID;
             }
         });
+
 
 
         LineChart lineChart = (LineChart) rootLayoutView.findViewById(R.id.detailChart);
@@ -105,6 +109,22 @@ public class Fragment_PlanDetail extends Fragment
 //        fTransaction.commit();
 
 
+        TextView newPayment = (TextView) rootLayoutView.findViewById(R.id.newPaymentTitle);
+        newPayment.setText("New monthly payment: $" + String.valueOf(individualContents.get(0)));
+
+        Double averageMontlhy=0d;
+        Integer count=0;
+
+        for (double x: individualContents)
+        {
+            averageMontlhy += x;
+            count++;
+        }
+
+        averageMontlhy = averageMontlhy/count;
+
+        TextView averagePayment = (TextView) rootLayoutView.findViewById(R.id.averagePayment);
+        averagePayment.setText(String.valueOf(averageMontlhy));
 
 
 

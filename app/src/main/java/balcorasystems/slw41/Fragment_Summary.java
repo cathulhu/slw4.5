@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -28,6 +29,15 @@ import java.util.List;
 
 public class Fragment_Summary extends Fragment
 {
+
+    public interface returnToMain
+    {
+        void loadSelection();
+    }
+
+    public returnToMain mListener;
+
+
 
 
 //        final List<Long> loanServicersNumbers = new ArrayList<Long>();
@@ -102,7 +112,15 @@ public class Fragment_Summary extends Fragment
         myRow4.setBellowLineSize(3);
 
 
+        Button select = (Button) rootLayoutView.findViewById(R.id.selectButton);
+        select.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener = (returnToMain) getContext();
+                mListener.loadSelection();
 
+            }
+        });
 
 
 

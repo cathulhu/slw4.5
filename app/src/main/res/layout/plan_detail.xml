@@ -141,7 +141,7 @@
                     android:text="Loan Forgiveness" />
 
                 <TextView
-                    android:id="@+id/monthlyPayment"
+                    android:id="@+id/averagePayment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="8dp"
@@ -167,7 +167,7 @@
                     android:layout_marginRight="8dp"
                     android:text="$44250"
                     android:textStyle="bold"
-                    android:layout_below="@+id/monthlyPayment"
+                    android:layout_below="@+id/averagePayment"
                     android:layout_toStartOf="@+id/imageView17"
                     android:layout_marginEnd="23dp" />
             </RelativeLayout>

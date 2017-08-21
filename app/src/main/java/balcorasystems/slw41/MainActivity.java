@@ -8,7 +8,7 @@ import android.view.Window;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements Fragment_Selection.OnNavigateAwayListener, Fragment_Questions.OnGoToMoneyStuff, Plans_Adapter.OnNavigateToDetail, Fragment_Questions.updateMainLoan, Fragment_PlanDetail.OnGoToDetailPlan
+public class MainActivity extends AppCompatActivity implements Fragment_Selection.OnNavigateAwayListener, Fragment_Questions.OnGoToMoneyStuff, Plans_Adapter.OnNavigateToDetail, Fragment_Questions.updateMainLoan, Fragment_PlanDetail.OnGoToDetailPlan, Fragment_Summary.returnToMain
 
 {
     public static Object_Loan masterLoan = new Object_Loan();
@@ -16,6 +16,8 @@ public class MainActivity extends AppCompatActivity implements Fragment_Selectio
     public static Double simpleIncome = 27000.0;
     public static Double simpleDebt = 35000.0;
     public static Double currentStdPayment = 0.7;
+    public static Integer simpleRepaymentSelection=0;
+    public static boolean noPaymentDateYet=true;
     public static ArrayList<Double> payments = new ArrayList<>();
     public static ArrayList<ArrayList> masterUberPayments;
     public static ArrayList<Double> simpleForgiveness = new ArrayList<>();
@@ -78,7 +80,13 @@ public class MainActivity extends AppCompatActivity implements Fragment_Selectio
         fTransaction.commit();
     }
 
-    FragmentTransaction mainFT = getSupportFragmentManager().beginTransaction();
+    public void loadSelection()
+    {
+        FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
+        fTransaction.replace(R.id.mainFrameLayout, new Fragment_Selection(), "info");
+//        fTransaction.addToBackStack(null);
+        fTransaction.commit();
+    }
 
 
 
@@ -235,8 +243,7 @@ public class MainActivity extends AppCompatActivity implements Fragment_Selectio
         simpleForgiveness.add(0.0);
 
         //populate initial selection fragment into main content layout
-        mainFT.replace(R.id.mainFrameLayout, new Fragment_Selection());
-        mainFT.commit();
+        loadSelection();
     }
 
     @Override
