@@ -13,8 +13,9 @@ import java.util.List;
 public class Review_Adapter extends RecyclerView.Adapter<Review_Adapter.ViewHolder>
 {
 
-    final List<String> summaryTitles = new ArrayList<>();
+    List<String> foundSummaryTitles = new ArrayList<>();
     final List<String> loanValues = new ArrayList<>();
+    public static Integer choice =0;
 
     public interface OnGoToChangeValue
     {
@@ -27,39 +28,41 @@ public class Review_Adapter extends RecyclerView.Adapter<Review_Adapter.ViewHold
 
     public Review_Adapter() {
 
-        summaryTitles.add("Loan Default");
-        summaryTitles.add("Loan Delinquency");
-        summaryTitles.add("Deceased Borrower");
-        summaryTitles.add("Consolidated Loans");
-        summaryTitles.add("Loan Rehabilitation");
-        summaryTitles.add("Parent PLUS Loans");
-        summaryTitles.add("FFEL Loans");
-        summaryTitles.add("Perkins Loans");
-        summaryTitles.add("Direct Loans");
-        summaryTitles.add("Employment");
-        summaryTitles.add("First Loan Date");
-        summaryTitles.add("Debt, Income, and Payment");
-        summaryTitles.add("Tax Status");
-        summaryTitles.add("Tax Dependants");
-        summaryTitles.add("Debt Types");
-        summaryTitles.add("Debt Servicer");
+        foundSummaryTitles=Fragment_MasterQuestionSpawner.summaryTitles;
 
-        loanValues.add(String.valueOf(MainActivity.masterLoan.inDefault));
-        loanValues.add(String.valueOf(MainActivity.masterLoan.inDelinquincy));
-        loanValues.add(String.valueOf(MainActivity.masterLoan.deceased));
-        loanValues.add(String.valueOf(MainActivity.masterLoan.hasConsolidated));
-        loanValues.add(String.valueOf(MainActivity.masterLoan.loanRehab));
-        loanValues.add(String.valueOf(MainActivity.masterLoan.parentLoans));
-        loanValues.add(String.valueOf(MainActivity.masterLoan.ffelLoans));
-        loanValues.add(String.valueOf(MainActivity.masterLoan.perkinsLoans));
-        loanValues.add(String.valueOf(MainActivity.masterLoan.directLoans));
-        loanValues.add(String.valueOf(MainActivity.masterLoan.employmentType));
-        loanValues.add(String.valueOf(MainActivity.masterLoan.loanDate));
-        loanValues.add(String.valueOf(MainActivity.masterLoan.debt));
-        loanValues.add(String.valueOf(MainActivity.masterLoan.taxStatus));
-        loanValues.add(String.valueOf(MainActivity.masterLoan.taxSize));
-        loanValues.add("not implemented types yet");
-        loanValues.add(String.valueOf(MainActivity.masterLoan.servicer));
+//        summaryTitles.add("Loan Default");
+//        summaryTitles.add("Loan Delinquency");
+//        summaryTitles.add("Deceased Borrower");
+//        summaryTitles.add("Consolidated Loans");
+//        summaryTitles.add("Loan Rehabilitation");
+//        summaryTitles.add("Parent PLUS Loans");
+//        summaryTitles.add("FFEL Loans");
+//        summaryTitles.add("Perkins Loans");
+//        summaryTitles.add("Direct Loans");
+//        summaryTitles.add("Employment");
+//        summaryTitles.add("First Loan Date");
+//        summaryTitles.add("Debt, Income, and Payment");
+//        summaryTitles.add("Tax Status");
+//        summaryTitles.add("Tax Dependants");
+//        summaryTitles.add("Debt Types");
+//        summaryTitles.add("Debt Servicer");
+//
+//        loanValues.add(String.valueOf(MainActivity.masterLoan.inDefault));
+//        loanValues.add(String.valueOf(MainActivity.masterLoan.inDelinquincy));
+//        loanValues.add(String.valueOf(MainActivity.masterLoan.deceased));
+//        loanValues.add(String.valueOf(MainActivity.masterLoan.hasConsolidated));
+//        loanValues.add(String.valueOf(MainActivity.masterLoan.loanRehab));
+//        loanValues.add(String.valueOf(MainActivity.masterLoan.parentLoans));
+//        loanValues.add(String.valueOf(MainActivity.masterLoan.ffelLoans));
+//        loanValues.add(String.valueOf(MainActivity.masterLoan.perkinsLoans));
+//        loanValues.add(String.valueOf(MainActivity.masterLoan.directLoans));
+//        loanValues.add(String.valueOf(MainActivity.masterLoan.employmentType));
+//        loanValues.add(String.valueOf(MainActivity.masterLoan.loanDate));
+//        loanValues.add(String.valueOf(MainActivity.masterLoan.debt));
+//        loanValues.add(String.valueOf(MainActivity.masterLoan.taxStatus));
+//        loanValues.add(String.valueOf(MainActivity.masterLoan.taxSize));
+//        loanValues.add("not implemented types yet");
+//        loanValues.add(String.valueOf(MainActivity.masterLoan.servicer));
 
     }
 
@@ -68,14 +71,15 @@ public class Review_Adapter extends RecyclerView.Adapter<Review_Adapter.ViewHold
     public Review_Adapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.review_row, viewGroup, false);
         final ViewHolder genericViewholder = new ViewHolder(view);
-//        mListener = (OnGoToChangeValue) view.getContext();       //FOR SOME REASON ITS INCREDIBLY IMPORTANT TO SET THIS TO CONTEXT;
+        mListener = (OnGoToChangeValue) view.getContext();       //FOR SOME REASON ITS INCREDIBLY IMPORTANT TO SET THIS TO CONTEXT;
 
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(view.getContext(), "Number  " + genericViewholder.getAdapterPosition(), Toast.LENGTH_SHORT).show();
-//                mListener.recyclerToDetail();
+                choice=genericViewholder.getAdapterPosition();
+                mListener.recyclerToDetail();
             }
         });
 
@@ -88,8 +92,8 @@ public class Review_Adapter extends RecyclerView.Adapter<Review_Adapter.ViewHold
 //        this is behaviour that happens every time an element is added to the recycler_plans view I think
 //        viewHolder.rowItem.setText(adapterPlans.get(i));
 
-        viewHolder.title.setText(summaryTitles.get(i));
-        viewHolder.value.setText(loanValues.get(i));
+        viewHolder.title.setText(foundSummaryTitles.get(i));
+//        viewHolder.value.setText(loanValues.get(i));
 
 
     }
@@ -97,7 +101,7 @@ public class Review_Adapter extends RecyclerView.Adapter<Review_Adapter.ViewHold
 
     @Override
     public int getItemCount() {
-        return summaryTitles.size();
+        return foundSummaryTitles.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

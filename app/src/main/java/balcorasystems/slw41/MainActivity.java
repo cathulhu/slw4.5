@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 import static java.lang.Boolean.TRUE;
 
-public class MainActivity extends AppCompatActivity implements Fragment_Selection.OnNavigateAwayListener, Fragment_Questions.OnGoToMoneyStuff, Plans_Adapter.OnNavigateToDetail, Fragment_Questions.updateMainLoan, Fragment_PlanDetail.OnGoToDetailPlan, Fragment_Summary.returnToMain, Questions_YN_Adapter.NextAfterSelection
+public class MainActivity extends AppCompatActivity implements Fragment_Selection.OnNavigateAwayListener, Fragment_Questions.OnGoToMoneyStuff, Plans_Adapter.OnNavigateToDetail, Fragment_Questions.updateMainLoan, Fragment_PlanDetail.OnGoToDetailPlan, Fragment_Summary.returnToMain, Questions_YN_Adapter.NextAfterSelection, Fragment_MasterQuestionSpawner.NextAfterSelection, Fragment_MasterQuestionSpawner.OnGoToMoneyStuff, Review_Adapter.OnGoToChangeValue
 
 {
     public static Object_Loan masterLoan = new Object_Loan();
@@ -59,8 +59,11 @@ public class MainActivity extends AppCompatActivity implements Fragment_Selectio
 
     public void recyclerToDetail()
     {
+        Fragment_MasterQuestionSpawner reloadedFragment = new Fragment_MasterQuestionSpawner();
+        reloadedFragment.index=Review_Adapter.choice;
+        reloadedFragment.first=true;
         FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
-        fTransaction.replace(R.id.mainFrameLayout, new Fragment_PlanDetail(), "details=");
+        fTransaction.replace(R.id.mainFrameLayout, reloadedFragment, "summary");
         fTransaction.addToBackStack(null);
         fTransaction.commit();
     }
