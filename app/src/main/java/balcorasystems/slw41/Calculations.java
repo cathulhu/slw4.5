@@ -142,7 +142,7 @@ public class Calculations
 
         MainActivity.payments = payments;
 
-        MainActivity.noPaymentDateYet=false;
+        MainActivity.noPaymentDataYet =false;
         return payments;
     }
 

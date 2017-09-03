@@ -119,7 +119,6 @@ public class Plans_Adapter extends RecyclerView.Adapter<Plans_Adapter.ViewHolder
         //this is behaviour that happens every time an element is added to the recycler_plans view I think
 
 
-
         // creating list of entry<br />
         ArrayList<Entry> entries = new ArrayList();
 
@@ -158,28 +157,23 @@ public class Plans_Adapter extends RecyclerView.Adapter<Plans_Adapter.ViewHolder
         viewHolder.lineChart.getAxisRight().setDrawGridLines(false);
         viewHolder.lineChart.setScaleXEnabled(false);
 
-
-
-
-
         viewHolder.rowItem.setText(adapterPlans.get(i));
         viewHolder.monthlyPayment.setText(String.valueOf(uberPayments.get(i).get(0)));
         viewHolder.totalTime.setText(String.valueOf(uberPayments.get(i).size()));
         viewHolder.totalRepayment.setText(String.valueOf(totals.get(i)));
         viewHolder.forgiveness.setText(String.valueOf(forgivnessValues.get(i)));
 
-
-
-
     }
 
 
     @Override
-    public int getItemCount() {
+    public int getItemCount()
+    {
         return adapterPlans.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder
+    {
         private TextView rowItem;
         private TextView monthlyPayment;
         private TextView totalRepayment;
@@ -188,7 +182,8 @@ public class Plans_Adapter extends RecyclerView.Adapter<Plans_Adapter.ViewHolder
         LineChart lineChart;
 
 
-        public ViewHolder(View view) {
+        public ViewHolder(View view)
+        {
             super(view);
 
             monthlyPayment = (TextView) view.findViewById(R.id.monthlyValue);

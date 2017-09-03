@@ -62,20 +62,20 @@
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 
-    <android.support.v7.widget.CardView android:id="@+id/card_view2"
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/trackingCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/card_view"
+        android:layout_marginTop="10dp"
         android:layout_weight="0.8"
         app:cardBackgroundColor="#E0E0E0"
         app:contentPaddingLeft="8dp"
-        app:contentPaddingRight="8dp"
-        app:contentPaddingTop="8dp"
-        android:layout_marginTop="10dp"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:android="http://schemas.android.com/apk/res/android"
 
-        android:layout_below="@+id/card_view"
-        android:layout_alignParentStart="true">
+        app:contentPaddingRight="8dp"
+        app:contentPaddingTop="8dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -97,13 +97,13 @@
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/separator1"
                 android:maxLines="3"
                 android:padding="8dp"
                 android:text="Track and update the progress of your selected repayment plan."
                 android:textColor="#666"
-                android:textSize="14dp"
-                android:layout_below="@+id/separator1"
-                android:layout_alignParentStart="true" />
+                android:textSize="14dp" />
 
             <Button
                 android:id="@+id/advancedButton"

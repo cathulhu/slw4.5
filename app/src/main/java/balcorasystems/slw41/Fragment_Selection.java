@@ -1,15 +1,18 @@
 package balcorasystems.slw41;
 
 import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.Toast;
-
-
 
 
 public class Fragment_Selection extends Fragment
@@ -29,6 +32,8 @@ public class Fragment_Selection extends Fragment
     {
         View rootLayoutView = inflater.inflate(R.layout.selection, selectionContainer, false);
         mListener = (OnNavigateAwayListener) getContext();       //FOR SOME REASON ITS INCREDIBLY IMPORTANT TO SET THIS TO CONTEXT;
+
+        CardView tracking = (CardView) rootLayoutView.findViewById(R.id.trackingCard);
 
         Button simpleLaunchButton;
         Button advancedLaunchButton;

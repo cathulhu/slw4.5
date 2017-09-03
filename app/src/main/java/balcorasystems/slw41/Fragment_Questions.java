@@ -154,7 +154,8 @@ public class Fragment_Questions extends Fragment
         layoutForFragment.setVisibility(View.GONE);
 
         nextButton.setEnabled(false);
-        taxDependants.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+        taxDependants.setOnValueChangedListener(new NumberPicker.OnValueChangeListener()
+        {
             @Override
             public void onValueChange(NumberPicker numberPicker, int i, int i1)
             {
@@ -166,7 +167,10 @@ public class Fragment_Questions extends Fragment
             }
         });
 
-        mainListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+
+        mainListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
             {
@@ -274,7 +278,7 @@ public class Fragment_Questions extends Fragment
                 }
                 else if (counter==10)
                 {
-                    loan.employmentNumber=i;
+//                    loan.employmentNumber=i;
                     nextButton.setEnabled(true);
                 }
                 else if (counter==11)

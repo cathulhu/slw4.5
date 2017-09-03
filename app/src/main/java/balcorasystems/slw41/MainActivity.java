@@ -8,7 +8,9 @@ import android.view.Window;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements Fragment_Selection.OnNavigateAwayListener, Fragment_Questions.OnGoToMoneyStuff, Plans_Adapter.OnNavigateToDetail, Fragment_Questions.updateMainLoan, Fragment_PlanDetail.OnGoToDetailPlan, Fragment_Summary.returnToMain
+import static java.lang.Boolean.TRUE;
+
+public class MainActivity extends AppCompatActivity implements Fragment_Selection.OnNavigateAwayListener, Fragment_Questions.OnGoToMoneyStuff, Plans_Adapter.OnNavigateToDetail, Fragment_Questions.updateMainLoan, Fragment_PlanDetail.OnGoToDetailPlan, Fragment_Summary.returnToMain, Questions_YN_Adapter.NextAfterSelection
 
 {
     public static Object_Loan masterLoan = new Object_Loan();
@@ -17,7 +19,7 @@ public class MainActivity extends AppCompatActivity implements Fragment_Selectio
     public static Double simpleDebt = 35000.0;
     public static Double currentStdPayment = 0.7;
     public static Integer simpleRepaymentSelection=0;
-    public static boolean noPaymentDateYet=true;
+    public static boolean noPaymentDataYet =true;
     public static ArrayList<Double> payments = new ArrayList<>();
     public static ArrayList<ArrayList> masterUberPayments;
     public static ArrayList<Double> simpleForgiveness = new ArrayList<>();
@@ -26,6 +28,18 @@ public class MainActivity extends AppCompatActivity implements Fragment_Selectio
 
     public Integer backCounter =0;
     public Integer launchCount=0;
+
+    @Override
+    public void nextQuestionRecycler(Boolean sentBoolean)
+    {
+        Fragment_MasterQuestionSpawner reloadedFragment = new Fragment_MasterQuestionSpawner();
+
+        FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
+        fTransaction.replace(R.id.mainFrameLayout, reloadedFragment, "summary");
+        fTransaction.addToBackStack(null);
+        fTransaction.commit();
+
+    }
 
     public void updateLoan()
     {
@@ -56,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements Fragment_Selectio
         if (selection==0)
         {
             FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
-            fTransaction.replace(R.id.mainFrameLayout, new Fragment_Questions(), "questions");
+            fTransaction.replace(R.id.mainFrameLayout, new Fragment_MasterQuestionSpawner());
             fTransaction.addToBackStack(null);
             fTransaction.commit();
         }
@@ -255,4 +269,7 @@ public class MainActivity extends AppCompatActivity implements Fragment_Selectio
         simpleForgiveness.add(0.0);
         super.onBackPressed();
     }
+
+
+
 }

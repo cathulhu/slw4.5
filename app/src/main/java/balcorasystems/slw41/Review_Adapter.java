@@ -71,9 +71,6 @@ public class Review_Adapter extends RecyclerView.Adapter<Review_Adapter.ViewHold
 //        mListener = (OnGoToChangeValue) view.getContext();       //FOR SOME REASON ITS INCREDIBLY IMPORTANT TO SET THIS TO CONTEXT;
 
 
-
-
-
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,7 +85,7 @@ public class Review_Adapter extends RecyclerView.Adapter<Review_Adapter.ViewHold
     @Override
     public void onBindViewHolder(Review_Adapter.ViewHolder viewHolder, int i) {
 
-        //this is behaviour that happens every time an element is added to the recycler_plans view I think
+//        this is behaviour that happens every time an element is added to the recycler_plans view I think
 //        viewHolder.rowItem.setText(adapterPlans.get(i));
 
         viewHolder.title.setText(summaryTitles.get(i));
