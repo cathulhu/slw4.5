@@ -7,14 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import static java.lang.Boolean.FALSE;
-import static java.lang.Boolean.TRUE;
 
 
 public class Fragment_MasterQuestionSpawner extends Fragment
@@ -23,6 +18,7 @@ public class Fragment_MasterQuestionSpawner extends Fragment
     public static ArrayList<ArrayList> uberOptions = new ArrayList<>();
     public static Integer index=0;
     public static Boolean first = true;
+    public static Boolean reviewLoad = false;
 
     final static ArrayList<String> mainQuestions = new ArrayList<String>();
     final static ArrayList<String> employmentOptions = new ArrayList<>();
@@ -32,72 +28,160 @@ public class Fragment_MasterQuestionSpawner extends Fragment
     final static ArrayList<String> summaryTitles = new ArrayList<>();
     final static ArrayList<String> servicerTitles = new ArrayList<>();
 
-    public static interface NextAfterSelection
-    {
-        public void nextQuestionRecycler(Boolean sentBoolean);
-    }
 
-    public interface OnGoToMoneyStuff
+//    public interface reload
+//    {
+//        public void NextAfterSelection();
+//    }
+//    public reload reloadListener;
+
+
+    public interface goToPlans
     {
         public void finishedQuestions();
     }
 
-    public OnGoToMoneyStuff leaveListener;
-    public NextAfterSelection mListener;
+    public goToPlans leaveListener;
+    // public NextAfterSelection mListener;
 
-    public void nextRecycler(Boolean next)
+    public void moveOther(String backOrForward)
     {
-        if (first==false)
+
+        if (first==false || reviewLoad==false)
         {
-            if (next==true)
+            if (backOrForward.equals("forward"))
             {
                 index++;
             }
-            else
+            else if (backOrForward.equals("backward"))
             {
                 index--;
             }
+            else
+            {
+                //otherwise I can specify other argument if I don't want to increment index for some other reason then review or first load
+            }
+
         }
         else
         {
-            first=false;
+            if (first==true)
+            {
+                //turning off reviewload after I don't need it.
+                reviewLoad=false;
+            }
+
+            if (reviewLoad==true)
+            {
+                //turning off reviewload after I don't need it.
+                reviewLoad=false;
+            }
         }
 
-
-
-        masterLoan.currentlyEditing=summaryTitles.get(index);
-        Fragment_Questions_Text chosenFragment= new Fragment_Questions_Text();
-        FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
-        fTransaction.replace(R.id.fragmentSection, chosenFragment);
-        fTransaction.commit();
-    }
-
-    public void nextOther()
-    {
-        index++;
-
+        // have to put the check for if we've reached the end of the questions first, otherwise it'll ask to check out of bounds with the summary titles
         if (index==summaryTitles.size())
         {
+//            index=0;
+            //for safety setting index=0 so nothing bad can happen out of bounds
             leaveListener.finishedQuestions();
             //go to analysis
-            //load different fragments, not the recycler view
-            index=0;
+            // index=0;
         }
-
-         if (summaryTitles.get(index).equals("Loan Details"))
-            {
-                FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
-                fTransaction.replace(R.id.fragmentSection, new Fragment_DebtRatio());
-                fTransaction.commit();
-                //load different fragments, not the recycler view
-            }
-            else if (summaryTitles.get(index).equals("Review"))
-            {
-                FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
-                fTransaction.replace(R.id.fragmentSection, new Review_Fragment());
-                fTransaction.commit();
-                //load different fragments, not the recycler view
-            }
+        else if (summaryTitles.get(index).equals("Loan Default"))
+        {
+            masterLoan.currentlyEditing=summaryTitles.get(index);
+            FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
+            fTransaction.replace(R.id.fragmentSection, new Fragment_Questions_Text());
+            fTransaction.commit();
+            //load different fragments, not the recycler view
+        }
+        else if (summaryTitles.get(index).equals("Loan Delinquency"))
+        {
+            masterLoan.currentlyEditing=summaryTitles.get(index);
+            FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
+            fTransaction.replace(R.id.fragmentSection, new Fragment_Questions_Text());
+            fTransaction.commit();
+            //load different fragments, not the recycler view
+        }
+        else if (summaryTitles.get(index).equals("Deceased Borrower"))
+        {
+            masterLoan.currentlyEditing=summaryTitles.get(index);
+            FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
+            fTransaction.replace(R.id.fragmentSection, new Fragment_Questions_Text());
+            fTransaction.commit();
+            //load different fragments, not the recycler view
+        }
+        else if (summaryTitles.get(index).equals("Loan Rehabilitation"))
+        {
+            masterLoan.currentlyEditing=summaryTitles.get(index);
+            FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
+            fTransaction.replace(R.id.fragmentSection, new Fragment_Questions_Text());
+            fTransaction.commit();
+            //load different fragments, not the recycler view
+        }
+        else if (summaryTitles.get(index).equals("First Loan Date"))
+        {
+            masterLoan.currentlyEditing=summaryTitles.get(index);
+            FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
+            fTransaction.replace(R.id.fragmentSection, new Fragment_Questions_Text());
+            fTransaction.commit();
+            //load different fragments, not the recycler view
+        }
+        else if (summaryTitles.get(index).equals("Debt Servicer"))
+        {
+            masterLoan.currentlyEditing=summaryTitles.get(index);
+            FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
+            fTransaction.replace(R.id.fragmentSection, new Fragment_Questions_Text());
+            fTransaction.commit();
+            //load different fragments, not the recycler view
+        }
+        else if (summaryTitles.get(index).equals("Employment"))
+        {
+            masterLoan.currentlyEditing=summaryTitles.get(index);
+            FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
+            fTransaction.replace(R.id.fragmentSection, new Fragment_Questions_Text());
+            fTransaction.commit();
+            //load different fragments, not the recycler view
+        }
+        else if (summaryTitles.get(index).equals("Debt, Income, and Payment"))
+        {
+            //load different fragments, not the recycler view
+            masterLoan.currentlyEditing=summaryTitles.get(index);
+            FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
+            fTransaction.replace(R.id.fragmentSection, new Fragment_Info());
+            fTransaction.commit();
+        }
+        else if (summaryTitles.get(index).equals("Tax Status"))
+        {
+            //load different fragments, not the recycler view
+            // masterLoan.currentlyEditing=summaryTitles.get(index);
+            // FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
+            // fTransaction.replace(R.id.fragmentSection, new Fragment_Info());
+            // fTransaction.commit();
+        }
+        else if (summaryTitles.get(index).equals("Tax Dependants"))
+        {
+            //load different fragments, not the recycler view
+            // masterLoan.currentlyEditing=summaryTitles.get(index);
+            // FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
+            // fTransaction.replace(R.id.fragmentSection, new Fragment_Info());
+            // fTransaction.commit();
+        }
+        else if (summaryTitles.get(index).equals("Loan Details"))
+        {
+            masterLoan.currentlyEditing=summaryTitles.get(index);
+            FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
+            fTransaction.replace(R.id.fragmentSection, new Fragment_DebtRatio());
+            fTransaction.commit();
+            //load different fragments, not the recycler view
+        }
+        else if (summaryTitles.get(index).equals("Review"))
+        {
+            FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
+            fTransaction.replace(R.id.fragmentSection, new Review_Fragment());
+            fTransaction.commit();
+            //load different fragments, not the recycler view
+        }
 
 
     }
@@ -107,21 +191,30 @@ public class Fragment_MasterQuestionSpawner extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup selectionContainer, Bundle savedInstanceState) {
         View rootLayoutView = inflater.inflate(R.layout.master_questions, selectionContainer, false);
 
-        leaveListener  = (OnGoToMoneyStuff) getContext();
+        leaveListener  = (goToPlans) getContext();
+//        reloadListener = (reload) getActivity();
 
         final TextView questionTitle = (TextView) rootLayoutView.findViewById(R.id.planTimelineTItle);
         final TextView currentQuestion = (TextView) rootLayoutView.findViewById(R.id.questionsHere);
         final Button nextButton = (Button) rootLayoutView.findViewById(R.id.nextButton);
         final Button previousButton = (Button) rootLayoutView.findViewById(R.id.prevButton);
 
-
         if (first==true)
         {
             populateArrays();
         }
 
+        //question and title are populated here either when first run or when fragment is restarted with a deliberate index
         questionTitle.setText(summaryTitles.get(index));
         currentQuestion.setText(mainQuestions.get(index));
+
+        //if the fragment was launched from the review screen sending nuetral won't incriment index, it'll just load the corresponding content
+        //alternatively if the fragment is running for the first time we also want to load content without incrimenting index
+        if (reviewLoad==true || first==true)
+        {
+            moveOther("nuetral");
+        }
+
 
 
         nextButton.setOnClickListener(new View.OnClickListener()
@@ -129,12 +222,17 @@ public class Fragment_MasterQuestionSpawner extends Fragment
             @Override
             public void onClick(View view)
             {
-                if (index >= uberOptions.size() )
+                moveOther("forward");
+                //updating the title and question after the content fragment changed
+
+                //must make sure nothing happens with out of bounds if index is too high.
+                if (index < summaryTitles.size() && index >= 0)
                 {
-                    nextOther();
                     questionTitle.setText(summaryTitles.get(index));
                     currentQuestion.setText(mainQuestions.get(index));
                 }
+
+
             }
         });
 
@@ -143,43 +241,22 @@ public class Fragment_MasterQuestionSpawner extends Fragment
             @Override
             public void onClick(View view)
             {
-                if (index > 0)
+                //must make sure nothing happens with out of bounds if index is too high.
+                if (index < summaryTitles.size() && index > 0)
                 {
-                    nextRecycler(FALSE);
+                    moveOther("backward");
 
-                    if (index <= (summaryTitles.size()))
-                    {
-                        //updating question and title text
-                        questionTitle.setText(summaryTitles.get(index));
-                        currentQuestion.setText(mainQuestions.get(index));
-                    }
+                    questionTitle.setText(summaryTitles.get(index));
+                    currentQuestion.setText(mainQuestions.get(index));
 
                 }
+
             }
         });
 
-
-        if (index < uberOptions.size())
-        {
-            nextRecycler(TRUE);
-            questionTitle.setText(summaryTitles.get(index));
-            currentQuestion.setText(mainQuestions.get(index));
-
-        }
-
-        if (summaryTitles.get(index).equals("Debt, Income, and Payment"))
-        {
-            //load different fragments, not the recycler view
-
-            FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
-            fTransaction.replace(R.id.fragmentSection, new Fragment_Info());
-            fTransaction.commit();
-
-        }
-
-
         return rootLayoutView;
     }
+
 
 
 

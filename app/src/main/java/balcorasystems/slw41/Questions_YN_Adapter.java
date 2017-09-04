@@ -20,12 +20,12 @@ public class Questions_YN_Adapter extends RecyclerView.Adapter<Questions_YN_Adap
     static Boolean fowardNavBoolean=true;
 
 
-    public static interface NextAfterSelection
+    public static interface NextAfter
     {
-        public void nextQuestionRecycler(Boolean sentBoolean);
+        public void NextAfterSelection();
     }
 
-    public NextAfterSelection mListener;
+    public NextAfter mListener;
 
     @Override
     public Questions_YN_Adapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -33,7 +33,7 @@ public class Questions_YN_Adapter extends RecyclerView.Adapter<Questions_YN_Adap
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.questions_text_row, parent, false);
         final Questions_YN_Adapter.ViewHolder genericViewholder = new ViewHolder(view);
 
-        mListener = (NextAfterSelection) view.getContext();       //FOR SOME REASON ITS INCREDIBLY IMPORTANT TO SET THIS TO CONTEXT;
+        mListener = (NextAfter) view.getContext();       //FOR SOME REASON ITS INCREDIBLY IMPORTANT TO SET THIS TO CONTEXT;
 
 
 
@@ -121,7 +121,7 @@ public class Questions_YN_Adapter extends RecyclerView.Adapter<Questions_YN_Adap
                 }
 
                 //this part navigates away
-                mListener.nextQuestionRecycler(TRUE);
+                mListener.NextAfterSelection();
 
 
             }

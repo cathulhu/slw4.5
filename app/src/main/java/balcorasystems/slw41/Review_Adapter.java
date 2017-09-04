@@ -19,9 +19,8 @@ public class Review_Adapter extends RecyclerView.Adapter<Review_Adapter.ViewHold
 
     public interface OnGoToChangeValue
     {
-        public void recyclerToDetail();
+        public void toReviewQuestion();
     }
-
     public OnGoToChangeValue mListener;
 
     private ArrayList<String> adapterPlans;
@@ -79,7 +78,7 @@ public class Review_Adapter extends RecyclerView.Adapter<Review_Adapter.ViewHold
             public void onClick(View view) {
                 Toast.makeText(view.getContext(), "Number  " + genericViewholder.getAdapterPosition(), Toast.LENGTH_SHORT).show();
                 choice=genericViewholder.getAdapterPosition();
-                mListener.recyclerToDetail();
+                mListener.toReviewQuestion();
             }
         });
 

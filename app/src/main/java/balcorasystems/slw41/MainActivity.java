@@ -5,12 +5,9 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-import static java.lang.Boolean.TRUE;
-
-public class MainActivity extends AppCompatActivity implements Fragment_Selection.OnNavigateAwayListener, Fragment_Questions.OnGoToMoneyStuff, Plans_Adapter.OnNavigateToDetail, Fragment_Questions.updateMainLoan, Fragment_PlanDetail.OnGoToDetailPlan, Fragment_Summary.returnToMain, Questions_YN_Adapter.NextAfterSelection, Fragment_MasterQuestionSpawner.NextAfterSelection, Fragment_MasterQuestionSpawner.OnGoToMoneyStuff, Review_Adapter.OnGoToChangeValue
+public class MainActivity extends AppCompatActivity implements Fragment_Selection.OnNavigateAwayListener, Fragment_Questions.OnGoToMoneyStuff, Plans_Adapter.OnNavigateToDetail, Fragment_Questions.updateMainLoan, Fragment_PlanDetail.OnGoToDetailPlan, Fragment_Summary.returnToMain, Questions_YN_Adapter.NextAfter, Fragment_MasterQuestionSpawner.goToPlans, Review_Adapter.OnGoToChangeValue
 
 {
     public static Object_Loan masterLoan = new Object_Loan();
@@ -29,16 +26,28 @@ public class MainActivity extends AppCompatActivity implements Fragment_Selectio
     public Integer backCounter =0;
     public Integer launchCount=0;
 
-    @Override
-    public void nextQuestionRecycler(Boolean sentBoolean)
+
+    public void NextAfterSelection()
     {
         Fragment_MasterQuestionSpawner reloadedFragment = new Fragment_MasterQuestionSpawner();
-
+        reloadedFragment.index++;
         FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
         fTransaction.replace(R.id.mainFrameLayout, reloadedFragment, "summary");
         fTransaction.addToBackStack(null);
         fTransaction.commit();
 
+    }
+
+    public void toReviewQuestion ()
+    {
+        Fragment_MasterQuestionSpawner reloadedFragment = new Fragment_MasterQuestionSpawner();
+        reloadedFragment.index=Review_Adapter.choice;
+        reloadedFragment.first=true;
+        reloadedFragment.reviewLoad=true;
+        FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
+        fTransaction.replace(R.id.mainFrameLayout, reloadedFragment, "summary");
+        fTransaction.addToBackStack(null);
+        fTransaction.commit();
     }
 
     public void updateLoan()
@@ -59,11 +68,8 @@ public class MainActivity extends AppCompatActivity implements Fragment_Selectio
 
     public void recyclerToDetail()
     {
-        Fragment_MasterQuestionSpawner reloadedFragment = new Fragment_MasterQuestionSpawner();
-        reloadedFragment.index=Review_Adapter.choice;
-        reloadedFragment.first=true;
         FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
-        fTransaction.replace(R.id.mainFrameLayout, reloadedFragment, "summary");
+        fTransaction.replace(R.id.mainFrameLayout, new Fragment_PlanDetail());
         fTransaction.addToBackStack(null);
         fTransaction.commit();
     }
@@ -89,8 +95,6 @@ public class MainActivity extends AppCompatActivity implements Fragment_Selectio
 
     public void finishedQuestions()
     {
-        //need to change what this does since the income stuff has been integrated into the questions wizard, this should now go to a recycler_summary.
-
         FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
         fTransaction.replace(R.id.mainFrameLayout, new Plans_RecyclerFragment(), "info");
         fTransaction.addToBackStack(null);
