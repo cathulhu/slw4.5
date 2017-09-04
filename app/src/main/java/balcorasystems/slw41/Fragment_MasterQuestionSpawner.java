@@ -81,8 +81,8 @@ public class Fragment_MasterQuestionSpawner extends Fragment
         // have to put the check for if we've reached the end of the questions first, otherwise it'll ask to check out of bounds with the summary titles
         if (index==summaryTitles.size())
         {
-//            index=0;
-            //for safety setting index=0 so nothing bad can happen out of bounds
+            index=0;
+            //for safety setting index=0 so nothing bad can happen out of bounds, especially if the fragment is reloaded to run a new set of calculations, so it starts from begining.
             leaveListener.finishedQuestions();
             //go to analysis
             // index=0;

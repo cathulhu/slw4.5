@@ -78,6 +78,9 @@ public class MainActivity extends AppCompatActivity implements Fragment_Selectio
     {
         if (selection==0)
         {
+            Fragment_MasterQuestionSpawner loadedFragment = new Fragment_MasterQuestionSpawner();
+            //reseting the index to 0 so it doesn't load out of bounds if launched a second time, just in case it wasn't properly done on leaving it
+            loadedFragment.index=0;
             FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
             fTransaction.replace(R.id.mainFrameLayout, new Fragment_MasterQuestionSpawner());
             fTransaction.addToBackStack(null);
