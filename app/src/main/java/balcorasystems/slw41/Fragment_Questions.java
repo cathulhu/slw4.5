@@ -40,7 +40,7 @@ public class Fragment_Questions extends Fragment
 
     private ListView mainListView ;
     private ArrayAdapter<String> listAdapter ;
-    public Object_Loan loan = new Object_Loan();
+    public Object_Borrower loan = new Object_Borrower();
 
     public View onCreateView(LayoutInflater inflater, ViewGroup selectionContainer, Bundle savedInstanceState) {
         View rootLayoutView = inflater.inflate(R.layout.questions, selectionContainer, false);

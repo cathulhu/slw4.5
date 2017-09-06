@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:entries="@array/loanTypes" />
+
+    <EditText
+        android:id="@+id/editBalance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/spinner"
+        android:ems="10"
+        android:hint="Loan Balance"
+        android:inputType="number"
+        android:textAlignment="center" />
+
+    <EditText
+        android:id="@+id/editInterest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/editBalance"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/editBalance"
+        android:ems="10"
+        android:hint="Interest Rate (APY)"
+        android:inputType="number" />
+
+    <CheckBox
+        android:id="@+id/checkBox2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/editBalance"
+        android:text="Previously Rehabilitaed Loan" />
+</RelativeLayout>

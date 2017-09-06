@@ -10,8 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-
-public class Fragment_Questions_Text extends Fragment
+public class Fragment_TaxStatus_Text extends Fragment
 {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup selectionContainer, Bundle savedInstanceState) {
@@ -22,7 +21,7 @@ public class Fragment_Questions_Text extends Fragment
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        RecyclerView.Adapter adapter = new Questions_Adapter();
+        RecyclerView.Adapter adapter = new TaxStatus_Adapter();
         recyclerView.setAdapter(adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 

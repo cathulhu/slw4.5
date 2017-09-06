@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Calculations
 {
-    static Object_Loan targetLoan;
+    static Object_Borrower targetLoan;
 
     //    public static Integer income =6;
 //    public static Integer debt =6;
@@ -14,7 +14,7 @@ public class Calculations
 //    public static double Savings =0.66;
     static double defaultMonthlyInterestRate = (0.0470 / 12);
 
-    Calculations(Object_Loan passedLoan)
+    Calculations(Object_Borrower passedLoan)
     {
         targetLoan = passedLoan;
         targetLoan.debt=MainActivity.simpleDebt;

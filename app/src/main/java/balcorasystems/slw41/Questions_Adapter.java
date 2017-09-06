@@ -4,16 +4,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import static android.view.View.GONE;
-import static java.lang.Boolean.TRUE;
 
-
-public class Questions_YN_Adapter extends RecyclerView.Adapter<Questions_YN_Adapter.ViewHolder>
+public class Questions_Adapter extends RecyclerView.Adapter<Questions_Adapter.ViewHolder>
 {
     Integer uberIndex=Fragment_MasterQuestionSpawner.index;
     static ArrayList<String> Options = new ArrayList<>();
@@ -28,10 +24,10 @@ public class Questions_YN_Adapter extends RecyclerView.Adapter<Questions_YN_Adap
     public NextAfter mListener;
 
     @Override
-    public Questions_YN_Adapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public Questions_Adapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.questions_text_row, parent, false);
-        final Questions_YN_Adapter.ViewHolder genericViewholder = new ViewHolder(view);
+        final Questions_Adapter.ViewHolder genericViewholder = new ViewHolder(view);
 
         mListener = (NextAfter) view.getContext();       //FOR SOME REASON ITS INCREDIBLY IMPORTANT TO SET THIS TO CONTEXT;
 
@@ -132,7 +128,7 @@ public class Questions_YN_Adapter extends RecyclerView.Adapter<Questions_YN_Adap
     }
 
     @Override
-    public void onBindViewHolder(Questions_YN_Adapter.ViewHolder holder, int position)
+    public void onBindViewHolder(Questions_Adapter.ViewHolder holder, int position)
     {
         //this is behaviour that happens every time an element is added to the recycler_plans view I think
         holder.option.setText(Options.get(position));

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class Fragment_MasterQuestionSpawner extends Fragment
 {
-    public static Object_Loan masterLoan = new Object_Loan();
+    public static Object_Borrower masterLoan = new Object_Borrower();
     public static ArrayList<ArrayList> uberOptions = new ArrayList<>();
     public static Integer index=0;
     public static Boolean first = true;
@@ -153,25 +153,24 @@ public class Fragment_MasterQuestionSpawner extends Fragment
         }
         else if (summaryTitles.get(index).equals("Tax Status"))
         {
-            //load different fragments, not the recycler view
-            // masterLoan.currentlyEditing=summaryTitles.get(index);
-            // FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
-            // fTransaction.replace(R.id.fragmentSection, new Fragment_Info());
-            // fTransaction.commit();
+            masterLoan.currentlyEditing=summaryTitles.get(index);
+            FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
+            fTransaction.replace(R.id.fragmentSection, new Fragment_TaxStatus_Text());
+            fTransaction.commit();
         }
         else if (summaryTitles.get(index).equals("Tax Dependants"))
         {
             //load different fragments, not the recycler view
-            // masterLoan.currentlyEditing=summaryTitles.get(index);
-            // FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
-            // fTransaction.replace(R.id.fragmentSection, new Fragment_Info());
-            // fTransaction.commit();
+             masterLoan.currentlyEditing=summaryTitles.get(index);
+             FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
+             fTransaction.replace(R.id.fragmentSection, new Fragment_Dependants());
+             fTransaction.commit();
         }
         else if (summaryTitles.get(index).equals("Loan Details"))
         {
             masterLoan.currentlyEditing=summaryTitles.get(index);
             FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
-            fTransaction.replace(R.id.fragmentSection, new Fragment_DebtRatio());
+            fTransaction.replace(R.id.fragmentSection, new Fragment_Loans());
             fTransaction.commit();
             //load different fragments, not the recycler view
         }
@@ -342,6 +341,7 @@ public class Fragment_MasterQuestionSpawner extends Fragment
             uberOptions.add(dateQuestionOptions);
             uberOptions.add(servicerTitles);
             uberOptions.add(employmentOptions);
+            uberOptions.add(taxOptions);
         }
 
 

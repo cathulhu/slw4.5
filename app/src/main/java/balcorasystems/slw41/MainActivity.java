@@ -7,10 +7,10 @@ import android.view.Window;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements Fragment_Selection.OnNavigateAwayListener, Fragment_Questions.OnGoToMoneyStuff, Plans_Adapter.OnNavigateToDetail, Fragment_Questions.updateMainLoan, Fragment_PlanDetail.OnGoToDetailPlan, Fragment_Summary.returnToMain, Questions_YN_Adapter.NextAfter, Fragment_MasterQuestionSpawner.goToPlans, Review_Adapter.OnGoToChangeValue
+public class MainActivity extends AppCompatActivity implements Fragment_Selection.OnNavigateAwayListener, Fragment_Questions.OnGoToMoneyStuff, Plans_Adapter.OnNavigateToDetail, Fragment_Questions.updateMainLoan, Fragment_PlanDetail.OnGoToDetailPlan, Fragment_Summary.returnToMain, Questions_Adapter.NextAfter, Fragment_MasterQuestionSpawner.goToPlans, Review_Adapter.OnGoToChangeValue, TaxStatus_Adapter.NextAfter, Fragment_Dependants.NextAfter, Loans_Adapter.NextAfter
 
 {
-    public static Object_Loan masterLoan = new Object_Loan();
+    public static Object_Borrower masterLoan = new Object_Borrower();
 
     public static Double simpleIncome = 27000.0;
     public static Double simpleDebt = 35000.0;
