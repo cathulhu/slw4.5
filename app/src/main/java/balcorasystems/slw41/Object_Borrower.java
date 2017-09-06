@@ -38,11 +38,14 @@ public class Object_Borrower
     public Double currentPayment;
     public Integer dependants;
 
+    public Boolean wagesGranished;
+    public Double nextRepaymentDate;
+    public Boolean inGrace;
+    public Boolean inDeferment;
+    public Boolean inForebearance;
 
+    public static Object_Debt debtObject = new Object_Debt();
 
-    // public ArrayList<Double> loanBalances;
     public ArrayList<Double> payments;
     // make sure the update everything that still uses this and switch it over to the proper Object_Loan stuff.
-
-
 }

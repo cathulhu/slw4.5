@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.NumberPicker;
-import android.widget.Spinner;
 
 /**
  * Created by L on 9/6/2017.
@@ -33,7 +32,7 @@ public class Fragment_Dependants extends Fragment
         dependantsSpinner.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker numberPicker, int i, int i1) {
-                Fragment_MasterQuestionSpawner.masterLoan.taxSize=i+1;
+                Fragment_MasterQuestionSpawner.masterBorrower.taxSize=i+1;
             }
         });
 

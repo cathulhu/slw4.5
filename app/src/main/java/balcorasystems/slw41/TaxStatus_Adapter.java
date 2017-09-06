@@ -44,57 +44,57 @@ public class TaxStatus_Adapter extends RecyclerView.Adapter<TaxStatus_Adapter.Vi
                 {
                     choiceBool=true;
                 }
-                String currentTopic = Fragment_MasterQuestionSpawner.masterLoan.currentlyEditing;
+                String currentTopic = Fragment_MasterQuestionSpawner.masterBorrower.currentlyEditing;
 
 
                 if (currentTopic.equals("Loan Default"))
                 {
-                    Fragment_MasterQuestionSpawner.masterLoan.inDefault=choiceBool;
+                    Fragment_MasterQuestionSpawner.masterBorrower.inDefault=choiceBool;
                 }
                 else if (currentTopic.equals("Loan Delinquency"))
                 {
-                    Fragment_MasterQuestionSpawner.masterLoan.inDelinquincy=choiceBool;
+                    Fragment_MasterQuestionSpawner.masterBorrower.inDelinquincy=choiceBool;
                 }
                 else if (currentTopic.equals("Deceased Borrower"))
                 {
-                    Fragment_MasterQuestionSpawner.masterLoan.deceased=choiceBool;
+                    Fragment_MasterQuestionSpawner.masterBorrower.deceased=choiceBool;
                 }
                 else if (currentTopic.equals("Loan Rehabilitation"))
                 {
-                    Fragment_MasterQuestionSpawner.masterLoan.loanRehab=choiceBool;
+                    Fragment_MasterQuestionSpawner.masterBorrower.loanRehab=choiceBool;
                 }
                 else if (currentTopic.equals("Employment"))
                 {
-                    Fragment_MasterQuestionSpawner.masterLoan.employmentType=choiceVerbose;
+                    Fragment_MasterQuestionSpawner.masterBorrower.employmentType=choiceVerbose;
                 }
                 else if (currentTopic.equals("First Loan Date"))
                 {
 
-                    Fragment_MasterQuestionSpawner.masterLoan.timeBefore98=false;
-                    Fragment_MasterQuestionSpawner.masterLoan.timeBetween98to07=false;
-                    Fragment_MasterQuestionSpawner.masterLoan.timeBetween07to11=false;
-                    Fragment_MasterQuestionSpawner.masterLoan.timeBetween11to14=false;
-                    Fragment_MasterQuestionSpawner.masterLoan.timeAfter14=false;
+                    Fragment_MasterQuestionSpawner.masterBorrower.timeBefore98=false;
+                    Fragment_MasterQuestionSpawner.masterBorrower.timeBetween98to07=false;
+                    Fragment_MasterQuestionSpawner.masterBorrower.timeBetween07to11=false;
+                    Fragment_MasterQuestionSpawner.masterBorrower.timeBetween11to14=false;
+                    Fragment_MasterQuestionSpawner.masterBorrower.timeAfter14=false;
 
                     if (choice==0)
                     {
-                        Fragment_MasterQuestionSpawner.masterLoan.timeBefore98=true;
+                        Fragment_MasterQuestionSpawner.masterBorrower.timeBefore98=true;
                     }
                     else if (choice==1)
                     {
-                        Fragment_MasterQuestionSpawner.masterLoan.timeBetween98to07=true;
+                        Fragment_MasterQuestionSpawner.masterBorrower.timeBetween98to07=true;
                     }
                     else if (choice==2)
                     {
-                        Fragment_MasterQuestionSpawner.masterLoan.timeBetween07to11=true;
+                        Fragment_MasterQuestionSpawner.masterBorrower.timeBetween07to11=true;
                     }
                     else if (choice==3)
                     {
-                        Fragment_MasterQuestionSpawner.masterLoan.timeBetween11to14=true;
+                        Fragment_MasterQuestionSpawner.masterBorrower.timeBetween11to14=true;
                     }
                     else if (choice==4)
                     {
-                        Fragment_MasterQuestionSpawner.masterLoan.timeAfter14=true;
+                        Fragment_MasterQuestionSpawner.masterBorrower.timeAfter14=true;
                     }
 
                 }
@@ -104,7 +104,7 @@ public class TaxStatus_Adapter extends RecyclerView.Adapter<TaxStatus_Adapter.Vi
                 }
                 else if (currentTopic.equals("Tax Status"))
                 {
-                    Fragment_MasterQuestionSpawner.masterLoan.taxStatus=choiceVerbose;
+                    Fragment_MasterQuestionSpawner.masterBorrower.taxStatus=choiceVerbose;
                 }
                 else if (currentTopic.equals("Tax Dependants"))
                 {
@@ -112,7 +112,7 @@ public class TaxStatus_Adapter extends RecyclerView.Adapter<TaxStatus_Adapter.Vi
                 }
                 else if (currentTopic.equals("Debt Servicer"))
                 {
-                    Fragment_MasterQuestionSpawner.masterLoan.servicer=choiceVerbose;
+                    Fragment_MasterQuestionSpawner.masterBorrower.servicer=choiceVerbose;
                 }
 
                 //this part navigates away

@@ -10,14 +10,6 @@
         android:id="@+id/relativeLayout15">
 
         <Button
-            android:id="@+id/deleteLoanButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:text="Delte Selected" />
-
-        <Button
             android:id="@+id/newLoanButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -1,10 +1,16 @@
 package balcorasystems.slw41;
 
-/**
- * Created by L on 9/6/2017.
- */
+import java.util.ArrayList;
+
+
 
 public class Object_Loan
 {
-
+    String type;
+    Boolean wasRehabed;
+    Double interestRate;
+    Long startingBalance;
+    Long currentBalance;
+    Long generatedMonthlyInterest;
+    Long accumulatedNonCapitalizedInterest;
 }

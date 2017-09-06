@@ -40,4 +40,12 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/editBalance"
         android:text="Previously Rehabilitaed Loan" />
+
+    <Button
+        android:id="@+id/deleteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete this Loan"
+        android:layout_below="@+id/editInterest"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>

@@ -16,15 +16,7 @@ import java.util.ArrayList;
 
 public class Loans_Adapter extends RecyclerView.Adapter<Loans_Adapter.ViewHolder>
 {
-    //here put an arraylist of all the loan objects that get created, then I can return the size of this array for the itemcount size
-
-    public static interface NextAfter
-    {
-        public void NextAfterSelection();
-    }
-    public NextAfter mListener;
-
-
+    //no need for a gotonext fragment thing since I don't actually do any navigating away or reloading from within the adapter, that's handled at the Fragment_Loans level.
 
     @Override
     public Loans_Adapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
@@ -33,11 +25,21 @@ public class Loans_Adapter extends RecyclerView.Adapter<Loans_Adapter.ViewHolder
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.loan_recycler_row, parent, false);
         final Loans_Adapter.ViewHolder genericViewholder = new ViewHolder(view);
 
-        mListener = (NextAfter) view.getContext();       //FOR SOME REASON ITS INCREDIBLY IMPORTANT TO SET THIS TO CONTEXT;
+//        mListener = (NextAfter) view.getContext();       //FOR SOME REASON ITS INCREDIBLY IMPORTANT TO SET THIS TO CONTEXT;
 
         EditText balance = (EditText) view.findViewById(R.id.editBalance);
         EditText interest = (EditText) view.findViewById(R.id.editInterest);
         Spinner loanTypesSpinner = (Spinner) view.findViewById(R.id.spinner);
+
+        Button deleteLoan = (Button) view.findViewById(R.id.deleteButton);
+        deleteLoan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                Fragment_MasterQuestionSpawner.masterBorrower.debtObject.deleteLoan(genericViewholder.getAdapterPosition());
+                notifyDataSetChanged();
+            }
+        });
 
 
         balance.addTextChangedListener(new TextWatcher() {
@@ -106,7 +108,8 @@ public class Loans_Adapter extends RecyclerView.Adapter<Loans_Adapter.ViewHolder
     @Override
     public int getItemCount()
     {
-        return 2;
+
+        return Fragment_MasterQuestionSpawner.masterBorrower.debtObject.loanPortfolio.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder
