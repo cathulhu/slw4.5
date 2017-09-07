@@ -44,75 +44,12 @@ public class TaxStatus_Adapter extends RecyclerView.Adapter<TaxStatus_Adapter.Vi
                 {
                     choiceBool=true;
                 }
-                String currentTopic = Fragment_MasterQuestionSpawner.masterBorrower.currentlyEditing;
 
+                String currentTopic = Fragment_MasterQuestionSpawner.Borrower.currentlyEditing;
 
-                if (currentTopic.equals("Loan Default"))
+                if (currentTopic.equals("Tax Status"))
                 {
-                    Fragment_MasterQuestionSpawner.masterBorrower.inDefault=choiceBool;
-                }
-                else if (currentTopic.equals("Loan Delinquency"))
-                {
-                    Fragment_MasterQuestionSpawner.masterBorrower.inDelinquincy=choiceBool;
-                }
-                else if (currentTopic.equals("Deceased Borrower"))
-                {
-                    Fragment_MasterQuestionSpawner.masterBorrower.deceased=choiceBool;
-                }
-                else if (currentTopic.equals("Loan Rehabilitation"))
-                {
-                    Fragment_MasterQuestionSpawner.masterBorrower.loanRehab=choiceBool;
-                }
-                else if (currentTopic.equals("Employment"))
-                {
-                    Fragment_MasterQuestionSpawner.masterBorrower.employmentType=choiceVerbose;
-                }
-                else if (currentTopic.equals("First Loan Date"))
-                {
-
-                    Fragment_MasterQuestionSpawner.masterBorrower.timeBefore98=false;
-                    Fragment_MasterQuestionSpawner.masterBorrower.timeBetween98to07=false;
-                    Fragment_MasterQuestionSpawner.masterBorrower.timeBetween07to11=false;
-                    Fragment_MasterQuestionSpawner.masterBorrower.timeBetween11to14=false;
-                    Fragment_MasterQuestionSpawner.masterBorrower.timeAfter14=false;
-
-                    if (choice==0)
-                    {
-                        Fragment_MasterQuestionSpawner.masterBorrower.timeBefore98=true;
-                    }
-                    else if (choice==1)
-                    {
-                        Fragment_MasterQuestionSpawner.masterBorrower.timeBetween98to07=true;
-                    }
-                    else if (choice==2)
-                    {
-                        Fragment_MasterQuestionSpawner.masterBorrower.timeBetween07to11=true;
-                    }
-                    else if (choice==3)
-                    {
-                        Fragment_MasterQuestionSpawner.masterBorrower.timeBetween11to14=true;
-                    }
-                    else if (choice==4)
-                    {
-                        Fragment_MasterQuestionSpawner.masterBorrower.timeAfter14=true;
-                    }
-
-                }
-                else if (currentTopic.equals("Debt, Income, and Payment"))
-                {
-
-                }
-                else if (currentTopic.equals("Tax Status"))
-                {
-                    Fragment_MasterQuestionSpawner.masterBorrower.taxStatus=choiceVerbose;
-                }
-                else if (currentTopic.equals("Tax Dependants"))
-                {
-//                    handeled in the dependants fragment
-                }
-                else if (currentTopic.equals("Debt Servicer"))
-                {
-                    Fragment_MasterQuestionSpawner.masterBorrower.servicer=choiceVerbose;
+                    Fragment_MasterQuestionSpawner.Borrower.taxStatus=choiceVerbose;
                 }
 
                 //this part navigates away

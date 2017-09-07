@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class Fragment_MasterQuestionSpawner extends Fragment
 {
-    public static Object_Borrower masterBorrower = new Object_Borrower();
+    public static Object_Borrower Borrower = new Object_Borrower();
     public static ArrayList<ArrayList> uberOptions = new ArrayList<>();
     public static Integer index=0;
     public static Boolean first = true;
@@ -89,7 +89,7 @@ public class Fragment_MasterQuestionSpawner extends Fragment
         }
         else if (summaryTitles.get(index).equals("Loan Default"))
         {
-            masterBorrower.currentlyEditing=summaryTitles.get(index);
+            Borrower.currentlyEditing=summaryTitles.get(index);
             FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
             fTransaction.replace(R.id.fragmentSection, new Fragment_Questions_Text());
             fTransaction.commit();
@@ -97,7 +97,7 @@ public class Fragment_MasterQuestionSpawner extends Fragment
         }
         else if (summaryTitles.get(index).equals("Loan Delinquency"))
         {
-            masterBorrower.currentlyEditing=summaryTitles.get(index);
+            Borrower.currentlyEditing=summaryTitles.get(index);
             FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
             fTransaction.replace(R.id.fragmentSection, new Fragment_Questions_Text());
             fTransaction.commit();
@@ -105,7 +105,7 @@ public class Fragment_MasterQuestionSpawner extends Fragment
         }
         else if (summaryTitles.get(index).equals("Deceased Borrower"))
         {
-            masterBorrower.currentlyEditing=summaryTitles.get(index);
+            Borrower.currentlyEditing=summaryTitles.get(index);
             FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
             fTransaction.replace(R.id.fragmentSection, new Fragment_Questions_Text());
             fTransaction.commit();
@@ -113,7 +113,7 @@ public class Fragment_MasterQuestionSpawner extends Fragment
         }
         else if (summaryTitles.get(index).equals("Loan Rehabilitation"))
         {
-            masterBorrower.currentlyEditing=summaryTitles.get(index);
+            Borrower.currentlyEditing=summaryTitles.get(index);
             FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
             fTransaction.replace(R.id.fragmentSection, new Fragment_Questions_Text());
             fTransaction.commit();
@@ -121,7 +121,7 @@ public class Fragment_MasterQuestionSpawner extends Fragment
         }
         else if (summaryTitles.get(index).equals("First Loan Date"))
         {
-            masterBorrower.currentlyEditing=summaryTitles.get(index);
+            Borrower.currentlyEditing=summaryTitles.get(index);
             FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
             fTransaction.replace(R.id.fragmentSection, new Fragment_Questions_Text());
             fTransaction.commit();
@@ -129,7 +129,7 @@ public class Fragment_MasterQuestionSpawner extends Fragment
         }
         else if (summaryTitles.get(index).equals("Debt Servicer"))
         {
-            masterBorrower.currentlyEditing=summaryTitles.get(index);
+            Borrower.currentlyEditing=summaryTitles.get(index);
             FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
             fTransaction.replace(R.id.fragmentSection, new Fragment_Questions_Text());
             fTransaction.commit();
@@ -137,7 +137,7 @@ public class Fragment_MasterQuestionSpawner extends Fragment
         }
         else if (summaryTitles.get(index).equals("Employment"))
         {
-            masterBorrower.currentlyEditing=summaryTitles.get(index);
+            Borrower.currentlyEditing=summaryTitles.get(index);
             FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
             fTransaction.replace(R.id.fragmentSection, new Fragment_Questions_Text());
             fTransaction.commit();
@@ -146,14 +146,14 @@ public class Fragment_MasterQuestionSpawner extends Fragment
         else if (summaryTitles.get(index).equals("Debt, Income, and Payment"))
         {
             //load different fragments, not the recycler view
-            masterBorrower.currentlyEditing=summaryTitles.get(index);
+            Borrower.currentlyEditing=summaryTitles.get(index);
             FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
             fTransaction.replace(R.id.fragmentSection, new Fragment_Info());
             fTransaction.commit();
         }
         else if (summaryTitles.get(index).equals("Tax Status"))
         {
-            masterBorrower.currentlyEditing=summaryTitles.get(index);
+            Borrower.currentlyEditing=summaryTitles.get(index);
             FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
             fTransaction.replace(R.id.fragmentSection, new Fragment_TaxStatus_Text());
             fTransaction.commit();
@@ -161,14 +161,14 @@ public class Fragment_MasterQuestionSpawner extends Fragment
         else if (summaryTitles.get(index).equals("Tax Dependants"))
         {
             //load different fragments, not the recycler view
-             masterBorrower.currentlyEditing=summaryTitles.get(index);
+             Borrower.currentlyEditing=summaryTitles.get(index);
              FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
              fTransaction.replace(R.id.fragmentSection, new Fragment_Dependants());
              fTransaction.commit();
         }
         else if (summaryTitles.get(index).equals("Loan Details"))
         {
-            masterBorrower.currentlyEditing=summaryTitles.get(index);
+            Borrower.currentlyEditing=summaryTitles.get(index);
             FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
             fTransaction.replace(R.id.fragmentSection, new Fragment_Loans());
             fTransaction.commit();
@@ -176,6 +176,9 @@ public class Fragment_MasterQuestionSpawner extends Fragment
         }
         else if (summaryTitles.get(index).equals("Review"))
         {
+            //sets the master copy of the borrower object in the main activity = to the changes made before leaving
+            MainActivity.masterBorrower=Borrower;
+
             FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
             fTransaction.replace(R.id.fragmentSection, new Review_Fragment());
             fTransaction.commit();

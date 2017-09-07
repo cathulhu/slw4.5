@@ -11,8 +11,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
 
 public class Fragment_Loans extends Fragment
 {
@@ -21,7 +19,7 @@ public class Fragment_Loans extends Fragment
 
     public void addLoan()
     {
-        Fragment_MasterQuestionSpawner.masterBorrower.debtObject.addBlankLoan();
+        Fragment_MasterQuestionSpawner.Borrower.debtAndRepaymentObject.addBlankLoan();
         adapter.notifyDataSetChanged();
     }
 

@@ -7,20 +7,13 @@ import android.view.Window;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements Fragment_Selection.OnNavigateAwayListener, Fragment_Questions.OnGoToMoneyStuff, Plans_Adapter.OnNavigateToDetail, Fragment_Questions.updateMainLoan, Fragment_PlanDetail.OnGoToDetailPlan, Fragment_Summary.returnToMain, Questions_Adapter.NextAfter, Fragment_MasterQuestionSpawner.goToPlans, Review_Adapter.OnGoToChangeValue, TaxStatus_Adapter.NextAfter, Fragment_Dependants.NextAfter
+public class MainActivity extends AppCompatActivity implements Fragment_Selection.OnNavigateAwayListener, Plans_Adapter.OnNavigateToDetail, Fragment_PlanDetail.OnGoToDetailPlan, Fragment_Summary.returnToMain, Questions_Adapter.NextAfter, Fragment_MasterQuestionSpawner.goToPlans, Review_Adapter.OnGoToChangeValue, TaxStatus_Adapter.NextAfter, Fragment_Dependants.NextAfter
 
 {
-    public static Object_Borrower masterLoan = new Object_Borrower();
+    public static Object_Borrower masterBorrower = new Object_Borrower();
 
-    public static Double simpleIncome = 27000.0;
-    public static Double simpleDebt = 35000.0;
-    public static Double currentStdPayment = 0.7;
-    public static Integer simpleRepaymentSelection=0;
-    public static boolean noPaymentDataYet =true;
-    public static ArrayList<Double> payments = new ArrayList<>();
-    public static ArrayList<ArrayList> masterUberPayments;
-    public static ArrayList<Double> simpleForgiveness = new ArrayList<>();
 
+//    public static boolean noPaymentDataYet =true;
     public static Integer detailID=0;
 
     public Integer backCounter =0;
@@ -47,14 +40,6 @@ public class MainActivity extends AppCompatActivity implements Fragment_Selectio
         fTransaction.replace(R.id.mainFrameLayout, reloadedFragment, "summary");
         fTransaction.addToBackStack(null);
         fTransaction.commit();
-    }
-
-    public void updateLoan()
-    {
-        masterLoan.debt=simpleDebt;
-        masterLoan.income=simpleIncome;
-        masterLoan.currentPayment=currentStdPayment;
-        masterLoan.payments=payments;
     }
 
     public void toDetailPlan()
@@ -87,10 +72,10 @@ public class MainActivity extends AppCompatActivity implements Fragment_Selectio
         }
         else if (selection==1)
         {
-            FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
-            fTransaction.replace(R.id.mainFrameLayout, new Fragment_Tracking(), "questions");
-            fTransaction.addToBackStack(null);
-            fTransaction.commit();
+//            FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
+//            fTransaction.replace(R.id.mainFrameLayout, new Fragment_Tracking(), "questions");
+//            fTransaction.addToBackStack(null);
+//            fTransaction.commit();
         }
 
     }
@@ -262,21 +247,8 @@ public class MainActivity extends AppCompatActivity implements Fragment_Selectio
         this.supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
 
-        //forgiveness hack for now
-        simpleForgiveness.add(0.0);
-
         //populate initial selection fragment into main content layout
         loadSelection();
-    }
-
-    @Override
-    public void onBackPressed()
-    {
-        //hack so forgiveness can be used more then once without having to restart app
-        simpleForgiveness.clear();
-        //need to add in another 0 here so array is right size, man this is a lot of dirty hacks to get this feature working crudely...
-        simpleForgiveness.add(0.0);
-        super.onBackPressed();
     }
 
 

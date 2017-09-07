@@ -18,10 +18,6 @@ import com.github.mikephil.charting.data.LineDataSet;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-/**
- * Created by L on 7/12/2017.
- */
-
 public class Fragment_PlanDetail extends Fragment
 {
 
@@ -32,7 +28,7 @@ public class Fragment_PlanDetail extends Fragment
     }
 
     public OnGoToDetailPlan mListener;
-    ArrayList<ArrayList> uberPayments = MainActivity.masterUberPayments;
+//    ArrayList<ArrayList> uberPayments = MainActivity.masterUberPayments;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup selectionContainer, Bundle savedInstanceState)
@@ -46,7 +42,8 @@ public class Fragment_PlanDetail extends Fragment
             @Override
             public void onClick(View view) {
                 mListener.toDetailPlan();
-                MainActivity.simpleRepaymentSelection=MainActivity.detailID;
+//                MainActivity.simpleRepaymentSelection=MainActivity.detailID;
+                //I forget what this is used for
             }
         });
 
@@ -56,24 +53,10 @@ public class Fragment_PlanDetail extends Fragment
         // creating list of entry<br />
         ArrayList<Entry> entries = new ArrayList();
 
-
-//        //populate charts with random example data
-//        for (int j = 0; j <240 ; j++)
-//        {
-//            Float random = (float) Math.random()*200;
-//
-//            while (random > 200)
-//            {
-//                random = (float) Math.random()*200;
-//            }
-//
-//            entries.add(new Entry(j, random));
-//        }
-
         Integer index=0;
 
         ArrayList<Double> individualContents = new ArrayList<>();
-        individualContents = uberPayments.get(MainActivity.detailID);
+//        individualContents = uberPayments.get(MainActivity.detailID);
 
         for (Double y: individualContents)
         {

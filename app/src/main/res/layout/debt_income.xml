@@ -16,6 +16,7 @@
             android:id="@+id/editTextPayment1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/textView7"
             android:ems="10"
@@ -24,48 +25,51 @@
             android:textAlignment="center"
             android:textSize="16sp"
             android:textStyle="italic"
-            android:layout_alignParentEnd="true" />
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/textView24"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/seekBar2"
-            android:layout_alignStart="@+id/editTextPayment1"
-            android:text="Debt"
+            android:text="Spouse Income"
             android:textSize="13sp"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold|italic"
+            android:visibility="visible"
+            android:layout_below="@+id/seekBar3"
+            android:layout_alignParentStart="true" />
 
 
         <TextView
             android:id="@+id/textView29"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
             android:text="$36,500"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:visibility="visible"
+            android:layout_below="@+id/seekBar3"
+            android:layout_alignParentEnd="true" />
 
         <SeekBar
             android:id="@+id/seekBar2"
             style="@android:style/Widget.DeviceDefault.Light.SeekBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView29"
             android:max="100"
             android:maxHeight="100dp"
             android:progress="30"
-            android:scrollbarThumbVertical="@drawable/common_google_signin_btn_icon_disabled" />
+            android:scrollbarThumbVertical="@drawable/common_google_signin_btn_icon_disabled"
+            android:visibility="visible"
+            android:layout_below="@+id/textView29"
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:id="@+id/textView37"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/textView29"
-            android:layout_below="@+id/seekBar2"
             android:text="$54,200"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true" />
 
         <SeekBar
             android:id="@+id/seekBar3"
@@ -96,7 +100,8 @@
             android:layout_below="@+id/seekBar3"
             android:text="Current Payment (Optional)"
             android:textSize="14sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="gone" />
 
 
     </RelativeLayout>

@@ -46,22 +46,22 @@ public class Review_Adapter extends RecyclerView.Adapter<Review_Adapter.ViewHold
 //        summaryTitles.add("Debt Types");
 //        summaryTitles.add("Debt Servicer");
 //
-//        loanValues.add(String.valueOf(MainActivity.masterBorrower.inDefault));
-//        loanValues.add(String.valueOf(MainActivity.masterBorrower.inDelinquincy));
-//        loanValues.add(String.valueOf(MainActivity.masterBorrower.deceased));
-//        loanValues.add(String.valueOf(MainActivity.masterBorrower.hasConsolidated));
-//        loanValues.add(String.valueOf(MainActivity.masterBorrower.loanRehab));
-//        loanValues.add(String.valueOf(MainActivity.masterBorrower.parentLoans));
-//        loanValues.add(String.valueOf(MainActivity.masterBorrower.ffelLoans));
-//        loanValues.add(String.valueOf(MainActivity.masterBorrower.perkinsLoans));
-//        loanValues.add(String.valueOf(MainActivity.masterBorrower.directLoans));
-//        loanValues.add(String.valueOf(MainActivity.masterBorrower.employmentType));
-//        loanValues.add(String.valueOf(MainActivity.masterBorrower.loanDate));
-//        loanValues.add(String.valueOf(MainActivity.masterBorrower.debt));
-//        loanValues.add(String.valueOf(MainActivity.masterBorrower.taxStatus));
-//        loanValues.add(String.valueOf(MainActivity.masterBorrower.taxSize));
+//        loanValues.add(String.valueOf(MainActivity.Borrower.inDefault));
+//        loanValues.add(String.valueOf(MainActivity.Borrower.inDelinquincy));
+//        loanValues.add(String.valueOf(MainActivity.Borrower.deceased));
+//        loanValues.add(String.valueOf(MainActivity.Borrower.hasConsolidated));
+//        loanValues.add(String.valueOf(MainActivity.Borrower.loanRehab));
+//        loanValues.add(String.valueOf(MainActivity.Borrower.parentLoans));
+//        loanValues.add(String.valueOf(MainActivity.Borrower.ffelLoans));
+//        loanValues.add(String.valueOf(MainActivity.Borrower.perkinsLoans));
+//        loanValues.add(String.valueOf(MainActivity.Borrower.directLoans));
+//        loanValues.add(String.valueOf(MainActivity.Borrower.employmentType));
+//        loanValues.add(String.valueOf(MainActivity.Borrower.loanDate));
+//        loanValues.add(String.valueOf(MainActivity.Borrower.debt));
+//        loanValues.add(String.valueOf(MainActivity.Borrower.taxStatus));
+//        loanValues.add(String.valueOf(MainActivity.Borrower.taxSize));
 //        loanValues.add("not implemented types yet");
-//        loanValues.add(String.valueOf(MainActivity.masterBorrower.servicer));
+//        loanValues.add(String.valueOf(MainActivity.Borrower.servicer));
 
     }
 

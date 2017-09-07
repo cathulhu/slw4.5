@@ -32,7 +32,7 @@ public class Fragment_Dependants extends Fragment
         dependantsSpinner.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker numberPicker, int i, int i1) {
-                Fragment_MasterQuestionSpawner.masterBorrower.taxSize=i+1;
+                Fragment_MasterQuestionSpawner.Borrower.taxSize=i+1;
             }
         });
 

@@ -11,8 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import java.util.ArrayList;
-
 
 public class Loans_Adapter extends RecyclerView.Adapter<Loans_Adapter.ViewHolder>
 {
@@ -27,16 +25,17 @@ public class Loans_Adapter extends RecyclerView.Adapter<Loans_Adapter.ViewHolder
 
 //        mListener = (NextAfter) view.getContext();       //FOR SOME REASON ITS INCREDIBLY IMPORTANT TO SET THIS TO CONTEXT;
 
-        EditText balance = (EditText) view.findViewById(R.id.editBalance);
-        EditText interest = (EditText) view.findViewById(R.id.editInterest);
-        Spinner loanTypesSpinner = (Spinner) view.findViewById(R.id.spinner);
+        final EditText balance = (EditText) view.findViewById(R.id.editBalance);
+        final EditText interest = (EditText) view.findViewById(R.id.editInterest);
+        final Spinner loanTypesSpinner = (Spinner) view.findViewById(R.id.spinner);
 
         Button deleteLoan = (Button) view.findViewById(R.id.deleteButton);
-        deleteLoan.setOnClickListener(new View.OnClickListener() {
+        deleteLoan.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View view)
             {
-                Fragment_MasterQuestionSpawner.masterBorrower.debtObject.deleteLoan(genericViewholder.getAdapterPosition());
+                Fragment_MasterQuestionSpawner.Borrower.debtAndRepaymentObject.deleteLoan(genericViewholder.getAdapterPosition());
                 notifyDataSetChanged();
             }
         });
@@ -56,7 +55,15 @@ public class Loans_Adapter extends RecyclerView.Adapter<Loans_Adapter.ViewHolder
             @Override
             public void afterTextChanged(Editable editable)
             {
+                String rawInput = String.valueOf(balance.getText());
+                Long inputBalance=0L;
+
+                if (!rawInput.equals(""))
+                {
+                    inputBalance = Long.valueOf(rawInput);
+                }
                 //do an input check then write the changes
+                Fragment_MasterQuestionSpawner.Borrower.debtAndRepaymentObject.loanPortfolio.get(genericViewholder.getAdapterPosition()).startingBalance= inputBalance;
             }
         });
 
@@ -75,6 +82,15 @@ public class Loans_Adapter extends RecyclerView.Adapter<Loans_Adapter.ViewHolder
             @Override
             public void afterTextChanged(Editable editable)
             {
+                String rawInput = String.valueOf(interest.getText());
+                Double inputInterest=0.0;
+
+                if (!rawInput.equals(""))
+                {
+                    inputInterest = Double.valueOf(rawInput);
+                }
+                //do an input check then write the changes
+                Fragment_MasterQuestionSpawner.Borrower.debtAndRepaymentObject.loanPortfolio.get(genericViewholder.getAdapterPosition()).interestRate= inputInterest;
                 //do an input check then write the changes
             }
         });
@@ -83,6 +99,8 @@ public class Loans_Adapter extends RecyclerView.Adapter<Loans_Adapter.ViewHolder
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
+                String loanTypeSelection = adapterView.getItemAtPosition(i).toString();
+                Fragment_MasterQuestionSpawner.Borrower.debtAndRepaymentObject.loanPortfolio.get(genericViewholder.getAdapterPosition()).type = loanTypeSelection;
             }
 
             @Override
@@ -109,7 +127,7 @@ public class Loans_Adapter extends RecyclerView.Adapter<Loans_Adapter.ViewHolder
     public int getItemCount()
     {
 
-        return Fragment_MasterQuestionSpawner.masterBorrower.debtObject.loanPortfolio.size();
+        return Fragment_MasterQuestionSpawner.Borrower.debtAndRepaymentObject.loanPortfolio.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder
