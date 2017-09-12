@@ -50,10 +50,12 @@ public class MainActivity extends AppCompatActivity implements Fragment_Selectio
         fTransaction.commit();
     }
 
-    public void recyclerToDetail()
+    public void recyclerToDetail(Integer selection)
     {
+        Fragment_PlanDetail loadedFragment = new  Fragment_PlanDetail();
+        loadedFragment.selection=selection;
         FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
-        fTransaction.replace(R.id.mainFrameLayout, new Fragment_PlanDetail());
+        fTransaction.replace(R.id.mainFrameLayout, loadedFragment);
         fTransaction.addToBackStack(null);
         fTransaction.commit();
     }
@@ -250,7 +252,4 @@ public class MainActivity extends AppCompatActivity implements Fragment_Selectio
         //populate initial selection fragment into main content layout
         loadSelection();
     }
-
-
-
 }

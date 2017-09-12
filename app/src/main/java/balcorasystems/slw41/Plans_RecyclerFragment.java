@@ -28,8 +28,10 @@ public class Plans_RecyclerFragment extends Fragment{
 
         plans = new ArrayList<>();
         plans.add("Standard Repayment");
-        plans.add("Simple IBR");
-        plans.add("Opportunistic IBR");
+//        plans.add("15% IDR");
+//        plans.add("10% IDR");
+
+        //TODO: Instead of just saying ok make 3 plans or whatever, I should run a calculation that checks a few different strategies first then decides how many plans and perhaps of what type should be spawned first.
 
         RecyclerView.Adapter adapter = new Plans_Adapter(plans);
         recyclerView.setAdapter(adapter);

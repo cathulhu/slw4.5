@@ -20,6 +20,7 @@ import java.util.Comparator;
 
 public class Fragment_PlanDetail extends Fragment
 {
+    public static Integer selection;
 
 
     public interface OnGoToDetailPlan
@@ -28,7 +29,7 @@ public class Fragment_PlanDetail extends Fragment
     }
 
     public OnGoToDetailPlan mListener;
-//    ArrayList<ArrayList> uberPayments = MainActivity.masterUberPayments;
+    public Object_Repayment targetRepayment = MainActivity.masterBorrower.debtAndRepaymentObject.repaymentPortfolio.get(selection);
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup selectionContainer, Bundle savedInstanceState)
@@ -37,34 +38,38 @@ public class Fragment_PlanDetail extends Fragment
         mListener = (OnGoToDetailPlan) getContext();
 
 
+
+        TextView newPayment = (TextView) rootLayoutView.findViewById(R.id.newPaymentTitle);
+        newPayment.setText("New monthly payment: $" + String.valueOf(targetRepayment.monthlyPayments.get(0)));
+
+        TextView totalSpent = (TextView) rootLayoutView.findViewById(R.id.totalRepayment);
+        totalSpent.setText(String.valueOf(targetRepayment.repaymentTotal));
+
+        TextView totalForgiven = (TextView) rootLayoutView.findViewById(R.id.totalForgiveness);
+        totalForgiven.setText(String.valueOf(targetRepayment.forgivnessTotal));
+
+        TextView averagePayment = (TextView) rootLayoutView.findViewById(R.id.averagePayment);
+        averagePayment.setText(String.valueOf(targetRepayment.meanMonthlyRepayment));
+
+
         Button seePlanButton = (Button) rootLayoutView.findViewById(R.id.getButton);
         seePlanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mListener.toDetailPlan();
-//                MainActivity.simpleRepaymentSelection=MainActivity.detailID;
-                //I forget what this is used for
             }
         });
 
-
-
         LineChart lineChart = (LineChart) rootLayoutView.findViewById(R.id.detailChart);
-        // creating list of entry<br />
         ArrayList<Entry> entries = new ArrayList();
 
         Integer index=0;
 
-        ArrayList<Double> individualContents = new ArrayList<>();
-//        individualContents = uberPayments.get(MainActivity.detailID);
-
-        for (Double y: individualContents)
+        for (Double x: targetRepayment.monthlyPayments)
         {
-            entries.add(new Entry(index, y.floatValue()));
+            entries.add(new Entry(index, x.floatValue()));
             index++;
         }
-
-
 
         LineDataSet dataset = new LineDataSet(entries, "Moneyz");
         dataset.setDrawCircleHole(false);
@@ -83,31 +88,6 @@ public class Fragment_PlanDetail extends Fragment
         lineChart.setDrawGridBackground(false);
 
 
-
-
-////        final RelativeLayout StepperFragmentLayout = (RelativeLayout) rootLayoutView.findViewById(R.id.stepperFragmentArea);
-//        FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
-//        fTransaction.replace(R.id.stepperFragmentArea, new Fragment_StepperAnalysis(), "questions");
-//        fTransaction.addToBackStack(null);
-//        fTransaction.commit();
-
-
-        TextView newPayment = (TextView) rootLayoutView.findViewById(R.id.newPaymentTitle);
-        newPayment.setText("New monthly payment: $" + String.valueOf(individualContents.get(0)));
-
-        Double averageMontlhy=0d;
-        Integer count=0;
-
-        for (double x: individualContents)
-        {
-            averageMontlhy += x;
-            count++;
-        }
-
-        averageMontlhy = averageMontlhy/count;
-
-        TextView averagePayment = (TextView) rootLayoutView.findViewById(R.id.averagePayment);
-        averagePayment.setText(String.valueOf(averageMontlhy));
 
 
 

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Calculations
 {
     static Object_Borrower targetBorrower;
-    public static Long totalCurrentDebt = 0L;
+//    public static Long totalCurrentDebt = 0L;
 
     //    public static Integer income =6;
 //    public static Integer debt =6;
@@ -17,24 +17,43 @@ public class Calculations
     Calculations(Object_Borrower passedBorrower)
     {
         targetBorrower = passedBorrower;
-        updateDebt();
 
-
-        //NEED TO REWRITE THE WAY CALCULATION WORKS SO IT CAN GET DATA FROM THE PROPER OBJECTS AND THEN STORE RESULTS IN OTHER PROPPER OBJECTS
-    }
-
-    public void updateDebt()
-    {
-        for (Object_Loan loan: targetBorrower.debtAndRepaymentObject.loanPortfolio)
-        {
-            totalCurrentDebt += loan.startingBalance;
-        }
     }
 
     public void StandardRepayCalc()
     {
+        ArrayList<Double> stdPayments = new ArrayList<>();
+        Double totalPayed=0.0;
+        Double individualPayment= 0.0;
+        Double totalMonthlyPayment= 0.0;
 
-        // Weighted average actually not used here but perhaps keep this code around for if I need to use that, say for loan consolidation for instance where I know this is used
+        for (Object_Loan loan : targetBorrower.debtAndRepaymentObject.loanPortfolio)
+        {
+            ArrayList<Double> payments= new ArrayList<>();
+            double monthlyInterestRate=loan.interestRate/100/12;
+            double paymentCalcNumerator = monthlyInterestRate * loan.startingBalance;    //change this to current balance soon and start using that value in other things
+            double paymentCalcDenominator = 1 - Math.pow(1 + (monthlyInterestRate), -120);
+            individualPayment = paymentCalcNumerator / paymentCalcDenominator;
+
+            totalPayed += individualPayment*120;
+            totalMonthlyPayment += individualPayment;
+        }
+
+        for (int i = 0; i < 120; i++)
+        {
+            stdPayments.add(totalMonthlyPayment);
+        }
+
+        //passing 0.0 for forgiveness and 0.0 for taxes
+        targetBorrower.debtAndRepaymentObject.addRepaymentNoSwitching(stdPayments, totalPayed, 0.0, 0.0);
+
+        //updating the master borrower object with this data so I don't have to pass one back.
+        MainActivity.masterBorrower=targetBorrower;
+    }
+
+
+
+    // Weighted average actually not used here but perhaps keep this code around for if I need to use that, say for loan consolidation for instance where I know this is used
 //        Double totalLoanWeight = 0.0;
 //        Double weightedAverageInterestRate = 0.0;
 //
@@ -46,28 +65,10 @@ public class Calculations
 //        weightedAverageInterestRate = ( (totalCurrentDebt / totalLoanWeight) / 10000 ) /12;
 //        //should add a round up to the nearest 1/8th just to be totally correct
 
-        ArrayList<Double> payments= new ArrayList<>();
-        Double totalPayed=0.0;
-        Double finalPayment= 0.0;
 
-        for (Object_Loan loan : targetBorrower.debtAndRepaymentObject.loanPortfolio)
-        {
-            double monthlyInterestRate=loan.interestRate/100/12;
-            double paymentCalcNumerator = monthlyInterestRate * loan.startingBalance;    //change this to current balance soon and start using that value in other things
-            double paymentCalcDenominator = 1 - Math.pow(1 + (monthlyInterestRate), -120);
-            double fixedPayment = paymentCalcNumerator / paymentCalcDenominator;
-            double payed = fixedPayment*120;
 
-            payments.add(fixedPayment);
-            totalPayed += payed;
-        }
 
-        for (Double x: payments)
-        {
-            finalPayment+=x;
-        }
 
-    }
 
 //    public static Double simpleStandardRepaymentCalc(double passedDebt) {
 //        double repaymentTermMonhts = 120;

@@ -33,10 +33,11 @@
                     android:id="@+id/newPaymentTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentTop="true"
                     android:layout_marginLeft="16dp"
                     android:text="New monthly payment: $135"
-                    android:textSize="24sp"
+                    android:textSize="20sp"
                     android:textStyle="bold|italic" />
             </RelativeLayout>
 
@@ -169,7 +170,7 @@
                     android:layout_alignParentTop="true" />
 
                 <TextView
-                    android:id="@+id/textView32"
+                    android:id="@+id/totalForgiveness"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
@@ -228,11 +229,11 @@
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/textView40"
 
 
                     android:layout_toEndOf="@+id/relativeLayout13"
-                    android:background="@color/cardview_dark_background">
+                    android:background="@color/cardview_dark_background"
+                    android:layout_alignTop="@+id/relativeLayout13">
 
                     <ImageView
                         android:id="@+id/imageView5"
