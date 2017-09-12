@@ -49,7 +49,7 @@
 //    private PieChart mChart;
 ////    private SeekBar mSeekBarX, mSeekBarY;
 ////    private TextView tvX, tvY;
-//    ArrayList<PieEntry> entries = new ArrayList<PieEntry>();
+//    ArrayList<PieEntry> repaymentEntries = new ArrayList<PieEntry>();
 //    ArrayList<Double> rawEntriesData = new ArrayList<>();
 //
 //    Float data1 = Float.valueOf((float) (MainActivity.simpleDebt/3));
@@ -65,9 +65,9 @@
 ////        RelativeLayout targetLayout = (RelativeLayout) rootLayoutView.findViewById(R.id.target);
 //        mChart = (PieChart) rootLayoutView.findViewById(R.id.chart1);
 //
-//        entries.add(0, new PieEntry(data1));
-//        entries.add(1, new PieEntry(data2));
-//        entries.add(2, new PieEntry(data3));
+//        repaymentEntries.add(0, new PieEntry(data1));
+//        repaymentEntries.add(1, new PieEntry(data2));
+//        repaymentEntries.add(2, new PieEntry(data3));
 //
 //        final TextView scalerText = (TextView) rootLayoutView.findViewById(R.id.scalertext);
 //        final TextView datatext = (TextView) rootLayoutView.findViewById(R.id.datatext);
@@ -119,7 +119,7 @@
 //                    Highlight thisHighlight = mChart.getHighlightByTouchPoint(me.getX(), me.getY());
 //                    Integer dataCoord= (int) thisHighlight.getX();
 //
-//                    PieEntry oldEntry = entries.get(dataCoord);
+//                    PieEntry oldEntry = repaymentEntries.get(dataCoord);
 //                    float oldData = oldEntry.getValue();
 //
 //                    selecttext.setText("Selected #" + mChart.getHighlightByTouchPoint(me.getX(), me.getY()));
@@ -159,7 +159,7 @@
 //                    Highlight thisHighlight = mChart.getHighlightByTouchPoint(x,y);
 //
 //                    float scaler = linearDistance/250;
-//                    PieEntry oldEntry = entries.get(dataCoord);
+//                    PieEntry oldEntry = repaymentEntries.get(dataCoord);
 //                    float oldData = oldEntry.getValue();
 //                    Integer changedData = Integer.valueOf((int) (oldData+scaler));
 //
@@ -172,7 +172,7 @@
 //                        changedData=2;
 //                    }
 //
-//                    entries.set(dataCoord, new PieEntry(changedData));
+//                    repaymentEntries.set(dataCoord, new PieEntry(changedData));
 //
 ////                    Toast.makeText(getContext(), String.valueOf("Scaler" + scaler) , Toast.LENGTH_SHORT).show();
 ////                    Toast.makeText(getContext(), String.valueOf("selected " + selected) , Toast.LENGTH_SHORT).show();
@@ -198,8 +198,8 @@
 ////                PieData newData = new PieData(dataSet2);
 ////                mChart.setData(newData);
 ////                Integer target = selected.getDataSetIndex();
-////                Integer changedData = entries.get(target);
-////                        entries.set(target, new PieEntry((66)));
+////                Integer changedData = repaymentEntries.get(target);
+////                        repaymentEntries.set(target, new PieEntry((66)));
 ////
 ////
 ////                data1=Integer.valueOf((int) (data1*(linearDistance/300)));
@@ -212,7 +212,7 @@
 ////                {
 ////                    data1=2;
 ////                }
-////                entries.set(0, new PieEntry(data1));
+////                repaymentEntries.set(0, new PieEntry(data1));
 //
 //                mChart.notifyDataSetChanged();
 //                mChart.invalidate();
@@ -379,22 +379,22 @@
 //
 //        float mult = range;
 //
-////        ArrayList<PieEntry> entries = new ArrayList<PieEntry>();
-////        entries.add(0, new PieEntry(data1));
-////        entries.add(1, new PieEntry(data2));
-////        entries.add(2, new PieEntry(data3));
+////        ArrayList<PieEntry> repaymentEntries = new ArrayList<PieEntry>();
+////        repaymentEntries.add(0, new PieEntry(data1));
+////        repaymentEntries.add(1, new PieEntry(data2));
+////        repaymentEntries.add(2, new PieEntry(data3));
 //
-//        // NOTE: The order of the entries when being added to the entries array determines their position around the center of
+//        // NOTE: The order of the repaymentEntries when being added to the repaymentEntries array determines their position around the center of
 //        // the chart.
 ////        for (int i = 0; i < count ; i++) {
-////            entries.add(new PieEntry((float) ((Math.random() * mult) + mult / 5),
+////            repaymentEntries.add(new PieEntry((float) ((Math.random() * mult) + mult / 5),
 ////                    mParties[i % mParties.length],
 ////                    getResources().getDrawable(R.drawable.googleg_standard_color_18)));
 ////        }
 //
 //
 //
-//        PieDataSet dataSet = new PieDataSet(entries, "Debt Composition");
+//        PieDataSet dataSet = new PieDataSet(repaymentEntries, "Debt Composition");
 //
 ////        dataSet.setDrawIcons(false);
 //

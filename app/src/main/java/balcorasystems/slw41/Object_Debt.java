@@ -9,6 +9,7 @@ public class Object_Debt
 {
     public static ArrayList<Object_Loan> loanPortfolio = new ArrayList<>();
     public static ArrayList<Object_Repayment> repaymentPortfolio = new ArrayList<>();
+    static Integer selectedRepaymentPlan=0;
 
     public static void addBlankLoan()
     {

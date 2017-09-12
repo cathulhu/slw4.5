@@ -19,7 +19,7 @@ public class Fragment_Tracking_Detail extends Fragment
 
 
     public Integer coordinate=0;
-    public Float paymentValue=0.0f;
+    public Double paymentValue=0.0;
     public String repaymentPlan = "Standard Repayment";
 
     public View onCreateView(LayoutInflater inflater, ViewGroup selectionContainer, Bundle savedInstanceState) {
