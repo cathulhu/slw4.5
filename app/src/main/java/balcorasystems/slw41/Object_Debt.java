@@ -25,15 +25,16 @@ public class Object_Debt
 
 
 
-    public static void addRepaymentWithSwitching(ArrayList<Double> passedPayments, Double passedTotal, double passedForgiveness, double passedTax, ArrayList<Integer> passedSwitchIndictars, ArrayList<Integer> passedSwitchIDs)
+    public static void addRepaymentWithSwitching(String type, ArrayList<Double> passedPayments, Double passedTotal, double passedForgiveness, double passedTax, ArrayList<Integer> passedSwitchIndictars, ArrayList<Integer> passedSwitchIDs)
     {
         Object_Repayment newRepayment = new Object_Repayment(passedPayments, passedTotal, passedForgiveness, passedTax, passedSwitchIndictars, passedSwitchIDs);
         repaymentPortfolio.add(newRepayment);
     }
 
-    public static void addRepaymentNoSwitching(ArrayList<Double> passedPayments, Double passedTotal, double passedForgiveness, double passedTax)
+    public static void addRepaymentNoSwitching(String type, ArrayList<Double> passedPayments, Double passedTotal, double passedForgiveness, double passedTax)
     {
         Object_Repayment newRepayment = new Object_Repayment(passedPayments, passedTotal, passedForgiveness, passedTax);
         repaymentPortfolio.add(newRepayment);
+        repaymentPortfolio.get(repaymentPortfolio.size()-1).coordinateInArray=repaymentPortfolio.size()-1;
     }
 }

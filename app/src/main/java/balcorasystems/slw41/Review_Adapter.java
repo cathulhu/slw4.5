@@ -29,40 +29,6 @@ public class Review_Adapter extends RecyclerView.Adapter<Review_Adapter.ViewHold
 
         foundSummaryTitles=Fragment_MasterQuestionSpawner.summaryTitles;
 
-//        summaryTitles.add("Loan Default");
-//        summaryTitles.add("Loan Delinquency");
-//        summaryTitles.add("Deceased Borrower");
-//        summaryTitles.add("Consolidated Loans");
-//        summaryTitles.add("Loan Rehabilitation");
-//        summaryTitles.add("Parent PLUS Loans");
-//        summaryTitles.add("FFEL Loans");
-//        summaryTitles.add("Perkins Loans");
-//        summaryTitles.add("Direct Loans");
-//        summaryTitles.add("Employment");
-//        summaryTitles.add("First Loan Date");
-//        summaryTitles.add("Debt, Income, and Payment");
-//        summaryTitles.add("Tax Status");
-//        summaryTitles.add("Tax Dependants");
-//        summaryTitles.add("Debt Types");
-//        summaryTitles.add("Debt Servicer");
-//
-//        loanValues.add(String.valueOf(MainActivity.Borrower.inDefault));
-//        loanValues.add(String.valueOf(MainActivity.Borrower.inDelinquincy));
-//        loanValues.add(String.valueOf(MainActivity.Borrower.deceased));
-//        loanValues.add(String.valueOf(MainActivity.Borrower.hasConsolidated));
-//        loanValues.add(String.valueOf(MainActivity.Borrower.loanRehab));
-//        loanValues.add(String.valueOf(MainActivity.Borrower.parentLoans));
-//        loanValues.add(String.valueOf(MainActivity.Borrower.ffelLoans));
-//        loanValues.add(String.valueOf(MainActivity.Borrower.perkinsLoans));
-//        loanValues.add(String.valueOf(MainActivity.Borrower.directLoans));
-//        loanValues.add(String.valueOf(MainActivity.Borrower.employmentType));
-//        loanValues.add(String.valueOf(MainActivity.Borrower.loanDate));
-//        loanValues.add(String.valueOf(MainActivity.Borrower.debt));
-//        loanValues.add(String.valueOf(MainActivity.Borrower.taxStatus));
-//        loanValues.add(String.valueOf(MainActivity.Borrower.taxSize));
-//        loanValues.add("not implemented types yet");
-//        loanValues.add(String.valueOf(MainActivity.Borrower.servicer));
-
     }
 
 

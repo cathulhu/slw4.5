@@ -58,7 +58,7 @@ public class Fragment_Summary extends Fragment
         View rootLayoutView = inflater.inflate(R.layout.summary_timeline, selectionContainer, false);
 
 
-        ArrayList<TimelineRow> timelineRowsList = new ArrayList<>();
+//        ArrayList<TimelineRow> timelineRowsList = new ArrayList<>();
 
         TimelineRow myRow = new TimelineRow(0);
         TimelineRow myRow1 = new TimelineRow(1);
@@ -131,22 +131,22 @@ public class Fragment_Summary extends Fragment
 
 
 // Add the new row to the list
-        timelineRowsList.add(myRow);
-        timelineRowsList.add(myRow1);
-        timelineRowsList.add(myRow2);
-        timelineRowsList.add(myRow3);
-        timelineRowsList.add(myRow4);
-        timelineRowsList.add(myRow5);
-        timelineRowsList.add(myRowA);
+//        timelineRowsList.add(myRow);
+//        timelineRowsList.add(myRow1);
+//        timelineRowsList.add(myRow2);
+//        timelineRowsList.add(myRow3);
+//        timelineRowsList.add(myRow4);
+//        timelineRowsList.add(myRow5);
+//        timelineRowsList.add(myRowA);
 
 // Create the Timeline Adapter
-        ArrayAdapter<TimelineRow> myAdapter = new TimelineViewAdapter(getContext(), 0, timelineRowsList,
-                //if true, list will be sorted by date
-                false);
+//        ArrayAdapter<TimelineRow> myAdapter = new TimelineViewAdapter(getContext(), 0, timelineRowsList,
+//                //if true, list will be sorted by date
+//                false);
 
 // Get the ListView and Bind it with the Timeline Adapter
-        ListView myListView = (ListView) rootLayoutView.findViewById(R.id.timeline_listView);
-        myListView.setAdapter(myAdapter);
+//        ListView myListView = (ListView) rootLayoutView.findViewById(R.id.timeline_listView);
+//        myListView.setAdapter(myAdapter);
 
 
 

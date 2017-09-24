@@ -41,7 +41,7 @@ public class Object_Repayment
         repaymentPlanNames.add("10% REPAYE");
         repaymentPlanNames.add("20% ICR");
 
-        calculateMeanMonthlyPayment();;
+        calculateMeanMonthlyPayment();
 
     }
 
@@ -51,6 +51,8 @@ public class Object_Repayment
     }
 
     public ArrayList<Double> monthlyPayments = new ArrayList<>();
+    public String type = "";
+    public Integer coordinateInArray=0;
     public Double repaymentTotal;
     public Double forgivnessTotal;
     public Double taxTotal;

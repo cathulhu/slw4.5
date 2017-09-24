@@ -32,9 +32,15 @@ public class Object_Borrower
 
     // public Double debt;
     public Integer taxSize;
-    public Double startingIncome;
-    public Double spouseIncome;
-    // raise percentage
+
+    public static Double annualraisePercent=(1.05);
+    //could have a separate raise percent for spouse, add this later
+    public static Double startingPrimaryIncome;
+    public static Double startingSpouseIncome;
+    public static ArrayList<Double> primaryIncomeOverTime = new ArrayList<>();
+    public static ArrayList<Double> spouseIncomeOverTime = new ArrayList<>();
+    public static Double primaryCurrentIncome=startingPrimaryIncome;
+    public static Double spouseCurrentIncome=startingSpouseIncome;
 
     public Boolean wagesGranished;
     public Double firstNextRepaymentDate;
@@ -46,4 +52,38 @@ public class Object_Borrower
 
     // public ArrayList<Double> payments;
     // make sure the update everything that still uses this and switch it over to the proper Object_Loan stuff.
+
+    public static void PopulatePrimaryIncome ()
+    {
+        primaryCurrentIncome=startingPrimaryIncome;
+
+        while (primaryIncomeOverTime.size() < 500)
+        {
+            for (int i = 0; i < 12; i++)
+            {
+                primaryIncomeOverTime.add(primaryCurrentIncome);
+            }
+
+            primaryCurrentIncome = primaryCurrentIncome * annualraisePercent;
+        }
+
+    }
+
+    public static void PopulateSpouseIncome ()
+    {
+        spouseCurrentIncome=startingSpouseIncome;
+
+        while (spouseIncomeOverTime.size() < 500)
+        {
+            for (int i = 0; i < 12; i++)
+            {
+                spouseIncomeOverTime.add(spouseCurrentIncome);
+            }
+
+            spouseCurrentIncome = spouseCurrentIncome * annualraisePercent;
+        }
+
+    }
+
+
 }

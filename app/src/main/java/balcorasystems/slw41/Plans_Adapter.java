@@ -31,10 +31,14 @@ public class Plans_Adapter extends RecyclerView.Adapter<Plans_Adapter.ViewHolder
 
         Calculations calculator = new Calculations(MainActivity.masterBorrower);
         calculator.StandardRepayCalc();
+        calculator.variableCalc();
 
         //add in an IBR and other plans once those calculations have been written. Eventually doing this calculation should be moved somewhere else and this adapter will just grab values.
         //this style is just repeating the calculation everytime, need to come up with something else
     }
+
+
+
 
 
     @Override
@@ -57,6 +61,9 @@ public class Plans_Adapter extends RecyclerView.Adapter<Plans_Adapter.ViewHolder
 
         return genericViewholder;
     }
+
+
+
 
     @Override
     public void onBindViewHolder(Plans_Adapter.ViewHolder viewHolder, int i)

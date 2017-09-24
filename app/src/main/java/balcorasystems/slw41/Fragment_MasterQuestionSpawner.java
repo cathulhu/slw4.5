@@ -148,7 +148,7 @@ public class Fragment_MasterQuestionSpawner extends Fragment
             //load different fragments, not the recycler view
             Borrower.currentlyEditing=summaryTitles.get(index);
             FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
-            fTransaction.replace(R.id.fragmentSection, new Fragment_Info());
+            fTransaction.replace(R.id.fragmentSection, new Fragment_Income());
             fTransaction.commit();
         }
         else if (summaryTitles.get(index).equals("Tax Status"))

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="loanTypes">
-        <item>Direct Subsidized Loan </item>
-        <item>Direct Unsubsidized Loan </item>
+        <item>Direct Subsidized Loan</item>
+        <item>Direct Unsubsidized Loan</item>
         <item>Subsidized Federal Stafford Loan</item>
         <item>Unsubsidized Federal Stafford Loan</item>
         <item>Direct Subsidized Consolidation Loan</item>

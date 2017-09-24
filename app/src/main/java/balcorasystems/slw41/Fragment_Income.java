@@ -11,7 +11,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 
-public class Fragment_Info extends Fragment
+public class Fragment_Income extends Fragment
 {
 
     public static Integer incomeRaw =6;
@@ -35,7 +35,8 @@ public class Fragment_Info extends Fragment
 
                 spouseIncomeRaw=i*1000;
                 spouseIncomeText.setText("$" + String.valueOf(i * 1000));
-                Fragment_MasterQuestionSpawner.Borrower.spouseIncome= Double.valueOf(spouseIncomeRaw);
+                Fragment_MasterQuestionSpawner.Borrower.startingSpouseIncome= Double.valueOf(spouseIncomeRaw);
+                Object_Borrower.PopulateSpouseIncome();
 
             }
 
@@ -57,7 +58,8 @@ public class Fragment_Info extends Fragment
 
                 incomeRaw=i*1000;
                 incomeText.setText("$" + String.valueOf(i * 1000));
-                Fragment_MasterQuestionSpawner.Borrower.startingIncome= Double.valueOf(incomeRaw);
+                Fragment_MasterQuestionSpawner.Borrower.startingPrimaryIncome= Double.valueOf(incomeRaw);
+                Object_Borrower.PopulatePrimaryIncome();
 
             }
 

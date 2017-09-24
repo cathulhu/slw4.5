@@ -9,7 +9,6 @@ public class Object_Loan
     String type;
     Boolean wasRehabed;
     Double interestRate;
-    Long startingBalance;
     Long currentBalance;
     Long generatedMonthlyInterest;
     Long accumulatedNonCapitalizedInterest;

@@ -63,7 +63,7 @@ public class Loans_Adapter extends RecyclerView.Adapter<Loans_Adapter.ViewHolder
                     inputBalance = Long.valueOf(rawInput);
                 }
                 //do an input check then write the changes
-                Fragment_MasterQuestionSpawner.Borrower.debtAndRepaymentObject.loanPortfolio.get(genericViewholder.getAdapterPosition()).startingBalance= inputBalance;
+                Fragment_MasterQuestionSpawner.Borrower.debtAndRepaymentObject.loanPortfolio.get(genericViewholder.getAdapterPosition()).currentBalance= inputBalance;
             }
         });
 
