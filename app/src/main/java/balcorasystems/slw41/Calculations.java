@@ -47,73 +47,241 @@ public class Calculations
     }
 
 
-
-
-
-
-    public Double repaymentEligibility(Object_Borrower passedBorrower, Object_Loan passedLoan, Integer repaymentMonth, String pfhStatus)
+    public static Double Standard12QuickCheck()
     {
+        ArrayList<Double> stdPayments = new ArrayList<>();
+        Double totalPayed=0.0;
+        Double individualPayment= 0.0;
+        Double totalMonthlyPayment= 0.0;
+
+        for (Object_Loan loan : targetBorrower.debtAndRepaymentObject.loanPortfolio)
+        {
+            ArrayList<Double> payments= new ArrayList<>();
+            double monthlyInterestRate=loan.interestRate/100/12;
+            double paymentCalcNumerator = monthlyInterestRate * loan.currentBalance;    //change this to current balance soon and start using that value in other things
+            double paymentCalcDenominator = 1 - Math.pow(1 + (monthlyInterestRate), -144);
+            individualPayment = paymentCalcNumerator / paymentCalcDenominator;
+
+            totalPayed += individualPayment*144;
+            totalMonthlyPayment += individualPayment;
+        }
+
+        return individualPayment;
+    }
+
+    public static Double Standard10QuickCheck()
+    {
+        ArrayList<Double> stdPayments = new ArrayList<>();
+        Double totalPayed=0.0;
+        Double individualPayment= 0.0;
+        Double totalMonthlyPayment= 0.0;
+
+        for (Object_Loan loan : targetBorrower.debtAndRepaymentObject.loanPortfolio)
+        {
+            ArrayList<Double> payments= new ArrayList<>();
+            double monthlyInterestRate=loan.interestRate/100/12;
+            double paymentCalcNumerator = monthlyInterestRate * loan.currentBalance;    //change this to current balance soon and start using that value in other things
+            double paymentCalcDenominator = 1 - Math.pow(1 + (monthlyInterestRate), -120);
+            individualPayment = paymentCalcNumerator / paymentCalcDenominator;
+
+            totalPayed += individualPayment*120;
+            totalMonthlyPayment += individualPayment;
+        }
+
+        return individualPayment;
+    }
+
+
+
+
+
+
+    public ArrayList<String> variableRepaymentCalc(Object_Borrower passedBorrower, Object_Loan passedLoan, Integer repaymentMonth, String pfhStatus, Double discretionaryIncome) {
         Double percent = 0D;
 
-        Boolean iBR15= false;
-        Boolean iBR10= false;
-        Boolean iCR20= false;
-        Boolean repaye10= false;
-        Boolean paye10= false;
+        Boolean iCR20 = false;
+        Boolean iBR15 = false;
+        Boolean iBR10 = false;
+        Boolean repaye10 = false;
+        Boolean paye10 = false;
+        Boolean std12 = false;
 
-        Boolean stdCap=false;
-        Integer timeframe=0;
+        ArrayList<Double> variablePayments = new ArrayList<>();
+        ArrayList<Double> stdPayments = new ArrayList<>();
+        ArrayList<Double> comparisonResults = new ArrayList<>();
+        ArrayList<String> repaymentPlanNames = new ArrayList<>();
+        repaymentPlanNames.add("ICR");
+        repaymentPlanNames.add("OLDIBR");
+        repaymentPlanNames.add("NEWIBR");
+        repaymentPlanNames.add("REPAYE");
+        repaymentPlanNames.add("PAYE");
 
-        if ( (passedBorrower.timeBetween11to14 = true || passedBorrower.timeAfter14) && pfhStatus.equals("10% PFH"))
+        Double std10yearOriginalPayment = passedBorrower.debtAndRepaymentObject.repaymentPortfolio.get(0).monthlyPayments.get(0);
+        Double std12yearPayment = Calculations.Standard12QuickCheck();
+        //TODO: soon setup 12 std repayment so its just calculated once at the begining of repayment selection, probably triggered in standard calc
+
+        Double disc20percentPayment = discretionaryIncome/12*0.20;
+        Double disc15percentPayment = discretionaryIncome/12*0.15;
+        Double disc10percentPayment = discretionaryIncome/12*0.10;
+
+
+        Boolean stdCap = false;
+        Integer timeframe = 0;
+
+
+        //ICR Check
+        if (passedLoan.type.equals("Direct Unsubsidized Consolidation Loan") || passedLoan.type.equals("Direct Subsidized Consolidation Loan")
+                || passedLoan.type.equals("Direct Unsubsidized Loan") || passedLoan.type.equals("Direct Subsidized Loan")
+                || passedLoan.type.equals("Direct PLUS Loan for Graduate/Professional Students") || passedLoan.type.equals("Direct PLUS Consolidation Loan") )
         {
-            //NEW IBR 10% and 20 years
-            iBR15= true;
+
+            variablePayments.add(disc20percentPayment);
+            stdPayments.add(std12yearPayment);
+
+            iCR20 = true;
+
+            //ICR lesser of 20% or 12 year std repayment
+            //no cap on disc payment
+        }
+        else
+        {
+            variablePayments.add(-1D);
+            stdPayments.add(-1D);
         }
 
-        if (passedLoan.type.equals("Direct Unsubsidized Consolidation Loan") || passedLoan.type.equals("Direct Subsidized Consolidation Loan") || passedLoan.type.equals("Direct Unsubsidized Loan") || passedLoan.type.equals("Direct Subsidized Loan") || passedLoan.type.equals("Direct PLUS Loan for Graduate/Professional Students") || passedLoan.type.equals("Direct PLUS Loan for Parents") || passedLoan.type.equals("Direct PLUS Consolidation Loan") ||  passedLoan.type.equals("FFEL PLUS Loan for Parents" ) || passedLoan.type.equals("FFEL PLUS Loan for Graduate/Professional Students" ) || passedLoan.type.equals("FFEL Consolidation Loan" ))
+
+        //OLD IBR CHECK
+        if ( ( passedLoan.type.equals("Direct Unsubsidized Consolidation Loan") || passedLoan.type.equals("Direct Subsidized Consolidation Loan")
+                || passedLoan.type.equals("Direct Unsubsidized Loan") || passedLoan.type.equals("Direct Subsidized Loan")
+                || passedLoan.type.equals("Direct PLUS Loan for Graduate/Professional Students") || passedLoan.type.equals("Direct PLUS Consolidation Loan")
+                || passedLoan.type.equals("FFEL PLUS Loan for Graduate/Professional Students") || passedLoan.type.equals("FFEL Consolidation Loan")
+                || passedLoan.type.equals("Subsidized Federal Stafford Loan") || passedLoan.type.equals("Unsubsidized Federal Stafford Loan") )
+                && ( pfhStatus.equals("15% PFH") || pfhStatus.equals("10% PFH") )
+                )
         {
-            //regular IBR 15% capped at fixed 10 year payment, 25 years
-            iBR10= true;
+            //IBR Capped at amount of original std payment
+
+                variablePayments.add(disc15percentPayment);
+                stdPayments.add(std10yearOriginalPayment);
+                //new ibr
+                iBR15=true;
+
+
+        }
+        else
+        {
+            variablePayments.add(-1D);
+            stdPayments.add(-1D);
         }
 
-        if (passedLoan.type.equals("Direct Unsubsidized Consolidation Loan") || passedLoan.type.equals("Direct Subsidized Consolidation Loan") || passedLoan.type.equals("Direct Unsubsidized Loan") || passedLoan.type.equals("Direct Subsidized Loan") || passedLoan.type.equals("Direct PLUS Loan for Graduate/Professional Students") || passedLoan.type.equals("Direct PLUS Loan for Parents") || passedLoan.type.equals("Direct PLUS Consolidation Loan") )
+        //New IBR CHECK
+        if ( ( passedLoan.type.equals("Direct Unsubsidized Consolidation Loan") || passedLoan.type.equals("Direct Subsidized Consolidation Loan")
+                || passedLoan.type.equals("Direct Unsubsidized Loan") || passedLoan.type.equals("Direct Subsidized Loan")
+                || passedLoan.type.equals("Direct PLUS Loan for Graduate/Professional Students") || passedLoan.type.equals("Direct PLUS Consolidation Loan")
+                || passedLoan.type.equals("FFEL PLUS Loan for Graduate/Professional Students") || passedLoan.type.equals("FFEL Consolidation Loan")
+                || passedLoan.type.equals("Subsidized Federal Stafford Loan") || passedLoan.type.equals("Unsubsidized Federal Stafford Loan") )
+                && pfhStatus.equals("10% PFH")
+                && passedBorrower.timeAfter14
+                )
         {
-            //ICR lesser of 20% or 12 year std repayment?
-            iCR20= true;
+
+                variablePayments.add(disc10percentPayment);
+                stdPayments.add(std10yearOriginalPayment);
+                iBR10=true;
+                //old ibr
+
+        }
+        else
+        {
+            variablePayments.add(-1D);
+            stdPayments.add(-1D);
         }
 
-        if (passedLoan.type.equals("Direct Unsubsidized Consolidation Loan") || passedLoan.type.equals("Direct Subsidized Consolidation Loan") || passedLoan.type.equals("Direct Unsubsidized Loan") || passedLoan.type.equals("Direct Subsidized Loan") || passedLoan.type.equals("Direct PLUS Loan for Graduate/Professional Students") || passedLoan.type.equals("Direct PLUS Loan for Parents") || passedLoan.type.equals("Direct PLUS Consolidation Loan") )
+
+
+
+        //Repaye check
+        if (passedLoan.type.equals("Direct Unsubsidized Consolidation Loan") || passedLoan.type.equals("Direct Subsidized Consolidation Loan")
+                || passedLoan.type.equals("Direct Unsubsidized Loan") || passedLoan.type.equals("Direct Subsidized Loan")
+                || passedLoan.type.equals("Direct PLUS Loan for Graduate/Professional Students") || passedLoan.type.equals("Direct PLUS Consolidation Loan")
+                )
         {
-            //REPAYE 10% of income, no cap, 20 years undergrad, 25 grad
+            variablePayments.add(disc10percentPayment);
+            stdPayments.add(-1D);
             repaye10=true;
+            //REPAYE 10% of income, no cap, 20 years undergrad, 25 grad
+        }
+        else
+        {
+            variablePayments.add(-1D);
+            stdPayments.add(-1D);
         }
 
-        if (passedLoan.type.equals("Direct Unsubsidized Consolidation Loan") || passedLoan.type.equals("Direct Subsidized Consolidation Loan") || passedLoan.type.equals("Direct Unsubsidized Loan") || passedLoan.type.equals("Direct Subsidized Loan") || passedLoan.type.equals("Direct PLUS Loan for Graduate/Professional Students") || passedLoan.type.equals("Direct PLUS Loan for Parents") || passedLoan.type.equals("Direct PLUS Consolidation Loan") )
+        //PAYE check
+        if ( (passedBorrower.timeAfter14 || passedBorrower.timeBetween11to14) && pfhStatus.equals("10% PFH") &&
+                ( passedLoan.type.equals("Direct Unsubsidized Consolidation Loan") || passedLoan.type.equals("Direct Subsidized Consolidation Loan")
+                || passedLoan.type.equals("Direct Unsubsidized Loan") || passedLoan.type.equals("Direct Subsidized Loan")
+                || passedLoan.type.equals("Direct PLUS Loan for Graduate/Professional Students") || passedLoan.type.equals("Direct PLUS Consolidation Loan") )
+                )
         {
-            if (passedBorrower.timeBetween11to14  || passedBorrower.timeAfter14)
-            {
-                //should consider how to add the edge case of loan on/after 07 AND one line on/after 9/14
-                //PAYE, have PFH Then 10%, capped at std amount @ 20 years
+            //PAYE 10% capped at std
+                    variablePayments.add(disc10percentPayment);
+                    stdPayments.add(-1D);
+            paye10=true;
 
-                paye10=true;
+        }
+        else
+        {
+            variablePayments.add(-1D);
+            stdPayments.add(-1D);
+        }
+
+        for (int i = 0; i < variablePayments.size(); i++)
+        {
+            Double variablePayment = variablePayments.get(i);
+            Double stdPaymentCap = stdPayments.get(i);
+
+            if (variablePayment < stdPaymentCap && variablePayment > 0)
+            {
+                comparisonResults.add(variablePayment);
+            }
+            else if (stdPaymentCap < variablePayment && stdPaymentCap > 0)
+            {
+                comparisonResults.add(stdPaymentCap);
+            }
+            else if (stdPaymentCap < 0)
+            {
+                comparisonResults.add(variablePayment);
             }
         }
 
+        //sorting comparison results by lowest, could do other sorts but this seems like good place to start
 
-        else if (iCR20==true)
+        Double lowest=comparisonResults.get(0);
+        Integer lowestID=0;
+
+
+        for (int i = 0; i < comparisonResults.size(); i++)
         {
-            percent=0.20;
-        }
-        else if (iBR15==true)
-        {
-            percent=0.15;
-        }
-        if (iBR10==true || repaye10==true || paye10==true)
-        {
-            percent=0.10;
+
+            if (comparisonResults.get(i) >= 0)
+            {
+                if (comparisonResults.get(i) < lowest)
+                {
+                    lowest=comparisonResults.get(i);
+                    lowestID=i;
+
+                }
+            }
         }
 
-        return percent;
+        String lowestType=repaymentPlanNames.get(lowestID);
+
+        ArrayList<String> results = new ArrayList<>();
+        results.add(lowestType);
+        results.add(String.valueOf(lowest));
+
+        return results;
     }
 
 
@@ -169,17 +337,22 @@ public class Calculations
 
 
 
-    public void variableCalc()
+    public void lowestCalc()
     {
-        ArrayList<Double> perLoanRepayments = new ArrayList<>();
+        ArrayList<Double> totalPayments = new ArrayList<>();
+        ArrayList<ArrayList> individualPayments = new ArrayList<>();
         double forgiveness=0;
         double statTotalSpent = 0;
 
         for (Object_Loan loan : targetBorrower.debtAndRepaymentObject.loanPortfolio)
         {
-            Double idrPercent = 0.15; //by default starts with highest since everyone is eligible for this type of IBR
+            ArrayList<Double> perLoanRepayments = new ArrayList<>();
+            ArrayList<String> perloanRepaymentTypes = new ArrayList<>();
+            ArrayList<String>monthlyPaymentCalc = new ArrayList();
+            Double lowestVariablePayment;
             Integer repaymentMonth = 0 ;
             Integer repaymentMonthLimit = 300;  //add functionality to change this for different repayment types
+            double startingStandardRepayment=Calculations.Standard10QuickCheck();
             double monthlyInterestRate=loan.interestRate/100/12;
             double monthlyAccruedInterest;
             double netChange;
@@ -189,30 +362,20 @@ public class Calculations
             double idrPayment;
             double statAccruedUnpaidInterst = 0;
             double loanRunningIndividualBalance=loan.currentBalance;
-
-
             String pfhStatus;
-
-
-            discretionaryIncome = DiscIncomeCalc(0, startingIncome);
-            pfhStatus = financialHardshipCalc(discretionaryIncome, targetBorrower);
-            idrPercent = repaymentEligibility(targetBorrower, loan, repaymentMonth, pfhStatus);
 
 
             while (loanRunningIndividualBalance > 0 && repaymentMonth < repaymentMonthLimit)
             {
-
-
                 //stages each month: check which IDR best eligible for, calculate IDR payment, calculate interest, update income, process payment
-
-
-//                idrPercent = repaymentEligibility(targetBorrower, loan, repaymentMonth, pfhStatus);
-                //I'll have to think on how I want to incorperate switching and comparing different plans after starting pick
-
                 discretionaryIncome=DiscIncomeCalc(repaymentMonth, runningIncome);
+                pfhStatus = financialHardshipCalc(discretionaryIncome, targetBorrower);
+                ArrayList<String> results = variableRepaymentCalc(targetBorrower, loan, repaymentMonth, pfhStatus, discretionaryIncome);
 
-                idrPayment = (discretionaryIncome * idrPercent) / 12;
-                //put check here to adjust idrPayment so it doesn't go above cap (if the current repayment plan has one)
+                idrPayment = Double.valueOf(results.get(1));
+
+                perloanRepaymentTypes.add( results.get(0) );
+                perLoanRepayments.add( Double.valueOf(results.get(1)));
 
                 monthlyAccruedInterest = monthlyInterestRate * loanRunningIndividualBalance;
                 //put check here if subsidized, if so and < 36 months interest = 0
@@ -242,24 +405,22 @@ public class Calculations
                     statAccruedUnpaidInterst += (long) netChange;     //calculating how much unpaid interest accrues
                 }
                 statTotalSpent += idrPayment;
+                loan.currentBalance=loanRunningIndividualBalance;
 
-
-
-
-                if (repaymentMonth > perLoanRepayments.size()-1)    //double check that this logic works the way you think it does
+                if (repaymentMonth > totalPayments.size()-1)    //double check that this logic works the way you think it does
                 {
-                    perLoanRepayments.add(idrPayment);
+                    totalPayments.add(idrPayment);
                 }
                 else
                 {
-                    perLoanRepayments.set(repaymentMonth, perLoanRepayments.get(repaymentMonth)+idrPayment);
+                    totalPayments.set(repaymentMonth, totalPayments.get(repaymentMonth)+idrPayment);
                 }
                 repaymentMonth++;
 
                 runningIncome=targetBorrower.primaryIncomeOverTime.get(repaymentMonth);
                 targetBorrower.primaryCurrentIncome=runningIncome;  //might not actually NEED to set this but eh for now
             }
-
+            individualPayments.add(perLoanRepayments);
 
             //final loan forgiveness sorting out
             if (loanRunningIndividualBalance > 0)
@@ -267,10 +428,11 @@ public class Calculations
                 forgiveness += loanRunningIndividualBalance;
             }
 
+            loan.forgiveness=forgiveness;
             loan.currentBalance=(long) 0;
         }
 
-        targetBorrower.debtAndRepaymentObject.addRepaymentNoSwitching("Variable", perLoanRepayments, statTotalSpent, forgiveness, 0);
+        targetBorrower.debtAndRepaymentObject.addRepaymentNoSwitching("Variable", totalPayments, statTotalSpent, forgiveness, 0);
 
     }
 

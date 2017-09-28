@@ -31,7 +31,7 @@ public class Plans_Adapter extends RecyclerView.Adapter<Plans_Adapter.ViewHolder
 
         Calculations calculator = new Calculations(MainActivity.masterBorrower);
         calculator.StandardRepayCalc();
-        calculator.variableCalc();
+        calculator.lowestCalc();
 
         //add in an IBR and other plans once those calculations have been written. Eventually doing this calculation should be moved somewhere else and this adapter will just grab values.
         //this style is just repeating the calculation everytime, need to come up with something else
