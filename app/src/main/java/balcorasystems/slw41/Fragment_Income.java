@@ -35,7 +35,7 @@ public class Fragment_Income extends Fragment
 
                 spouseIncomeRaw=i*1000;
                 spouseIncomeText.setText("$" + String.valueOf(i * 1000));
-                Fragment_MasterQuestionSpawner.Borrower.startingSpouseIncome= Double.valueOf(spouseIncomeRaw);
+                Object_Borrower.startingSpouseIncome = Double.valueOf(spouseIncomeRaw);
                 Object_Borrower.PopulateSpouseIncome();
 
             }
@@ -58,7 +58,7 @@ public class Fragment_Income extends Fragment
 
                 incomeRaw=i*1000;
                 incomeText.setText("$" + String.valueOf(i * 1000));
-                Fragment_MasterQuestionSpawner.Borrower.startingPrimaryIncome= Double.valueOf(incomeRaw);
+                Object_Borrower.startingPrimaryIncome = Double.valueOf(incomeRaw);
                 Object_Borrower.PopulatePrimaryIncome();
 
             }

@@ -21,7 +21,7 @@ public class Fragment_Selection extends Fragment
 
     public interface OnNavigateAwayListener
     {
-        public void navigateToChoice(Integer choice);
+        void navigateToChoice(Integer choice);
     }
 
     public OnNavigateAwayListener mListener;

@@ -19,7 +19,7 @@ public class Fragment_Loans extends Fragment
 
     public void addLoan()
     {
-        Fragment_MasterQuestionSpawner.Borrower.debtAndRepaymentObject.addBlankLoan();
+        Object_Debt.addBlankLoan();
         adapter.notifyDataSetChanged();
     }
 

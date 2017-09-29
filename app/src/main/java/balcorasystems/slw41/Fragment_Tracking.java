@@ -40,7 +40,7 @@ public class Fragment_Tracking extends Fragment
         mPagerAdapter = new ScreenSlidePagerAdapter(getFragmentManager());
         trackingPager.setAdapter(mPagerAdapter);
 
-        Object_Repayment targetRepayment = MainActivity.masterBorrower.debtAndRepaymentObject.repaymentPortfolio.get(MainActivity.masterBorrower.debtAndRepaymentObject.selectedRepaymentPlan);
+        Object_Repayment targetRepayment = Object_Debt.repaymentPortfolio.get(Object_Debt.selectedRepaymentPlan);
         Integer index=0;
 
         for (Double x: targetRepayment.monthlyPayments)
@@ -127,7 +127,7 @@ public class Fragment_Tracking extends Fragment
 
         @Override
         public Fragment getItem(int position) {
-            Object_Repayment targetRepayment = MainActivity.masterBorrower.debtAndRepaymentObject.repaymentPortfolio.get(MainActivity.masterBorrower.debtAndRepaymentObject.selectedRepaymentPlan);
+            Object_Repayment targetRepayment = Object_Debt.repaymentPortfolio.get(Object_Debt.selectedRepaymentPlan);
             Fragment_Tracking_Detail instancedFrag = new Fragment_Tracking_Detail();
             instancedFrag.coordinate=position;
             instancedFrag.paymentValue=targetRepayment.monthlyPayments.get(position);
@@ -137,7 +137,7 @@ public class Fragment_Tracking extends Fragment
 
         @Override
         public int getCount() {
-            Object_Repayment targetRepayment = MainActivity.masterBorrower.debtAndRepaymentObject.repaymentPortfolio.get(MainActivity.masterBorrower.debtAndRepaymentObject.selectedRepaymentPlan);
+            Object_Repayment targetRepayment = Object_Debt.repaymentPortfolio.get(Object_Debt.selectedRepaymentPlan);
             return targetRepayment.monthlyPayments.size();
         }
     }

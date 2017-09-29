@@ -16,9 +16,9 @@ public class Questions_Adapter extends RecyclerView.Adapter<Questions_Adapter.Vi
     static Boolean fowardNavBoolean=true;
 
 
-    public static interface NextAfter
+    public interface NextAfter
     {
-        public void NextAfterSelection();
+        void NextAfterSelection();
     }
 
     public NextAfter mListener;

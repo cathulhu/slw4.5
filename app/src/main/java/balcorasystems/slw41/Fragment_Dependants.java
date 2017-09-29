@@ -13,9 +13,9 @@ import android.widget.NumberPicker;
 
 public class Fragment_Dependants extends Fragment
 {
-    public static interface NextAfter
+    public interface NextAfter
     {
-        public void NextAfterSelection();
+        void NextAfterSelection();
     }
 
     public NextAfter mListener;

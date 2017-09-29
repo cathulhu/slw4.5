@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements Fragment_Selectio
     public void NextAfterSelection()
     {
         Fragment_MasterQuestionSpawner reloadedFragment = new Fragment_MasterQuestionSpawner();
-        reloadedFragment.index++;
+        Fragment_MasterQuestionSpawner.index++;
         FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
         fTransaction.replace(R.id.mainFrameLayout, reloadedFragment, "summary");
         fTransaction.addToBackStack(null);
@@ -33,9 +33,9 @@ public class MainActivity extends AppCompatActivity implements Fragment_Selectio
     public void toReviewQuestion ()
     {
         Fragment_MasterQuestionSpawner reloadedFragment = new Fragment_MasterQuestionSpawner();
-        reloadedFragment.index=Review_Adapter.choice;
-        reloadedFragment.first=true;
-        reloadedFragment.reviewLoad=true;
+        Fragment_MasterQuestionSpawner.index =Review_Adapter.choice;
+        Fragment_MasterQuestionSpawner.first =true;
+        Fragment_MasterQuestionSpawner.reviewLoad =true;
         FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
         fTransaction.replace(R.id.mainFrameLayout, reloadedFragment, "summary");
         fTransaction.addToBackStack(null);
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements Fragment_Selectio
     public void recyclerToDetail(Integer selection)
     {
         Fragment_PlanDetail loadedFragment = new  Fragment_PlanDetail();
-        loadedFragment.selection=selection;
+        Fragment_PlanDetail.selection =selection;
         FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
         fTransaction.replace(R.id.mainFrameLayout, loadedFragment);
         fTransaction.addToBackStack(null);
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements Fragment_Selectio
         {
             Fragment_MasterQuestionSpawner loadedFragment = new Fragment_MasterQuestionSpawner();
             //reseting the index to 0 so it doesn't load out of bounds if launched a second time, just in case it wasn't properly done on leaving it
-            loadedFragment.index=0;
+            Fragment_MasterQuestionSpawner.index =0;
             FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
             fTransaction.replace(R.id.mainFrameLayout, new Fragment_MasterQuestionSpawner());
             fTransaction.addToBackStack(null);

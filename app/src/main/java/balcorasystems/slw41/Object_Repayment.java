@@ -8,12 +8,13 @@ public class Object_Repayment
     ArrayList<String>repaymentPlanNames;
 
     //constructor without any plan switching
-    public Object_Repayment(ArrayList<Double> passedPayments, Double passedTotal, double passedForgiveness, double passedTax)
+    public Object_Repayment(String type, ArrayList<Double> passedPayments, Double passedTotal, double passedForgiveness, double passedTax)
     {
         this.monthlyPayments=passedPayments;
         this.repaymentTotal=passedTotal;
         this.forgivnessTotal=passedForgiveness;
         this.taxTotal=passedTax;
+        this.type=type;
 
         calculateMeanMonthlyPayment();
     }

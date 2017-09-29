@@ -14,9 +14,9 @@ public class TaxStatus_Adapter extends RecyclerView.Adapter<TaxStatus_Adapter.Vi
     Integer uberIndex=Fragment_MasterQuestionSpawner.index;
     static ArrayList<String> TaxOptions = new ArrayList<>();
 
-    public static interface NextAfter
+    public interface NextAfter
     {
-        public void NextAfterSelection();
+        void NextAfterSelection();
     }
 
     public NextAfter mListener;

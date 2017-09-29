@@ -19,7 +19,7 @@ public class Review_Adapter extends RecyclerView.Adapter<Review_Adapter.ViewHold
 
     public interface OnGoToChangeValue
     {
-        public void toReviewQuestion();
+        void toReviewQuestion();
     }
     public OnGoToChangeValue mListener;
 

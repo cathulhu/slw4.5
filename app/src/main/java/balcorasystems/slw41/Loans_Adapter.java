@@ -35,7 +35,7 @@ public class Loans_Adapter extends RecyclerView.Adapter<Loans_Adapter.ViewHolder
             @Override
             public void onClick(View view)
             {
-                Fragment_MasterQuestionSpawner.Borrower.debtAndRepaymentObject.deleteLoan(genericViewholder.getAdapterPosition());
+                Object_Debt.deleteLoan(genericViewholder.getAdapterPosition());
                 notifyDataSetChanged();
             }
         });
@@ -63,7 +63,7 @@ public class Loans_Adapter extends RecyclerView.Adapter<Loans_Adapter.ViewHolder
                     inputBalance = Long.valueOf(rawInput);
                 }
                 //do an input check then write the changes
-                Fragment_MasterQuestionSpawner.Borrower.debtAndRepaymentObject.loanPortfolio.get(genericViewholder.getAdapterPosition()).currentBalance= inputBalance;
+                Object_Debt.loanPortfolio.get(genericViewholder.getAdapterPosition()).currentBalance= inputBalance;
             }
         });
 
@@ -90,7 +90,7 @@ public class Loans_Adapter extends RecyclerView.Adapter<Loans_Adapter.ViewHolder
                     inputInterest = Double.valueOf(rawInput);
                 }
                 //do an input check then write the changes
-                Fragment_MasterQuestionSpawner.Borrower.debtAndRepaymentObject.loanPortfolio.get(genericViewholder.getAdapterPosition()).interestRate= inputInterest;
+                Object_Debt.loanPortfolio.get(genericViewholder.getAdapterPosition()).interestRate= inputInterest;
                 //do an input check then write the changes
             }
         });
@@ -100,7 +100,7 @@ public class Loans_Adapter extends RecyclerView.Adapter<Loans_Adapter.ViewHolder
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
                 String loanTypeSelection = adapterView.getItemAtPosition(i).toString();
-                Fragment_MasterQuestionSpawner.Borrower.debtAndRepaymentObject.loanPortfolio.get(genericViewholder.getAdapterPosition()).type = loanTypeSelection;
+                Object_Debt.loanPortfolio.get(genericViewholder.getAdapterPosition()).type = loanTypeSelection;
             }
 
             @Override
@@ -127,7 +127,7 @@ public class Loans_Adapter extends RecyclerView.Adapter<Loans_Adapter.ViewHolder
     public int getItemCount()
     {
 
-        return Fragment_MasterQuestionSpawner.Borrower.debtAndRepaymentObject.loanPortfolio.size();
+        return Object_Debt.loanPortfolio.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder

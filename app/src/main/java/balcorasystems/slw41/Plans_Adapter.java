@@ -19,7 +19,7 @@ public class Plans_Adapter extends RecyclerView.Adapter<Plans_Adapter.ViewHolder
 
     public interface OnNavigateToDetail
     {
-        public void recyclerToDetail(Integer passedSelection);
+        void recyclerToDetail(Integer passedSelection);
     }
     public OnNavigateToDetail mListener;
 
@@ -31,7 +31,7 @@ public class Plans_Adapter extends RecyclerView.Adapter<Plans_Adapter.ViewHolder
 
         Calculations calculator = new Calculations(MainActivity.masterBorrower);
         calculator.StandardRepayCalc();
-        calculator.lowestCalc();
+        Calculations.payeCalc();
 
         //add in an IBR and other plans once those calculations have been written. Eventually doing this calculation should be moved somewhere else and this adapter will just grab values.
         //this style is just repeating the calculation everytime, need to come up with something else
@@ -72,7 +72,7 @@ public class Plans_Adapter extends RecyclerView.Adapter<Plans_Adapter.ViewHolder
 
         //populating graph
         ArrayList<Entry> entries = new ArrayList();
-        Object_Repayment targetRepayment = MainActivity.masterBorrower.debtAndRepaymentObject.repaymentPortfolio.get(i);
+        Object_Repayment targetRepayment = Object_Debt.repaymentPortfolio.get(i);
         Integer index=0;
 
         for (Double x: targetRepayment.monthlyPayments)

@@ -33,7 +33,7 @@ public class Object_Debt
 
     public static void addRepaymentNoSwitching(String type, ArrayList<Double> passedPayments, Double passedTotal, double passedForgiveness, double passedTax)
     {
-        Object_Repayment newRepayment = new Object_Repayment(passedPayments, passedTotal, passedForgiveness, passedTax);
+        Object_Repayment newRepayment = new Object_Repayment(type, passedPayments, passedTotal, passedForgiveness, passedTax);
         repaymentPortfolio.add(newRepayment);
         repaymentPortfolio.get(repaymentPortfolio.size()-1).coordinateInArray=repaymentPortfolio.size()-1;
     }

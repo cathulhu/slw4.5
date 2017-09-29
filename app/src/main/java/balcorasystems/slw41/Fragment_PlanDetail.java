@@ -37,7 +37,7 @@ public class Fragment_PlanDetail extends Fragment
         View rootLayoutView = inflater.inflate(R.layout.plan_detailmk2, selectionContainer, false);
         mListener = (OnGoToDetailPlan) getContext();
 
-        final Object_Repayment targetRepayment = MainActivity.masterBorrower.debtAndRepaymentObject.repaymentPortfolio.get(selection);
+        final Object_Repayment targetRepayment = Object_Debt.repaymentPortfolio.get(selection);
 
         TextView newPayment = (TextView) rootLayoutView.findViewById(R.id.newPaymentTitle);
         newPayment.setText("New monthly payment: $" + String.valueOf(targetRepayment.monthlyPayments.get(0)));
@@ -57,7 +57,7 @@ public class Fragment_PlanDetail extends Fragment
             @Override
             public void onClick(View view)
             {
-                MainActivity.masterBorrower.debtAndRepaymentObject.selectedRepaymentPlan=selection;
+                Object_Debt.selectedRepaymentPlan =selection;
                 mListener.toDetailPlan();
             }
         });

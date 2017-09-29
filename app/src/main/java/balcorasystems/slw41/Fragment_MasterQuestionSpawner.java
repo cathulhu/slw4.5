@@ -38,7 +38,7 @@ public class Fragment_MasterQuestionSpawner extends Fragment
 
     public interface goToPlans
     {
-        public void finishedQuestions();
+        void finishedQuestions();
     }
 
     public goToPlans leaveListener;
