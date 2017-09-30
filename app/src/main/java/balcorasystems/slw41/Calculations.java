@@ -3,39 +3,33 @@ package balcorasystems.slw41;
 
 import java.util.ArrayList;
 
-public class Calculations
-{
+public class Calculations {
     static Object_Borrower targetBorrower;
 
-    Calculations(Object_Borrower passedBorrower)
-    {
+    Calculations(Object_Borrower passedBorrower) {
         targetBorrower = passedBorrower;
 
     }
 
 
-
-    public void StandardRepayCalc()
-    {
+    public void StandardRepayCalc() {
         ArrayList<Double> stdPayments = new ArrayList<>();
-        Double totalPayed=0.0;
-        Double individualPayment= 0.0;
-        Double totalMonthlyPayment= 0.0;
+        Double totalPayed = 0.0;
+        Double individualPayment = 0.0;
+        Double totalMonthlyPayment = 0.0;
 
-        for (Object_Loan loan : Object_Debt.loanPortfolio)
-        {
-            ArrayList<Double> payments= new ArrayList<>();
-            double monthlyInterestRate=loan.interestRate/100/12;
+        for (Object_Loan loan : Object_Debt.loanPortfolio) {
+            ArrayList<Double> payments = new ArrayList<>();
+            double monthlyInterestRate = loan.interestRate / 100 / 12;
             double paymentCalcNumerator = monthlyInterestRate * loan.currentBalance;    //change this to current balance soon and start using that value in other things
             double paymentCalcDenominator = 1 - Math.pow(1 + (monthlyInterestRate), -120);
             individualPayment = paymentCalcNumerator / paymentCalcDenominator;
 
-            totalPayed += individualPayment*120;
+            totalPayed += individualPayment * 120;
             totalMonthlyPayment += individualPayment;
         }
 
-        for (int i = 0; i < 120; i++)
-        {
+        for (int i = 0; i < 120; i++) {
             stdPayments.add(totalMonthlyPayment);
         }
 
@@ -43,15 +37,12 @@ public class Calculations
         Object_Debt.addRepaymentNoSwitching("Standard", stdPayments, totalPayed, 0.0, 0.0);
 
         //updating the master borrower object with this data so I don't have to pass one back.
-        MainActivity.masterBorrower=targetBorrower;
+        MainActivity.masterBorrower = targetBorrower;
     }
 
 
-
-    public static Double DiscIncomeCalc(Integer repaymentMonth, Double currentIncome, String filingStatus)
-    {
-        if (filingStatus.equals("jointly something"))
-        {
+    public static Double DiscIncomeCalc(Integer repaymentMonth, Double currentIncome, String filingStatus) {
+        if (filingStatus.equals("jointly something")) {
             //use the spousal poverty guidelines
         }
         double povertyLevelsingle48states2017 = 12060;  //will adjust and make this an array with all the propper values later
@@ -62,41 +53,30 @@ public class Calculations
     }
 
 
-
-
-
-    public static String financialHardshipCalc(double discretionaryIncome)
-    {
+    public static String financialHardshipCalc(double discretionaryIncome) {
         //perhaps later throw in a check to make sure std calc has actually been run first
 
-        Integer coordinatesOfStdRepayment=0;
+        Integer coordinatesOfStdRepayment = 0;
         String hardshipResult;
 
-        for (Object_Repayment x: Object_Debt.repaymentPortfolio)
-        {
-            if (x.type.equals("Standard"))
-            {
-                coordinatesOfStdRepayment=x.coordinateInArray;
+        for (Object_Repayment x : Object_Debt.repaymentPortfolio) {
+            if (x.type.equals("Standard")) {
+                coordinatesOfStdRepayment = x.coordinateInArray;
             }
         }
 
-        Double stdPayment= Object_Debt.repaymentPortfolio.get(coordinatesOfStdRepayment).monthlyPayments.get(0);
-        Double discretionaryIncomeMonthly = discretionaryIncome/12;
+        Double stdPayment = Object_Debt.repaymentPortfolio.get(coordinatesOfStdRepayment).monthlyPayments.get(0);
+        Double discretionaryIncomeMonthly = discretionaryIncome / 12;
 
-        if (stdPayment > discretionaryIncomeMonthly*0.15)
-        {
+        if (stdPayment > discretionaryIncomeMonthly * 0.15) {
             //15% PFH true
-            hardshipResult="15% PFH";
-        }
-        else if (stdPayment > discretionaryIncomeMonthly*0.10)
-        {
+            hardshipResult = "15% PFH";
+        } else if (stdPayment > discretionaryIncomeMonthly * 0.10) {
             //10% PFH true
-            hardshipResult="10% PFH";
-        }
-        else
-        {
+            hardshipResult = "10% PFH";
+        } else {
             //No PFH
-            hardshipResult="No PFH";
+            hardshipResult = "No PFH";
         }
 
         return hardshipResult;
@@ -104,12 +84,66 @@ public class Calculations
     }
 
 
+    public static Double TaxCalc (Double passedUnpaidAndIncome)
+
+    {
+
+        Double incomeBracketDiff;
+        String filingStatus=targetBorrower.taxStatus;
+        Integer taxcoord1=0;
+        Double owedTotal=0D;
+
+        //TODO: update these values for 2017 and add another dimension for famyily sizes
+        double[] taxBracketsPercent2016 = {.10, .15, .25, .28, .33, .35, .396};
+        double[] taxBracketsGrossSingle2016 = {0, 9275, 37650, 91150, 190150, 413350, 415050};
+        double[] taxBracketsGrossJoint2016 = {0, 18550, 75300, 151900, 231450, 413350, 466950};
+        double[] taxBracketsGrossHead2016 = {0, 13250, 50400, 130150, 210800, 413350, 441000};
+        double[][] taxContainer = {taxBracketsGrossSingle2016, taxBracketsGrossJoint2016, taxBracketsGrossHead2016};
+
+        if (filingStatus.equals("Single filing") || filingStatus.equals("Married but filing separately") )
+        {
+            taxcoord1=0;
+        }
+        else if (filingStatus.equals("Joint filing"))
+        {
+            taxcoord1=1;
+        }
+        else if (filingStatus.equals("Head of Household"))
+        {
+            taxcoord1=2;
+        }
+
+        for (int i = 6; passedUnpaidAndIncome > 0; i--) {
+            if (passedUnpaidAndIncome > taxContainer[taxcoord1][i])                                              //for smaller example, 40k forgiven... 40k<415k, loop, 40k<413k, 40k<190k 40k<91l, 40k<37k = yes, start at i=2
+            {                                                                                                // example first time around loop income(loan forgiveness)= 500k
+                double taxRate = taxBracketsPercent2016[i];                                             //.396,
+                incomeBracketDiff = passedUnpaidAndIncome - (taxContainer[taxcoord1][i]);               //lets do single filing, rt=500k - (415050) , so iBD =84950
+                passedUnpaidAndIncome = passedUnpaidAndIncome - incomeBracketDiff;                               //                       rt now = 500k- 84950, rt = 415050
+                owedTotal += taxRate * incomeBracketDiff;                                           // wt = 0.396*84950 = 33640.2
+            }                                                                                      //second time around loop
+                                                                                                   //.35 rate,
+        }                                                                                          // Ibd = 415050-413350 = 1700
+                                                                                                   // rt = 415050-1700 = 413350
+                                                                                                    // wt = 0.35 * 1700 = 33640.2 + 595 = 34235.2
+    return owedTotal;
+    }
+
+
+
+
+
+
+
+
+
+
 //PAYE calc works, now just need to add the other calculations, the create the mega calc that calls on them all and can compare the results
 
     public static void payeCalc()
     {
-        ArrayList<Double> payments = new ArrayList<>();
+
         Double totalPayed=0D;
+        ArrayList<Double> payments = new ArrayList<>();
         //TODO: think if I want to be returning payments to the mega function that calls the individual calcs or a more sophisitacted object, either way need to return this array
 
         for (Object_Loan loan: targetBorrower.debtAndRepaymentObject.loanPortfolio)
@@ -127,6 +161,7 @@ public class Calculations
             String taxfilingStatus = targetBorrower.taxStatus;
             double forgiveness=0D;
             String pfhStatus;
+            Double owedTaxesOnForgiveness;
 
 
             if (loan.isGraduateLoan)
@@ -211,11 +246,10 @@ public class Calculations
             loanRunningIndividualBalance += payeUncappitalizedInterest;
 
             forgiveness=loanRunningIndividualBalance;
-
-            //TODO: add calculation for tax on forgived sum
+            owedTaxesOnForgiveness=TaxCalc(loanRunningIndividualBalance);
 
             //passing 0.0 for taxes until I put tax calc back in
-            Object_Debt.addRepaymentNoSwitching("PAYE", payments, totalPayed, forgiveness, 0.0);
+            Object_Debt.addRepaymentNoSwitching("PAYE", payments, totalPayed, forgiveness, owedTaxesOnForgiveness);
 
             //updating the master borrower object with this data so I don't have to pass one back.
             MainActivity.masterBorrower=targetBorrower;

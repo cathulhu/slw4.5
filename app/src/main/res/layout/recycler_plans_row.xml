@@ -30,6 +30,14 @@
             android:padding="4dp">
 
             <TextView
+                android:id="@+id/owedTaxesValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/forgivnessValue"
+                android:layout_below="@+id/forgivnessValue"
+                android:text="0" />
+
+            <TextView
                 android:id="@+id/totalView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -113,6 +121,15 @@
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/textView21"
                 android:text="Loan Forgiveness" />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/textView12"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textView12"
+                android:text="Owed Taxes" />
 
         </RelativeLayout>
 

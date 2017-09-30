@@ -36,10 +36,7 @@ public class Plans_RecyclerFragment extends Fragment{
         recyclerView.setAdapter(adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-
-
         return rootLayoutView;
-
     }
 
 

@@ -111,6 +111,7 @@ public class Plans_Adapter extends RecyclerView.Adapter<Plans_Adapter.ViewHolder
         viewHolder.totalRepayment.setText(String.valueOf(targetRepayment.repaymentTotal));
         viewHolder.forgiveness.setText(String.valueOf(targetRepayment.forgivnessTotal));
         //not yet listing average payment here
+        viewHolder.owedTaxes.setText(String.valueOf(targetRepayment.taxTotal));
 
     }
 
@@ -128,6 +129,7 @@ public class Plans_Adapter extends RecyclerView.Adapter<Plans_Adapter.ViewHolder
         private TextView totalRepayment;
         private TextView totalTime;
         private TextView forgiveness;
+        private TextView owedTaxes;
         LineChart lineChart;
 
 
@@ -141,6 +143,7 @@ public class Plans_Adapter extends RecyclerView.Adapter<Plans_Adapter.ViewHolder
             rowItem = (TextView) view.findViewById(R.id.rowItem);
             lineChart = (LineChart) view.findViewById(R.id.previewChart);
             forgiveness = (TextView) view.findViewById(R.id.forgivnessValue);
+            owedTaxes= (TextView) view.findViewById(R.id.owedTaxesValue);
         }
     }
 }

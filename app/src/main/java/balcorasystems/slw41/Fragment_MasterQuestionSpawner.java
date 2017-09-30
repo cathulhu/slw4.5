@@ -302,6 +302,7 @@ public class Fragment_MasterQuestionSpawner extends Fragment
 
             taxOptions.add("Single filing");
             taxOptions.add("Joint filing");
+            taxOptions.add("Head of Household");
             taxOptions.add("Married but filing separately");
 
             employmentOptions.add("Independent contractor/Self Employed");
