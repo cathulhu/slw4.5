@@ -27,7 +27,8 @@ public class Fragment_MasterQuestionSpawner extends Fragment
     final static ArrayList<String> yesNoOptions = new ArrayList<>();
     final static ArrayList<String> summaryTitles = new ArrayList<>();
     final static ArrayList<String> servicerTitles = new ArrayList<>();
-
+    final static ArrayList<String> repaymentStatusQuestions = new ArrayList<>();
+    final static ArrayList<String> maritalStuatss = new ArrayList<>();
 
 //    public interface reload
 //    {
@@ -36,12 +37,12 @@ public class Fragment_MasterQuestionSpawner extends Fragment
 //    public reload reloadListener;
 
 
-    public interface goToPlans
+    public interface goToNext
     {
-        void finishedQuestions();
+        void toReport();
     }
 
-    public goToPlans leaveListener;
+    public goToNext leaveListener;
     // public NextAfterSelection mListener;
 
     public void moveOther(String backOrForward)
@@ -83,25 +84,16 @@ public class Fragment_MasterQuestionSpawner extends Fragment
         {
             index=0;
             //for safety setting index=0 so nothing bad can happen out of bounds, especially if the fragment is reloaded to run a new set of calculations, so it starts from begining.
-            leaveListener.finishedQuestions();
+            leaveListener.toReport();
             //go to analysis
             // index=0;
         }
-        else if (summaryTitles.get(index).equals("Loan Default"))
+        else if (summaryTitles.get(index).equals("Repayment Status"))
         {
             Borrower.currentlyEditing=summaryTitles.get(index);
             FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
             fTransaction.replace(R.id.fragmentSection, new Fragment_Questions_Text());
             fTransaction.commit();
-            //load different fragments, not the recycler view
-        }
-        else if (summaryTitles.get(index).equals("Loan Delinquency"))
-        {
-            Borrower.currentlyEditing=summaryTitles.get(index);
-            FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
-            fTransaction.replace(R.id.fragmentSection, new Fragment_Questions_Text());
-            fTransaction.commit();
-            //load different fragments, not the recycler view
         }
         else if (summaryTitles.get(index).equals("Deceased Borrower"))
         {
@@ -127,6 +119,14 @@ public class Fragment_MasterQuestionSpawner extends Fragment
             fTransaction.commit();
             //load different fragments, not the recycler view
         }
+        else if (summaryTitles.get(index).equals("Repayment Date"))
+        {
+            Borrower.currentlyEditing=summaryTitles.get(index);
+            FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
+            fTransaction.replace(R.id.fragmentSection, new Fragment_Calendar());
+            fTransaction.commit();
+            //load different fragments, not the recycler view
+        }
         else if (summaryTitles.get(index).equals("Debt Servicer"))
         {
             Borrower.currentlyEditing=summaryTitles.get(index);
@@ -143,13 +143,13 @@ public class Fragment_MasterQuestionSpawner extends Fragment
             fTransaction.commit();
             //load different fragments, not the recycler view
         }
-        else if (summaryTitles.get(index).equals("Debt, Income, and Payment"))
+        else if (summaryTitles.get(index).equals("Marital Status"))
         {
-            //load different fragments, not the recycler view
             Borrower.currentlyEditing=summaryTitles.get(index);
             FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
-            fTransaction.replace(R.id.fragmentSection, new Fragment_Income());
+            fTransaction.replace(R.id.fragmentSection, new Fragment_Questions_Text());
             fTransaction.commit();
+            //load different fragments, not the recycler view
         }
         else if (summaryTitles.get(index).equals("Tax Status"))
         {
@@ -161,10 +161,18 @@ public class Fragment_MasterQuestionSpawner extends Fragment
         else if (summaryTitles.get(index).equals("Tax Dependants"))
         {
             //load different fragments, not the recycler view
-             Borrower.currentlyEditing=summaryTitles.get(index);
-             FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
-             fTransaction.replace(R.id.fragmentSection, new Fragment_Dependants());
-             fTransaction.commit();
+            Borrower.currentlyEditing=summaryTitles.get(index);
+            FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
+            fTransaction.replace(R.id.fragmentSection, new Fragment_Dependants());
+            fTransaction.commit();
+        }
+        else if (summaryTitles.get(index).equals("Income"))
+        {
+            //load different fragments, not the recycler view
+            Borrower.currentlyEditing=summaryTitles.get(index);
+            FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
+            fTransaction.replace(R.id.fragmentSection, new Fragment_Income());
+            fTransaction.commit();
         }
         else if (summaryTitles.get(index).equals("Loan Details"))
         {
@@ -193,7 +201,7 @@ public class Fragment_MasterQuestionSpawner extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup selectionContainer, Bundle savedInstanceState) {
         View rootLayoutView = inflater.inflate(R.layout.master_questions, selectionContainer, false);
 
-        leaveListener  = (goToPlans) getContext();
+        leaveListener  = (goToNext) getContext();
 //        reloadListener = (reload) getActivity();
 
         final TextView questionTitle = (TextView) rootLayoutView.findViewById(R.id.planTimelineTItle);
@@ -272,37 +280,37 @@ public class Fragment_MasterQuestionSpawner extends Fragment
 
         if (uberOptions.size() == 0)
         {
-            mainQuestions.add("Are any of your student loans in a state of default? Typically loans go into default after a period of non payment (delinquency) of about 9 months, or 270 days.");
-            mainQuestions.add("Are any of your student loans in a state of delinquency? Delinquency is defined as having missed a payment due date and still having an outstanding owed balance on the missed payment.");
+            mainQuestions.add("Which stage of loan repayment are you in currently? Default occurs after a period of non payment (delinquency) of 9 months, or 270 days.");
             mainQuestions.add("Are you a parent borrower, next of kin, or other entity who thinks they may be financially responsible for the student loans of an individual who has died?");
             mainQuestions.add("Have you undergone loan rehabilitation on these student loans for a past default?");
             mainQuestions.add("Select one of the following ranges for the date you received your first student loan.");
+            mainQuestions.add("When is your next payment due? Or When do you estimate entering repayment if you aren't currently in repayment.");
             mainQuestions.add("Select your debt servicer from the list below.");
             mainQuestions.add("Select the industry and position you work in.");
-
-            mainQuestions.add("Select your income and debt at the time of repayment or current values if you are already in repayment. Optionally you can enter your current or expected monthly Repayment otherwise it will be automatically calculated.");
+            mainQuestions.add("Are you currently married or will you be married before your next repayment due date?");
             mainQuestions.add("At the time of repayment what will your tax filing status be?");
             mainQuestions.add("At the time of repayment how many dependencies will you be claiming on your tax filing?");
+            mainQuestions.add("Select your gross income (income before taxes) at the time of repayment or current values if you are already in repayment and the income of your spouse if applicable.");
             mainQuestions.add("How much of the total debt is comprised of each different loan type? Tap on s slice of the pie chart and use the slider to adjust the fraction that fraction.");
             mainQuestions.add("Review your answers to the questionnaire below, click on any item to go back and change your answer. When you're ready to proceed tap Analyze Loans.");
 
-            summaryTitles.add("Loan Default");
-            summaryTitles.add("Loan Delinquency");
+            summaryTitles.add("Repayment Status");
             summaryTitles.add("Deceased Borrower");
             summaryTitles.add("Loan Rehabilitation");
             summaryTitles.add("First Loan Date");
+            summaryTitles.add("Repayment Date");
             summaryTitles.add("Debt Servicer");
             summaryTitles.add("Employment");
-
-            summaryTitles.add("Debt, Income, and Payment");
+            summaryTitles.add("Marital Status");
             summaryTitles.add("Tax Status");
             summaryTitles.add("Tax Dependants");
+            summaryTitles.add("Income");
             summaryTitles.add("Loan Details");
             summaryTitles.add("Review");
 
             taxOptions.add("Single filing");
-            taxOptions.add("Joint filing");
             taxOptions.add("Head of Household");
+            taxOptions.add("Married filing jointly");
             taxOptions.add("Married but filing separately");
 
             employmentOptions.add("Independent contractor/Self Employed");
@@ -337,17 +345,31 @@ public class Fragment_MasterQuestionSpawner extends Fragment
             servicerTitles.add("OSLA Servicing");
             servicerTitles.add("Debt Management and Collections System");
 
-            for (int i = 0; i < 4; i++)
+            repaymentStatusQuestions.add("In Repayment");
+            repaymentStatusQuestions.add("Not in Repayment (still in school)");
+            repaymentStatusQuestions.add("In grace period");
+            repaymentStatusQuestions.add("In Deferment");
+            repaymentStatusQuestions.add("In Forbearance");
+            repaymentStatusQuestions.add("In Delinquency");
+            repaymentStatusQuestions.add("In Default");
+
+            maritalStuatss.add("Married");
+            maritalStuatss.add("Single");
+
+            uberOptions.add(repaymentStatusQuestions);
+
+            for (int i = 0; i < 2; i++)
             {
                 uberOptions.add(yesNoOptions);
             }
 
             uberOptions.add(dateQuestionOptions);
+            uberOptions.add(yesNoOptions);  //just putting this here as a blank since text isn't used in the one between these two for now
             uberOptions.add(servicerTitles);
             uberOptions.add(employmentOptions);
+            uberOptions.add(maritalStuatss);
             uberOptions.add(taxOptions);
         }
-
 
 
     }

@@ -1,7 +1,8 @@
 package balcorasystems.slw41;
 
 import java.util.ArrayList;
-
+import java.util.Calendar;
+import java.util.Date;
 
 
 public class Object_Borrower
@@ -11,12 +12,8 @@ public class Object_Borrower
     public boolean inDefault;
     public boolean inDelinquincy;
     public boolean deceased;
-//    public boolean hasConsolidated;
+    public boolean isMarried;
     public boolean loanRehab;
-//    public boolean parentLoans;
-//    public boolean ffelLoans;
-//    public boolean perkinsLoans;
-//    public boolean directLoans;
 
     public boolean timeBefore98;
     public boolean timeBetween98to07;
@@ -24,13 +21,11 @@ public class Object_Borrower
     public boolean timeBetween11to14;
     public boolean timeAfter14;
 
+    public Date repaymentDate;
     public String employmentType;
     public String taxStatus;
     public String servicer;
-//    public String loanDateString;
-//    public Integer loanDate;
-
-    // public Double debt;
+    public String repaymentStatus;
     public Integer taxSize;
 
     public static Double annualraisePercent=(1.05);
@@ -43,13 +38,17 @@ public class Object_Borrower
     public static Double spouseCurrentIncome=startingSpouseIncome;
 
     public Boolean wagesGranished;
-    public Double firstNextRepaymentDate;
     public Boolean inGrace;
     public Boolean inDeferment;
     public Boolean inForebearance;
 
     public static Object_Debt debtAndRepaymentObject = new Object_Debt();
 
+
+    Object_Borrower ()
+    {
+        repaymentDate = new Date();
+    }
     // public ArrayList<Double> payments;
     // make sure the update everything that still uses this and switch it over to the proper Object_Loan stuff.
 

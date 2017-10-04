@@ -25,6 +25,8 @@ public class Plans_Adapter extends RecyclerView.Adapter<Plans_Adapter.ViewHolder
 
     private ArrayList<String> adapterPlans; //probably not keeping this, I can come up with a better way to get the number of plans returned, maybe just cap it at 3 or do something else.
 
+
+
     public Plans_Adapter(ArrayList<String> passedPlans)
     {
         this.adapterPlans = passedPlans;
@@ -104,14 +106,14 @@ public class Plans_Adapter extends RecyclerView.Adapter<Plans_Adapter.ViewHolder
 
         viewHolder.rowItem.setText(adapterPlans.get(i));
 
-        viewHolder.monthlyPayment.setText(String.valueOf(targetRepayment.monthlyPayments.get(i)));
+        viewHolder.monthlyPayment.setText("$"+ String.valueOf(targetRepayment.monthlyPayments.get(i)));
         //retrieves the first new payment, not the average or anything
-        viewHolder.totalTime.setText(String.valueOf(targetRepayment.monthlyPayments.size()));
+        viewHolder.totalTime.setText(String.valueOf(targetRepayment.monthlyPayments.size())+" Months");
         //just calculating it here, could have this data on the object;
-        viewHolder.totalRepayment.setText(String.valueOf(targetRepayment.repaymentTotal));
-        viewHolder.forgiveness.setText(String.valueOf(targetRepayment.forgivnessTotal));
+        viewHolder.totalRepayment.setText("$"+String.valueOf(targetRepayment.repaymentTotal));
+        viewHolder.forgiveness.setText("$"+String.valueOf(targetRepayment.forgivnessTotal));
         //not yet listing average payment here
-        viewHolder.owedTaxes.setText(String.valueOf(targetRepayment.taxTotal));
+        viewHolder.owedTaxes.setText("$"+String.valueOf(targetRepayment.taxTotal));
 
     }
 

@@ -14,9 +14,8 @@ import android.widget.TextView;
 public class Fragment_Income extends Fragment
 {
 
-    public static Integer incomeRaw =6;
-    public static Integer spouseIncomeRaw =6;
-//    public static double StandardPayment =0.66;
+    public static Integer incomeRaw =0;
+    public static Integer spouseIncomeRaw =0;
 
 
     @Override
@@ -26,7 +25,21 @@ public class Fragment_Income extends Fragment
         SeekBar spouseIncomeSeeker = (SeekBar) rootLayoutView.findViewById(R.id.seekBar2);
         SeekBar incomeSeeker = (SeekBar) rootLayoutView.findViewById(R.id.seekBar3);
         final TextView spouseIncomeText = (TextView) rootLayoutView.findViewById(R.id.textView29);
+        final TextView spouseIncomeLabel = (TextView) rootLayoutView.findViewById(R.id.textView24);
         final TextView incomeText = (TextView) rootLayoutView.findViewById(R.id.textView37);
+
+        if (!MainActivity.masterBorrower.isMarried)
+        {
+            spouseIncomeSeeker.setVisibility(View.GONE);
+            spouseIncomeText.setVisibility(View.GONE);
+            spouseIncomeLabel.setVisibility(View.GONE);
+        }
+        else
+        {
+            spouseIncomeSeeker.setVisibility(View.VISIBLE);
+            spouseIncomeText.setVisibility(View.VISIBLE);
+            spouseIncomeLabel.setVisibility(View.VISIBLE);
+        }
 
         spouseIncomeSeeker.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override

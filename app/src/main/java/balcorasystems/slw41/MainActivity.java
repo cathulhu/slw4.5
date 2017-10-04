@@ -5,9 +5,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 
-import java.util.ArrayList;
-
-public class MainActivity extends AppCompatActivity implements Fragment_Selection.OnNavigateAwayListener, Plans_Adapter.OnNavigateToDetail, Fragment_PlanDetail.OnGoToDetailPlan, Fragment_Summary.returnToMain, Questions_Adapter.NextAfter, Fragment_MasterQuestionSpawner.goToPlans, Review_Adapter.OnGoToChangeValue, TaxStatus_Adapter.NextAfter, Fragment_Dependants.NextAfter
+public class MainActivity extends AppCompatActivity implements Fragment_Selection.OnNavigateAwayListener, Plans_Adapter.OnNavigateToDetail, Fragment_PlanDetail.OnGoToDetailPlan, Fragment_Summary.returnToMain, Questions_Adapter.NextAfter, Fragment_MasterQuestionSpawner.goToNext, Review_Adapter.OnGoToChangeValue, TaxStatus_Adapter.NextAfter, Fragment_Dependants.NextAfter, Fragment_Calendar.NextAfter, Report_RecyclerFragment.backToReview, Report_RecyclerFragment.goToPlans
 
 {
     public static Object_Borrower masterBorrower = new Object_Borrower();
@@ -27,7 +25,31 @@ public class MainActivity extends AppCompatActivity implements Fragment_Selectio
         fTransaction.replace(R.id.mainFrameLayout, reloadedFragment, "summary");
         fTransaction.addToBackStack(null);
         fTransaction.commit();
+    }
 
+    public void NextAfterSelection(String reviewFlag)
+    {
+        Fragment_MasterQuestionSpawner reloadedFragment = new Fragment_MasterQuestionSpawner();
+        if (reviewFlag.equals("review"))
+        {
+            //this should load just the review page
+//            reloadedFragment.index=reloadedFragment.summaryTitles.size();
+            //TODO: fix this so it reloads properly and while your at it put in a feature to so that review changes one thing then snaps back to review status
+            reloadedFragment.reviewLoad=true;
+        }
+        FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
+        fTransaction.replace(R.id.mainFrameLayout, reloadedFragment, "summary");
+        fTransaction.addToBackStack(null);
+        fTransaction.commit();
+    }
+
+    public void toReport()
+    {
+        Report_RecyclerFragment reportFragment = new Report_RecyclerFragment();
+        FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
+        fTransaction.replace(R.id.mainFrameLayout, reportFragment, "summary");
+        fTransaction.addToBackStack(null);
+        fTransaction.commit();
     }
 
     public void toReviewQuestion ()
@@ -82,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements Fragment_Selectio
 
     }
 
-    public void finishedQuestions()
+    public void gotoPlans()
     {
         FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
         fTransaction.replace(R.id.mainFrameLayout, new Plans_RecyclerFragment(), "info");
@@ -231,7 +253,7 @@ public class MainActivity extends AppCompatActivity implements Fragment_Selectio
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
 //        StartAppSDK.init(this, "000000000", true);

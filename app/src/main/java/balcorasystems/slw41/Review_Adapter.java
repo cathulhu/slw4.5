@@ -57,6 +57,20 @@ public class Review_Adapter extends RecyclerView.Adapter<Review_Adapter.ViewHold
 //        this is behaviour that happens every time an element is added to the recycler_plans view I think
 //        viewHolder.rowItem.setText(adapterPlans.get(i));
 
+        //        summaryTitles.add("Repayment Status");
+//        summaryTitles.add("Deceased Borrower");
+//        summaryTitles.add("Loan Rehabilitation");
+//        summaryTitles.add("First Loan Date");
+//        summaryTitles.add("Repayment Date");
+//        summaryTitles.add("Debt Servicer");
+//        summaryTitles.add("Employment");
+//        summaryTitles.add("Marital Status");
+//        summaryTitles.add("Tax Status");
+//        summaryTitles.add("Tax Dependants");
+//        summaryTitles.add("Income");
+//        summaryTitles.add("Loan Details");
+//        summaryTitles.add("Review");
+
         viewHolder.title.setText(foundSummaryTitles.get(i));
 //        viewHolder.value.setText(loanValues.get(i));
 

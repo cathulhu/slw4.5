@@ -36,7 +36,7 @@ public class Questions_Adapter extends RecyclerView.Adapter<Questions_Adapter.Vi
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                //TODO: update these with all the new choices so date is being saved by each of them
                 //this part saves data to the working loan object
                 Integer choice = genericViewholder.getAdapterPosition();
                 String choiceVerbose = Options.get(choice);
@@ -68,6 +68,14 @@ public class Questions_Adapter extends RecyclerView.Adapter<Questions_Adapter.Vi
                 {
                     Fragment_MasterQuestionSpawner.Borrower.employmentType=choiceVerbose;
                 }
+                else if (currentTopic.equals("Repayment Status"))
+                {
+                    Fragment_MasterQuestionSpawner.Borrower.repaymentStatus=choiceVerbose;
+                }
+                else if (currentTopic.equals("Marital Status"))
+                {
+                    Fragment_MasterQuestionSpawner.Borrower.isMarried=choiceBool;
+                }
                 else if (currentTopic.equals("First Loan Date"))
                 {
 
@@ -80,32 +88,52 @@ public class Questions_Adapter extends RecyclerView.Adapter<Questions_Adapter.Vi
                     if (choice==0)
                     {
                         Fragment_MasterQuestionSpawner.Borrower.timeBefore98=true;
+                        Fragment_MasterQuestionSpawner.Borrower.timeBetween98to07=false;
+                        Fragment_MasterQuestionSpawner.Borrower.timeBetween07to11=false;
+                        Fragment_MasterQuestionSpawner.Borrower.timeBetween11to14=false;
+                        Fragment_MasterQuestionSpawner.Borrower.timeAfter14=false;
                     }
                     else if (choice==1)
                     {
                         Fragment_MasterQuestionSpawner.Borrower.timeBetween98to07=true;
+                        Fragment_MasterQuestionSpawner.Borrower.timeBefore98=false;
+                        Fragment_MasterQuestionSpawner.Borrower.timeBetween07to11=false;
+                        Fragment_MasterQuestionSpawner.Borrower.timeBetween11to14=false;
+                        Fragment_MasterQuestionSpawner.Borrower.timeAfter14=false;
                     }
                     else if (choice==2)
                     {
                         Fragment_MasterQuestionSpawner.Borrower.timeBetween07to11=true;
+                        Fragment_MasterQuestionSpawner.Borrower.timeBefore98=false;
+                        Fragment_MasterQuestionSpawner.Borrower.timeBetween98to07=false;
+                        Fragment_MasterQuestionSpawner.Borrower.timeBetween11to14=false;
+                        Fragment_MasterQuestionSpawner.Borrower.timeAfter14=false;
                     }
                     else if (choice==3)
                     {
                         Fragment_MasterQuestionSpawner.Borrower.timeBetween11to14=true;
+                        Fragment_MasterQuestionSpawner.Borrower.timeBefore98=false;
+                        Fragment_MasterQuestionSpawner.Borrower.timeBetween98to07=false;
+                        Fragment_MasterQuestionSpawner.Borrower.timeBetween07to11=false;
+                        Fragment_MasterQuestionSpawner.Borrower.timeAfter14=false;
                     }
                     else if (choice==4)
                     {
                         Fragment_MasterQuestionSpawner.Borrower.timeAfter14=true;
+                        Fragment_MasterQuestionSpawner.Borrower.timeBefore98=false;
+                        Fragment_MasterQuestionSpawner.Borrower.timeBetween98to07=false;
+                        Fragment_MasterQuestionSpawner.Borrower.timeBetween07to11=false;
+                        Fragment_MasterQuestionSpawner.Borrower.timeBetween11to14=false;
                     }
 
                 }
-                else if (currentTopic.equals("Debt, Income, and Payment"))
+                else if (currentTopic.equals("Income"))
                 {
                     //will write data to target objects within this fragment
                 }
                 else if (currentTopic.equals("Tax Status"))
                 {
-                    //will write data to target objects within this fragment
+                    Fragment_MasterQuestionSpawner.Borrower.repaymentStatus=choiceVerbose;
                 }
                 else if (currentTopic.equals("Tax Dependants"))
                 {
