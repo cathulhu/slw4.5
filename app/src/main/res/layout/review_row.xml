@@ -18,5 +18,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:text="TextView" />
+        android:layout_marginLeft="8dp"
+        android:layout_toEndOf="@+id/title"
+        android:text="TextView"
+        android:textAlignment="textEnd" />
 </RelativeLayout>

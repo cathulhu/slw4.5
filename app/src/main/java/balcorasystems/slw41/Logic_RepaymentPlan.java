@@ -2,7 +2,7 @@ package balcorasystems.slw41;
 
 import java.util.ArrayList;
 
-public class repaymentPlanLogic
+public class Logic_RepaymentPlan
 {
     ArrayList<ArrayList> Ubersteps = new ArrayList<>();
     ArrayList<String> monthlySteps = new ArrayList<>();

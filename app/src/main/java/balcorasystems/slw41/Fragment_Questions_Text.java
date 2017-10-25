@@ -22,7 +22,7 @@ public class Fragment_Questions_Text extends Fragment
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        RecyclerView.Adapter adapter = new Questions_Adapter();
+        RecyclerView.Adapter adapter = new Adapter_Questions();
         recyclerView.setAdapter(adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 

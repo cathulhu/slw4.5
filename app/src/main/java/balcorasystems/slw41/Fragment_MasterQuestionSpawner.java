@@ -19,6 +19,8 @@ public class Fragment_MasterQuestionSpawner extends Fragment
     public static Integer index=0;
     public static Boolean first = true;
     public static Boolean reviewLoad = false;
+    public static Boolean snapbackReview = false;
+    public static Boolean goSnapBack = false;
 
     final static ArrayList<String> mainQuestions = new ArrayList<String>();
     final static ArrayList<String> employmentOptions = new ArrayList<>();
@@ -39,7 +41,7 @@ public class Fragment_MasterQuestionSpawner extends Fragment
 
     public interface goToNext
     {
-        void toReport();
+        void toIssues();
     }
 
     public goToNext leaveListener;
@@ -63,6 +65,12 @@ public class Fragment_MasterQuestionSpawner extends Fragment
                 //otherwise I can specify other argument if I don't want to increment index for some other reason then review or first load
             }
 
+            if (index > summaryTitles.size())
+            {
+                //max check
+                index=summaryTitles.size();
+            }
+
         }
         else
         {
@@ -77,6 +85,8 @@ public class Fragment_MasterQuestionSpawner extends Fragment
                 //turning off reviewload after I don't need it.
                 reviewLoad=false;
             }
+
+
         }
 
         // have to put the check for if we've reached the end of the questions first, otherwise it'll ask to check out of bounds with the summary titles
@@ -84,7 +94,7 @@ public class Fragment_MasterQuestionSpawner extends Fragment
         {
             index=0;
             //for safety setting index=0 so nothing bad can happen out of bounds, especially if the fragment is reloaded to run a new set of calculations, so it starts from begining.
-            leaveListener.toReport();
+            leaveListener.toIssues();
             //go to analysis
             // index=0;
         }
@@ -188,7 +198,7 @@ public class Fragment_MasterQuestionSpawner extends Fragment
             MainActivity.masterBorrower=Borrower;
 
             FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
-            fTransaction.replace(R.id.fragmentSection, new Review_Fragment());
+            fTransaction.replace(R.id.fragmentSection, new Fragment_Review());
             fTransaction.commit();
             //load different fragments, not the recycler view
         }
@@ -196,6 +206,14 @@ public class Fragment_MasterQuestionSpawner extends Fragment
 
     }
 
+    public void checkSnapback()
+    {
+
+
+        snapbackReview=false;
+        index=summaryTitles.size()-1;
+        moveOther("nuetral going back to review");
+    }
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup selectionContainer, Bundle savedInstanceState) {
@@ -225,6 +243,20 @@ public class Fragment_MasterQuestionSpawner extends Fragment
             moveOther("nuetral");
         }
 
+        if (goSnapBack)
+        {
+            index=summaryTitles.size();
+            goSnapBack=false;
+
+            questionTitle.setText("Review");
+            currentQuestion.setText(mainQuestions.get(index));
+            MainActivity.masterBorrower=Borrower;
+            FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
+            fTransaction.replace(R.id.fragmentSection, new Fragment_Review());
+            fTransaction.commit();
+
+        }
+
 
 
         nextButton.setOnClickListener(new View.OnClickListener()
@@ -232,8 +264,25 @@ public class Fragment_MasterQuestionSpawner extends Fragment
             @Override
             public void onClick(View view)
             {
-                moveOther("forward");
-                //updating the title and question after the content fragment changed
+
+                if (snapbackReview)
+                {
+                    snapbackReview=false;
+                    index=summaryTitles.size();
+                    goSnapBack=false;
+
+                    questionTitle.setText("Review");
+                    currentQuestion.setText(mainQuestions.get(index));
+                    MainActivity.masterBorrower=Borrower;
+                    FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
+                    fTransaction.replace(R.id.fragmentSection, new Fragment_Review());
+                    fTransaction.commit();
+                }
+                else
+                {
+                    moveOther("forward");
+                    //updating the title and question after the content fragment changed
+                }
 
                 //must make sure nothing happens with out of bounds if index is too high.
                 if (index < summaryTitles.size() && index >= 0)
@@ -281,31 +330,23 @@ public class Fragment_MasterQuestionSpawner extends Fragment
         if (uberOptions.size() == 0)
         {
             mainQuestions.add("Which stage of loan repayment are you in currently? Default occurs after a period of non payment (delinquency) of 9 months, or 270 days.");
-            mainQuestions.add("Are you a parent borrower, next of kin, or other entity who thinks they may be financially responsible for the student loans of an individual who has died?");
             mainQuestions.add("Have you undergone loan rehabilitation on these student loans for a past default?");
-            mainQuestions.add("Select one of the following ranges for the date you received your first student loan.");
             mainQuestions.add("When is your next payment due? Or When do you estimate entering repayment if you aren't currently in repayment.");
-            mainQuestions.add("Select your debt servicer from the list below.");
             mainQuestions.add("Select the industry and position you work in.");
             mainQuestions.add("Are you currently married or will you be married before your next repayment due date?");
-            mainQuestions.add("At the time of repayment what will your tax filing status be?");
+            mainQuestions.add("At the time of repayment what was your last, or will be, your tax filing status be?");
             mainQuestions.add("At the time of repayment how many dependencies will you be claiming on your tax filing?");
             mainQuestions.add("Select your gross income (income before taxes) at the time of repayment or current values if you are already in repayment and the income of your spouse if applicable.");
-            mainQuestions.add("How much of the total debt is comprised of each different loan type? Tap on s slice of the pie chart and use the slider to adjust the fraction that fraction.");
             mainQuestions.add("Review your answers to the questionnaire below, click on any item to go back and change your answer. When you're ready to proceed tap Analyze Loans.");
 
             summaryTitles.add("Repayment Status");
-            summaryTitles.add("Deceased Borrower");
             summaryTitles.add("Loan Rehabilitation");
-            summaryTitles.add("First Loan Date");
             summaryTitles.add("Repayment Date");
-            summaryTitles.add("Debt Servicer");
             summaryTitles.add("Employment");
             summaryTitles.add("Marital Status");
             summaryTitles.add("Tax Status");
             summaryTitles.add("Tax Dependants");
             summaryTitles.add("Income");
-            summaryTitles.add("Loan Details");
             summaryTitles.add("Review");
 
             taxOptions.add("Single filing");
@@ -356,16 +397,16 @@ public class Fragment_MasterQuestionSpawner extends Fragment
             maritalStuatss.add("Married");
             maritalStuatss.add("Single");
 
+
+
             uberOptions.add(repaymentStatusQuestions);
 
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 1; i++)
             {
                 uberOptions.add(yesNoOptions);
             }
 
-            uberOptions.add(dateQuestionOptions);
             uberOptions.add(yesNoOptions);  //just putting this here as a blank since text isn't used in the one between these two for now
-            uberOptions.add(servicerTitles);
             uberOptions.add(employmentOptions);
             uberOptions.add(maritalStuatss);
             uberOptions.add(taxOptions);

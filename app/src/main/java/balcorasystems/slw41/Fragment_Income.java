@@ -28,7 +28,7 @@ public class Fragment_Income extends Fragment
         final TextView spouseIncomeLabel = (TextView) rootLayoutView.findViewById(R.id.textView24);
         final TextView incomeText = (TextView) rootLayoutView.findViewById(R.id.textView37);
 
-        if (!MainActivity.masterBorrower.isMarried)
+        if (!Fragment_MasterQuestionSpawner.Borrower.isMarried)
         {
             spouseIncomeSeeker.setVisibility(View.GONE);
             spouseIncomeText.setVisibility(View.GONE);

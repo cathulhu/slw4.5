@@ -14,7 +14,7 @@ import com.github.mikephil.charting.data.LineDataSet;
 
 import java.util.ArrayList;
 
-public class Plans_Adapter extends RecyclerView.Adapter<Plans_Adapter.ViewHolder>
+public class Adapter_Plans extends RecyclerView.Adapter<Adapter_Plans.ViewHolder>
 {
 
     public interface OnNavigateToDetail
@@ -27,7 +27,7 @@ public class Plans_Adapter extends RecyclerView.Adapter<Plans_Adapter.ViewHolder
 
 
 
-    public Plans_Adapter(ArrayList<String> passedPlans)
+    public Adapter_Plans(ArrayList<String> passedPlans)
     {
         this.adapterPlans = passedPlans;
 
@@ -44,7 +44,7 @@ public class Plans_Adapter extends RecyclerView.Adapter<Plans_Adapter.ViewHolder
 
 
     @Override
-    public Plans_Adapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, final int i)
+    public Adapter_Plans.ViewHolder onCreateViewHolder(ViewGroup viewGroup, final int i)
     {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recycler_plans_row, viewGroup, false);
         final ViewHolder genericViewholder = new ViewHolder(view);
@@ -68,7 +68,7 @@ public class Plans_Adapter extends RecyclerView.Adapter<Plans_Adapter.ViewHolder
 
 
     @Override
-    public void onBindViewHolder(Plans_Adapter.ViewHolder viewHolder, int i)
+    public void onBindViewHolder(Adapter_Plans.ViewHolder viewHolder, int i)
     {
         //this is behaviour that happens every time an element is added to the recycler_plans view I think
 

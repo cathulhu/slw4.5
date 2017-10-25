@@ -12,35 +12,25 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 
-public class Plans_RecyclerFragment extends Fragment{
+public class Fragment_Review extends Fragment {
 
     ArrayList plans;
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup selectionContainer, Bundle savedInstanceState) {
-        final View rootLayoutView = inflater.inflate(R.layout.recycler_plans, selectionContainer, false);
+        final View rootLayoutView = inflater.inflate(R.layout.review, selectionContainer, false);
 
 
-        final RecyclerView recyclerView = (RecyclerView) rootLayoutView.findViewById(R.id.recyclerList);
+        final RecyclerView recyclerView = (RecyclerView) rootLayoutView.findViewById(R.id.review_recycler_view);
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        plans = new ArrayList<>();
-        plans.add("Standard Repayment");
-        plans.add("PAYE");
-
-        //TODO: Instead of just saying ok make 3 plans or whatever, I should run a calculation that checks a few different strategies first then decides how many plans and perhaps of what type should be spawned first.
-
-        RecyclerView.Adapter adapter = new Plans_Adapter(plans);
+        RecyclerView.Adapter adapter = new Adapter_Review();
         recyclerView.setAdapter(adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
+
         return rootLayoutView;
     }
-
-
-
-
-
 }

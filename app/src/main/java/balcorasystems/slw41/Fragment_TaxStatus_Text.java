@@ -21,7 +21,7 @@ public class Fragment_TaxStatus_Text extends Fragment
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        RecyclerView.Adapter adapter = new TaxStatus_Adapter();
+        RecyclerView.Adapter adapter = new Adapter_TaxStatus();
         recyclerView.setAdapter(adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 

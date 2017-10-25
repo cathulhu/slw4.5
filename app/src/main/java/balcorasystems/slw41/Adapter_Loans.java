@@ -12,16 +12,16 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 
-public class Loans_Adapter extends RecyclerView.Adapter<Loans_Adapter.ViewHolder>
+public class Adapter_Loans extends RecyclerView.Adapter<Adapter_Loans.ViewHolder>
 {
     //no need for a gotonext fragment thing since I don't actually do any navigating away or reloading from within the adapter, that's handled at the Fragment_Loans level.
 
     @Override
-    public Loans_Adapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+    public Adapter_Loans.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.loan_recycler_row, parent, false);
-        final Loans_Adapter.ViewHolder genericViewholder = new ViewHolder(view);
+        final Adapter_Loans.ViewHolder genericViewholder = new ViewHolder(view);
 
 //        mListener = (NextAfter) view.getContext();       //FOR SOME REASON ITS INCREDIBLY IMPORTANT TO SET THIS TO CONTEXT;
 
@@ -115,7 +115,7 @@ public class Loans_Adapter extends RecyclerView.Adapter<Loans_Adapter.ViewHolder
 
 
     @Override
-    public void onBindViewHolder(Loans_Adapter.ViewHolder holder, int position)
+    public void onBindViewHolder(Adapter_Loans.ViewHolder holder, int position)
     {
         //this is behaviour that happens every time an element is added to the recycler_plans view I think
 

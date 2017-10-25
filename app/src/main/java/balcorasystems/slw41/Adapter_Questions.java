@@ -9,11 +9,12 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 
-public class Questions_Adapter extends RecyclerView.Adapter<Questions_Adapter.ViewHolder>
+public class Adapter_Questions extends RecyclerView.Adapter<Adapter_Questions.ViewHolder>
 {
     Integer uberIndex=Fragment_MasterQuestionSpawner.index;
     static ArrayList<String> Options = new ArrayList<>();
     static Boolean fowardNavBoolean=true;
+    static Boolean snapbackReview=false;
 
 
     public interface NextAfter
@@ -21,16 +22,22 @@ public class Questions_Adapter extends RecyclerView.Adapter<Questions_Adapter.Vi
         void NextAfterSelection();
     }
 
+    public interface NextAfterString
+    {
+        void NextAfterSelection(String passedString);
+    }
+
     public NextAfter mListener;
+    public NextAfterString mListenerString;
 
     @Override
-    public Questions_Adapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public Adapter_Questions.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.questions_text_row, parent, false);
-        final Questions_Adapter.ViewHolder genericViewholder = new ViewHolder(view);
+        final Adapter_Questions.ViewHolder genericViewholder = new ViewHolder(view);
 
         mListener = (NextAfter) view.getContext();       //FOR SOME REASON ITS INCREDIBLY IMPORTANT TO SET THIS TO CONTEXT;
-
+        mListenerString = (NextAfterString) view.getContext();       //FOR SOME REASON ITS INCREDIBLY IMPORTANT TO SET THIS TO CONTEXT;
 
 
         view.setOnClickListener(new View.OnClickListener() {
@@ -144,9 +151,15 @@ public class Questions_Adapter extends RecyclerView.Adapter<Questions_Adapter.Vi
                     Fragment_MasterQuestionSpawner.Borrower.servicer=choiceVerbose;
                 }
 
-                //this part navigates away
-                mListener.NextAfterSelection();
-
+                if (Fragment_MasterQuestionSpawner.snapbackReview)
+                {
+                    mListenerString.NextAfterSelection("snapback");
+                }
+                else
+                {
+                    //this part navigates away
+                    mListener.NextAfterSelection();
+                }
 
             }
         });
@@ -156,7 +169,7 @@ public class Questions_Adapter extends RecyclerView.Adapter<Questions_Adapter.Vi
     }
 
     @Override
-    public void onBindViewHolder(Questions_Adapter.ViewHolder holder, int position)
+    public void onBindViewHolder(Adapter_Questions.ViewHolder holder, int position)
     {
         //this is behaviour that happens every time an element is added to the recycler_plans view I think
         holder.option.setText(Options.get(position));

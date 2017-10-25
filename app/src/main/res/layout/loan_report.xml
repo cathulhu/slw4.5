@@ -45,7 +45,7 @@
             android:layout_alignParentStart="true"
             android:layout_below="@+id/textView13"
             android:layout_marginLeft="16dp"
-            android:text="Below is a summary of the loans you enetered and information about what issues must be resolved before continuing and what kind of optimizations are available."
+            android:text="This is a summary of the loans in your debt porfile and the options availabile."
             android:textSize="16sp" />
 
         <TextView
@@ -54,16 +54,15 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_margin="16dp"
-            android:text="Debt Analysis"
+            android:text="Loan Report"
             android:textColor="@color/step_pager_selected_tab_color"
             android:textSize="18sp" />
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/loanSummaryList"
+        android:id="@+id/loans_detail_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/relativeLayout16"
-        android:layout_above="@+id/buttonArea" />
+        android:layout_below="@+id/relativeLayout16" />
 </RelativeLayout>

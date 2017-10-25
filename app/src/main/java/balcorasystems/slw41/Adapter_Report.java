@@ -1,17 +1,19 @@
 package balcorasystems.slw41;
 
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.view.View;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
+import java.text.NumberFormat;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class Report_Adapter extends RecyclerView.Adapter<Report_Adapter.ViewHolder>
+public class Adapter_Report extends RecyclerView.Adapter<Adapter_Report.ViewHolder>
 {
+
 
 
 
@@ -19,7 +21,7 @@ public class Report_Adapter extends RecyclerView.Adapter<Report_Adapter.ViewHold
     Object_Loan eachLoan;
 
     @Override
-    public Report_Adapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+    public Adapter_Report.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.report_row_item, parent, false);
 
@@ -29,11 +31,13 @@ public class Report_Adapter extends RecyclerView.Adapter<Report_Adapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(Report_Adapter.ViewHolder holder, int position)
+    public void onBindViewHolder(Adapter_Report.ViewHolder holder, int position)
     {
         eachLoan=masterBorrower.debtAndRepaymentObject.loanPortfolio.get(position);
+        String balanceValue = String.valueOf(eachLoan.currentBalance);
+        balanceValue = formatNumbers(balanceValue);
         String loanTilteText;
-        loanTilteText=eachLoan.type + " - " + String.valueOf(eachLoan.startingBalance);
+        loanTilteText=eachLoan.type + " - $" + balanceValue;
 
         holder.loanHeadline.setText(loanTilteText);
     }
@@ -56,5 +60,19 @@ public class Report_Adapter extends RecyclerView.Adapter<Report_Adapter.ViewHold
 
             loanHeadline=(TextView) itemView.findViewById(R.id.loanTitle);
         }
+    }
+
+
+
+    public String formatNumbers(String input) {
+        Pattern p = Pattern.compile("\\d+");
+        Matcher m = p.matcher(input);
+        NumberFormat nf = NumberFormat.getInstance();
+        StringBuffer sb = new StringBuffer();
+        while(m.find()) {
+            String g = m.group();
+            m.appendReplacement(sb, nf.format(Double.parseDouble(g)));
+        }
+        return m.appendTail(sb).toString();
     }
 }

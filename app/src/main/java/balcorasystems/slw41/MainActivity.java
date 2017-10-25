@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 
-public class MainActivity extends AppCompatActivity implements Fragment_Selection.OnNavigateAwayListener, Plans_Adapter.OnNavigateToDetail, Fragment_PlanDetail.OnGoToDetailPlan, Fragment_Summary.returnToMain, Questions_Adapter.NextAfter, Fragment_MasterQuestionSpawner.goToNext, Review_Adapter.OnGoToChangeValue, TaxStatus_Adapter.NextAfter, Fragment_Dependants.NextAfter, Fragment_Calendar.NextAfter, Report_RecyclerFragment.backToReview, Report_RecyclerFragment.goToPlans
+public class MainActivity extends AppCompatActivity implements Fragment_Selection.OnNavigateAwayListener, Adapter_Plans.OnNavigateToDetail, Fragment_PlanDetail.OnGoToDetailPlan, Fragment_Summary.returnToMain, Adapter_Questions.NextAfter, Fragment_MasterQuestionSpawner.goToNext, Adapter_Review.OnGoToChangeValue, Adapter_TaxStatus.NextAfter, Fragment_Dependants.NextAfter, Fragment_Calendar.NextAfter, Fragment_Issues.backToReview, Fragment_Issues.gotoReport, Fragment_Report.toRepaymentChoices, Adapter_Questions.NextAfterString, Fragment_modeChoice.goToQuestions
 
 {
     public static Object_Borrower masterBorrower = new Object_Borrower();
@@ -32,10 +32,12 @@ public class MainActivity extends AppCompatActivity implements Fragment_Selectio
         Fragment_MasterQuestionSpawner reloadedFragment = new Fragment_MasterQuestionSpawner();
         if (reviewFlag.equals("review"))
         {
-            //this should load just the review page
-//            reloadedFragment.index=reloadedFragment.summaryTitles.size();
-            //TODO: fix this so it reloads properly and while your at it put in a feature to so that review changes one thing then snaps back to review status
             reloadedFragment.reviewLoad=true;
+        }
+
+        if (reviewFlag.equals("snapback"))
+        {
+            reloadedFragment.goSnapBack=true;
         }
         FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
         fTransaction.replace(R.id.mainFrameLayout, reloadedFragment, "summary");
@@ -43,21 +45,42 @@ public class MainActivity extends AppCompatActivity implements Fragment_Selectio
         fTransaction.commit();
     }
 
+    public void toIssues()
+    {
+        Fragment_Issues issuesFragment = new Fragment_Issues();
+        FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
+        fTransaction.replace(R.id.mainFrameLayout, issuesFragment, "summary");
+        fTransaction.addToBackStack(null);
+        fTransaction.commit();
+    }
+
     public void toReport()
     {
-        Report_RecyclerFragment reportFragment = new Report_RecyclerFragment();
+        Fragment_Report reportFragment = new Fragment_Report();
         FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
         fTransaction.replace(R.id.mainFrameLayout, reportFragment, "summary");
         fTransaction.addToBackStack(null);
         fTransaction.commit();
     }
 
+    public void toQuestions()
+    {
+            Fragment_MasterQuestionSpawner loadedFragment = new Fragment_MasterQuestionSpawner();
+            //reseting the index to 0 so it doesn't load out of bounds if launched a second time, just in case it wasn't properly done on leaving it
+            Fragment_MasterQuestionSpawner.index =0;
+            FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
+            fTransaction.replace(R.id.mainFrameLayout, loadedFragment);
+            fTransaction.addToBackStack(null);
+            fTransaction.commit();
+    }
+
     public void toReviewQuestion ()
     {
         Fragment_MasterQuestionSpawner reloadedFragment = new Fragment_MasterQuestionSpawner();
-        Fragment_MasterQuestionSpawner.index =Review_Adapter.choice;
+        Fragment_MasterQuestionSpawner.index = Adapter_Review.choice;
         Fragment_MasterQuestionSpawner.first =true;
         Fragment_MasterQuestionSpawner.reviewLoad =true;
+        Fragment_MasterQuestionSpawner.snapbackReview=true;
         FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
         fTransaction.replace(R.id.mainFrameLayout, reloadedFragment, "summary");
         fTransaction.addToBackStack(null);
@@ -86,11 +109,16 @@ public class MainActivity extends AppCompatActivity implements Fragment_Selectio
     {
         if (selection==0)
         {
-            Fragment_MasterQuestionSpawner loadedFragment = new Fragment_MasterQuestionSpawner();
-            //reseting the index to 0 so it doesn't load out of bounds if launched a second time, just in case it wasn't properly done on leaving it
-            Fragment_MasterQuestionSpawner.index =0;
+//            Fragment_MasterQuestionSpawner loadedFragment = new Fragment_MasterQuestionSpawner();
+//            //reseting the index to 0 so it doesn't load out of bounds if launched a second time, just in case it wasn't properly done on leaving it
+//            Fragment_MasterQuestionSpawner.index =0;
+//            FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
+//            fTransaction.replace(R.id.mainFrameLayout, new Fragment_MasterQuestionSpawner());
+//            fTransaction.addToBackStack(null);
+//            fTransaction.commit();
+
             FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
-            fTransaction.replace(R.id.mainFrameLayout, new Fragment_MasterQuestionSpawner());
+            fTransaction.replace(R.id.mainFrameLayout, new Fragment_modeChoice());
             fTransaction.addToBackStack(null);
             fTransaction.commit();
         }
@@ -107,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements Fragment_Selectio
     public void gotoPlans()
     {
         FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
-        fTransaction.replace(R.id.mainFrameLayout, new Plans_RecyclerFragment(), "info");
+        fTransaction.replace(R.id.mainFrameLayout, new Fragment_Plans(), "info");
         fTransaction.addToBackStack(null);
         fTransaction.commit();
     }

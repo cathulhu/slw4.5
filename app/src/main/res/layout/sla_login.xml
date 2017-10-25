@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
+
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/pwfield"
+            android:layout_below="@+id/pwfield"
+            android:text="Login" />
+
+        <EditText
+            android:id="@+id/pwfield"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/unamefield"
+            android:layout_below="@+id/unamefield"
+            android:ems="10"
+            android:inputType="text"
+            android:text="P23480234jsdf#" />
+
+        <EditText
+            android:id="@+id/unamefield"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="asjdlasdf@aa.com" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/postResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="150dp"
+        android:text="ResponceDataHERE" />
+
+</RelativeLayout>

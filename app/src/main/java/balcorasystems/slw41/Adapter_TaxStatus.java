@@ -9,7 +9,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 
-public class TaxStatus_Adapter extends RecyclerView.Adapter<TaxStatus_Adapter.ViewHolder>
+public class Adapter_TaxStatus extends RecyclerView.Adapter<Adapter_TaxStatus.ViewHolder>
 {
     Integer uberIndex=Fragment_MasterQuestionSpawner.index;
     static ArrayList<String> TaxOptions = new ArrayList<>();
@@ -23,10 +23,10 @@ public class TaxStatus_Adapter extends RecyclerView.Adapter<TaxStatus_Adapter.Vi
 
 
     @Override
-    public TaxStatus_Adapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public Adapter_TaxStatus.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.questions_text_row, parent, false);
-        final TaxStatus_Adapter.ViewHolder genericViewholder = new ViewHolder(view);
+        final Adapter_TaxStatus.ViewHolder genericViewholder = new ViewHolder(view);
 
         mListener = (NextAfter) view.getContext();       //FOR SOME REASON ITS INCREDIBLY IMPORTANT TO SET THIS TO CONTEXT;
 
@@ -64,7 +64,7 @@ public class TaxStatus_Adapter extends RecyclerView.Adapter<TaxStatus_Adapter.Vi
     }
 
     @Override
-    public void onBindViewHolder(TaxStatus_Adapter.ViewHolder holder, int position)
+    public void onBindViewHolder(Adapter_TaxStatus.ViewHolder holder, int position)
     {
         //this is behaviour that happens every time an element is added to the recycler_plans view I think
         holder.option.setText(TaxOptions.get(position));

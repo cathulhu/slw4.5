@@ -9,8 +9,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginBottom="1dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginBottom="3dp"
+        android:layout_marginTop="3dp"
         android:checkMark="@drawable/ic_check"
         android:checkMarkTint="@color/circle_color_default_blue"
         android:text="CheckedTextView" />

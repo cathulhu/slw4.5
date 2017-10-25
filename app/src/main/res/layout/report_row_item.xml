@@ -32,12 +32,12 @@
         android:layout_alignStart="@+id/textView26"
         android:layout_below="@+id/textView26"
         android:layout_marginTop="4dp"
-        android:text="Loan Issues:"
+        android:text="Loan Traits:"
         android:textStyle="bold" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="150dp"
         android:layout_alignEnd="@+id/textView26"
         android:layout_alignStart="@+id/textView30"
         android:layout_below="@+id/textView30">
@@ -49,7 +49,7 @@
 
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content" />
         </LinearLayout>
     </ScrollView>
 

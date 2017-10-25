@@ -10,15 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import java.util.ArrayList;
 
-
-public class Report_RecyclerFragment extends Fragment
+public class Fragment_Issues extends Fragment
 {
 
-    public interface goToPlans
+    public interface gotoReport
     {
-        void gotoPlans();
+        void toReport();
     }
 
     public interface backToReview
@@ -26,11 +24,11 @@ public class Report_RecyclerFragment extends Fragment
         void NextAfterSelection(String reviewString);
     }
 
-    public goToPlans mListener;
+    public gotoReport mListener;
     public backToReview reviewListener;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup selectionContainer, Bundle savedInstanceState) {
-        final View rootLayoutView = inflater.inflate(R.layout.report_screen, selectionContainer, false);
+        final View rootLayoutView = inflater.inflate(R.layout.issues, selectionContainer, false);
 
 
 
@@ -42,8 +40,8 @@ public class Report_RecyclerFragment extends Fragment
             @Override
             public void onClick(View view) {
 
-                mListener = (goToPlans) rootLayoutView.getContext();
-                mListener.gotoPlans();
+                mListener = (gotoReport) rootLayoutView.getContext();
+                mListener.toReport();
             }
         });
 
@@ -63,7 +61,7 @@ public class Report_RecyclerFragment extends Fragment
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        RecyclerView.Adapter adapter = new Report_Adapter();
+        RecyclerView.Adapter adapter = new Adapter_LoanIssues();
         recyclerView.setAdapter(adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 

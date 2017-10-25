@@ -15,7 +15,7 @@ import android.widget.Toast;
 public class Fragment_Loans extends Fragment
 {
     public static Boolean firstRun=true;
-    RecyclerView.Adapter adapter = new Loans_Adapter();
+    RecyclerView.Adapter adapter = new Adapter_Loans();
 
     public void addLoan()
     {

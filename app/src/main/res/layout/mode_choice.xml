@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:splitTrack="false"
+        android:switchPadding="9dp"
+        android:text="Text"
+        android:textOff="switch to high accuracy mode"
+        android:textOn="switch to low accuracy mode"
+        tools:checked="false"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_above="@+id/fragmentView"
+        android:layout_alignEnd="@+id/fragmentView" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="16dp"
+        android:text="Some kind of Title" />
+
+    <RelativeLayout
+        android:animateLayoutChanges="true"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginRight="16dp"
+        android:id="@+id/fragmentView"
+        android:layout_above="@+id/leave"
+        android:layout_alignStart="@+id/textView17">
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/leave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/fragmentView"
+        android:layout_alignParentBottom="true"
+        android:text="Continue" />
+
+    <TextView
+        android:id="@+id/textView31"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/switch1"
+        android:layout_alignEnd="@+id/switch1"
+        android:layout_alignStart="@+id/textView17"
+        android:layout_below="@+id/textView17"
+        android:layout_marginTop="5dp"
+        android:text="Here you can input your login credentials to the Federal Student Aide database and your loans will automatically be downloaded or you can switch to low precision ballpark mode." />
+
+</RelativeLayout>
