@@ -15,6 +15,8 @@ public class Adapter_Review extends RecyclerView.Adapter<Adapter_Review.ViewHold
     Object_Borrower borrower = new Object_Borrower();
     List<String> foundSummaryTitles = new ArrayList<>();
     public static Integer choice =0;
+    ArrayList<String> values = new ArrayList<>();
+    Integer index=0;
 
     public interface OnGoToChangeValue
     {
@@ -53,7 +55,16 @@ public class Adapter_Review extends RecyclerView.Adapter<Adapter_Review.ViewHold
             public void onClick(View view) {
                 Toast.makeText(view.getContext(), "Number  " + genericViewholder.getAdapterPosition(), Toast.LENGTH_SHORT).show();
                 choice=genericViewholder.getAdapterPosition();
-                mListener.toReviewQuestion();
+
+                if (index!=9)
+                {
+                    mListener.toReviewQuestion();
+                }
+                else
+                {
+
+                }
+
             }
         });
 
@@ -65,9 +76,19 @@ public class Adapter_Review extends RecyclerView.Adapter<Adapter_Review.ViewHold
 
 //        this is behaviour that happens every time an element is added to the recycler_plans view I think
         borrower=Fragment_MasterQuestionSpawner.Borrower;
+        index++;
 
+        String title = new String();
 
-        String title = foundSummaryTitles.get(i);
+        if (index != 9)
+        {
+             title = foundSummaryTitles.get(i);
+        }
+        else
+        {
+            title="Loans";
+        }
+
         viewHolder.title.setText(title);
 
          if (title.equals("Repayment Status"))
@@ -150,13 +171,13 @@ public class Adapter_Review extends RecyclerView.Adapter<Adapter_Review.ViewHold
 
             viewHolder.value.setText(incomeString);
         }
-        else if (title.equals("Loan Details"))
+        else if (index==9)
         {
             String loansString = new String();
 
             for (Object_Loan loan:borrower.debtAndRepaymentObject.loanPortfolio)
             {
-                    loansString += loan.type + " " + loan.currentBalance + " APR " + loan.interestRate + "%" + "\n";
+                    loansString += loan.type + " $" + loan.startingBalance + " @ " + loan.interestRate + "% Interest" + "\n";
             }
 
             viewHolder.value.setText(loansString);
@@ -168,7 +189,7 @@ public class Adapter_Review extends RecyclerView.Adapter<Adapter_Review.ViewHold
 
     @Override
     public int getItemCount() {
-        return foundSummaryTitles.size();
+        return foundSummaryTitles.size()+1;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity implements Fragment_Selectio
 
 //    public static boolean noPaymentDataYet =true;
     public static Integer detailID=0;
-
+    public static Object_Debt downloadedLoans = new Object_Debt();
     public Integer backCounter =0;
     public Integer launchCount=0;
 

@@ -184,18 +184,19 @@ public class Fragment_MasterQuestionSpawner extends Fragment
             fTransaction.replace(R.id.fragmentSection, new Fragment_Income());
             fTransaction.commit();
         }
-        else if (summaryTitles.get(index).equals("Loan Details"))
-        {
-            Borrower.currentlyEditing=summaryTitles.get(index);
-            FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
-            fTransaction.replace(R.id.fragmentSection, new Fragment_Loans());
-            fTransaction.commit();
-            //load different fragments, not the recycler view
-        }
+//        else if (summaryTitles.get(index).equals("Loan Details"))
+//        {
+//            Borrower.currentlyEditing=summaryTitles.get(index);
+//            FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
+//            fTransaction.replace(R.id.fragmentSection, new Fragment_Loans());
+//            fTransaction.commit();
+//            //load different fragments, not the recycler view
+//        }
         else if (summaryTitles.get(index).equals("Review"))
         {
             //sets the master copy of the borrower object in the main activity = to the changes made before leaving
             MainActivity.masterBorrower=Borrower;
+            MainActivity.masterBorrower.debtAndRepaymentObject = MainActivity.downloadedLoans;
 
             FragmentTransaction fTransaction = getFragmentManager().beginTransaction();
             fTransaction.replace(R.id.fragmentSection, new Fragment_Review());

@@ -1,10 +1,7 @@
 package balcorasystems.slw41;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,14 +9,22 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.internal.LinkedTreeMap;
+import com.google.gson.stream.JsonReader;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONStringer;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +38,7 @@ public class Fragment_SLALogin extends Fragment
 {
 //    public String results = "";
     public JSONObject loanResults = new JSONObject();
+    public Map<String, String> loanDataMap = new HashMap<>();
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -118,8 +124,8 @@ public class Fragment_SLALogin extends Fragment
             String splitIdToken[] = sessionIDtoken.split(";");
             sessionIDtoken=splitIdToken[0];
 
-            String rawResponce = "";
-            JSONObject jsonResponce = new JSONObject();
+            String rawResponse = "";
+            JSONObject jsonResponse = new JSONObject();
 
 //      login format UTF-8 web encoding: "userId=asdasdf%40aaa.comdd&password=Password34589asd&from=&id=";
 
@@ -131,9 +137,7 @@ public class Fragment_SLALogin extends Fragment
             }
 
             String POSTtextLogin = "userId=" + username + "&password=" + password + "&" + "from=" + "&" + "id=";
-
             RequestBody body = RequestBody.create(MediaType.parse(POSTtextLogin), POSTtextLogin);
-
 
             okhttp3.Request postRequest = new okhttp3.Request.Builder()
                     .url(urlTarget3)
@@ -150,12 +154,43 @@ public class Fragment_SLALogin extends Fragment
                     .addHeader("Cookie", sessionIDtoken)
                     .build();
 
+            String testdata ="{\"simpleLoans\":[{\"balance\":4521,\"interestRate\":3.4,\"loanType\":\"D1\",\"date\":{\"dateString\":\"January 2012\"},\"firstDisbursementDate\":{\"dateString\":\"January 2012\"},\"servicer\":\"DEPT OF ED\\/FEDLOAN SERVICING(PHEAA)\",\"servicerPhone\":\"800-699-2908\"},{\"balance\":3517,\"interestRate\":6.8,\"loanType\":\"D2\",\"date\":{\"dateString\":\"January 2012\"},\"firstDisbursementDate\":{\"dateString\":\"January 2012\"},\"servicer\":\"DEPT OF ED\\/FEDLOAN SERVICING(PHEAA)\",\"servicerPhone\":\"800-699-2908\"},{\"balance\":5619,\"interestRate\":3.4,\"loanType\":\"D1\",\"date\":{\"dateString\":\"September 2012\"},\"firstDisbursementDate\":{\"dateString\":\"September 2012\"},\"servicer\":\"DEPT OF ED\\/FEDLOAN SERVICING(PHEAA)\",\"servicerPhone\":\"800-699-2908\"},{\"balance\":9379,\"interestRate\":6.8,\"loanType\":\"D2\",\"date\":{\"dateString\":\"September 2012\"},\"firstDisbursementDate\":{\"dateString\":\"September 2012\"},\"servicer\":\"DEPT OF ED\\/FEDLOAN SERVICING(PHEAA)\",\"servicerPhone\":\"800-699-2908\"},{\"balance\":5635,\"interestRate\":3.86,\"loanType\":\"D1\",\"date\":{\"dateString\":\"September 2013\"},\"firstDisbursementDate\":{\"dateString\":\"September 2013\"},\"servicer\":\"DEPT OF ED\\/FEDLOAN SERVICING(PHEAA)\",\"servicerPhone\":\"800-699-2908\"},{\"balance\":8045,\"interestRate\":3.86,\"loanType\":\"D2\",\"date\":{\"dateString\":\"September 2013\"},\"firstDisbursementDate\":{\"dateString\":\"September 2013\"},\"servicer\":\"DEPT OF ED\\/FEDLOAN SERVICING(PHEAA)\",\"servicerPhone\":\"800-699-2908\"},{\"balance\":1844,\"interestRate\":4.66,\"loanType\":\"D1\",\"date\":{\"dateString\":\"September 2014\"},\"firstDisbursementDate\":{\"dateString\":\"September 2014\"},\"servicer\":\"DEPT OF ED\\/FEDLOAN SERVICING(PHEAA)\",\"servicerPhone\":\"800-699-2908\"},{\"balance\":2672,\"interestRate\":4.66,\"loanType\":\"D2\",\"date\":{\"dateString\":\"September 2014\"},\"firstDisbursementDate\":{\"dateString\":\"September 2014\"},\"servicer\":\"DEPT OF ED\\/FEDLOAN SERVICING(PHEAA)\",\"servicerPhone\":\"800-699-2908\"}],\"nsldsCode\":\"O\",\"error\":false}";
+            ArrayList extractedJsonData = new ArrayList();
+
 
             okhttp3.Response response = null;
             try {
                 response = client.newCall(postRequest).execute();
-                rawResponce = response.body().string();
-                jsonResponce = new JSONObject(rawResponce);
+                rawResponse = response.body().string();
+                jsonResponse = new JSONObject(testdata);        // TODO change this back to raw response
+                Integer loanNumber =0;
+                loanNumber = jsonResponse.getJSONArray("simpleLoans").length();
+
+                for (int i = 0; i < loanNumber; i++)
+                {
+                    JSONObject reSerializedsimpleLoansContent = new JSONObject(String.valueOf(jsonResponse.getJSONArray("simpleLoans").get(i)));
+                    Integer balance = Integer.valueOf(String.valueOf(reSerializedsimpleLoansContent.get("balance")));
+                    Double interest = Double.valueOf(String.valueOf(reSerializedsimpleLoansContent.get("interestRate")));
+                    String servicer = String.valueOf(reSerializedsimpleLoansContent.get("servicer"));
+                    String servicerPhone = String.valueOf(reSerializedsimpleLoansContent.get("servicerPhone"));
+                    String loanType = String.valueOf(reSerializedsimpleLoansContent.get("loanType"));
+                    String date = String.valueOf(reSerializedsimpleLoansContent.get("date"));
+
+//                    JSONObject reSerializedDateContent = new JSONObject(String.valueOf(reSerializedsimpleLoansContent.getJSONArray("firstDisbursementDate").get(0)));
+//                    String date = String.valueOf(reSerializedsimpleLoansContent.getJSONArray("firstDisbursementDate").get(0));
+
+                    extractedJsonData.add(balance);
+                    extractedJsonData.add(interest);
+                    extractedJsonData.add(servicer);
+                    extractedJsonData.add(servicerPhone);
+                    extractedJsonData.add(loanType);
+                    extractedJsonData.add(date);
+
+                    Object_Debt updatedDebt = new Object_Debt();
+                    updatedDebt.addFullLoan(balance, balance, interest, loanType, servicer, date);
+
+                    MainActivity.downloadedLoans = updatedDebt;
+                }
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -163,8 +198,7 @@ public class Fragment_SLALogin extends Fragment
                 e.printStackTrace();
             }
 
-
-            return jsonResponce;
+            return jsonResponse;
         }
 
 
@@ -173,12 +207,14 @@ public class Fragment_SLALogin extends Fragment
         {
             jsonResult = Go(username, password);
 
-            getActivity().runOnUiThread(new Runnable() {
+            getActivity().runOnUiThread(new Runnable()
+            {
                 @Override
                 public void run() {
                     updateResults(jsonResult);
                 }
             });
+
         }
     }
 

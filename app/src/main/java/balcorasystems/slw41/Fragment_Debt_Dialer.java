@@ -61,11 +61,11 @@ public class Fragment_Debt_Dialer extends Fragment
 
                     if (seekArc.getProgress()==99)
                     {
-                        seekArc.setClockwise(FALSE);
+                        seekArc.setClockwise(TRUE);
                     }
                     else
                     {
-                        seekArc.setClockwise(TRUE);
+                        seekArc.setClockwise(FALSE);
                     }
                     debt += i;
                 }

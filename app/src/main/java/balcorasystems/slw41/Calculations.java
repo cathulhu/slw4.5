@@ -148,7 +148,6 @@ public class Calculations {
 
         for (Object_Loan loan: targetBorrower.debtAndRepaymentObject.loanPortfolio)
         {
-            loan.updatetypes();
 
             Double loanRunningIndividualBalance = loan.startingBalance;
             Double loanInterestRate = loan.interestRate/100/12;

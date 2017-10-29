@@ -13,8 +13,20 @@ public class Object_Debt
 
     public static void addBlankLoan()
     {
-        Object_Loan newLoan = new Object_Loan();
-        loanPortfolio.add(newLoan);
+        Object_Loan blankLoan = new Object_Loan();
+        loanPortfolio.add(blankLoan);
+    }
+
+    public static void addFullLoan(double startingBal, double currentBal, double APY, String type, String servicer, String dispDate)
+    {
+        Object_Loan fullLoan = new Object_Loan();
+        fullLoan.startingBalance=startingBal;
+        fullLoan.currentBalance=currentBal;
+        fullLoan.interestRate=APY;
+        fullLoan.type=type;
+        fullLoan.servicer=servicer;
+        fullLoan.dispersementDate=dispDate;
+        loanPortfolio.add(fullLoan);
     }
 
     public static void deleteLoan(int delTarget)
