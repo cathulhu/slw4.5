@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -73,6 +74,15 @@ public class Fragment_SLALogin extends Fragment
 
         result.setText(runnableResult.toString());
     }
+
+    public void updateProgress(Integer numOfLoans, Integer progress)
+    {
+        ProgressBar downloadBar = (ProgressBar) getView().findViewById(R.id.downloadProgress);
+        downloadBar.setMax(numOfLoans);
+        downloadBar.setProgress(progress);
+    }
+
+
 
 
 
@@ -166,6 +176,8 @@ public class Fragment_SLALogin extends Fragment
                 Integer loanNumber =0;
                 loanNumber = jsonResponse.getJSONArray("simpleLoans").length();
 
+                updateProgressBar(loanNumber, 0);
+
                 for (int i = 0; i < loanNumber; i++)
                 {
                     JSONObject reSerializedsimpleLoansContent = new JSONObject(String.valueOf(jsonResponse.getJSONArray("simpleLoans").get(i)));
@@ -190,6 +202,8 @@ public class Fragment_SLALogin extends Fragment
                     updatedDebt.addFullLoan(balance, balance, interest, loanType, servicer, date);
 
                     MainActivity.downloadedLoans = updatedDebt;
+
+                    updateProgressBar(loanNumber, i+1);
                 }
 
             } catch (IOException e) {
@@ -213,8 +227,20 @@ public class Fragment_SLALogin extends Fragment
                 public void run() {
                     updateResults(jsonResult);
                 }
+
             });
 
+        }
+
+        public void updateProgressBar(final Integer loanNum, final Integer progress)
+        {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run()
+                {
+                    updateProgress(loanNum, progress);
+                }
+            });
         }
     }
 

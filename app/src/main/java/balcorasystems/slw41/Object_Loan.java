@@ -15,12 +15,25 @@ public class Object_Loan
     double currentBalance;
     double startingBalance;
     double forgivenessElig;
+    double uncapitalizedInterest;
+    double PAYEinterestCapValue;
+    Boolean PAYEinterestCapReached=false;
     Long generatedMonthlyInterest;
     Long accumulatedNonCapitalizedInterest;
 
     Object_Loan ()
     {
 
+    }
+
+    public void updateTraits()
+    {
+        PAYEinterestCapValue = startingBalance*0.10;
+
+        if(type.equals("D1") || type.equals("D0") || type.equals("D6") || type.equals("D9") || type.equals("SF") )
+        {
+            isSubsidized=true;
+        }
     }
 
 //    public void updatetypes()

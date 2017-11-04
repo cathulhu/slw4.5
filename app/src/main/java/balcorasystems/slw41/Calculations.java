@@ -12,7 +12,7 @@ public class Calculations {
     }
 
 
-    public void StandardRepayCalc() {
+    public static void StandardRepayCalc() {
         ArrayList<Double> stdPayments = new ArrayList<>();
         Double totalPayed = 0.0;
         Double individualPayment = 0.0;
@@ -66,6 +66,7 @@ public class Calculations {
         }
 
         Double stdPayment = Object_Debt.repaymentPortfolio.get(coordinatesOfStdRepayment).monthlyPayments.get(0);
+        targetBorrower.debtAndRepaymentObject.repaymentPortfolio.get(0).calculateMeanMonthlyPayment();
         Double discretionaryIncomeMonthly = discretionaryIncome / 12;
 
         if (stdPayment > discretionaryIncomeMonthly * 0.15) {
@@ -84,7 +85,7 @@ public class Calculations {
     }
 
 
-    public static Double TaxCalc (Double passedUnpaidAndIncome)
+    public static Double TaxCalc (Double passedIncome)
 
     {
 
@@ -113,12 +114,13 @@ public class Calculations {
             taxcoord1=2;
         }
 
-        for (int i = 6; passedUnpaidAndIncome > 0; i--) {
-            if (passedUnpaidAndIncome > taxContainer[taxcoord1][i])                                              //for smaller example, 40k forgiven... 40k<415k, loop, 40k<413k, 40k<190k 40k<91l, 40k<37k = yes, start at i=2
+        for (int i = 6; passedIncome > 0; i--)
+        {
+            if (passedIncome > taxContainer[taxcoord1][i])                                              //for smaller example, 40k forgiven... 40k<415k, loop, 40k<413k, 40k<190k 40k<91l, 40k<37k = yes, start at i=2
             {                                                                                                // example first time around loop income(loan forgiveness)= 500k
                 double taxRate = taxBracketsPercent2016[i];                                             //.396,
-                incomeBracketDiff = passedUnpaidAndIncome - (taxContainer[taxcoord1][i]);               //lets do single filing, rt=500k - (415050) , so iBD =84950
-                passedUnpaidAndIncome = passedUnpaidAndIncome - incomeBracketDiff;                               //                       rt now = 500k- 84950, rt = 415050
+                incomeBracketDiff = passedIncome - (taxContainer[taxcoord1][i]);               //lets do single filing, rt=500k - (415050) , so iBD =84950
+                passedIncome = passedIncome - incomeBracketDiff;                               //                       rt now = 500k- 84950, rt = 415050
                 owedTotal += taxRate * incomeBracketDiff;                                           // wt = 0.396*84950 = 33640.2
             }                                                                                      //second time around loop
                                                                                                    //.35 rate,
@@ -129,6 +131,171 @@ public class Calculations {
     }
 
 
+    public static void payeCalc2()
+    {
+        Double loanTotalBalance= 0D;
+        Double loan10percentCapAmmount= 0D;
+        Integer repaymentMonth=0;
+
+        Integer repaymentMonthLimit=0;
+        Double runningIncome= Object_Borrower.startingPrimaryIncome;
+        String taxfilingStatus = targetBorrower.taxStatus;
+        Double forgiveness=0D;
+        String pfhStatus = "";
+        Double owedTaxesOnForgiveness = 0D;
+        ArrayList<Double> payments = new ArrayList();
+        Double totalPayed = 0D;
+
+
+        Double standardPayment = targetBorrower.debtAndRepaymentObject.repaymentPortfolio.get(0).meanMonthlyRepayment;
+
+        //populate initial values
+        for (Object_Loan loan: targetBorrower.debtAndRepaymentObject.loanPortfolio)
+        {
+            loanTotalBalance += loan.currentBalance;
+            loan10percentCapAmmount += loan.startingBalance*0.10;
+        }
+
+
+
+
+        while (loanTotalBalance > 0)
+        {
+            Double discretionaryIncome=0D;
+            Double idrPayment=0D;
+
+            //generate and apply interest from each loan
+            for (Object_Loan loan: targetBorrower.debtAndRepaymentObject.loanPortfolio)
+            {
+                Double loanRunningIndividualBalance = loan.currentBalance;
+                Double loanInterestRate = loan.interestRate/100/12;
+                Double perLoanPerMonthInterest = loanRunningIndividualBalance*loanInterestRate;
+
+                if (loan.isSubsidized && repaymentMonth < 36)
+                {
+                    perLoanPerMonthInterest =0D;
+                }
+
+                if (!loan.PAYEinterestCapReached)
+                {
+                    loan.uncapitalizedInterest += perLoanPerMonthInterest;
+                    if (loan.uncapitalizedInterest >= loan.PAYEinterestCapValue)
+                    {
+                        loan.uncapitalizedInterest=loan.PAYEinterestCapValue;
+                        loan.PAYEinterestCapReached=true;
+                    }
+
+                }
+            }
+
+            //calculate payment
+            if(targetBorrower.taxStatus.equals("joint filing option here"))
+            {
+                runningIncome += Object_Borrower.spouseIncomeOverTime.get(repaymentMonth) + Object_Borrower.primaryIncomeOverTime.get(repaymentMonth);
+            }
+            else
+            {
+                runningIncome = Object_Borrower.primaryIncomeOverTime.get(repaymentMonth);
+            }
+            discretionaryIncome=Calculations.DiscIncomeCalc(repaymentMonth, runningIncome, taxfilingStatus);
+            pfhStatus = financialHardshipCalc(discretionaryIncome);
+            idrPayment = discretionaryIncome/12*0.10;
+
+            if (pfhStatus.equals("No PFH") || targetBorrower.inDefault)
+            {
+                idrPayment = standardPayment;
+            }
+
+
+            payments.add(idrPayment);
+
+
+            //interest capitalization
+            for (Object_Loan loan: targetBorrower.debtAndRepaymentObject.loanPortfolio)
+            {
+                //of course there is 3rd possibility that triggers capitalization, leaving the plan, I'll handle switching later.
+                if (pfhStatus.equals("No PFH") || targetBorrower.inDefault)
+                {
+                   loan.currentBalance += loan.uncapitalizedInterest;
+                   loan.uncapitalizedInterest=0;
+                }
+            }
+
+            loanTotalBalance=0D;
+            for (Object_Loan loan: targetBorrower.debtAndRepaymentObject.loanPortfolio)
+            {
+                loanTotalBalance += loan.currentBalance;
+            }
+
+            //payment allocation - ratio based
+            for (Object_Loan loan: targetBorrower.debtAndRepaymentObject.loanPortfolio)
+            {
+                Double paymentPercentAllocation = loan.currentBalance/loanTotalBalance;
+                Double apportionedPayment = idrPayment*paymentPercentAllocation;
+
+                if (loan.currentBalance - apportionedPayment < 0)
+                {
+                    apportionedPayment = loan.currentBalance;
+                }
+
+                loan.currentBalance -= apportionedPayment;
+            }
+
+
+//            //payment allocation - highest interest first
+//            for (Object_Loan loan: targetBorrower.debtAndRepaymentObject.loanPortfolio)
+//            {
+//
+//            }
+
+            //check for loan timeout
+            for (Object_Loan loan: targetBorrower.debtAndRepaymentObject.loanPortfolio)
+            {
+                if (loan.isGraduateLoan)
+                {
+                    if (repaymentMonth == 299)
+                    {
+                        loan.uncapitalizedInterest += loan.currentBalance;
+                        loan.currentBalance=0;
+                    }
+                }
+                else
+                {
+                    if (repaymentMonth == 239)
+                    {
+                        loan.uncapitalizedInterest += loan.currentBalance;
+                        loan.currentBalance=0;
+                    }
+                }
+            }
+
+            loanTotalBalance=0D;
+            for (Object_Loan loan: targetBorrower.debtAndRepaymentObject.loanPortfolio)
+            {
+                loanTotalBalance += loan.currentBalance;
+            }
+
+            repaymentMonth++;
+        }
+
+        //dump last uncapitalized interest into forgiveness
+        for (Object_Loan loan: targetBorrower.debtAndRepaymentObject.loanPortfolio)
+        {
+            forgiveness += loan.uncapitalizedInterest;
+            loan.uncapitalizedInterest=0;
+            forgiveness += loan.currentBalance;
+            loan.currentBalance=0;
+        }
+
+        for (Double x:payments)
+        {
+                totalPayed += x;
+        }
+
+        owedTaxesOnForgiveness = TaxCalc(forgiveness + runningIncome) - TaxCalc(runningIncome);;
+
+        Object_Debt.addRepaymentNoSwitching("PAYE", payments, totalPayed, forgiveness, owedTaxesOnForgiveness);
+    }
 
 
 
@@ -139,127 +306,127 @@ public class Calculations {
 
 //PAYE calc works, now just need to add the other calculations, the create the mega calc that calls on them all and can compare the results
 
-    public static void payeCalc()
-    {
+//    public static void payeCalc()
+//    {
+//
+//        Double totalPayed=0D;
+//        ArrayList<Double> payments = new ArrayList<>();
+//        //TODO: think if I want to be returning payments to the mega function that calls the individual calcs or a more sophisitacted object, either way need to return this array
+//
+//        for (Object_Loan loan: targetBorrower.debtAndRepaymentObject.loanPortfolio)
+//        {
+//
+//            Double loanRunningIndividualBalance = loan.startingBalance;
+//            Double loanInterestRate = loan.interestRate/100/12;
+//            Double loan10percentCapAmmount = loan.startingBalance*0.10;
+//
+//            Double payeUncappitalizedInterest=0D;
+//            Integer repaymentMonth=0;
+//            Integer repaymentMonthLimit=0;
+//            double runningIncome= Object_Borrower.startingPrimaryIncome;
+//            String taxfilingStatus = targetBorrower.taxStatus;
+//            double forgiveness=0D;
+//            String pfhStatus;
+//            Double owedTaxesOnForgiveness;
+//            Double perLoanTotal=0D;
+//
+//
+//            if (loan.isGraduateLoan)
+//            {
+//                repaymentMonthLimit=300;
+//            }
+//            else
+//            {
+//                repaymentMonthLimit=240;
+//            }
+//
+//            //PAYE has 10% principal interest cap
+//
+//            while (loanRunningIndividualBalance > perLoanTotal && repaymentMonth < repaymentMonthLimit)
+//            {
+//                Double thisMonthsInterest = loanRunningIndividualBalance*loanInterestRate;  //should this value be divided by 12?
+//                Double payeMonthlyInterest=0D;
+//                Double discretionaryIncome=0D;
+//                double idrPayment = 0D;
+//
+//                //checking for joint filing which counts spousal income;
+//                if(targetBorrower.taxStatus.equals("joint filing option here"))
+//                {
+//                    runningIncome += Object_Borrower.spouseIncomeOverTime.get(repaymentMonth);
+//                }
+//                else
+//                {
+//                    runningIncome = Object_Borrower.primaryIncomeOverTime.get(repaymentMonth);
+//                }
+//
+//                //calculate payment
+//                discretionaryIncome=Calculations.DiscIncomeCalc(repaymentMonth, runningIncome, taxfilingStatus);
+//                pfhStatus = financialHardshipCalc(discretionaryIncome);
+//                idrPayment = discretionaryIncome/12*0.10;
+//
+//                //check if payment is greater than ballance, used for final payment
+//                if (loanRunningIndividualBalance - idrPayment < 0)
+//                {
+//                    idrPayment = (loanRunningIndividualBalance - idrPayment) * -1;
+//                }
+//
+//                //adding idrPayment to array of payments for this loan
+//                payments.add(idrPayment);
+//                totalPayed += idrPayment;
+//                perLoanTotal += idrPayment;
+//
+//                //calculate interest
+//                if (loan.isSubsidized && repaymentMonth < 36)
+//                {
+//                    payeMonthlyInterest =0D;
+//                }
+//                else
+//                {
+//                    payeMonthlyInterest = thisMonthsInterest;
+//                }
+//
+//                //adding latest interest to the uncapitalized pile
+//                payeUncappitalizedInterest += payeMonthlyInterest;
+//
+//                //checking partial financial hardship status
+//                pfhStatus=financialHardshipCalc(discretionaryIncome);
+//
+//                if (pfhStatus.equals("No PFH"))
+//                {
+//                    //the three events that trigger interest capitalization are default, leaving the plan or loss of PFH
+//
+//                    if (payeUncappitalizedInterest > loan10percentCapAmmount)
+//                    {
+//                        payeUncappitalizedInterest = loan10percentCapAmmount;
+//                    }
+//
+//                    loanRunningIndividualBalance += payeUncappitalizedInterest;
+//                }
+//
+//                repaymentMonth++;
+//            }
+//
+//            //adding the uncapitalized interest to the balance at the end
+//            if (payeUncappitalizedInterest > loan10percentCapAmmount)
+//            {
+//                payeUncappitalizedInterest = loan10percentCapAmmount;
+//            }
+//            loanRunningIndividualBalance += payeUncappitalizedInterest;
+//
+//            forgiveness=loanRunningIndividualBalance;
+//            owedTaxesOnForgiveness=TaxCalc(loanRunningIndividualBalance);
+//
+//            //passing 0.0 for taxes until I put tax calc back in
+//            Object_Debt.addRepaymentNoSwitching("PAYE", payments, totalPayed, forgiveness, owedTaxesOnForgiveness);
+//
+//            //updating the master borrower object with this data so I don't have to pass one back.
+//            MainActivity.masterBorrower=targetBorrower;
+//        }
+//
+//
+//    }
 
-        Double totalPayed=0D;
-        ArrayList<Double> payments = new ArrayList<>();
-        //TODO: think if I want to be returning payments to the mega function that calls the individual calcs or a more sophisitacted object, either way need to return this array
 
-        for (Object_Loan loan: targetBorrower.debtAndRepaymentObject.loanPortfolio)
-        {
-
-            Double loanRunningIndividualBalance = loan.startingBalance;
-            Double loanInterestRate = loan.interestRate/100/12;
-            Double loan10percentCapAmmount = loan.startingBalance*0.10;
-
-            Double payeUncappitalizedInterest=0D;
-            Integer repaymentMonth=0;
-            Integer repaymentMonthLimit=0;
-            double runningIncome= Object_Borrower.startingPrimaryIncome;
-            String taxfilingStatus = targetBorrower.taxStatus;
-            double forgiveness=0D;
-            String pfhStatus;
-            Double owedTaxesOnForgiveness;
-
-
-            if (loan.isGraduateLoan)
-            {
-                repaymentMonthLimit=300;
-            }
-            else
-            {
-                repaymentMonthLimit=240;
-            }
-
-            //PAYE has 10% principal interest cap
-
-            while (loanRunningIndividualBalance > 0 && repaymentMonth < repaymentMonthLimit)
-            {
-                Double thisMonthsInterest = loanRunningIndividualBalance*loanInterestRate;  //should this value be divided by 12?
-                Double payeMonthlyInterest=0D;
-                Double discretionaryIncome=0D;
-                double idrPayment = 0D;
-
-                //checking for joint filing which counts spousal income;
-                if(targetBorrower.taxStatus.equals("joint filing option here"))
-                {
-                    runningIncome += Object_Borrower.spouseIncomeOverTime.get(repaymentMonth);
-                }
-                else
-                {
-                    runningIncome = Object_Borrower.primaryIncomeOverTime.get(repaymentMonth);
-                }
-
-                //calculate payment
-                discretionaryIncome=Calculations.DiscIncomeCalc(repaymentMonth, runningIncome, taxfilingStatus);
-                pfhStatus = financialHardshipCalc(discretionaryIncome);
-                idrPayment = discretionaryIncome/12*0.10;
-
-                //check if payment is greater than ballance, used for final payment
-                if (loanRunningIndividualBalance - idrPayment < 0)
-                {
-                    idrPayment = (loanRunningIndividualBalance - idrPayment) * -1;
-                }
-
-                //adding idrPayment to array of payments for this loan
-                payments.add(idrPayment);
-                totalPayed += idrPayment;
-
-                //calculate interest
-                if (loan.isSubsidized && repaymentMonth < 36)
-                {
-                    payeMonthlyInterest =0D;
-                }
-                else
-                {
-                    payeMonthlyInterest = thisMonthsInterest;
-                }
-
-                //adding latest interest to the uncapitalized pile
-                payeUncappitalizedInterest += payeMonthlyInterest;
-
-                //checking partial financial hardship status
-                pfhStatus=financialHardshipCalc(discretionaryIncome);
-
-                if (pfhStatus.equals("No PFH"))
-                {
-                    //the three events that trigger interest capitalization are default, leaving the plan or loss of PFH
-
-                    if (payeUncappitalizedInterest > loan10percentCapAmmount)
-                    {
-                        payeUncappitalizedInterest = loan10percentCapAmmount;
-                    }
-
-                    loanRunningIndividualBalance += payeUncappitalizedInterest;
-                }
-
-                repaymentMonth++;
-            }
-
-            //adding the uncapitalized interest to the balance at the end
-            if (payeUncappitalizedInterest > loan10percentCapAmmount)
-            {
-                payeUncappitalizedInterest = loan10percentCapAmmount;
-            }
-            loanRunningIndividualBalance += payeUncappitalizedInterest;
-
-            forgiveness=loanRunningIndividualBalance;
-            owedTaxesOnForgiveness=TaxCalc(loanRunningIndividualBalance);
-
-            //passing 0.0 for taxes until I put tax calc back in
-            Object_Debt.addRepaymentNoSwitching("PAYE", payments, totalPayed, forgiveness, owedTaxesOnForgiveness);
-
-            //updating the master borrower object with this data so I don't have to pass one back.
-            MainActivity.masterBorrower=targetBorrower;
-        }
-
-
-
-
-
-
-    }
 
 
     public static void repayeCalc(Object_Loan loan)

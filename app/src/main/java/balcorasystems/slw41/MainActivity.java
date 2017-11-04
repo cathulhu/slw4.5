@@ -125,7 +125,8 @@ public class MainActivity extends AppCompatActivity implements Fragment_Selectio
         else if (selection==1)
         {
             FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
-            fTransaction.replace(R.id.mainFrameLayout, new Fragment_Tracking(), "questions");
+//            fTransaction.replace(R.id.mainFrameLayout, new Fragment_Tracking(), "questions");
+            fTransaction.replace(R.id.mainFrameLayout, new Fragmanet_Hub(), "questions");
             fTransaction.addToBackStack(null);
             fTransaction.commit();
         }

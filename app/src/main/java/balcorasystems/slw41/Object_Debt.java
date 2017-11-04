@@ -26,6 +26,9 @@ public class Object_Debt
         fullLoan.type=type;
         fullLoan.servicer=servicer;
         fullLoan.dispersementDate=dispDate;
+
+        fullLoan.updateTraits();
+
         loanPortfolio.add(fullLoan);
     }
 

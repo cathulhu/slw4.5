@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:seekarc="http://schemas.android.com/apk/res-auto"
+    android:weightSum="3">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@color/colorAccent"
+        android:layout_height="60dp"
+        android:id="@+id/relativeLayout18">
+
+        <TextView
+            android:id="@+id/textView34"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="Next Item Due:"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/nextItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView34"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="3dp"
+            android:layout_marginTop="3dp"
+            android:text="Recertify IBR Status by November 30th"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:weightSum="3"
+        android:layout_below="@+id/relativeLayout18"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:background="@color/cardview_light_background"
+            android:alpha="90"
+            android:layout_height="match_parent">
+
+            <com.triggertrap.seekarc.SeekArc
+                android:id="@+id/seekArc"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView42"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:padding="6dp"
+                seekarc:max="100"
+                seekarc:progress="71"
+                seekarc:rotation="180"
+                seekarc:startAngle="30"
+                seekarc:sweepAngle="300"
+                seekarc:thumb="@color/transparent" />
+
+            <TextView
+                android:id="@+id/textView42"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:text="Loan Health" />
+
+            <TextView
+                android:id="@+id/textView45"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="B-"
+                android:textSize="30sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:background="@color/cardview_light_background"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView43"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:text="Next Payment" />
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="$432"
+                android:textSize="24sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:padding="2dp"
+            android:background="@color/cardview_light_background"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView41"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:text="Next Milestone" />
+
+            <ProgressBar
+                android:id="@+id/progressBar2"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/textView41"
+                android:layout_alignStart="@+id/textView41"
+                android:layout_margin="2dp"
+                android:layout_centerVertical="true"
+                android:max="100"
+                android:progress="75" />
+
+            <TextView
+                android:id="@+id/textView44"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:text="Loan Forgivenes" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/trackingFrame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/linearLayout">
+
+    </RelativeLayout>
+
+</RelativeLayout>
