@@ -129,7 +129,7 @@
                 android:layout_alignEnd="@+id/textView12"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/textView12"
-                android:text="Owed Taxes" />
+                android:text="Final Taxes" />
 
         </RelativeLayout>
 

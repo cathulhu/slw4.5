@@ -32,11 +32,21 @@ public class Logic_RepaymentActions
 
     }
 
-    public void populate (Object_Borrower passedBorrower)
+    public void populate (Object_Borrower passedBorrower, String repaymentType)
     {
-        numberofMonths = passedBorrower.debtAndRepaymentObject.repaymentPortfolio.get(1).monthlyPayments.size();
-        startRepayment = passedBorrower.debtAndRepaymentObject.repaymentPortfolio.get(1).repaymentStartDate;
-        //TODO update a more intelligent selection method for getting these
+        Integer index=0;
+        Integer arrayCoord=0;
+        for (Object_Repayment repayment:passedBorrower.debtAndRepaymentObject.repaymentPortfolio)
+        {
+            if (repayment.type.equals(repaymentType));
+            {
+                arrayCoord=index;
+            }
+            index++;
+        }
+
+        numberofMonths = passedBorrower.debtAndRepaymentObject.repaymentPortfolio.get(arrayCoord).monthlyPayments.size();
+        startRepayment = passedBorrower.debtAndRepaymentObject.repaymentPortfolio.get(arrayCoord).repaymentStartDate;
 
         Calendar date = new GregorianCalendar();
         date.setTime(startRepayment);
@@ -82,7 +92,8 @@ public class Logic_RepaymentActions
             if (passedBorrower.PSLFeligib && plsfStartToggle)
             {
                 //TODO add a proper condition for actually being enrolled in PSLF
-                passedBorrower.PSLFpayments++;
+//                passedBorrower.PSLFpayments++;
+                //disabled this because then for subsequent calculations it shows as already having payed, need to think carefully how I want to do the whole PSLF system
             }
 
             //if still PLSF employed and 120 PLSF payments have been made trigger forgiveness

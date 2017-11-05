@@ -29,6 +29,7 @@ public class Fragment_Plans extends Fragment{
         plans = new ArrayList<>();
         plans.add("Standard Repayment");
         plans.add("PAYE");
+        plans.add("REPAYE");
 
         //TODO: Instead of just saying ok make 3 plans or whatever, I should run a calculation that checks a few different strategies first then decides how many plans and perhaps of what type should be spawned first.
 

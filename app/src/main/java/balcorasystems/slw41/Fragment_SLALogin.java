@@ -137,7 +137,7 @@ public class Fragment_SLALogin extends Fragment
             String authXSRFtoken = "test=data;fakedata";
             String sessionIDtoken = "test;data";
 
-            if (headersMap.containsKey("Set-Cooke"))
+            if (headersMap.containsKey("set-cookie"))
             {
                 authXSRFtoken = headersMap.get("Set-Cookie").get(1);
                 sessionIDtoken = headersMap.get("Set-Cookie").get(0);

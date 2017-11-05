@@ -20,10 +20,13 @@ public class Object_Loan
     Boolean PAYEinterestCapReached=false;
     Long generatedMonthlyInterest;
     Long accumulatedNonCapitalizedInterest;
+    public static Integer IDcounter=0;
+    Integer IDnumber=0;
 
     Object_Loan ()
     {
-
+        IDnumber=IDcounter;
+        IDcounter++;
     }
 
     public void updateTraits()
