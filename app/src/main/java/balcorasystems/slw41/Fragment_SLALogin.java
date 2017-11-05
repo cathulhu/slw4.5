@@ -40,6 +40,7 @@ public class Fragment_SLALogin extends Fragment
 //    public String results = "";
     public JSONObject loanResults = new JSONObject();
     public Map<String, String> loanDataMap = new HashMap<>();
+    Boolean fsaSiteDown=false;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -72,7 +73,15 @@ public class Fragment_SLALogin extends Fragment
         loanResults = runnableResult;
         TextView result = (TextView) getView().findViewById(R.id.postResult);
 
-        result.setText(runnableResult.toString());
+        if (fsaSiteDown)
+        {
+            result.setText("FSA Website Down for Maintenance");
+        }
+        else
+        {
+            result.setText(runnableResult.toString());
+        }
+
     }
 
     public void updateProgress(Integer numOfLoans, Integer progress)
@@ -125,12 +134,23 @@ public class Fragment_SLALogin extends Fragment
                 e.printStackTrace();
             }
 
-            String authXSRFtoken = headersMap.get("Set-Cookie").get(1);
+            String authXSRFtoken = "test=data;fakedata";
+            String sessionIDtoken = "test;data";
+
+            if (headersMap.containsKey("Set-Cooke"))
+            {
+                authXSRFtoken = headersMap.get("Set-Cookie").get(1);
+                sessionIDtoken = headersMap.get("Set-Cookie").get(0);
+            }
+            else
+            {
+                fsaSiteDown=true;
+            }
+
             String splitToken[] = authXSRFtoken.split(";");
             String secondSplitToken[] = splitToken[0].split("=");
             authXSRFtoken=secondSplitToken[1];
 
-            String sessionIDtoken = headersMap.get("Set-Cookie").get(0);
             String splitIdToken[] = sessionIDtoken.split(";");
             sessionIDtoken=splitIdToken[0];
 

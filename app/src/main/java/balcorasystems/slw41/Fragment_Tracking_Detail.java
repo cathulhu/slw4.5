@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -45,7 +46,15 @@ public class Fragment_Tracking_Detail extends Fragment
 
         Calendar c = Calendar.getInstance();
         c.setTime(dates.get(0));
-        date.setText("Action Items for " + coordinate + ", " + String.valueOf(new SimpleDateFormat("MMM").format(c.getTime())) + " " + String.valueOf(new SimpleDateFormat("YYYY").format(c.getTime())) );
+//        String month = new SimpleDateFormat("MMM").format(dates.get(0));
+//        String year = new SimpleDateFormat("YYYY").format(dates.get(0));
+
+
+        SimpleDateFormat dt1 = new SimpleDateFormat("MMM yyyy");
+
+        String fulldate = dt1.format(dates.get(0));
+        String dataPretty ="Action Items for " + fulldate;
+        date.setText(dataPretty);
 
 
 
