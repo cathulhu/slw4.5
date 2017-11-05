@@ -1,5 +1,6 @@
 package balcorasystems.slw41;
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,8 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 
 import java.util.ArrayList;
+
+import static java.lang.Boolean.FALSE;
 
 public class Adapter_Plans extends RecyclerView.Adapter<Adapter_Plans.ViewHolder>
 {
@@ -103,6 +106,8 @@ public class Adapter_Plans extends RecyclerView.Adapter<Adapter_Plans.ViewHolder
         viewHolder.lineChart.getXAxis().setDrawGridLines(false);
         viewHolder.lineChart.getAxisRight().setDrawGridLines(false);
         viewHolder.lineChart.setScaleXEnabled(false);
+        viewHolder.lineChart.setGridBackgroundColor(Color.TRANSPARENT);
+        data.setHighlightEnabled(FALSE);
 
         viewHolder.rowItem.setText(adapterPlans.get(i));
 

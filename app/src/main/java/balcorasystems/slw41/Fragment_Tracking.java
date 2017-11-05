@@ -1,5 +1,6 @@
 package balcorasystems.slw41;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -18,6 +19,9 @@ import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 
 import static android.R.attr.entries;
 
@@ -71,6 +75,9 @@ public class Fragment_Tracking extends Fragment
         trackingChart.getAxisRight().setDrawGridLines(false);
         trackingChart.setScaleXEnabled(false);
         trackingChart.highlightValue(0, 0);
+        trackingChart.setGridBackgroundColor(0);
+        dataset.setDrawHorizontalHighlightIndicator(false);
+        dataset.setHighLightColor(Color.BLACK);
 
         trackingChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
@@ -126,12 +133,16 @@ public class Fragment_Tracking extends Fragment
         }
 
         @Override
-        public Fragment getItem(int position) {
+        public Fragment getItem(int position)
+        {
             Object_Repayment targetRepayment = Object_Debt.repaymentPortfolio.get(Object_Debt.selectedRepaymentPlan);
-            Fragment_Tracking_Detail instancedFrag = new Fragment_Tracking_Detail();
-            instancedFrag.coordinate=position;
-            instancedFrag.paymentValue=targetRepayment.monthlyPayments.get(position);
-            return instancedFrag;
+            Fragment_Tracking_Detail instanceOfTracker = new Fragment_Tracking_Detail();
+            instanceOfTracker.startdate=targetRepayment.repaymentStartDate;
+            instanceOfTracker.dates=targetRepayment.repaymentActions.masterDates.get(position);
+            instanceOfTracker.values=targetRepayment.repaymentActions.masterValues.get(position);
+            instanceOfTracker.coordinate=position;
+
+            return instanceOfTracker;
 
         }
 

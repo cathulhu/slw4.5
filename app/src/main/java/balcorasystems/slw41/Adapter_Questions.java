@@ -74,6 +74,11 @@ public class Adapter_Questions extends RecyclerView.Adapter<Adapter_Questions.Vi
                 else if (currentTopic.equals("Employment"))
                 {
                     Fragment_MasterQuestionSpawner.Borrower.employmentType=choiceVerbose;
+
+                    if (!choiceVerbose.equals("Private for profit company") || !choiceVerbose.equals("Not employed full time (below 30 hours per week"))
+                    {
+                        Fragment_MasterQuestionSpawner.Borrower.PSLFeligib=true;
+                    }
                 }
                 else if (currentTopic.equals("Repayment Status"))
                 {

@@ -41,6 +41,8 @@ public class Object_Borrower
     public Boolean inGrace;
     public Boolean inDeferment;
     public Boolean inForebearance;
+    public Boolean PSLFeligib = false;
+    public Integer PSLFpayments =0;
 
     public static Object_Debt debtAndRepaymentObject = new Object_Debt();
 

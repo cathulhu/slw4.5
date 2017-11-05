@@ -1,8 +1,7 @@
 package balcorasystems.slw41;
 
-import java.lang.annotation.Target;
 import java.util.ArrayList;
-
+import java.util.Date;
 
 
 public class Object_Debt
@@ -40,16 +39,23 @@ public class Object_Debt
 
 
 
-    public static void addRepaymentWithSwitching(String type, ArrayList<Double> passedPayments, Double passedTotal, double passedForgiveness, double passedTax, ArrayList<Integer> passedSwitchIndictars, ArrayList<Integer> passedSwitchIDs)
+//    public static void addRepaymentWithSwitching(String type, ArrayList<Double> passedPayments, Double passedTotal, double passedForgiveness, double passedTax, ArrayList<Integer> passedSwitchIndictars, ArrayList<Integer> passedSwitchIDs)
+//    {
+//        Object_Repayment newRepayment = new Object_Repayment(passedPayments, passedTotal, passedForgiveness, passedTax, passedSwitchIndictars, passedSwitchIDs);
+//        repaymentPortfolio.add(newRepayment);
+//    }
+
+    public static void addRepaymentNoSwitching(String type, ArrayList<Double> passedPayments, Double passedTotal, double passedForgiveness, double passedTax, Date repaymentDate)
     {
-        Object_Repayment newRepayment = new Object_Repayment(passedPayments, passedTotal, passedForgiveness, passedTax, passedSwitchIndictars, passedSwitchIDs);
+        Object_Repayment newRepayment = new Object_Repayment(type, passedPayments, passedTotal, passedForgiveness, passedTax, repaymentDate);
         repaymentPortfolio.add(newRepayment);
+//        repaymentPortfolio.get(repaymentPortfolio.size()-1).coordinateInArray=repaymentPortfolio.size()-1;
     }
 
-    public static void addRepaymentNoSwitching(String type, ArrayList<Double> passedPayments, Double passedTotal, double passedForgiveness, double passedTax)
+    public static void addStdRepayment(String type, ArrayList<Double> passedPayments, Double passedTotal, double passedForgiveness, double passedTax, Date repaymentDate)
     {
-        Object_Repayment newRepayment = new Object_Repayment(type, passedPayments, passedTotal, passedForgiveness, passedTax);
+        Object_Repayment newRepayment = new Object_Repayment(type, passedPayments, passedTotal, passedForgiveness, passedTax, repaymentDate);
         repaymentPortfolio.add(newRepayment);
-        repaymentPortfolio.get(repaymentPortfolio.size()-1).coordinateInArray=repaymentPortfolio.size()-1;
+//        repaymentPortfolio.get(repaymentPortfolio.size()-1).coordinateInArray=repaymentPortfolio.size()-1;
     }
 }
