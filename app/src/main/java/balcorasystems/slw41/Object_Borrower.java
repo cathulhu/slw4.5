@@ -58,6 +58,8 @@ public class Object_Borrower
     {
         primaryCurrentIncome=startingPrimaryIncome;
 
+        primaryIncomeOverTime.clear();
+
         while (primaryIncomeOverTime.size() < 500)
         {
             for (int i = 0; i < 12; i++)
@@ -73,6 +75,8 @@ public class Object_Borrower
     public static void PopulateSpouseIncome ()
     {
         spouseCurrentIncome=startingSpouseIncome;
+
+        spouseIncomeOverTime.clear();
 
         while (spouseIncomeOverTime.size() < 500)
         {

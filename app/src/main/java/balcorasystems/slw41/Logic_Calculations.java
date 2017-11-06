@@ -44,6 +44,7 @@ public class Logic_Calculations {
     public static Double DiscIncomeCalc(Integer repaymentMonth, Double currentIncome, String filingStatus) {
         if (filingStatus.equals("jointly something")) {
             //use the spousal poverty guidelines
+            //TODO make this work or determine it isn't needed
         }
         double povertyLevelsingle48states2017 = 12060;  //will adjust and make this an array with all the propper values later
         double financialHardshipLine = povertyLevelsingle48states2017 * 1.5;
@@ -173,7 +174,6 @@ public class Logic_Calculations {
 
 
             //calculate payment
-            //TODO add in something that calculates tax savings filing seperately vs jointly
             if(copyofBorrower.taxStatus.equals("joint filing option here"))
             {
                 runningIncome += Object_Borrower.spouseIncomeOverTime.get(repaymentMonth) + Object_Borrower.primaryIncomeOverTime.get(repaymentMonth);
@@ -184,6 +184,12 @@ public class Logic_Calculations {
             }
             discretionaryIncome= Logic_Calculations.DiscIncomeCalc(repaymentMonth, runningIncome, taxfilingStatus);
             pfhStatus = financialHardshipCalc(discretionaryIncome);
+
+            if (discretionaryIncome < 0)
+            {
+                discretionaryIncome=0D;
+            }
+
             idrPayment = discretionaryIncome/12*0.10;
 
             if (idrPayment > 0 && idrPayment < 5)
