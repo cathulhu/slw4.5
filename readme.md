@@ -9,10 +9,11 @@
 
 <h2 align="center">Student Loan Wizard</h2>
 
-<p float="left">
+<p align="center">
     <img src="images/analysis.gif">
-  </a>
+    <p align="center">
     An android app for getting the most out of your student loan repayment.
+    </p>
 </p>
 
 <!-- ABOUT THE PROJECT -->
