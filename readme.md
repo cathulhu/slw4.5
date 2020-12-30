@@ -19,7 +19,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About
 
-[More Information in Portfolio](https://example.com)
+[More Information in Portfolio](http://www.eobgauge.com/slw)
 
 Student Loan Wizard shows you how to save the most money through student loan repayment and forgiveness programs.
 
