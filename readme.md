@@ -7,29 +7,30 @@
 <!-- PROJECT LOGO -->
 <br />
 
-<h3 align="center">Student Loan Wizard</h3>
+<h2 align="center">Student Loan Wizard</h2>
 
-<p align="center">
+<p float="left">
+<div>
     <img src="images/analysis.gif">
   </a>
-
-
-
-  <p align="center">
     An android app for getting the most out of your student loan repayment.
+</div>
+
+    <!-- ABOUT THE PROJECT -->
+    ## About
+
+    [More Information in Portfolio](https://example.com)
+
+    Student Loan Wizard shows you how to save the most money through student loan repayment and forgiveness programs.
+
+    * Save money by choosing the right repayment plan for your circumstances
+    * Combine with federal loan forgiveness you may already be eligible for
+    * Pay thousands less in taxes on any forgiven loans
+    * Interactive questionnaire to determine if you're already eligible for complete loan forgiveness
+
+
 </p>
 
-<!-- ABOUT THE PROJECT -->
-## About
-
-[More Information in Portfolio](https://example.com)
-
-Student Loan Wizard shows you how to save the most money through student loan repayment and forgiveness programs.
-
-* Save money by choosing the right repayment plan for your circumstances
-* Combine with federal loan forgiveness you may already be eligible for
-* Pay thousands less in taxes on any forgiven loans
-* Interactive questionnaire to determine if you're already eligible for complete loan forgiveness
 
 <!-- GETTING STARTED -->
 ## Installation
