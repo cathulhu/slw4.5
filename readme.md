@@ -10,34 +10,29 @@
 <h2 align="center">Student Loan Wizard</h2>
 
 <p float="left">
-<div>
     <img src="images/analysis.gif">
   </a>
     An android app for getting the most out of your student loan repayment.
-</div>
-
-    <!-- ABOUT THE PROJECT -->
-    ## About
-
-    [More Information in Portfolio](https://example.com)
-
-    Student Loan Wizard shows you how to save the most money through student loan repayment and forgiveness programs.
-
-    * Save money by choosing the right repayment plan for your circumstances
-    * Combine with federal loan forgiveness you may already be eligible for
-    * Pay thousands less in taxes on any forgiven loans
-    * Interactive questionnaire to determine if you're already eligible for complete loan forgiveness
-
-
 </p>
 
+<!-- ABOUT THE PROJECT -->
+## About
+
+[More Information in Portfolio](https://example.com)
+
+Student Loan Wizard shows you how to save the most money through student loan repayment and forgiveness programs.
+
+* Save money by choosing the right repayment plan for your circumstances
+* Combine with federal loan forgiveness you may already be eligible for
+* Pay thousands less in taxes on any forgiven loans
+* Interactive questionnaire to determine if you're already eligible for complete loan forgiveness
 
 <!-- GETTING STARTED -->
 ## Installation
 
-~~You'll find the this program on [Android Market] (https://market.android.com/details?id=com.balcorasystems.slw)~~
+~~You'll find the this program on [Android Market](https://market.android.com/details?id=com.balcorasystems.slw)~~
 
-As of Q1 2018 Student Loan Wizard is defunct due to changes in the US FedLoan system which severely curtail loan forgiveness and eliminate a number of advantageous loan repayment options. [Read more here] (https://www.nbcnews.com/think/opinion/betsy-devos-refusal-honor-student-loan-forgiveness-shows-her-disrespect-ncna1234074)
+As of Q1 2018 Student Loan Wizard is defunct due to changes in the US FedLoan system which severely curtail loan forgiveness and eliminate a number of advantageous loan repayment options. [Read more here](https://www.nbcnews.com/think/opinion/betsy-devos-refusal-honor-student-loan-forgiveness-shows-her-disrespect-ncna1234074)
 
 <!-- USAGE EXAMPLES -->
 ## Usage
