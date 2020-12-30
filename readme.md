@@ -31,7 +31,7 @@ Student Loan Wizard shows you how to save the most money through student loan re
 <!-- GETTING STARTED -->
 ## Installation
 
-~~You'll find the this program on [Android Market](https://market.android.com/details?id=com.balcorasystems.slw)~~
+~~You'll find this program on [Android Market](https://market.android.com/details?id=com.balcorasystems.slw)~~
 
 As of Q1 2018 Student Loan Wizard is defunct due to changes in the US FedLoan system which severely curtail loan forgiveness and eliminate a number of advantageous loan repayment options. [Read more here](https://www.nbcnews.com/think/opinion/betsy-devos-refusal-honor-student-loan-forgiveness-shows-her-disrespect-ncna1234074)
 
